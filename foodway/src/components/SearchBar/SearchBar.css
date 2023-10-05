@@ -1,0 +1,30 @@
+@import url('../../assets/css/style.css');
+
+.searchBar {
+    background-color: var(--branco);
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+    width: 31.18781rem;
+    height: 1.59038rem;
+    padding: 0.048rem;
+}
+
+.searchBar img {
+    width: 1.29606rem;
+    height: 1.32rem;
+}
+
+input {
+    outline: none;
+    border: 0;
+    width: 100%;
+}
+
+input::placeholder {
+    color: var(--cinzaEscuro);
+    font-size: 0.95331rem;
+    font-weight: 500;
+}

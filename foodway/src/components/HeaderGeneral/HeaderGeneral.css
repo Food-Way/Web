@@ -1,0 +1,57 @@
+@import url('../../assets/css/style.css');
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 400;
+    background-color: var(--branco);
+}
+
+header h1 {
+    font-size: 1.91169rem;
+    font-weight: 700;
+}
+
+header div.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    gap: 0.5rem;
+}
+
+header div div.left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header div img {
+    width: 3.53106rem;
+    height: 3.7145rem;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+header nav ul li {
+    display: flex;
+    cursor: pointer;
+}
+
+header nav ul li.active {
+    background-color: var(--primary);
+    color: var(--branco);
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    padding: 0.048rem;
+}
