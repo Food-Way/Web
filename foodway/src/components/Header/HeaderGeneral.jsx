@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import './HeaderGeneral.css';
 
 
-function Header() {
+const HeaderGeneral = () => {
     return (
         <>
             <header>
@@ -14,7 +14,7 @@ function Header() {
                         <h1>FoodWay</h1>
                     </div>
                     <SelectCategory />
-                    <SearchBar />
+                    <SearchBar defaultMSG="Busque Restarantes" />
                     {/* Select component local */}
                     <nav>
                         <ul>
@@ -30,4 +30,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default HeaderGeneral;

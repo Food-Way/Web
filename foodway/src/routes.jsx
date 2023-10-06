@@ -6,7 +6,7 @@ const Rotas = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route Component={Home} path="/home" />
+        <Route Component={Home} path="/" />
         <Route path="/sign-in" />
         <Route path="/sign-up-costumer" />
         <Route path="/sign-up-establishment" />

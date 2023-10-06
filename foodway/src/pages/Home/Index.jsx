@@ -1,8 +1,14 @@
+// import { Header } from "../../components/Header/Index.jsx";
+
+import Header from "../../components/Header/HeaderGeneral";
+
+
 const Home = () => {
     return (
-        <div>
-        <h1>Home</h1>
-        </div>
+        <>
+            <Header />
+          <h1>Teste</h1>
+         </>
     )
 }
 export default Home;
