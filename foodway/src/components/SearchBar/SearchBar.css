@@ -9,7 +9,8 @@
     align-items: center;
     width: 31.18781rem;
     height: 1.59038rem;
-    padding: 0.048rem;
+    padding: 0.048rem; 
+    color: #000;
 }
 
 .searchBar img {
@@ -20,7 +21,10 @@
 input {
     outline: none;
     border: 0;
-    width: 100%;
+    width: 30%;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 10px;
+    padding: 15px;
 }
 
 input::placeholder {
@@ -28,3 +32,4 @@ input::placeholder {
     font-size: 0.95331rem;
     font-weight: 500;
 }
+
