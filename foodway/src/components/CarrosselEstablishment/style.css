@@ -1,0 +1,34 @@
+.carrossel-establishment-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+  
+}
+.carrossel-establishment-container h2{
+    align-self: flex-start;
+    border-bottom: 1.5px solid #FF530D;;
+    padding: 0px 0px 5px 0px;
+}
+ 
+ 
+.stick-slide{
+    width: fit-content;
+}
+
+.carrossel-establishment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.cards-container{
+    padding: 20px 00px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+}

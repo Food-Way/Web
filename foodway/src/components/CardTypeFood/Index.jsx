@@ -4,6 +4,8 @@ const CardTypeFood = ({ typeFood, image }) => {
   const styleCard = {
     backgroundImage: `url(${image})`,
     backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    
   };
 
   return (
