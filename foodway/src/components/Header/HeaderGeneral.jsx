@@ -14,7 +14,7 @@ const HeaderGeneral = () => {
                         <h1>FoodWay</h1>
                     </div>
                     <SelectCategory />
-                    <SearchBar defaultMSG="Busque Restarantes" />
+                    <SearchBar defaultMSG="Busque Restaurantes" />
                     {/* Select component local */}
                     <nav>
                         <ul>

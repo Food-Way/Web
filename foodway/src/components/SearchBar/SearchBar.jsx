@@ -5,7 +5,7 @@ import ImgLupa from '../../assets/img/Lupa.svg';
 const  SearchBar= ({defaultMSG}) => {
     return(
         <>
-        <input type="text" value={defaultMSG}/>
+        <input type="text" defaultValue={defaultMSG}/>
         </>
     )
     // const UsersSearch = ({ users, session }) => {

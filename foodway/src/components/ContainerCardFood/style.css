@@ -1,0 +1,36 @@
+.container-cards {
+    display:flex;
+   
+    width: 100%;
+    overflow-x: auto;
+}
+
+.container-cards::-webkit-scrollbar {
+  display: none;
+}
+
+ 
+.container-cards {
+  -ms-overflow-style: none;   
+  scrollbar-width: none;   
+}
+
+.container-scroll{
+    display: flex;
+    align-items: center;
+}
+
+.container-scroll button{
+     background-color: #d8d8d8;
+    border: none;
+    height: 100px;
+    padding: 5px 20px;
+    transition: .3s;
+    margin: 0px 10px;
+}
+
+.container-scroll button:hover{
+    background-color: #cccccc;
+    
+     
+}
