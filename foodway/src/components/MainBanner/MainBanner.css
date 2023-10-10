@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
 }
 .main-banner-container h1 span {
   color: var(--cinza);
