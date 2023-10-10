@@ -1,0 +1,36 @@
+@import url(../../assets/css/style.css);
+.container-cards {
+  display: flex;
+
+  width: 100%;
+  overflow-x: auto;
+  font-size: 62.5%;
+}
+
+.container-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.container-cards {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container-scroll {
+  display: flex;
+  align-items: center;
+  margin: 30px 0px 40px 0px;
+}
+
+.container-scroll button {
+  background-color: #d8d8d8;
+  border: none;
+  height: 100px;
+  padding: 5px 20px;
+  transition: 0.3s;
+  margin: 0px 10px;
+}
+
+.container-scroll button:hover {
+  background-color: #cccccc;
+}

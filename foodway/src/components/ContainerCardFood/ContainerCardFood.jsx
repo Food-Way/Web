@@ -3,8 +3,8 @@ import br from "../../assets/img/cardHome/br.png";
 import it from "../../assets/img/cardHome/it.png";
 import jp from "../../assets/img/cardHome/jp.png";
 import mx from "../../assets/img/cardHome/mx.png";
-import "./style.css";
-import CardTypeFood from "../CardTypeFood/Index";
+import "./ContainerCardFood.css";
+import CardTypeFood from "../CardTypeFood/CardTypeFood";
 import { useRef, useState, useEffect } from "react";
 
 const ContainerCardFood = () => {

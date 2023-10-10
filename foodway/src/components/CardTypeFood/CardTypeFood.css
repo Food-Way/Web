@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap");
-
+@import url(../../assets/css/style.css);
 .card-type-food {
-  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  min-width: 350px;
   height: 120px;
-   
-  min-width: 15%;
   color: white;
   display: flex;
   flex-direction: column;
@@ -12,7 +11,7 @@
   margin: 8px;
   border-radius: 9px;
   user-select: none;
-
+  font-size: 1.2rem;
   color: #f6f6f6;
   text-align: center;
   text-shadow: 0px 4.101578235626221px 4.101578235626221px rgba(0, 0, 0, 0.67);
@@ -20,4 +19,11 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  transition: 0.5s;
+}
+
+@media (max-width: 850px) {
+  .card-type-food {
+    font-size: 0.9rem;
+  }
 }
