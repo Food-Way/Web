@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import Home from "./pages/Home/Index";
+import NotFound from "./pages/NotFound/index";
+import Home from "./pages/Home/Home";
 
 const Rotas = () => {
   return (

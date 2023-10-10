@@ -1,18 +1,22 @@
 @import url(../../assets/css/style.css);
 
+.slider-card {
+  width: fit-content !important;
+  margin: 0px 50px 0px 0px !important;
+}
+
 .carrossel-establishment-container {
   font-size: 62.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
   width: 80%;
 }
 .carrossel-establishment-container h2 {
   color: var(--preto);
   font-family: Quicksand;
-  font-size: 2.2em;
+  font-size: 3.2em;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -27,13 +31,12 @@
   width: 100%;
 }
 .cards-container {
-  display: flex;
-  justify-content: space-between;
+  padding: 20px 0px;
 }
 
 /* Consulta de mídia para telas menores, por exemplo, largura máxima de 768px */
 @media (max-wiodth: 800px) {
-  .carrossel-establishment-container h2 {
-    font-size: 1.2em;
+  carrossel-establishment-container {
+    font-size: 50%;
   }
 }
