@@ -1,38 +1,53 @@
-.main-banner-container{
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 350px;
-justify-content: center;
-align-items: center;
-flex-shrink: 0;
+@import url(../../assets/css/style.css);
 
-background-position: center;
-background-size: contain;
+.main-banner-container {
+  font-size: 62.5%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 350px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 
-
+  background-position: center;
+  background-size: contain;
+  transition: 0.5s;
 }
-.main-banner-container h1{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.main-banner-container h1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
 }
 .main-banner-container h1 span {
-    color: #F6F6F6;
-text-align: center;
-text-shadow: 0px 6.624204158782959px 6.624204158782959px rgba(0, 0, 0, 0.25);
-font-family: Quicksand;
-font-size: 56px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  color: var(--cinza);
+  text-align: center;
+  text-shadow: 0px 6.624204158782959px 6.624204158782959px rgba(0, 0, 0, 0.25);
+  font-family: Quicksand;
+  font-size: 2.6em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
-#red{
-color: #F00;
-font-family: Quicksand;
-font-size: 56px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+#red {
+  color: var(--primary);
+
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+@media (max-width: 1542px) {
+  .main-banner-container {
+    font-size: 50%;
+  }
+}
+@media (max-width: 850px) {
+  .main-banner-container {
+    font-size: 30%;
+    height: 200px;
+  }
 }

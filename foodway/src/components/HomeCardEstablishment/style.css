@@ -1,50 +1,64 @@
+@import url(../../assets/css/style.css);
 .card-establishment {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: center;
-    min-width: 400px;
-    height: 400px;
-    background-size: cover;
-    color: red;
-    background-repeat: no-repeat;
-    color: #F6F6F6;
-    font-family: Inter;
-    font-size: 34.009px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    user-select: none;
-    border-radius: 7px;
-    margin: 0px 20px;
-    
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  height: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #f6f6f6;
+  font-family: Inter;
+  font-size: 34.009px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  user-select: none;
+  border-radius: 7px;
+  margin: 20px;
+  transition: 0.3s;
 }
- 
-.card-establishment p:first-child{
-    color: #F6F6F6;
-text-align: center;
-font-family: Quicksand;
-font-size: 24px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+
+.card-establishment p:first-child {
+  color: #f6f6f6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
-.card-establishment p:nth-child(2){
-color: #F6F6F6;
-font-family: Quicksand;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+.card-establishment p:nth-child(2) {
+  color: #f6f6f6;
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
- 
-.card-establishment-content{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
+
+.card-establishment-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
-.star-svg{
-    margin: 0px 4px;
+.star-svg {
+  margin: 0px 4px;
+}
+
+@media (max-width: 1420px) {
+  .card-establishment {
+    width: 100%;
+    min-width: 250px;
+    height: 250px;
+  }
+}
+@media (max-width: 768px) {
+  .card-establishment {
+    width: 200px;
+    height: 200px;
+  }
 }
