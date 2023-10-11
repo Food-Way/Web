@@ -7,7 +7,6 @@ import establishment from "../../assets/img/images/e.png";
 const Signin = () => {
   return (
     <>
-      <Header />
       <div className="mainSignin">
         <div className="mainSiginContainer">
           <div className="cardCostumerEstablishment">
@@ -20,7 +19,6 @@ const Signin = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

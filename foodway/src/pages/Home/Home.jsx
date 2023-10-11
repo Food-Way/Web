@@ -26,7 +26,6 @@ const Home = () => {
   };
   return (
     <div className="home">
-      <Header />
       <MainBanner />
       <ContainerCardFood />
       <div style={styleDiv}>
@@ -72,7 +71,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   );
