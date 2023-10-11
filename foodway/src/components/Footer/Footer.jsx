@@ -4,6 +4,7 @@ import face from "../../assets/img/icons/face.svg";
 import twitter from "../../assets/img/icons/twitter.svg";
 import github from "../../assets/img/icons/github.svg";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="container-footer">
@@ -24,19 +25,19 @@ const Footer = () => {
           <div className="sub-footer">
             <ul>
               <li>
-                <a href="">Início</a>
+                <Link to={"/"}>Início</Link>
               </li>
 
               <li>
-                <a href="">Sobre</a>
+                <Link to={"/about"}>Sobre</Link>
               </li>
 
               <li>
-                <a href="">App</a>
+                <Link to={"/"}>App</Link>
               </li>
 
               <li>
-                <a href="">Login</a>
+                <Link to={"Login"}>Login</Link>
               </li>
             </ul>
           </div>

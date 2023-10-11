@@ -15,4 +15,4 @@ const ButtonSecondary = ({ text, onClick }) => {
   );
 };
 
-export  { ButtonPrimary, ButtonSecondary}
+export { ButtonPrimary, ButtonSecondary };

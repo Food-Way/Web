@@ -1,16 +1,18 @@
 import LogoFoodWay from "../../assets/img/FoodWayLogo.png";
 import SelectCategory from "../SelectCategory/SelectCategory";
 import SearchBar from "../SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 import "./HeaderGeneral.css";
 
 const HeaderGeneral = () => {
   return (
     <header>
       <div className="container">
-        <div className="left">
+        <Link className="left" to={"/"}>
           <img src={LogoFoodWay} alt="Logo FoodWay" />
           <h1>FoodWay</h1>
-        </div>
+        </Link>
+
         <div className="centerHeader">
           <SelectCategory />
           <SearchBar defaultMSG="Busque Restaurantes" />
@@ -18,10 +20,26 @@ const HeaderGeneral = () => {
         </div>
         <nav>
           <ul>
-            <li>Inicio</li>
-            <li>Sobre</li>
-            <li>Login</li>
-            <li className="active">Cadastro</li>
+            <li>
+              <Link className="linkItem" to={"/"}>
+                Inicio
+              </Link>
+            </li>
+            <li>
+              <Link className="linkItem" to={"/about"}>
+                Sobre
+              </Link>
+            </li>
+            <li>
+              <Link className="linkItem" to={"/login"}>
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link className="linkItem" to={"sign-in"}>
+                Cadastro
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

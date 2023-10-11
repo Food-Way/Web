@@ -4,7 +4,7 @@ import "./Home.css";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
-import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Index";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import jp from "../../assets/img/cardHome/jp.png";
 import card from "../../assets/img/Card.png";
 import customerIMG from "../../assets/img/images/customer.png";

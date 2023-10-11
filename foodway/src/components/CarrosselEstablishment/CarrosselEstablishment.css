@@ -1,5 +1,8 @@
 @import url(../../assets/css/style.css);
-
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary);
+}
 .slider-card {
   width: fit-content !important;
   margin: 0px 50px 0px 0px !important;
