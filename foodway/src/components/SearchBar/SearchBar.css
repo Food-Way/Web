@@ -1,35 +1,26 @@
-@import url('../../assets/css/style.css');
+@import url("../../assets/css/style.css");
 
 .searchBar {
-    background-color: var(--branco);
-    border: var(--borda);
-    border-radius: var(--arredondamento);
-    display: flex;
-    gap: 0.625rem;
-    align-items: center;
-    width: 31.18781rem;
-    height: 1.59038rem;
-    padding: 0.048rem; 
-    color: #000;
-}
-
-.searchBar img {
-    width: 1.29606rem;
-    height: 1.32rem;
+  background-color: var(--branco);
+  border: var(--borda);
+  border-radius: var(--arredondamento);
+  display: flex;
+  align-items: center;
+  color: #000;
+  margin: 0px 40px;
 }
 
 input {
-    outline: none;
-    border: 0;
-    width: 30%;
-    border: solid 1px rgb(158, 158, 158);
-    border-radius: 10px;
-    padding: 15px;
+  outline: none;
+  border: 0;
+  width: 30%;
+  border: solid 1px rgb(158, 158, 158);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 input::placeholder {
-    color: var(--cinzaEscuro);
-    font-size: 0.95331rem;
-    font-weight: 500;
+  color: var(--cinzaEscuro);
+  font-size: 0.95331rem;
+  font-weight: 500;
 }
-

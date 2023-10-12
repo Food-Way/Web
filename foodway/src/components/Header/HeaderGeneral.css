@@ -1,57 +1,81 @@
-@import url('../../assets/css/style.css');
+@import url("../../assets/css/style.css");
+.centerHeader {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.linkItem {
+  color: black;
+  text-decoration: none;
+  margin: 0px 10px;
+  transition: 0.3s ease-in-out;
+}
+.linkItem:hover {
+  color: var(--primary);
+  text-decoration: none;
+  margin: 0px 10px;
+}
 
 header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-size: 1.25rem;
-    font-weight: 400;
-    background-color: var(--branco);
+  position: relative; /* Fixa o cabeçalho na parte superior da página */
+  top: 0; /* Coloca o cabeçalho no topo da página */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: 400;
+  padding: 15px 0px;
+  background-color: white;
+  z-index: 100;
 }
 
 header h1 {
-    font-size: 1.91169rem;
-    font-weight: 700;
+  font-size: 1.91169rem;
+  font-weight: 700;
 }
 
 header div.container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  gap: 0.5rem;
 }
 
-header div div.left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
+header div .left {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 header div img {
-    width: 3.53106rem;
-    height: 3.7145rem;
+  width: 3.53106rem;
+  height: 3.7145rem;
 }
 
 header nav ul {
-    display: flex;
-    list-style: none;
-    gap: 0.5rem;
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
 }
 
 header nav ul li {
-    display: flex;
-    cursor: pointer;
+  display: flex;
+  cursor: pointer;
 }
 
 header nav ul li.active {
-    background-color: var(--primary);
-    color: var(--branco);
-    border: var(--borda);
-    border-radius: var(--arredondamento);
-    padding: 0.048rem;
+  background-color: var(--primary);
+  color: var(--branco);
+  border: var(--borda);
+  border-radius: var(--arredondamento);
+  padding: 0.048rem;
 }

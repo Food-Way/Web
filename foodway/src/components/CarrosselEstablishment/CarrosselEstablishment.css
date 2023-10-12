@@ -1,5 +1,8 @@
 @import url(../../assets/css/style.css);
-
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary);
+}
 .slider-card {
   width: fit-content !important;
   margin: 0px 50px 0px 0px !important;
@@ -11,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 85%;
 }
 .carrossel-establishment-container h2 {
   color: var(--preto);
@@ -32,6 +35,7 @@
 }
 .cards-container {
   padding: 20px 0px;
+  width: 100%;
 }
 
 /* Consulta de mídia para telas menores, por exemplo, largura máxima de 768px */

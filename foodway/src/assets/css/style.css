@@ -14,3 +14,8 @@
   font-size: 62.5%;
   font-family: var(--defaultFonte);
 }
+
+html {
+  background-color: yellow;
+  min-height: 100vh;
+}

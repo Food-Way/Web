@@ -4,7 +4,7 @@ import "./Home.css";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
-import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Index";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import jp from "../../assets/img/cardHome/jp.png";
 import card from "../../assets/img/Card.png";
 import customerIMG from "../../assets/img/images/customer.png";
@@ -25,8 +25,7 @@ const Home = () => {
     width: "100%",
   };
   return (
-    <div className="home">
-      <Header />
+    <main>
       <MainBanner />
       <ContainerCardFood />
       <div style={styleDiv}>
@@ -40,25 +39,25 @@ const Home = () => {
         <div className="cto-container">
           <div className="cto">
             <div className="cta-saiba-mais">
-              <p>
+              <div className="textLegend">
                 <span>A rota assertiva para o</span>
                 <span>
                   <span className="red">sucesso </span>do seu estabelecimento!
                 </span>
-              </p>
+              </div>
+
               <img src={establishmentIMG} alt="saiba-mais" />
               <ButtonPrimary text="Saiba Mais!" />
             </div>
             <div className="cta-saiba-mais">
-              <p>
+              <div className="textLegend">
                 <span>
-                  {" "}
                   Desfrute o <span className="red">sabor do sucesso </span>
-                  ao
-                </span>{" "}
-                <span>escolher o lugar perfeito!</span>
-              </p>
-              <img src={customerIMG} alt="Saiba-Mais!" />
+                  ao escolher o lugar perfeito!
+                </span>
+              </div>
+
+              <img src={customerIMG} alt="saiba-mais" />
               <ButtonPrimary text="Saiba Mais!" />
             </div>
           </div>
@@ -66,15 +65,17 @@ const Home = () => {
         <div style={androidStyle} className="android-section-container">
           <div className="android-section">
             <div className="android-section-text">
-              EM BREVE <span>Disponível para</span> <span>Android</span>
+              <div className="android-container">
+                <span>EM BREVE</span> <span>Disponível para</span>{" "}
+                <span>Android</span>
+              </div>
               <img src={androidI} alt="android" />
               <ButtonSecondary text="Veja" />
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    </div>
+    </main>
   );
 };
 

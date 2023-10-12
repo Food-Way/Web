@@ -6,76 +6,77 @@ import mx from "../../assets/img/cardHome/mx.png";
 import "./ContainerCardFood.css";
 import CardTypeFood from "../CardTypeFood/CardTypeFood";
 import { useRef, useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
-const ContainerCardFood = () => {
-  const containerCardsRef = useRef(null);
-  const [scrollLeft, setScrollLeft] = useState(0);
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
-  useEffect(() => {
-    // Inicialize a posição de rolagem no meio do tamanho do componente
-    if (containerCardsRef.current) {
-      const containerWidth = containerCardsRef.current.offsetWidth;
-      const scrollWidth = containerCardsRef.current.scrollWidth;
-      const initialScroll = (scrollWidth - containerWidth) / 2;
-      containerCardsRef.current.scrollLeft = initialScroll;
-      setScrollLeft(initialScroll);
-    }
-  }, []);
-
-  const rolarParaEsquerda = () => {
-    // Torna a rolagem mais suave
-    const novaPosicao = scrollLeft - 600; // Ajuste a quantidade de rolagem
-    if (containerCardsRef.current) {
-      containerCardsRef.current.scrollTo({
-        left: novaPosicao,
-        behavior: "smooth", // Adiciona uma animação suave
-      });
-      setScrollLeft(novaPosicao);
-    }
-  };
-
-  const rolarParaDireita = () => {
-    // Torna a rolagem mais suave
-    const novaPosicao = scrollLeft + 600; // Ajuste a quantidade de rolagem
-    if (containerCardsRef.current) {
-      containerCardsRef.current.scrollTo({
-        left: novaPosicao,
-        behavior: "smooth", // Adiciona uma animação suave
-      });
-      setScrollLeft(novaPosicao);
-    }
-  };
-
-  return (
-    <>
-      <div className="container-scroll">
-        <button onClick={rolarParaEsquerda}>&lt;</button>
-
-        <div
-          id="containerCards"
-          className="container-cards"
-          ref={containerCardsRef}
-        >
-          <CardTypeFood typeFood="Hamburguer" image={ar} />
-          <CardTypeFood typeFood="Pizza" image={br} />
-          <CardTypeFood typeFood="Japonesa" image={it} />
-          <CardTypeFood typeFood="Mexicana" image={jp} />
-          <CardTypeFood typeFood="Árabe" image={mx} />
-          <CardTypeFood typeFood="Hamburguer" image={ar} />
-          <CardTypeFood typeFood="Pizza" image={br} />
-          <CardTypeFood typeFood="Japonesa" image={it} />
-          <CardTypeFood typeFood="Mexicana" image={jp} />
-          <CardTypeFood typeFood="Árabe" image={mx} />
-          <CardTypeFood typeFood="Hamburguer" image={ar} />
-          <CardTypeFood typeFood="Pizza" image={br} />
-          <CardTypeFood typeFood="Japonesa" image={it} />
-          <CardTypeFood typeFood="Mexicana" image={jp} />
-          <CardTypeFood typeFood="Árabe" image={mx} />
-        </div>
-        <button onClick={rolarParaDireita}> &gt; </button>
-      </div>
-    </>
-  );
-};
+const ContainerCardFood = () => (
+  <>
+    <Swiper
+      loop={true}
+      className="cards-container"
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={4}
+      navigation
+    >
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Hamburguer" image={ar} />
+      </SwiperSlide>
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Pizza" image={br} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Japonesa" image={it} />
+      </SwiperSlide>
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Mexicana" image={jp} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Árabe" image={mx} />
+      </SwiperSlide>
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Hamburguer" image={ar} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Pizza" image={br} />
+      </SwiperSlide>
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Japonesa" image={it} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Mexicana" image={jp} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Árabe" image={mx} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Hamburguer" image={ar} />
+      </SwiperSlide>
+      <SwiperSlide>
+        {" "}
+        <CardTypeFood typeFood="Pizza" image={br} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Japonesa" image={it} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Mexicana" image={jp} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CardTypeFood typeFood="Árabe" image={mx} />
+      </SwiperSlide>
+    </Swiper>
+  </>
+);
 
 export default ContainerCardFood;

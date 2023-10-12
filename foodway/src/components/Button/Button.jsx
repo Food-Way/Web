@@ -1,4 +1,4 @@
-import "./style.css";
+import "./Button.css";
 const ButtonPrimary = ({ text, onClick }) => {
   return (
     <button className="button-primary" type="button">
@@ -15,4 +15,4 @@ const ButtonSecondary = ({ text, onClick }) => {
   );
 };
 
-export  { ButtonPrimary, ButtonSecondary}
+export { ButtonPrimary, ButtonSecondary };
