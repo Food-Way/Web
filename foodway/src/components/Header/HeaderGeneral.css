@@ -17,6 +17,8 @@
 }
 
 header {
+  position: relative; /* Fixa o cabeçalho na parte superior da página */
+  top: 0; /* Coloca o cabeçalho no topo da página */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,6 +28,7 @@ header {
   font-weight: 400;
   padding: 15px 0px;
   background-color: white;
+  z-index: 100;
 }
 
 header h1 {
@@ -38,7 +41,7 @@ header div.container {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 85%;
   gap: 0.5rem;
 }
 
@@ -50,6 +53,7 @@ header div .left {
   gap: 0.5rem;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 }
 
 header div img {

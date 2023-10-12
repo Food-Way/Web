@@ -8,7 +8,7 @@ const HeaderGeneral = () => {
   return (
     <header>
       <div className="container">
-        <Link className="left" to={"/"}>
+        <Link className="left" to="/">
           <img src={LogoFoodWay} alt="Logo FoodWay" />
           <h1>FoodWay</h1>
         </Link>
@@ -31,12 +31,12 @@ const HeaderGeneral = () => {
               </Link>
             </li>
             <li>
-              <Link className="linkItem" to={"/login"}>
+              <Link className="linkItem" to={"/sign-in"}>
                 Login
               </Link>
             </li>
             <li>
-              <Link className="linkItem" to={"sign-in"}>
+              <Link className="linkItem" to={"sign-up"}>
                 Cadastro
               </Link>
             </li>

@@ -3,12 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  min-height: 90vh;
   background-color: var(--cinza);
 }
 .mainSiginContainer {
-  width: 80%;
-
+  width: 85%;
   display: flex;
 }
 
