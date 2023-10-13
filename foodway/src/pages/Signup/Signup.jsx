@@ -1,6 +1,9 @@
 import Header from "../../components/Header/HeaderGeneral";
 import Footer from "../../components/Footer/Footer";
-import { ButtonPrimary } from "../../components/Button/Button";
+import {
+  ButtonPrimary,
+  ButtonPrimaryLink,
+} from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import "./Signup.css";
 import costumer from "../../assets/img/images/c.png";
@@ -12,15 +15,20 @@ const Signin = () => {
         <div className="mainSiginContainer">
           <div className="cardCostumerEstablishment">
             <img src={costumer} alt="" />
-            <Link to={"/sign-up-costumer"}>
-              <ButtonPrimary text="Sou um Cliente!" />
-            </Link>
+
+            <ButtonPrimaryLink
+              url="/sign-up-costumer"
+              className="buttonCostumerEstablishment"
+              text="Sou um Cliente!"
+            />
           </div>
           <div className="cardCostumerEstablishment">
             <img src={establishment} alt="" />
-            <Link to={"/sign-up-establishment"}>
-              <ButtonPrimary text="Tenho um Estabelecimento!" />
-            </Link>
+            <ButtonPrimaryLink
+              url="/sign-up-establishment"
+              className="buttonCostumerEstablishment"
+              text="Tenho um Estabelecimento!"
+            />
           </div>
         </div>
       </div>
