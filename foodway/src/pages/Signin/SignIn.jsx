@@ -4,6 +4,7 @@ import { ButtonPrimary } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
 import { useState } from "react";
+import api from "../../services/api";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +25,24 @@ const SignIn = () => {
     setPassword(value);
 
     console.log("value is:", password);
+  };
+
+  const handleLogin = async () => {
+    console.log("handleLogin");
+    const data = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await api.post("/users/login", data);
+      console.log(response.data);
+
+      // Armazena os dados no sessionStorage
+      sessionStorage.setItem("userData", JSON.stringify(response.data));
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
