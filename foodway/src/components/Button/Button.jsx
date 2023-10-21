@@ -1,8 +1,8 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
-const ButtonPrimary = ({ text, onClick }) => {
+const ButtonPrimary = ({ text, onclick }) => {
   return (
-    <button className="button-primary" type="button">
+    <button className="button-primary" onClick={onclick} type="button">
       {text}
     </button>
   );
