@@ -5,14 +5,16 @@ import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardF
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
-import jp from "../../assets/img/cardHome/jp.png";
-import card from "../../assets/img/Card.png";
-import customerIMG from "../../assets/img/images/customer.png";
-import establishmentIMG from "../../assets/img/images/establishment.png";
-import androidBg from "../../assets/img/images/emBreve.png";
-import androidI from "../../assets/img/icons/android.svg";
+
 import Footer from "../../components/Footer/Footer";
 const Home = () => {
+  const establishmentIMG =
+    "https://foodway.blob.core.windows.net/public/establishment.png";
+  const customerIMG =
+    "https://foodway.blob.core.windows.net/public/customer.png";
+  const card = "https://foodway.blob.core.windows.net/public/Card.png";
+  const androidI = "https://foodway.blob.core.windows.net/public/android.svg";
+  const androidBg = "https://foodway.blob.core.windows.net/public/emBreve.png";
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
   };

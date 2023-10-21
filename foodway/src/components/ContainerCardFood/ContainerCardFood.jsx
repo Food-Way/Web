@@ -1,8 +1,4 @@
-import ar from "../../assets/img/cardHome/ar.png";
-import br from "../../assets/img/cardHome/br.png";
-import it from "../../assets/img/cardHome/it.png";
-import jp from "../../assets/img/cardHome/jp.png";
-import mx from "../../assets/img/cardHome/mx.png";
+
 import CardTypeFood from "../CardTypeFood/CardTypeFood";
 import "./ContainerCardFood.css"
 import { useRef, useState, useEffect } from "react";
@@ -14,6 +10,12 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const ContainerCardFood = () => {
+  const ar = "https://foodway.blob.core.windows.net/public/ar.png";
+  const br = "https://foodway.blob.core.windows.net/public/br.png";
+  const it = "https://foodway.blob.core.windows.net/public/it.png";
+  const jp = "https://foodway.blob.core.windows.net/public/jp.png";
+  const mx = "https://foodway.blob.core.windows.net/public/mx.png";
+
   const [tamanhoDoElemento, setTamanhoDoElemento] = useState(0);
 
 
@@ -131,5 +133,6 @@ const ContainerCardFood = () => {
    
   )
 }
+
 
 export default ContainerCardFood;

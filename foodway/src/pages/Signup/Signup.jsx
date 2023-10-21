@@ -6,9 +6,9 @@ import {
 } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import "./Signup.css";
-import costumer from "../../assets/img/images/c.png";
-import establishment from "../../assets/img/images/e.png";
 const Signin = () => {
+  const costumer = "https://foodway.blob.core.windows.net/public/c.png";
+  const establishment = "https://foodway.blob.core.windows.net/public/e.png";
   return (
     <>
       <div className="mainSignin">

@@ -1,10 +1,11 @@
-import LogoFoodWay from "../../assets/img/FoodWayLogo.png";
 import SelectCategory from "../SelectCategory/SelectCategory";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import "./HeaderGeneral.css";
 
 const HeaderGeneral = () => {
+  const LogoFoodWay =
+    "https://foodway.blob.core.windows.net/public/FoodWayLogo.png";
   return (
     <header>
       <div className="container">
