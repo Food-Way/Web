@@ -4,7 +4,10 @@ import { ButtonPrimary } from "../../components/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import api from "../../services/api";
+import { Auth } from "../../components/Auth/Auth";
+
 const SignIn = () => {
   const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
   const navigate = useNavigate();
@@ -24,33 +27,62 @@ const SignIn = () => {
     setPassword(value);
   };
 
+  const handleLogoff = () => {
+    sessionStorage.clear();
+    toast.success("Logout realizado com sucesso!");
+    navigate("/");
+  };
+
   const handleLogin = async () => {
     console.log("handleLogin: ", email, " ", password);
     const data = {
       email: email,
       password: password,
     };
-    try {
-      const response = await api.post("users/login", data);
-      if (response.status === 200) {
-        console.log("Login successful!");
-        console.log("Response data:", response.data);
-        sessionStorage.setItem("userData", JSON.stringify(response.data));
-        navigate("/");
-      } else {
-        console.log("Login failed with status code:", response.status);
-        console.log("Response data:", response.data);
-      }
-    } catch (error) {
-      if (error.response.status === 401) {
-        console.log("Login failed with status code:", error.response.status);
-        console.log("Response data:", error.response.data);
+    if (email === "" || password === "") {
+      toast.error("Preencha todos os campos");
+      return;
+    } else if (email.includes("@") === false) {
+      toast.error("Email inválido");
+      return;
+    } else {
+      try {
+        const response = await api.post("users/login", data);
+        if (response.status === 200) {
+          console.log("Login successful!");
+          console.log("Response data:", response.data);
+          sessionStorage.setItem("email", response.data.email);
+          sessionStorage.setItem("idUser", response.data.idUser);
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("typeUser", response.data.typeUser);
+          toast.success("Login realizado com sucesso!");
+          console.log("User type:", response.data.typeUser);
+          if (response.data.typeUser === "CLIENT") {
+            setTimeout(() => {
+              console.log("Redirecting to /perfil...");
+              navigate("/perfil");
+            }, 2000);
+          } else if (response.data.typeUser === "ESTABLISHMENT") {
+            console.log("Redirecting to /establishment/performance...");
+            navigate("/establishment/performance");
+          }
+        } else {
+          console.log("Login failed with status code:", response.status);
+          console.log("Response data:", response.data);
+        }
+      } catch (error) {
+        if (error.response.status === 401) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
       }
     }
   };
 
   return (
     <main className="main-signin">
+      <Auth />
       <div className="container">
         <div className="form">
           <div className="form-container">
@@ -75,7 +107,7 @@ const SignIn = () => {
                 onChange={handleChangeSenha}
               />
               <span className="">
-                Não possui uma conta? <Link>Cadastre-se</Link>
+                Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
               <ButtonPrimary text="Entrar" onclick={handleLogin} />
             </form>
