@@ -6,14 +6,16 @@ import HeaderGeneral from "./components/Header/HeaderGeneral";
 import Footer from "./components/Footer/Footer";
 import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignIn from "./pages/Signin/SignIn";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Rotas = () => {
   return (
     <BrowserRouter>
       <HeaderGeneral />
+      <ToastContainer position="top-left" />
       <Routes>
         <Route Component={Home} path="/" />
-
         <Route path="/about" />
         <Route Component={Signup} path="/sign-up" />
         <Route path="/sign-in" Component={SignIn} />
