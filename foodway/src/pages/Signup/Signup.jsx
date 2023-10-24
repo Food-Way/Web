@@ -1,12 +1,8 @@
-import Header from "../../components/Header/HeaderGeneral";
-import Footer from "../../components/Footer/Footer";
-import {
-  ButtonPrimary,
-  ButtonPrimaryLink,
-} from "../../components/Button/Button";
-import { Link } from "react-router-dom";
 import "./Signup.css";
-const Signin = () => {
+
+import { ButtonPrimaryLink } from "../../components/Button/Button";
+
+const Signup = () => {
   const costumer = "https://foodway.blob.core.windows.net/public/c.png";
   const establishment = "https://foodway.blob.core.windows.net/public/e.png";
   return (
@@ -36,4 +32,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;
