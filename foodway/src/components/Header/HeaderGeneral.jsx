@@ -3,6 +3,12 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import "./HeaderGeneral.css";
 
+const handleLogoff = () => {
+  sessionStorage.clear();
+  toast.success("Logout realizado com sucesso!");
+  navigate("/");
+};
+
 const HeaderGeneral = () => {
   const LogoFoodWay =
     "https://foodway.blob.core.windows.net/public/FoodWayLogo.png";
@@ -40,6 +46,19 @@ const HeaderGeneral = () => {
               <Link className="linkItem" to={"sign-up"}>
                 Cadastro
               </Link>
+            </li>
+            <li>
+              {sessionStorage.getItem("token") != "" ? (
+                <Link
+                  className="linkItem"
+                  to={"sign-in"}
+                  onClick={handleLogoff}
+                >
+                  Sair
+                </Link>
+              ) : (
+                ""
+              )}
             </li>
           </ul>
         </nav>
