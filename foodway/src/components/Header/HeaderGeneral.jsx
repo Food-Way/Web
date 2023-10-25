@@ -48,16 +48,16 @@ const HeaderGeneral = () => {
               </Link>
             </li>
             <li>
-              {sessionStorage.getItem("token") != "" ? (
+              {sessionStorage.getItem("token") === null ? (
+                ""
+              ) : (
                 <Link
                   className="linkItem"
-                  to={"/sign-in"}
+                  to={"sign-in"}
                   onClick={handleLogoff}
                 >
                   Sair
                 </Link>
-              ) : (
-                ""
               )}
             </li>
           </ul>
