@@ -51,7 +51,7 @@ const HeaderGeneral = () => {
               {sessionStorage.getItem("token") != "" ? (
                 <Link
                   className="linkItem"
-                  to={"sign-in"}
+                  to={"/sign-in"}
                   onClick={handleLogoff}
                 >
                   Sair
