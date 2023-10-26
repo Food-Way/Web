@@ -42,7 +42,8 @@ main.main-signin {
   margin: 20px 0px;
 }
 .img-login {
-  width: 700px;
+  width: 80%;
+  height: auto;
   object-fit: cover;
 }
 .imgContainer {

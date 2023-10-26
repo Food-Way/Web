@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 12px 0px 12px 0px;
+  margin: 4px 0px 4px 0px;
   width: 80%;
 }
 .form-group input {

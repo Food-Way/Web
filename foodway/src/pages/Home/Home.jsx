@@ -5,6 +5,7 @@ import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardF
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
+import { Auth } from "../../components/Auth/Auth";
 
 import Footer from "../../components/Footer/Footer";
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
   };
   return (
     <main>
+      <Auth />
       <MainBanner />
       <ContainerCardFood />
       <div style={styleDiv}>

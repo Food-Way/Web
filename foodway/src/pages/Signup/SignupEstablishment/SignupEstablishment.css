@@ -1,6 +1,6 @@
 @import url(../../../assets/css/style.css);
 
-main.main-signupcostumer {
+main.main-signupestablishment {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +29,7 @@ main.main-signupcostumer {
   align-items: center;
   background-color: white;
   box-shadow: 0px 0px 12.15035px 0px rgba(0, 0, 0, 0.25);
+  padding: 40px 30px;
 }
 .form-container form {
   display: flex;
@@ -37,7 +38,6 @@ main.main-signupcostumer {
   width: 100%;
 }
 .form-container h1 {
-  text-align: center;
   font-size: 3.4rem;
   margin: 20px 0px;
 }
