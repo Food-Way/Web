@@ -28,3 +28,7 @@ select::-webkit-select-arrow {
 .select-category {
   width: 14rem;
 }
+
+.select-category option::selection {
+  background-color: red;
+}

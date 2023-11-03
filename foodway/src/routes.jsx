@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,7 +26,8 @@ const Rotas = () => {
           path="/sign-up-establishment"
           Component={SignupCostumerEstablishment}
         />
-        <Route path="/perfil" />
+        <Route Component={UserProfile} path="/user-profile" />
+        <Route path="/profile" />
         <Route path="/establishment" />
         <Route path="/menu" />
         <Route path="/establishment/menu/edit" />

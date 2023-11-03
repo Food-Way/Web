@@ -1,0 +1,43 @@
+@import url(../../assets/css/style.css);
+
+.comment-container {
+    height: 23rem;
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    width: 50rem;
+    padding: 15px;
+    box-shadow: var(--sombra);
+}
+
+.comment-container .comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment-header span {
+    font-size: 2rem;
+}
+
+.comment-content {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.comment-content p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: justify;
+
+}
+
+.comment-content span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    
+}
+
+
+
