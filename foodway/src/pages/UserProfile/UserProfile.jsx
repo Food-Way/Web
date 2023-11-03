@@ -7,14 +7,14 @@ import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondary } from "../../components/Button/Button"
 import api from "../../services/api";
 
-import "./MyUserProfile.css";
+import "./UserProfile.css";
 
-const MyUserProfile = () => {
+const UserProfile = () => {
   const [user, setUser] = useState([]);
 
   function getUser() {
 
-    const idUser = btoa(sessionStorage.getItem("idUser"));
+    const idUser = atob(sessionStorage.getItem("idUser"));
     console.log("idUser: ", idUser);
 
     const response = api.get(`customers/${idUser}`)
@@ -35,7 +35,7 @@ const MyUserProfile = () => {
 
   return (
     <>
-      <div className="my-user-profile-container">
+      <div className=".profile-container">
         <div>
           {/* menu */}
         </div>
@@ -110,4 +110,4 @@ const MyUserProfile = () => {
   )
 }
 
-export default MyUserProfile;
+export default UserProfile;

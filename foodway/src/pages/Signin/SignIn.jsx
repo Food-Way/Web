@@ -59,7 +59,7 @@ const SignIn = () => {
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate("/my-user-profile");
+              navigate("/user-profile");
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {

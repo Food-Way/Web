@@ -4,10 +4,6 @@ body {
     background-color: var(--brancoGelo);
 }
 
-/* .my-user-profile-container {
-
-} */
-
 .profile {
     display: flex;
     flex-direction: column;
