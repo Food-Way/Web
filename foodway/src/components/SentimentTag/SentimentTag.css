@@ -1,0 +1,29 @@
+@import url(../../assets/css/style.css);
+
+.sentiment-tag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--arredondamento);
+    height: 5vh;
+    width: 18vh;
+    box-shadow: var(--sombra);
+}
+
+.sentiment-tag span.sentiment-label {
+    font-size: 1.5rem;
+    color: var(--branco);
+}
+
+.positive {
+    background-color: green;
+}
+
+.neutral {
+    background-color: yellow;
+}
+
+.negative {
+    background-color: red;
+}

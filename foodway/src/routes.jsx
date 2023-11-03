@@ -10,6 +10,7 @@ import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CommentDash from "./pages/CommentDash/CommentDash";
 
 const Rotas = () => {
   return (
@@ -32,6 +33,7 @@ const Rotas = () => {
         <Route path="/menu" />
         <Route path="/establishment/menu/edit" />
         <Route path="/establishment/performance" />
+        <Route Component={CommentDash} path="/establishment/performance/comments" />
         <Route Component={NotFound} path="*" />
       </Routes>
       <Footer />
