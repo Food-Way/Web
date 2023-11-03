@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../../public/capa.png"
 import Comment from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
-import ProfilePhoto from "../../../public/foto-foto-de-perfil.png"
-import {ButtonSecondary} from "../../components/Button/Button"
+import DefaultImage from "../../../public/default-user-image.png";
+import { ButtonSecondary } from "../../components/Button/Button"
+import api from "../../services/api";
 
 import "./MyUserProfile.css";
 
 const MyUserProfile = () => {
+  const [user, setUser] = useState([]);
+
+  function getUser() {
+
+    const idUser = btoa(sessionStorage.getItem("idUser"));
+    console.log("idUser: ", idUser);
+
+    const response = api.get(`customers/${idUser}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setUser(response.data);
+          console.log("response: ", response.data);
+          console.log("User: ", user);
+        }
+      })
+      .catch((erro) => console.log(erro));
+
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <>
       <div className="my-user-profile-container">
@@ -21,10 +45,10 @@ const MyUserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  {/* <img src={ProfilePhoto} alt="" /> */}
-                  <span className="profile-username">Bruna Ballerini</span>
-                  <span className="profile-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, consequatur ullam! Doloribus enim architecto consectetur hic ex. Iusto velit maiores quos magnam nesciunt obcaecati alias qui vitae incidunt, nihil animi?</span>
-                  {/* <ButtonSecondary text={"Editar Perfil"}/> */}
+                  <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
+                  <span className="profile-username">{user.name}</span>
+                  <span className="profile-description">{user.bio}</span>
+                  {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
                   <RateCard />
@@ -50,7 +74,6 @@ const MyUserProfile = () => {
             </div>
           </section>
           <section>
-            {/* <div className="all-container"> */}
             <div className="fav-estabs-container">
               <span className="profile-title">Restaurantes favoritos</span>
               <div className="fav-estabs-box">
@@ -80,7 +103,6 @@ const MyUserProfile = () => {
                 />
               </div>
             </div>
-            {/* </div> */}
           </section>
         </div>
       </div>

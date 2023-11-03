@@ -23,16 +23,23 @@ body {
 }
 
 .user-info-box {
-    width: 65%;
+    width: 65vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 12%;
 }
 
 .user-info-left {
     width: 25rem;
     display: flex;
     flex-direction: column;
+}
+
+.profile-photo {
+    position: absolute;
+    top: 30%;
+    left: 15%;
 }
 
 .user-info-right {

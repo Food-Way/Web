@@ -4,12 +4,26 @@ import ReactStars from "react-rating-stars-component";
 import "./RateCard.css";
 
 const RateCard = () => {
-    return(
+    return (
         <>
             <div className="rate-container">
                 <div className="rate-box">
                     <div className="rate-left">
-                        <span className="profile-level">NÍVEL: <span id="profile-level">99</span></span>
+                        <div className="experience-info">
+                            <span className="profile-level">NÍVEL: <span id="profile-level">99</span></span>
+                            {
+                                sessionStorage.getItem("my-profile") == atob("true") ? (
+                                    <>
+                                        <div className="experience">
+                                            <span>EXP</span>
+                                            <progress value="50" max="100"></progress>
+                                        </div>
+                                    </>
+                                ) : (
+                                    ""
+                                )
+                            }
+                        </div>
                         <div className="profile-rate">
                             <span>3.65</span>
                             <ReactStars
