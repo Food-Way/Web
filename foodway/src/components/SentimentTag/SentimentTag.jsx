@@ -1,10 +1,18 @@
+import React from "react";
+import PositiveFace from "../../../public/positive.svg";
+import NegativeFace from "../../../public/negative.svg";
+import NeutralFace from "../../../public/neutral.svg";
+
 import "./SentimentTag.css";
 
 const Positive = () => {
     return (
         <>
             <div className="sentiment-tag positive">
-                <span className="sentiment-label">Muito bom!! :)</span>
+                <img src={PositiveFace} alt="" />
+                <span className="sentiment-label">
+                    Muito bom!!
+                </span>
             </div>
         </>
     )
@@ -14,7 +22,10 @@ const Neutral = () => {
     return (
         <>
             <div className="sentiment-tag neutral">
-                <span className="sentiment-label">Interessante -_-</span>
+                <img src={NeutralFace} alt="" />
+                <span className="sentiment-label">
+                    Interessante
+                </span>
             </div>
         </>
     )
@@ -24,10 +35,13 @@ const Negative = () => {
     return (
         <>
             <div className="sentiment-tag negative">
-                <span className="sentiment-label">Muito ruim :(</span>
+                <img src={NegativeFace} alt="" />
+                <span className="sentiment-label">
+                    Muito ruim
+                </span>
             </div>
         </>
     )
 }
 
-export {Neutral, Negative, Positive};
+export { Neutral, Negative, Positive };
