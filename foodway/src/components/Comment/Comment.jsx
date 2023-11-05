@@ -17,7 +17,7 @@ const Comment = () => {
                         <div className="header-initial">
                             <span>Restaurante e Cia</span>
                             {
-                                document.location.href != "http://localhost:5173/user-profile" ? (
+                                document.location.pathname != "/user-profile" ? (
                                     sentimentAnalysis < 5.0 ? (
                                         <Negative />
                                     ) : (

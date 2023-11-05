@@ -10,7 +10,7 @@ const RateCard = () => {
                 <div className="rate-box">
                     <div className="rate-left">
                         <div className="experience-info">
-                            <span className="profile-level">NÍVEL: <span id="profile-level">99</span></span>
+                            <span className="profile-level">NÍVEL: 99</span>
                             {
                                 sessionStorage.getItem("my-profile") == atob("true") ? (
                                     <>
@@ -37,8 +37,8 @@ const RateCard = () => {
                         </div>
                     </div>
                     <div className="rate-right">
-                        <span><span className="comments-number">+999</span> Comentários</span>
-                        <span><span className="upvotes-number">+999</span> UpVotes</span>
+                        <span className="comments-number">+999 Comentários</span>
+                        <span className="upvotes-number">+999 UpVotes</span>
                     </div>
                 </div>
             </div>
