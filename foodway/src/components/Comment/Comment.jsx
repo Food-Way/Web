@@ -1,15 +1,37 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import Upvotes from "../Upvotes/Upvotes";
+import { Neutral, Positive, Negative } from "../../components/SentimentTag/SentimentTag";
+
 import "./Comment.css";
 
 const Comment = () => {
+
+    let sentimentAnalysis = 5.0;
+
     return (
         <>
             <div className="comment-container">
                 <div className="comment-box">
                     <div className="comment-header">
-                        <span>Restaurante e Cia</span>
+                        <div className="header-initial">
+                            <span>Restaurante e Cia</span>
+                            {
+                                document.location.pathname != "/user-profile" ? (
+                                    sentimentAnalysis < 5.0 ? (
+                                        <Negative />
+                                    ) : (
+                                        sentimentAnalysis > 7.0 ? (
+                                            <Positive />
+                                        ) : (
+                                            <Neutral />
+                                        )
+                                    )
+                                ) : (
+                                    ""
+                                )
+                            }
+                        </div>
                         <ReactStars
                             count={5}
                             edit={false}

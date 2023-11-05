@@ -1,9 +1,5 @@
 @import url(../../assets/css/style.css);
 
-body {
-    background-color: var(--brancoGelo);
-}
-
 .profile {
     display: flex;
     flex-direction: column;
@@ -88,4 +84,3 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
 }
-

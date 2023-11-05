@@ -18,6 +18,7 @@
 
 html {
   /* background-color: yellow; */
+  background-color: var(--brancoGelo);
   min-height: 100vh;
 }
 

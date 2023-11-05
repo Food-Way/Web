@@ -35,7 +35,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className=".profile-container">
+      <div className="profile-container">
         <div>
           {/* menu */}
         </div>

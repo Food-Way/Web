@@ -19,6 +19,13 @@
     font-size: 2rem;
 }
 
+.header-initial {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .comment-content {
     width: 90%;
     display: flex;
