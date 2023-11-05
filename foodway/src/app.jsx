@@ -1,11 +1,9 @@
-import Header from './components/HeaderGeneral/HeaderGeneral.jsx';
-
-function App() {
-    return (
-        <div className="App">
-            <Header />
-        </div>
-    );
-}
-
+import Rotas from "./routes";
+const App = () => {
+  return (
+    <>
+      <Rotas />
+    </>
+  );
+};
 export default App;
