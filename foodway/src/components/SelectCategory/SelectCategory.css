@@ -1,34 +1,35 @@
-@import url("../../assets/css/style.css");
+@import url('../../assets/css/style.css');
 
-.selectCategory {
-  width: 6rem;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: 400;
+/* .selectCategory {
+    width: 5rem;
+    height: 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
 }
 
 .selectCategory:focus {
-  border-color: var(--primary);
-  border-width: 0rem;
-  outline-offset: none;
+    border-color: var(--primary);
+    border-width: 0rem;
+    outline-offset: none;
 }
 
 .selectCategory option {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 select::-ms-expand,
 select::-webkit-select-arrow {
-  color: var(--primary);
-  /* Define a cor da seta */
-}
+    color: var(--primary);
+} */
 
 .select-category {
-  width: 14rem;
+    width: 15rem;
+    font-size: 16px;
+    font-family: var(--fonte);
 }
 
-.select-category option::selection {
-  background-color: red;
+.css-tj5bde-Svg path {
+    fill: var(--primary);
 }
