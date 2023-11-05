@@ -1,0 +1,34 @@
+@import url(../../assets/css/style.css);
+
+.menu-item-container {
+    display: flex;
+    justify-content: center;
+    background-color: var(--branco);
+    width: 18vw;
+    height: 27vh;
+    padding-block: 10px;
+    border-radius: var(--arredondamento);
+}
+
+.menu-header span.product-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.menu-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-footer span {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.menu-footer .operations {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}

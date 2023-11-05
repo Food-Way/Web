@@ -1,0 +1,12 @@
+@import url(../../assets/css/style.css);
+
+.carrossel-container-typefood{
+  display: flex;
+  width: 100%;
+}
+
+.carrossel-typefood{
+  padding: 20px 0px;
+  width: 100%;
+  overflow-x: hidden;
+}

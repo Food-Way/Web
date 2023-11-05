@@ -1,4 +1,4 @@
-@import url('../../assets/css/style.css');
+@import url("../../assets/css/style.css");
 
 /* .selectCategory {
     width: 5rem;
@@ -10,13 +10,13 @@
 }
 
 .selectCategory:focus {
-    border-color: var(--primary);
-    border-width: 0rem;
-    outline-offset: none;
+  border-color: var(--primary);
+  border-width: 0rem;
+  outline-offset: none;
 }
 
 .selectCategory option {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 select::-ms-expand,

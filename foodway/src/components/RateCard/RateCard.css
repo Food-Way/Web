@@ -1,0 +1,74 @@
+@import url(../../assets/css/style.css);
+
+.rate-container {
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    border: var(--borda);
+}
+
+.rate-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.experience-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.experience-info .experience {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.experience-info .experience progress {
+    border-radius: var(--arredondamento);
+}
+
+.experience-info .experience progress::-webkit-progress-bar {
+    background-color: var(--cinzaClaro);
+    border-radius: var(--arredondamento);
+}
+
+.experience-info .experience progress::-webkit-progress-value {
+    background-color: #82FF36;
+    border-radius: var(--arredondamento);
+}
+
+.rate-left,
+.rate-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rate-left .profile-rate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.rate-left span.profile-level {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.rate-left .profile-rate span {
+    font-size: 2.5rem;
+    font-weight: 600;
+
+}
+
+.comments-number,
+.upvotes-number {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
