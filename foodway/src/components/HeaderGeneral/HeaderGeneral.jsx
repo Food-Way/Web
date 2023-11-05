@@ -1,10 +1,12 @@
-import LogoFoodWay from  '../../assets/img/FoodWayLogo.png';
+import React, { useEffect, useState } from 'react';
+import LogoFoodWay from '../../assets/img/FoodWayLogo.png';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SearchBar from '../SearchBar/SearchBar';
+import SelectLocation from '../SelectLocation/SelectLocation';
 import './HeaderGeneral.css';
 
-
 function Header() {
+
     return (
         <>
             <header>
@@ -15,17 +17,17 @@ function Header() {
                     </div>
                     <SelectCategory />
                     <SearchBar />
-                    {/* Select component local */}
+                    <SelectLocation />
                     <nav>
                         <ul>
                             <li>Inicio</li>
-                            <li>Sobre</li>
+                            <li>Cadastro</li>
                             <li>Login</li>
-                            <li className='active'>Cadastro</li>
                         </ul>
                     </nav>
                 </div>
             </header>
+            <img src="src\assets\img\imgTeste.jpeg" alt="" />
         </>
     );
 }

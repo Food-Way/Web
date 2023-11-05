@@ -1,8 +1,11 @@
+import React from 'react';
+import HeaderGeneral from '../../components/HeaderGeneral/HeaderGeneral.jsx';
+
 const Home = () => {
     return (
-        <div>
-        <h1>Home</h1>
-        </div>
+        <>
+            <HeaderGeneral />
+        </>
     )
 }
 export default Home;
