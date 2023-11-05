@@ -1,0 +1,87 @@
+@import url('../../assets/css/style.css');
+
+.select-location {
+    width: 10rem;
+    height: 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+    border-radius: var(--arredondamento);
+    /* border: var(--borda); */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('../../assets/img/seta.svg') 90% 50% no-repeat;
+    /* border: none; */
+    cursor: pointer;
+}
+
+.select-location span {
+    user-select: none;
+}
+
+.options-location {
+    display: flex;
+    height: 14vh;
+    flex-direction: column;
+    position: absolute;
+    width: 10rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    top: 0%;
+    transition: all 0.3s;
+    overflow-y: scroll;
+}
+
+.options-location::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.options-location::-webkit-scrollbar-thumb {
+    background: var(--branco);
+    border-radius: var(--arredondamento);
+}
+
+.options-location::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border-radius: var(--arredondamento);
+}
+
+.options-location div {
+    padding: 0.5rem;
+    margin: 0.2rem;
+    color: var(--branco);
+    transition: all 0.3s;
+}
+
+.options-location div:hover {
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    color: var(--preto);
+    transition: all 0.3s;
+}
+
+.animation-in {
+    top: 5rem;
+    transition: all 0.3 s;
+}
+
+.animation-out {
+    top: -150%;
+    width: 0px;
+    height: 0px;
+    transition: all 1s;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
