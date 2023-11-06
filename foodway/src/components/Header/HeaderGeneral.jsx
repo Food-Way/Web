@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectLocation from '../SelectionLocation/SelectionLocation';
+import { Link } from "react-router-dom";
 import './HeaderGeneral.css';
 
 function Header() {
@@ -19,13 +20,38 @@ function Header() {
                     <SelectLocation />
                     <nav>
                         <ul>
-                            <li>Inicio</li>
-                            <li>Login</li>
-                            <li>Cadastro</li>
+                            <li>
+                                <Link className="linkItem" to={"/"}>
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="linkItem" to={"/sign-in"}>
+                                    Login
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="linkItem" to={"sign-up"}>
+                                    Cadastro
+                                </Link>
+                            </li>
+                            <li>
+                                {sessionStorage.getItem("token") === null ? (
+                                    ""
+                                ) : (
+                                    <Link
+                                        className="linkItem"
+                                        to={"sign-in"}
+                                        onClick={handleLogoff}
+                                    >
+                                        Sair
+                                    </Link>
+                                )}
+                            </li>
                         </ul>
                     </nav>
                 </div>
-            </header> 
+            </header>
         </>
     );
 }
