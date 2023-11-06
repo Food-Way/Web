@@ -1,0 +1,15 @@
+@import url('../../assets/css/style.css');
+
+.menu-item span {
+    padding-left: 1rem;
+}
+
+.boxCopyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-active {
+    color: var(--primary);
+}
