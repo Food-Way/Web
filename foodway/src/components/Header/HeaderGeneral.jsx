@@ -5,6 +5,12 @@ import SelectLocation from '../SelectionLocation/SelectionLocation';
 import { Link } from "react-router-dom";
 import './HeaderGeneral.css';
 
+const handleLogoff = () => {
+    sessionStorage.clear();
+    toast.success("Logout realizado com sucesso!");
+    navigate("/");
+  };
+
 function Header() {
     const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
     return (
@@ -16,7 +22,7 @@ function Header() {
                         <h1>FoodWay</h1>
                     </div>
                     <SelectCategory />
-                    <SearchBar />
+                    <SearchBar placeholder="Buscar estabelecimento" />
                     <SelectLocation />
                     <nav>
                         <ul>

@@ -12,4 +12,18 @@ function ModalSuccess (props) {
     );
 }
 
-export { ModalSuccess }
+function AlertConfirm(props) {
+    Swal.fire({
+        title: props.title,
+        text: props.text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: props.txtConfirm
+    }).then((result) => {
+
+    })
+}
+
+export { ModalSuccess, AlertConfirm }

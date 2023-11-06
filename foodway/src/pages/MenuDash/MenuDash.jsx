@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 
-import { ModalSuccess } from "../../components/Modal/Modal";
+import { ModalSuccess, AlertConfirm } from "../../components/Modal/Modal";
 import MenuItem from "../../components/MenuItem/MenuItem";
 import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Filter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
+import api from "../../services/api";
 
 
 import "./MenuDash.css";
 
 const MenuDash = () => {
+    const [menu, setMenu] = useState([]);
+
+    function getMenu() {
+        const response = api.get('menu', {
+            headers: {
+                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
+            },
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    setMenu(response.data);
+                    console.log("response: ", response.data);
+                    console.log("Menu: ", menu);
+                }
+            })
+            .catch((erro) => console.log(erro));
+    };
+
+    useEffect(() => {
+        getMenu();
+    }, []);
 
     return (
         <>
@@ -25,29 +47,18 @@ const MenuDash = () => {
                     <div className="dash-container">
                         <section>
                             <div className="menu-dash-container">
-                                <SearchBar />
+                                <SearchBar placeholder="Buscar produto" />
                                 <div className="filter-box">
                                     <img src={Filter} className="filter" alt="" />
                                 </div>
                                 <div className="menu-dash-box">
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
-                                    <MenuItem />
+                                    {menu.map((item) => (
+                                        <MenuItem
+                                            key={item.id}
+                                            name={item.name}
+                                            price={item.price}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </section>
