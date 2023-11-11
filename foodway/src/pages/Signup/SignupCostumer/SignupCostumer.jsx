@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import InputField from "../../../components/InputField/InputField";
 import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
 import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ButtonPrimary,
   ButtonSecondary,
   ButtonStep,
 } from "../../../components/Button/Button";
-import { Link } from "react-router-dom";
+
 import { Auth } from "../../../components/Auth/Auth";
 import "./SignupCostumer.css";
 import { Button, Modal } from "@mui/material";
@@ -15,6 +16,7 @@ import api from "../../../services/api";
 
 const SignUpCostumer = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const [selectedValues, setSelectedValues] = useState([]);
 
@@ -132,6 +134,9 @@ const SignUpCostumer = () => {
             toast.success(
               "Cadastro realizado com sucesso! Redirecionando... para login"
             );
+            setTimeout(() => {
+              navigate("/sign-in");
+            }, 2000);
           }
         })
         .catch((error) => {
@@ -255,7 +260,7 @@ const SignUpCostumer = () => {
                 </>
               )}
               <span className="redirect-option">
-                Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
+                Já possui uma conta? <Link to="/sign-in">Faça login</Link>
               </span>
               {step === 1 && (
                 <ButtonPrimary text="Avançar" onclick={handleSteps} />
