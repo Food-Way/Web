@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './SearchBar.css';
-import api from '../../services/mock';
+import api from "../../services/api";
 
-function SearchBar() {
+function SearchBar(props) {
     const [searched, setSearched] = useState([]);
     const [filter, setFilter] = useState('');
     const [filtred, setFiltred] = useState([]);
@@ -26,6 +26,12 @@ function SearchBar() {
                     callGet(uriPath);
                 }
                 break;
+            case '/establishment/performance/menu':
+                uriPath = `/menu`;
+                setPassed(true);
+                setSearched([]);
+                callGet(uriPath);
+                break;
 
             default:
                 uriPath = `/establishment`;
@@ -35,14 +41,19 @@ function SearchBar() {
     }
 
     function callGet(uriPath) {
-        api.get(uriPath)
+        api.get(uriPath, {
+            headers: {
+                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
+            },
+        })
+            
             .then(response => {
-                if (response.status === 200) {
-                    setSearched(response.data);
-                } else {
-                    console.error('Erro ao buscar:', response.status);
-                }
-            })
+            if (response.status === 200) {
+                setSearched(response.data);
+            } else {
+                console.error('Erro ao buscar:', response.status);
+            }
+        })
             .catch(error => {
                 console.error('Erro ao buscar:', error);
             })
@@ -54,7 +65,7 @@ function SearchBar() {
     function search() {
         listSearched();
     }
-    
+
     useEffect(() => {
         listSearched();
     }, []);
@@ -81,7 +92,7 @@ function SearchBar() {
         <div className="dropdown">
             <input
                 type="text"
-                placeholder="Buscar estabelecimento"
+                placeholder={props.placeholder}
                 className='search-bar'
                 onKeyUp={filterName}
                 onFocus={search}

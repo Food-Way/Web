@@ -26,7 +26,7 @@ const UserProfile = () => {
         }
       })
       .catch((erro) => console.log(erro));
-
+      
   }
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import "./Comment.css";
 
 const Comment = () => {
 
-    let sentimentAnalysis = 5.0;
+    let sentimentAnalysis = 8.0;
 
     return (
         <>
@@ -28,7 +28,7 @@ const Comment = () => {
                                         )
                                     )
                                 ) : (
-                                    ""
+                                    "" 
                                 )
                             }
                         </div>
