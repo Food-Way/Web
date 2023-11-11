@@ -110,22 +110,9 @@ const SignUpCostumer = () => {
         password: formData.password,
         typeUser: "CLIENT",
         cpf: formData.cpf,
-        culinary: [
-          {
-            id: 1,
-            name: "Brasileira",
-          },
-          {
-            id: 2,
-            name: "Italiana",
-          },
-          {
-            id: 3,
-            name: "Japonesa",
-          },
-        ],
-        bio: "sss",
-        profilePhoto: "sss",
+        culinary: selectedValues,
+        bio: "",
+        profilePhoto: "",
       };
       api
         .post("customers", data)
