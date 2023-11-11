@@ -59,7 +59,7 @@ label:before {
   transform: scale(0);
 }
 
-label img {
+label .image-container {
   height: 200px;
   width: 200px;
   transition-duration: 0.2s;
@@ -78,7 +78,20 @@ label img {
   z-index: 1;
 }
 
-:checked + label img {
+:checked + label .image-container {
   box-shadow: 0 0 5px #333;
   z-index: -1;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  background-position: center;
+  align-items: end;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.image-container h2 {
+  color: white;
+  text-align: center;
+  margin: 15px 5px;
 }

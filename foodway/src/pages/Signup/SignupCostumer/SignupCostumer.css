@@ -94,16 +94,14 @@
   text-align: center;
 }
 
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
 * {
   scrollbar-width: auto;
   scrollbar-color: #ff0007 #ffffff;
 }
 
-/* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 14px;
+  width: 7px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -117,7 +115,10 @@
 }
 .button-div {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 100%;
+}
+.button-div div {
+  width: 10%;
 }

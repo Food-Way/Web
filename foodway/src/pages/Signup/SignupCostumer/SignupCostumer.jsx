@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../../../components/InputField/InputField";
 import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
+import { toast } from "react-toastify";
 import {
   ButtonPrimary,
   ButtonSecondary,
@@ -9,14 +10,14 @@ import {
 import { Link } from "react-router-dom";
 import { Auth } from "../../../components/Auth/Auth";
 import "./SignupCostumer.css";
-import { Modal } from "@mui/material";
+import { Button, Modal } from "@mui/material";
+import api from "../../../services/api";
 
 const SignUpCostumer = () => {
-  const [step, setStep] = useState(1); // To track the current step of the form
+  const [step, setStep] = useState(1);
 
   const [selectedValues, setSelectedValues] = useState([]);
 
-  // Input values for each step
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -27,21 +28,14 @@ const SignUpCostumer = () => {
     culinary: "",
   });
 
-  const handleRegister = () => {
-    console.log("Handle Register");
-  };
-
   const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
 
   const handleNext = () => {
-    console.log("Handle Next");
     if (step < 2) {
       setStep(step + 1);
     }
   };
-
   const handleBack = () => {
-    console.log("Handle Back");
     if (step > 1) {
       setStep(step - 1);
     }
@@ -50,15 +44,107 @@ const SignUpCostumer = () => {
   const handleInputChange = (event) => {
     const { id, value } = event.target;
     setFormData({ ...formData, [id]: value });
-    console.log(formData);
   };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    console.log("Handle Close");
     setOpen(false);
     handleNext();
+  };
+
+  const handleSteps = () => {
+    if (step === 1) {
+      if (!formData.name || !formData.lastname || !formData.email) {
+        toast.error("Preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("As senhas não correspondem.");
+        return;
+      }
+      handleNext();
+    }
+
+    if (step === 2) {
+      if (!formData.cpf || formData.cpf.length !== 11 || isNaN(formData.cpf)) {
+        toast.error("O CPF deve ter 11 caracteres numéricos.");
+        return;
+      }
+      if (
+        !formData.password ||
+        formData.password.length < 8 ||
+        !/[a-z]/.test(formData.password) ||
+        !/[A-Z]/.test(formData.password) ||
+        !/[0-9]/.test(formData.password) ||
+        !/[.,:;!?@#$%^*()_+-]/.test(formData.password)
+      ) {
+        toast.error(
+          "A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo."
+        );
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("As senhas não correspondem.");
+        return;
+      }
+      handleOpen();
+    }
+  };
+
+  const handleRegisterCostumer = () => {
+    if (selectedValues.length < 3) {
+      // toast.error("Selecione pelo menos tres preferências");
+      // return;
+    } else {
+      handleClose();
+      setFormData({ ...formData, culinary: selectedValues });
+
+      console.log(formData);
+      const data = {
+        name: formData.name.trim() + " " + formData.lastname.trim(),
+        email: formData.email,
+        password: formData.password,
+        typeUser: "CLIENT",
+        cpf: formData.cpf,
+        culinary: [
+          {
+            id: 1,
+            name: "Brasileira",
+          },
+          {
+            id: 2,
+            name: "Italiana",
+          },
+          {
+            id: 3,
+            name: "Japonesa",
+          },
+        ],
+        bio: "sss",
+        profilePhoto: "sss",
+      };
+      api
+        .post("customers", data)
+        .then((response) => {
+          if (response.status === 201) {
+            toast.success(
+              "Cadastro realizado com sucesso! Redirecionando... para login"
+            );
+          }
+        })
+        .catch((error) => {
+          var message = "Ocorreu um erro ao realizar o cadastro.";
+          if (error.response.status === 400) {
+            const errors = error.response.data.errors;
+            message += " Verifique os campos informados.";
+          } else {
+            message += " Erro interno no servidor.";
+          }
+          toast.error(message);
+        });
+    }
   };
 
   return (
@@ -77,7 +163,16 @@ const SignUpCostumer = () => {
                     setSelectedValues={setSelectedValues}
                   />
                   <div className="button-div">
-                    <ButtonPrimary text="Finalizar" onclick={handleClose} />
+                    <div>
+                      {" "}
+                      <ButtonSecondary text="<" onclick={handleClose} />{" "}
+                    </div>
+                    <div>
+                      <ButtonPrimary
+                        text="Criar >"
+                        onclick={handleRegisterCostumer}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -88,7 +183,7 @@ const SignUpCostumer = () => {
                   <ButtonStep
                     className="step-position"
                     step="1"
-                    onclick={handleNext}
+                    onclick={handleSteps}
                   />
                 )}
                 {step === 2 && (
@@ -146,7 +241,7 @@ const SignUpCostumer = () => {
                     id="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    autoComplete="current-password"
+                    autocomplete="new-password"
                   />
                   <InputField
                     type="password"
@@ -155,7 +250,7 @@ const SignUpCostumer = () => {
                     id="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    autoComplete="current-password"
+                    autocomplete="new-password"
                   />
                 </>
               )}
@@ -163,12 +258,12 @@ const SignUpCostumer = () => {
                 Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
               {step === 1 && (
-                <ButtonPrimary text="Avançar" onclick={handleNext} />
+                <ButtonPrimary text="Avançar" onclick={handleSteps} />
               )}
               {step === 2 && (
                 <>
                   <ButtonSecondary text="Voltar" onclick={handleBack} />
-                  <ButtonPrimary text="Avançar" onclick={handleOpen} />
+                  <ButtonPrimary text="Avançar" onclick={handleSteps} />
                 </>
               )}
             </form>
