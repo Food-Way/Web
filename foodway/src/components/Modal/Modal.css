@@ -1,0 +1,31 @@
+@import url(../../assets/css/style.css);
+
+.modal-button {
+    border: none;
+    /* text-align: center; */
+    text-decoration: none;
+    /* display: inline-block */
+    font-size: 2rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.modal-popup-class {
+    height: 30vh;
+}
+
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20rem;
+}
+
+.modal-input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}

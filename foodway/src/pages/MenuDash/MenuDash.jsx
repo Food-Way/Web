@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
-
-import { ModalSuccess, AlertConfirm } from "../../components/Modal/Modal";
-import MenuItem from "../../components/MenuItem/MenuItem";
+import { HandleFormModal } from "../../components/Modal/Modal";
+import Product from "../../components/Product/Product";
 import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Filter from "../../../public/filter.svg";
@@ -18,7 +17,7 @@ const MenuDash = () => {
     function getMenu() {
         const response = api.get('menu', {
             headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
+                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
             },
         })
             .then((response) => {
@@ -35,6 +34,7 @@ const MenuDash = () => {
         getMenu();
     }, []);
 
+
     return (
         <>
             <div className="menu-dashboard-container">
@@ -42,7 +42,20 @@ const MenuDash = () => {
                     <span className="title">Cardápio</span>
                     <div className="add-item">
                         <img src={Adicionar} alt="" />
-                        <span>Criar Item</span>
+
+                        <HandleFormModal 
+                                confirmText="Criar"
+                                cancelText="Cancelar"
+                                lblCampo1="Nome"
+                                lblCampo2="Preço"
+                                iptProductPrice="productPrice"
+                                iptProductName="productName"
+                                successTitle="Produto Criado!"
+                                content="Criar Produto"
+                                status={201}
+                                method="post"
+                                uri="products"
+                        />
                     </div>
                     <div className="dash-container">
                         <section>
@@ -53,11 +66,14 @@ const MenuDash = () => {
                                 </div>
                                 <div className="menu-dash-box">
                                     {menu.map((item) => (
-                                        <MenuItem
-                                            key={item.id}
-                                            name={item.name}
-                                            price={item.price}
-                                        />
+                                        <>
+                                            <Product
+                                                key={item.idProduct}
+                                                idProduct={item.idProduct}
+                                                name={item.name}
+                                                price={item.price}
+                                            />
+                                        </>
                                     ))}
                                 </div>
                             </div>
