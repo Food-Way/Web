@@ -1,26 +1,62 @@
-@import url("../../assets/css/style.css");
+@import url(../../assets/css/style.css);
 
-.searchBar {
-  background-color: var(--branco);
+.search-bar {
+  width: 16vw;
+  height: 3.8rem;
+  box-sizing: border-box;
+  background-image: url('../../../public/Lupa.svg');
+  background-position: .8rem .7rem;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  font-family: var(--fonte);
+  padding: 14px 20px 12px 45px;
   border: var(--borda);
   border-radius: var(--arredondamento);
-  display: flex;
-  align-items: center;
-  color: #000;
-  margin: 0px 40px;
 }
 
-input {
-  outline: none;
-  border: 0;
-  width: 30%;
-  border: solid 1px rgb(158, 158, 158);
+.search-bar:focus {
+  background-color: var(--cinza);
+  border-radius: var(--arredondamento);
+  outline: var(--primary);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 10px;
-  padding: 10px;
+  backdrop-filter: blur(10px);
+  min-width: 250px;
+  border-radius: var(--arredondamento);
+  z-index: 1;
 }
 
-input::placeholder {
-  color: var(--cinzaEscuro);
-  font-size: 0.95331rem;
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-family: var(--fonte);
+  font-size: 2rem;
   font-weight: 500;
+  margin: 1rem;
+  padding: 12px 16px;
+  transition: all 0.3s;
+}
+
+.dropdown-content a:hover {
+  transition: all 0.3s;
+  background-color: var(--branco);
+  border-radius: var(--arredondamento);
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

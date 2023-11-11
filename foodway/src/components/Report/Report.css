@@ -1,0 +1,21 @@
+@import url(../../assets/css/style.css);
+
+
+.report-container {
+    background-color: var(--branco);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    width: 13.5vw;
+    height: 5vh;
+}
+
+.report-box {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}

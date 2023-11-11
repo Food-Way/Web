@@ -52,16 +52,16 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          sessionStorage.setItem("email", response.data.email);
-          sessionStorage.setItem("idUser", response.data.idUser);
-          sessionStorage.setItem("token", response.data.token);
-          sessionStorage.setItem("typeUser", response.data.typeUser);
+          sessionStorage.setItem("email", btoa(response.data.email));
+          sessionStorage.setItem("idUser", btoa(response.data.idUser));
+          sessionStorage.setItem("token", btoa(response.data.token));
+          sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           toast.success("Login realizado com sucesso!");
-          console.log("User type:", response.data.typeUser);
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate("/perfil");
+              navigate("/user-profile");
+              sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {
             console.log("Redirecting to /establishment/performance...");
