@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import InputField from "../../../components/InputField/InputField";
-import { ButtonPrimary } from "../../../components/Button/Button";
+import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
+import {
+  ButtonPrimary,
+  ButtonSecondary,
+  ButtonStep,
+} from "../../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { Auth } from "../../../components/Auth/Auth";
+import "./SignupCostumer.css";
+import { Modal } from "@mui/material";
 
 const SignUpCostumer = () => {
   const [step, setStep] = useState(1); // To track the current step of the form
+
+  const [selectedValues, setSelectedValues] = useState([]);
 
   // Input values for each step
   const [formData, setFormData] = useState({
@@ -15,17 +24,24 @@ const SignUpCostumer = () => {
     cpf: "",
     password: "",
     confirmPassword: "",
+    culinary: "",
   });
+
+  const handleRegister = () => {
+    console.log("Handle Register");
+  };
 
   const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
 
   const handleNext = () => {
+    console.log("Handle Next");
     if (step < 2) {
       setStep(step + 1);
     }
   };
 
   const handleBack = () => {
+    console.log("Handle Back");
     if (step > 1) {
       setStep(step - 1);
     }
@@ -34,16 +50,56 @@ const SignUpCostumer = () => {
   const handleInputChange = (event) => {
     const { id, value } = event.target;
     setFormData({ ...formData, [id]: value });
+    console.log(formData);
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    console.log("Handle Close");
+    setOpen(false);
+    handleNext();
   };
 
   return (
-    <main className="main-signupestablishment">
+    <main className="main-signup-costumer">
       <Auth />
+
       <div className="container">
-        <div className="form">
-          <div className="form-container">
-            <h1 className="title">Cadastro de Usuário</h1>
+        <div className="form-costumer">
+          <div className="form-container-costumer">
+            <Modal open={open} onClose={handleClose}>
+              <div className="modal-body">
+                <div className="modal-container">
+                  <h1 className="modal-title">Selecione suas preferências</h1>
+                  <CheckboxSelect
+                    selectedValues={selectedValues}
+                    setSelectedValues={setSelectedValues}
+                  />
+                  <div className="button-div">
+                    <ButtonPrimary text="Finalizar" onclick={handleClose} />
+                  </div>
+                </div>
+              </div>
+            </Modal>
             <form>
+              <span className="action-sec">
+                {step === 1 && (
+                  <ButtonStep
+                    className="step-position"
+                    step="1"
+                    onclick={handleNext}
+                  />
+                )}
+                {step === 2 && (
+                  <ButtonStep
+                    className="step-position"
+                    step="2"
+                    onclick={handleBack}
+                  />
+                )}
+                <h1 className="title">Cadastro de Usuário</h1>
+              </span>
               {step === 1 && (
                 <>
                   <InputField
@@ -103,16 +159,16 @@ const SignUpCostumer = () => {
                   />
                 </>
               )}
-              <span className="">
+              <span className="redirect-option">
                 Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
               {step === 1 && (
-                <ButtonPrimary text="Avançar" onClick={handleNext} />
+                <ButtonPrimary text="Avançar" onclick={handleNext} />
               )}
               {step === 2 && (
                 <>
-                  <ButtonPrimary text="Voltar" onClick={handleBack} />
-                  <ButtonPrimary text="Cadastrar" />
+                  <ButtonSecondary text="Voltar" onclick={handleBack} />
+                  <ButtonPrimary text="Avançar" onclick={handleOpen} />
                 </>
               )}
             </form>

@@ -1,6 +1,6 @@
 @import url(../../../assets/css/style.css);
 
-main.main-signupcostumer {
+.main-signup-costumer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,19 +10,20 @@ main.main-signupcostumer {
 }
 .container {
   width: 85%;
-
   display: flex;
   justify-content: center;
 }
-.form {
+.form-costumer {
   width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.form-container {
+.form-container-costumer {
   width: 60%;
+  height: 100%;
+  min-height: 577px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,13 +31,14 @@ main.main-signupcostumer {
   background-color: white;
   box-shadow: 0px 0px 12.15035px 0px rgba(0, 0, 0, 0.25);
 }
-.form-container form {
+.form-container-costumer form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
-.form-container h1 {
+
+.form-container-costumer h1 {
   text-align: center;
   font-size: 3.4rem;
   margin: 20px 0px;
@@ -54,5 +56,68 @@ main.main-signupcostumer {
 }
 
 .button-primary {
-  width: 75% !important;
+  width: 75%;
+}
+
+.action-sec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.redirect-option {
+  margin: 10px;
+}
+.modal-body {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 80vh;
+  background-color: white;
+  border: 2px solid #000;
+  box-shadow: 0px 0px 12.15035px 0px rgba(0, 0, 0, 0.25);
+}
+.modal-container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.modal-title {
+  font-size: 3.4rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ff0007 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ff0007;
+  border-radius: 10px;
+  border: 2px none #ffffff;
+}
+.button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
 }

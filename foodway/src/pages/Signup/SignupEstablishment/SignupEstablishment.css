@@ -1,6 +1,6 @@
 @import url(../../../assets/css/style.css);
 
-main.main-signupestablishment {
+.main-signupestablishment {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,14 +14,14 @@ main.main-signupestablishment {
   display: flex;
   justify-content: center;
 }
-.form {
+.form-establishment {
   width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.form-container {
+.form-container-establishment {
   width: 60%;
   display: flex;
   flex-direction: column;
