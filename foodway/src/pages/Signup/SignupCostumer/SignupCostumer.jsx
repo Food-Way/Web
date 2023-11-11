@@ -199,7 +199,7 @@ const SignUpCostumer = () => {
                 <>
                   <InputField
                     type="text"
-                    label="Nome"
+                    label="Nome*"
                     placeholder="insira seu nome"
                     id="name"
                     value={formData.name}
@@ -207,7 +207,7 @@ const SignUpCostumer = () => {
                   />
                   <InputField
                     type="text"
-                    label="Sobrenome"
+                    label="Sobrenome*"
                     placeholder="insira seu sobrenome"
                     id="lastname"
                     value={formData.lastname}
@@ -215,7 +215,7 @@ const SignUpCostumer = () => {
                   />
                   <InputField
                     type="email"
-                    label="Email"
+                    label="Email*"
                     placeholder="insira seu email"
                     id="email"
                     value={formData.email}
@@ -228,7 +228,7 @@ const SignUpCostumer = () => {
                 <>
                   <InputField
                     type="text"
-                    label="CPF"
+                    label="CPF*"
                     placeholder="insira seu CPF"
                     id="cpf"
                     value={formData.cpf}
@@ -261,10 +261,14 @@ const SignUpCostumer = () => {
                 <ButtonPrimary text="Avançar" onclick={handleSteps} />
               )}
               {step === 2 && (
-                <>
-                  <ButtonSecondary text="Voltar" onclick={handleBack} />
-                  <ButtonPrimary text="Avançar" onclick={handleSteps} />
-                </>
+                <div className="section-btn">
+                  <div className="section-item">
+                    <ButtonSecondary text="Voltar" onclick={handleBack} />
+                  </div>
+                  <div className="section-item">
+                    <ButtonPrimary text="Avançar" onclick={handleSteps} />
+                  </div>
+                </div>
               )}
             </form>
           </div>
