@@ -122,3 +122,16 @@
 .button-div div {
   width: 10%;
 }
+
+.section-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-item {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+}
