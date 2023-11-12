@@ -1,14 +1,21 @@
 import "./CheckboxSelect.css";
-import { api_mock } from "../../services/api";
+import api from "../../services/api";
 import { useState, useEffect } from "react";
 
 const CheckboxSelect = ({ setSelectedValues, selectedValues }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    api_mock.get("establishment").then((response) => {
-      setCategories(response.data);
-    });
+    api.get("culinaries", {
+      headers: {
+        Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        setCategories(response.data);
+        console.log("response: ", response.data);
+      }
+    })
   }, []);
 
   const handleCheckboxChange = (event) => {
@@ -53,9 +60,9 @@ const CheckboxSelect = ({ setSelectedValues, selectedValues }) => {
               <div
                 className="image-container"
                 style={{
-                  background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${category.culinary_image}), lightgray 50% / cover no-repeat`,
+                  background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${category.photo}), lightgray 50% / cover no-repeat`,
                   backgroundPosition: "center",
-                  backgroundImage: `url(${category.culinary_image})`,
+                  backgroundImage: `url(${category.photo})`,
                 }}
               >
                 <h2>{category.name}</h2>
