@@ -1,11 +1,22 @@
 @import url(../../assets/css/style.css);
 
+.profile-container {
+    top: 10vh;
+    left: 34vw;
+    width: 50vw;
+    position: absolute;
+}
+
 .profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 4.5rem;
+}
+
+.user-banner {
+    margin-left: 3.5rem;
 }
 
 .user-info-container {
@@ -18,35 +29,50 @@
     width: 65vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 12%;
 }
 
 .user-info-left {
-    width: 25rem;
+    width: 27rem;
+    height: 15vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo {
+    width: 250px;
+    border-radius: 150px;
     position: absolute;
-    top: 30%;
-    left: 15%;
+    top: 20vh;
+    border: 0.5rem solid var(--cinza);
 }
 
 .user-info-right {
-    width: 45.5vw;
+    width: 25.5vw; 
 }
 
 .user-info-left span.profile-username {
+    width: 14vw;
+    text-transform: capitalize;
     font-size: 3rem;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .user-info-left span.profile-description {
+    width: 13vw;
+    height: 10vh;
     font-size: 1.5rem;
     font-weight: 400;
     text-align: left;
+    user-select: none;
+    margin-top: 0.5rem;
+}
+
+.description-scroll {
+    overflow-y: scroll;
 }
 
 .last-comment-container {
@@ -57,25 +83,26 @@
 }
 
 .last-comment-box {
-    width: 68vw;
+    width: 54vw;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     overflow-y: scroll;
     height: 65vh;
+    margin-top: 3rem;
 }
 
 .fav-estabs-container {
-    width: 68vw;
+    width: 55vw;
     height: 25vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    margin-top: 5rem;
 }
 
 .fav-estabs-box {
-    width: 100%;
     display: flex;
     flex-direction: row;
 }

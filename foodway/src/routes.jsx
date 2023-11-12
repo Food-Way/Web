@@ -11,13 +11,17 @@ import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import SearchEstablishment from "./pages/SearchEstablishment/SearchEstablishment";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
+import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
 
 const Rotas = () => {
   return (
     <BrowserRouter>
-      <HeaderGeneral />
+    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ?  <HeaderGeneral /> : "" }
+    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment /> : <HeaderGeneral />}
+
       <ToastContainer position="top-left" />
       <Routes>
         <Route Component={Home} path="/" />
@@ -30,6 +34,7 @@ const Rotas = () => {
           path="/sign-up-establishment"
         />
         <Route Component={UserProfile} path="/user-profile" />
+        <Route Component={SearchEstablishment} path="/establishment/search" />
         <Route path="/profile" />
         <Route path="/establishment" />
         <Route path="/menu" />
