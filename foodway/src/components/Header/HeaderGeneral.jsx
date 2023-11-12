@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectLocation from '../SelectionLocation/SelectionLocation';
+import { Link } from "react-router-dom";
 import './HeaderGeneral.css';
+
+const handleLogoff = () => {
+    sessionStorage.clear();
+    toast.success("Logout realizado com sucesso!");
+    navigate("/");
+  };
 
 function Header() {
     const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
@@ -15,17 +22,42 @@ function Header() {
                         <h1>FoodWay</h1>
                     </div>
                     <SelectCategory />
-                    <SearchBar />
+                    <SearchBar placeholder="Buscar estabelecimento" />
                     <SelectLocation />
                     <nav>
                         <ul>
-                            <li>Inicio</li>
-                            <li>Login</li>
-                            <li>Cadastro</li>
+                            <li>
+                                <Link className="linkItem" to={"/"}>
+                                    Inicio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="linkItem" to={"/sign-in"}>
+                                    Login
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="linkItem" to={"sign-up"}>
+                                    Cadastro
+                                </Link>
+                            </li>
+                            <li>
+                                {sessionStorage.getItem("token") === null ? (
+                                    ""
+                                ) : (
+                                    <Link
+                                        className="linkItem"
+                                        to={"sign-in"}
+                                        onClick={handleLogoff}
+                                    >
+                                        Sair
+                                    </Link>
+                                )}
+                            </li>
                         </ul>
                     </nav>
                 </div>
-            </header> 
+            </header>
         </>
     );
 }

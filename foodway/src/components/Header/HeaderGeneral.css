@@ -2,7 +2,7 @@
 
 header {
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,6 +33,11 @@ header div div.left {
     gap: 0.5rem;
 }
 
+.left img {
+    width: 5rem;
+    height: 5rem;
+}
+
 header div img {
     width: 3.53106rem;
     height: 3.7145rem;
@@ -51,10 +56,16 @@ header nav ul {
 header nav ul li {
     display: flex;
     cursor: pointer;
+    transition: all .3s;
+}
+
+.linkItem {
+    text-decoration: none;
+    color: var(--preto);
 }
 
 header nav ul li:hover{
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
     transition: all .3s;
 }
 /* 

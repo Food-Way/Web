@@ -12,7 +12,7 @@ const InputField = ({
 }) => {
   return (
     <div className="form-group">
-      <label htmlFor={id}>{label}:</label>
+      <label htmlFor={id}>{label}</label>
       <input
         type={type}
         id={id}

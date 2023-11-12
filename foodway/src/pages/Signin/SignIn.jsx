@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
+import { Modal } from "@mui/material";
 
 const SignIn = () => {
   const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
@@ -85,8 +86,8 @@ const SignIn = () => {
     <main className="main-signin">
       <Auth />
       <div className="container">
-        <div className="form">
-          <div className="form-container">
+        <div className="form-signin">
+          <div className="form-container-signin">
             <h1 className="title">Login</h1>
             <form onSubmit={handleSubmit}>
               <InputField

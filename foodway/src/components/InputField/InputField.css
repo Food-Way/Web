@@ -11,6 +11,8 @@
   border: var(--borda);
   font-family: var(--defaultFonte);
   font-size: 1.9rem;
+  padding: 10px 0px 10px 0px;
+  margin: 0px 0px 10px 0px;
 }
 .form-group input::placeholder {
   font-family: var(--defaultFonte);

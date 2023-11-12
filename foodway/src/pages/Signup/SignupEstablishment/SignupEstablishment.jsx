@@ -7,11 +7,11 @@ const SignupEstablishment = () => {
   const loginIMG =
     "https://foodway.blob.core.windows.net/public/cadastroEstablishment.png";
   return (
-    <main className="main-signupestablishment">
+    <main className="main-signup-establishment">
       <Auth />
       <div className="container">
-        <div className="form">
-          <div className="form-container">
+        <div className="form-establishment">
+          <div className="form-container-establishment">
             <h1 className="title">Cadastro de Estabelecimento</h1>
             <form>
               <span className="">
