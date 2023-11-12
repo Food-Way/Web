@@ -5,7 +5,8 @@ import { Neutral, Positive, Negative } from "../../components/SentimentTag/Senti
 
 import "./Comment.css";
 
-const Comment = () => {
+const Comment = (props) => {
+    console.log(props);
 
     let sentimentAnalysis = 8.0;
 
@@ -15,7 +16,7 @@ const Comment = () => {
                 <div className="comment-box">
                     <div className="comment-header">
                         <div className="header-initial">
-                            <span>Restaurante e Cia</span>
+                            <span>{props.establishmentName}</span>
                             {
                                 document.location.pathname != "/user-profile" ? (
                                     sentimentAnalysis < 5.0 ? (
@@ -36,14 +37,14 @@ const Comment = () => {
                             count={5}
                             edit={false}
                             size={24}
-                            value={4.5}
+                            value={props.rate}
                             isHalf={true}
                             activeColor="#ff0000"
                         />
                     </div>
                     <div className="comment-content">
-                        <span>Amei!!!!</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus voluptatem, cum quas error illum, quia odit molestiae nihil unde animi debitis. Saepe libero quasi reiciendis alias autem est nesciunt tenetur!</p>
+                        <span>{props.title}</span>
+                        <p>{props.comment}</p>
                     </div>
                     <div className="comment-footer">
                         <Upvotes />
