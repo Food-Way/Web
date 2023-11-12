@@ -60,6 +60,7 @@ const SignIn = () => {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
               navigate("/user-profile");
+              location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {

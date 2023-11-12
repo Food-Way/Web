@@ -5,7 +5,7 @@ import MenuEstablishment from "../../components/MenuEstablishment/MenuEstablishm
 function SearchEstablishment() {
     return (
         <>
-            <MenuEstablishment />
+            <h1>AAAAAAAA</h1>
         </>
     );
 }

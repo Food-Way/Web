@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Banner from "../../../public/capa.png"
 import Comment from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondary } from "../../components/Button/Button"
+import HeaderGeneral from "../../components/Header/HeaderGeneral";
 import api from "../../services/api";
 
 import "./UserProfile.css";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);
+  const profileDescriptionRef = useRef(null);
 
   function getUser() {
 
@@ -26,28 +28,73 @@ const UserProfile = () => {
         }
       })
       .catch((erro) => console.log(erro));
+  }
 
+  function firstAndEnd(phrase) {
+    let words = phrase.split(' ');
+    let firstWord = words[0];
+    let endWord = words[words.length - 1];
+    return [firstWord + " " + endWord];
+  }
+
+  const scrollToBottomAndBack = () => {
+    if (profileDescriptionRef.current) {
+      const targetScroll = profileDescriptionRef.current.scrollHeight;
+
+      const duration = 20000;
+      let startTime;
+
+      const scrollAnimation = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+
+        const progress = timestamp - startTime;
+        const percentage = Math.min(progress / duration, 1);
+        profileDescriptionRef.current.scrollTop = targetScroll * percentage;
+
+        if (progress < duration) {
+          requestAnimationFrame(scrollAnimation);
+        }
+      };
+
+      requestAnimationFrame(scrollAnimation);
+    }
+  };
+
+  function showDescription(bio) {
+
+    if (bio.length > 30) {
+      return (
+        <span className="profile-description" ref={profileDescriptionRef}>
+          {user.bio}
+        </span>
+      )
+    } else {
+      return (
+        <span className="profile-description description-scroll" ref={profileDescriptionRef}>
+          {user.bio}
+        </span>
+      )
+    }
   }
 
   useEffect(() => {
     getUser();
+    scrollToBottomAndBack();
   }, []);
 
   return (
     <>
       <div className="profile-container">
-        <div>
-          {/* menu */}
-        </div>
         <div className="profile">
           <section>
-            <img src={Banner} alt="" />
+            <img className="user-banner" src={Banner} alt="" />
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
-                  <span className="profile-username">{user.name}</span>
-                  <span className="profile-description">{user.bio}</span>
+                  {/* user.profilePhoto === "" || null ? DefaultImage : user.profilePhoto */}
+                  <img className="profile-photo" src={DefaultImage} alt="" />
+                  <span className="profile-username">{firstAndEnd(`${user.name}`)}</span>
+                  {showDescription(`${user.bio}`)}
                   {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">

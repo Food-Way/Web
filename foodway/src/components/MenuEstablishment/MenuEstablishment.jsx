@@ -1,11 +1,17 @@
 import { useState, React, useEffect } from "react";
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { faUser, faMagnifyingGlass, faStore, faUserLarge, faArrowRightFromBracket, faChartSimple, faComments, faRankingStar, faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, menuClasses } from 'react-pro-sidebar';
+import { faUser, faMagnifyingGlass, faStore, faUserLarge, faArrowRightFromBracket, faChartSimple, faComments, faRankingStar, faBookOpen, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useNavigate } from "react-router-dom";
+import UserProfile from "../../pages/UserProfile/UserProfile";
+import DoneIcon from '@material-ui/icons/Done';
+import { toast } from "react-toastify";
 import './MenuEstablishment.css';
 
 function MenuEstablishment() {
+    const navigate = useNavigate();
+    const [oldPath, setOldPath] = useState("");
+
     const [establishment, setEstablishment] = useState([
         { "id": 1, "nome": "Restaurante Italiano" },
         { "id": 2, "nome": "Churrascaria" },
@@ -32,6 +38,7 @@ function MenuEstablishment() {
         sessionStorage.clear();
         toast.success("Logout realizado com sucesso!");
         navigate("/");
+        location.reload();
     };
 
     function setCheck(id) {
@@ -43,14 +50,57 @@ function MenuEstablishment() {
         }
     }
 
-    var results = [10, 20, 30, 44, 70, 98];
+    function setNavigate(className) {
+        className = className || <UserProfile />;
+
+        if (oldPath != className) {
+            setColor(className);
+            setOldPath(className);
+        } 
+
+        // for (let index = 0; index < array.length; index++) {
+        //     const element = array[index];
+            
+        // }
+
+        console.log(className);
+        if (className == ".search-item") {
+            navigate("/*")
+        } else if (className == ".establishment") {
+            navigate("/establishment/search")
+        } else if (className == ".profile-item") {
+            navigate("/user-profile")
+        } else if (className == ".users-item") {
+            navigate("/users")
+        } else if (className == ".out-item") {
+            handleLogoff();
+        }
+        return className;
+    }
+
+    function setColor(className) {
+        var item = document.querySelector(className);
+        item.classList.toggle("item-active");
+    }
 
     return (
         <>
-            <Sidebar>
+            <Sidebar
+                rootStyles={{
+                    [`.${sidebarClasses.container}`]: {
+                        height: "200vh",
+                        width: "22vw",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        backgroundColor: "var(--branco)",
+                        paddingBottom: "3rem",
+                    }
+                }}
+            >
                 <Menu>
-                    <MenuItem icon={(<FontAwesomeIcon icon={faUser} className="item-active" />)}>
-                        Perfil
+                    <MenuItem icon={(<FontAwesomeIcon icon={faUser} className="profile-item" />)} onClick={() => {setNavigate(".profile-item")}}>
+                        <span className="profile-item">Perfil</ span>
                     </MenuItem>
 
                     {/* Utilizar parseJWT */}
@@ -63,32 +113,28 @@ function MenuEstablishment() {
                         </>
                     ) : (
                         <>
-                            <SubMenu icon={(<FontAwesomeIcon icon={faMagnifyingGlass} />)} label={"Busca"}>
-                                <SubMenu icon={(<FontAwesomeIcon icon={faStore} />)} label={"Estabelecimento " + "(" + establishment.length + ")"}>
+                            <SubMenu icon={(<FontAwesomeIcon icon={faMagnifyingGlass} className="search-item" />)} label={"Busca"} onClick={() => {setNavigate(".search-item")}}>
+                                <SubMenu icon={(<FontAwesomeIcon icon={faStore} className="establishment-item" />)} label={"Estabelecimento " + "(" + establishment.length + ")"} onClick={() => {setNavigate(".establishment-item")}}>
                                     {establishment.map((item) => {
                                         return (
                                             <MenuItem key={item.id} onClick={() => setCheck("e" + item.id)}>
                                                 <div className="menu-item">
-                                                    <input type="checkbox" name="" id={"e" + item.id} />
-                                                    <span>{item.nome}</span>
+                                                    <div class="pretty p-icon p-round p-smooth check-culinary">
+                                                        <input type="checkbox" onClick={() => setCheck("e" + item.id)} id={"e" + item.id} />
+                                                        <div class="state">
+                                                            <DoneIcon className="icon check" />
+                                                            <label>{item.nome}</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </MenuItem>
                                         )
                                     })}
                                 </SubMenu>
                                 {sessionStorage.getItem("token") !== null ? (
-                                    <SubMenu icon={(<FontAwesomeIcon icon={faUserLarge} />)} label={"Usuários " + "(" + users.length + ")"}>
-                                        {users.map((item) => {
-                                            return (
-                                                <MenuItem key={item.id} onClick={() => setCheck("u" + item.id)}>
-                                                    <div className="menu-item">
-                                                        <input type="checkbox" name="" id={"u" + item.id} />
-                                                        <span>{item.nome}</span>
-                                                    </div>
-                                                </MenuItem>
-                                            )
-                                        })}
-                                    </SubMenu>
+                                    <MenuItem className="users-item" icon={(<FontAwesomeIcon icon={faUserLarge} onClick={() => {setNavigate(".users-item")}} />)}>
+                                        <span>Usuários ({users.length})</span>
+                                    </MenuItem>
                                 ) : (
                                     ''
                                 )}
@@ -96,7 +142,7 @@ function MenuEstablishment() {
                         </>
                     )}
                     {sessionStorage.getItem("token") !== null ? (
-                        <MenuItem icon={(<FontAwesomeIcon icon={faArrowRightFromBracket} />)} onClick={handleLogoff}> Sair </MenuItem>
+                        <MenuItem className="out-item" icon={(<FontAwesomeIcon icon={faArrowRightFromBracket} />)} onClick={() => {setNavigate(".out-item")}}> Sair </MenuItem>
                     ) : (
                         ''
                     )}
@@ -105,7 +151,7 @@ function MenuEstablishment() {
                     <span>Todos os direitos reservados</span>
                     <b>FoodWay © 2023</b>
                 </div>
-            </Sidebar>;
+            </Sidebar>
         </>
     );
 }
