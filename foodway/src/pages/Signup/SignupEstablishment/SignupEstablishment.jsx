@@ -9,11 +9,15 @@ import { Link } from "react-router-dom";
 import { Auth } from "../../../components/Auth/Auth";
 import { ButtonStep } from "../../../components/Button/Button";
 import { useState, useEffect } from "react";
+import { Modal } from "@mui/material";
+import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
+import { toast } from "react-toastify";
 
 const SignupEstablishment = () => {
   const [step, setStep] = useState(1);
 
-  // const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const loginIMG =
     "https://foodway.blob.core.windows.net/public/cadastroEstablishment.png";
 
@@ -28,6 +32,8 @@ const SignupEstablishment = () => {
     }
   };
 
+  const handleRegisterEstablishment = () => {};
+
   const handleInputChange = (event) => {
     const { id, value } = event.target;
     setFormData({ ...formData, [id]: value });
@@ -40,109 +46,37 @@ const SignupEstablishment = () => {
     handleNext();
   };
 
-  // const handleSteps = () => {
-  //   if (step === 1) {
-  //     if (!formData.name || !formData.lastname || !formData.email) {
-  //       toast.error("Preencha todos os campos obrigatórios.");
-  //       return;
-  //     }
-
-  //     if (formData.password !== formData.confirmPassword) {
-  //       toast.error("As senhas não correspondem.");
-  //       return;
-  //     }
-  //     handleNext();
-  //   }
-
-  //   if (step === 2) {
-  //     if (!formData.cpf || formData.cpf.length !== 11 || isNaN(formData.cpf)) {
-  //       toast.error("O CPF deve ter 11 caracteres numéricos.");
-  //       return;
-  //     }
-  //     if (
-  //       !formData.password ||
-  //       formData.password.length < 8 ||
-  //       !/[a-z]/.test(formData.password) ||
-  //       !/[A-Z]/.test(formData.password) ||
-  //       !/[0-9]/.test(formData.password) ||
-  //       !/[.,:;!?@#$%^*()_+-]/.test(formData.password)
-  //     ) {
-  //       toast.error(
-  //         "A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo."
-  //       );
-  //       return;
-  //     }
-  //     if (formData.password !== formData.confirmPassword) {
-  //       toast.error("As senhas não correspondem.");
-  //       return;
-  //     }
-  //     handleOpen();
-  //   }
-  // };
-
-  // const handleRegisterCostumer = () => {
-  //   if (selectedValues.length < 3) {
-  //     // toast.error("Selecione pelo menos tres preferências");
-  //     // return;
-  //   } else {
-  //     handleClose();
-  //     setFormData({ ...formData, culinary: selectedValues });
-
-  //     console.log(formData);
-  //     const data = {
-  //       name: formData.name.trim() + " " + formData.lastname.trim(),
-  //       email: formData.email,
-  //       password: formData.password,
-  //       typeUser: "CLIENT",
-  //       cpf: formData.cpf,
-  //       culinary: [
-  //         {
-  //           id: 1,
-  //           name: "Brasileira",
-  //         },
-  //         {
-  //           id: 2,
-  //           name: "Italiana",
-  //         },
-  //         {
-  //           id: 3,
-  //           name: "Japonesa",
-  //         },
-  //       ],
-  //       bio: "sss",
-  //       profilePhoto: "sss",
-  //     };
-  //     api
-  //       .post("customers", data)
-  //       .then((response) => {
-  //         if (response.status === 201) {
-  //           toast.success(
-  //             "Cadastro realizado com sucesso! Redirecionando... para login"
-  //           );
-  //           setTimeout(() => {
-  //             navigate("/sign-in");
-  //           }, 2000);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         var message = "Ocorreu um erro ao realizar o cadastro.";
-  //         if (error.response.status === 400) {
-  //           const errors = error.response.data.errors;
-  //           message += " Verifique os campos informados.";
-  //         } else {
-  //           message += " Erro interno no servidor.";
-  //         }
-  //         toast.error(message);
-  //       });
-  //   }
-  // };
-
   return (
     <main className="main-signup-establishment">
       <Auth />
       <div className="container">
         <div className="form-establishment">
           <div className="form-container-establishment">
+            <Modal open={open} onClose={handleClose}>
+              <div className="modal-body">
+                <div className="modal-container">
+                  <h1 className="modal-title">Selecione suas preferências</h1>
+                  <CheckboxSelect
+                    selectedValues={selectedValues}
+                    setSelectedValues={setSelectedValues}
+                    selectedCulinaries={selectedCulinaries}
+                    setSelectedCulinaries={setSelectedCulinaries}
+                  />
+                  <div className="button-div">
+                    <div>
+                      {" "}
+                      <ButtonSecondary text="<" onclick={handleClose} />{" "}
+                    </div>
+                    <div>
+                      <ButtonPrimary
+                        text="Criar >"
+                        onclick={handleRegisterEstablishment}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Modal>
             <form>
               <span className="action-sec">
                 {step === 1 && (

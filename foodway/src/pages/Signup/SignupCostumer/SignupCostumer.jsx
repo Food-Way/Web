@@ -17,7 +17,7 @@ import api from "../../../services/api";
 const SignUpCostumer = () => {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
-
+  const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const [selectedValues, setSelectedValues] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -101,16 +101,30 @@ const SignUpCostumer = () => {
       // return;
     } else {
       handleClose();
+      // console.log(selectedValues);
+      // console.log(selectedCulinaries);
+      // for (var i = 0; i < selectedCulinaries.length; i++) {
+      //   if (selectedValues.includes(selectedCulinaries[i].name)) {
+      //     selectedValues.splice(
+      //       selectedValues.indexOf(selectedCulinaries[i].name),
+      //       1
+      //     );
+      //   }
+      // }
+
+      const filteredCulinaries = selectedCulinaries
+        .filter((culinary) => selectedValues.includes(culinary.name))
+        .map(({ photo, ...rest }) => rest);
+      console.log(filteredCulinaries);
       setFormData({ ...formData, culinary: selectedValues });
 
-      console.log(formData);
       const data = {
         name: formData.name.trim() + " " + formData.lastname.trim(),
         email: formData.email,
         password: formData.password,
         typeUser: "CLIENT",
         cpf: formData.cpf,
-        culinary: selectedValues,
+        culinary: filteredCulinaries,
         bio: "",
         profilePhoto: "",
       };
@@ -153,6 +167,8 @@ const SignUpCostumer = () => {
                   <CheckboxSelect
                     selectedValues={selectedValues}
                     setSelectedValues={setSelectedValues}
+                    selectedCulinaries={selectedCulinaries}
+                    setSelectedCulinaries={setSelectedCulinaries}
                   />
                   <div className="button-div">
                     <div>

@@ -13,6 +13,5 @@ const api_mock = axios.create({
     "Content-Type": "application/json",
   },
 });
-
 export default api;
-export { api_mock };
+export { api_mock, api };

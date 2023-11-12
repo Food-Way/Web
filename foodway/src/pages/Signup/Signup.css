@@ -22,3 +22,6 @@
 .cardCostumerEstablishment a {
   width: fit-content;
 }
+.cardCostumerEstablishment img {
+  margin-bottom: 10px;
+}
