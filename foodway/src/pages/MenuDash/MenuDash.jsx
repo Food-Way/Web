@@ -60,9 +60,15 @@ const MenuDash = () => {
                     <div className="dash-container">
                         <section>
                             <div className="menu-dash-container">
-                                <SearchBar placeholder="Buscar produto" />
-                                <div className="filter-box">
-                                    <img src={Filter} className="filter" alt="" />
+                                <div className="menu-dash-header">
+                                    <SearchBar placeholder="Buscar produto" />
+                                    <div className="filter-box">
+                                        <img src={Filter} className="filter" alt="" />
+                                        <span>a</span>
+                                        <span>a</span>
+                                        <span>a</span>
+                                        <span>a</span>
+                                    </div>
                                 </div>
                                 <div className="menu-dash-box">
                                     {menu.map((item) => (
