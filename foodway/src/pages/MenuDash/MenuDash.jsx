@@ -4,7 +4,7 @@ import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
 import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../../public/filter.svg";
+import Filter from "../../components/Filter/Filter";
 import Report from "../../components/Report/Report";
 import api from "../../services/api";
 
@@ -62,13 +62,7 @@ const MenuDash = () => {
                             <div className="menu-dash-container">
                                 <div className="menu-dash-header">
                                     <SearchBar placeholder="Buscar produto" />
-                                    <div className="filter-box">
-                                        <img src={Filter} className="filter" alt="" />
-                                        <span>a</span>
-                                        <span>a</span>
-                                        <span>a</span>
-                                        <span>a</span>
-                                    </div>
+                                    <Filter />
                                 </div>
                                 <div className="menu-dash-box">
                                     {menu.map((item) => (

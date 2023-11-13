@@ -5,7 +5,6 @@ import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCa
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondary } from "../../components/Button/Button"
-import HeaderGeneral from "../../components/Header/HeaderGeneral";
 import api from "../../services/api";
 
 import "./UserProfile.css";
@@ -101,7 +100,7 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
+                  <img className="profile-photo" src={user.profilePhoto === "https://example.com/leo.jpg" ? DefaultImage : user.profilePhoto} alt="" />
                   <span className="profile-username">{user.name}</span>
                   <span className="profile-description">{user.bio}</span>
                   {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}

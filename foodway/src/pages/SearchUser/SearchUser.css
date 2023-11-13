@@ -1,0 +1,55 @@
+@import url('../../assets/css/style.css');
+
+.search-user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.search-user{
+    width: 60%;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-user {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.search-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.user-detail-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.search-results {
+    border-bottom: 2px solid var(--primary);
+}
+
+.search-bar {
+    width: 30vw;
+}
+
+.search-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

@@ -14,13 +14,13 @@ ul {
 
 .unordenated-list {
   margin: auto;
-  /* overflow: hidden; */
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  /*  */
-  /* height: 100%; */
-  /* width: 50px; */
+  
+  height: 100%;
+  width: 50px;
 }
 
 li {

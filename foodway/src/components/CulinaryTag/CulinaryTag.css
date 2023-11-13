@@ -1,0 +1,13 @@
+@import url('../../assets/css/style.css');
+
+.culinary-tag-container {
+    background: var(--preto);
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    padding: 0.5rem;    
+    text-align: center;
+}
+
+.culinary-tag-container span{
+    color: var(--branco);
+}

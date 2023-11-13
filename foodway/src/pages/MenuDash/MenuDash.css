@@ -49,34 +49,6 @@
     position: relative;
 }
 
-.filter-box {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 3.5vw;
-    transition: width 0.5s ease;
-    background-color: var(--preto);
-    height: 5vh;
-    border-radius: var(--arredondamento);
-    cursor: pointer;
-}
-
-.filter-box:hover {
-    width: 38.2vw;
-}
-
-.filter {
-    margin: 0 10px;
-}
-
-
-.menu-dash-container img.filter {
-    width: 3vw;
-    height: 3vh;
-}
-
 .menu-dash-box {
     display: flex;
     flex-direction: row;

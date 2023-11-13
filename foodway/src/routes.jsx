@@ -6,12 +6,11 @@ import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import HeaderGeneral from "./components/Header/HeaderGeneral";
-import Footer from "./components/Footer/Footer";
 import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import SearchEstablishment from "./pages/SearchEstablishment/SearchEstablishment";
+import SearchUser from "./pages/SearchUser/SearchUser";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
 import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
@@ -34,7 +33,6 @@ const Rotas = () => {
           path="/sign-up-establishment"
         />
         <Route Component={UserProfile} path="/user-profile" />
-        <Route Component={SearchEstablishment} path="/establishment/search" />
         <Route path="/profile" />
         <Route path="/establishment" />
         <Route path="/menu" />
@@ -43,6 +41,7 @@ const Rotas = () => {
         <Route Component={CommentDash} path="/establishment/performance/comments" />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
         <Route Component={NotFound} path="*" />
+        <Route Component={SearchUser} path="/search-user" />
       </Routes>
     </BrowserRouter>
   );
