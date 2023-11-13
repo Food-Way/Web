@@ -101,74 +101,55 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  {/* user.profilePhoto === "" || null ? DefaultImage : user.profilePhoto */}
-                  <img className="profile-photo" src={DefaultImage} alt="" />
-                  <span className="profile-username">{firstAndEnd(`${user.name}`)}</span>
-                  {showDescription(`${user.bio}`)}
+                  <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
+                  <span className="profile-username">{user.name}</span>
+                  <span className="profile-description">{user.bio}</span>
                   {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
-                  <RateCard />
+                  <RateCard
+                    xp={user.xp}
+                    level={user.level}
+                    profileRate={user.profileRate}
+                    qtdComments={user.qtdComments}
+                  />
                 </div>
-    <div className="profile-container">
-      <div>
-        {/* menu */}
-      </div>
-      <div className="profile">
-        <section>
-          <img src={Banner} alt="" />
-          <div className="user-info-container">
-            <div className="user-info-box">
-              <div className="user-info-left">
-                <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
-                <span className="profile-username">{user.name}</span>
-                <span className="profile-description">{user.bio}</span>
-                {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
-              </div>
-              <div className="user-info-right">
-                <RateCard
-                  xp={user.xp}
-                  level={user.level}
-                  profileRate={user.profileRate}
-                  qtdComments={user.qtdComments}
-                />
               </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div className="last-comment-container">
-            <span className="profile-title">Últimas avaliações</span>
-            <div className="last-comment-box">
-              {comments.map((item) => (
-                <Comment
-                  establishmentName={item.establishmentName}
-                  rate={item.commentRate}
-                  title={item.title}
-                  comment={item.comment}
-                />
-              ))}
+          </section>
+          <section>
+            <div className="last-comment-container">
+              <span className="profile-title">Últimas avaliações</span>
+              <div className="last-comment-box">
+                {comments.map((item) => (
+                  <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div className="fav-estabs-container">
-            <span className="profile-title">Restaurantes favoritos</span>
-            <div className="fav-estabs-box">
-              {establishments.map((item) => (
-                <HomeCardEstablishment
-                  establishment={item.establishmentName}
-                  category={item.culinary}
-                  image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                  rattingNumber={item.establishmentRate}
-                />
-              ))}
+          </section>
+          <section>
+            <div className="fav-estabs-container">
+              <span className="profile-title">Restaurantes favoritos</span>
+              <div className="fav-estabs-box">
+                {establishments.map((item) => (
+                  <HomeCardEstablishment
+                    establishment={item.establishmentName}
+                    category={item.culinary}
+                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
+                    rattingNumber={item.establishmentRate}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-    </div>
-  </>
+    </>
   )
 }
 
