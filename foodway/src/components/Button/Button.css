@@ -23,7 +23,13 @@
   transform: scale(1.1);
   transition: 0.3s;
 }
-
+.button-primary-v2:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
 .button-secondary {
   max-width: fit-content;
   min-width: 60%;
@@ -60,4 +66,48 @@
 }
 .button-step img {
   width: 75%;
+}
+.button-primary-v2 {
+  max-width: fit-content;
+  min-width: 100px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.button-secondary-v2 {
+  max-width: fit-content;
+  width: 100px;
+  min-width: 100%;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.button-secondary-v2:hover {
+  background: #161616;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.3s;
 }

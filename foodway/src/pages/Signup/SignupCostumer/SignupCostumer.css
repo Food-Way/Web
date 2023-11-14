@@ -120,7 +120,7 @@
   width: 100%;
 }
 .button-div div {
-  width: 10%;
+  width: fit-content;
 }
 
 .section-btn {

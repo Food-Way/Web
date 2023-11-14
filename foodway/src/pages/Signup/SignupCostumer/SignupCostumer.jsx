@@ -97,21 +97,9 @@ const SignUpCostumer = () => {
 
   const handleRegisterCostumer = () => {
     if (selectedValues.length < 3) {
-      // toast.error("Selecione pelo menos tres preferências");
-      // return;
+      toast.error("Selecione pelo menos tres preferências");
     } else {
       handleClose();
-      // console.log(selectedValues);
-      // console.log(selectedCulinaries);
-      // for (var i = 0; i < selectedCulinaries.length; i++) {
-      //   if (selectedValues.includes(selectedCulinaries[i].name)) {
-      //     selectedValues.splice(
-      //       selectedValues.indexOf(selectedCulinaries[i].name),
-      //       1
-      //     );
-      //   }
-      // }
-
       const filteredCulinaries = selectedCulinaries
         .filter((culinary) => selectedValues.includes(culinary.name))
         .map(({ photo, ...rest }) => rest);
@@ -120,14 +108,15 @@ const SignUpCostumer = () => {
 
       const data = {
         name: formData.name.trim() + " " + formData.lastname.trim(),
-        email: formData.email,
-        password: formData.password,
+        email: formData.email.trim(),
+        password: formData.password.trim(),
         typeUser: "CLIENT",
-        cpf: formData.cpf,
+        cpf: formData.cpf.replace(/[^\d]+/g, ""),
         culinary: filteredCulinaries,
         bio: "",
         profilePhoto: "",
       };
+      console.log(data);
       api
         .post("customers", data)
         .then((response) => {
@@ -241,6 +230,7 @@ const SignUpCostumer = () => {
                     id="cpf"
                     value={formData.cpf}
                     onChange={handleInputChange}
+                    mask={"999.999.999-99"}
                   />
                   <InputField
                     type="password"
