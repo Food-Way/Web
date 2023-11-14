@@ -3,14 +3,14 @@ import ReactStars from "react-rating-stars-component";
 
 import "./RateCard.css";
 
-const RateCard = () => {
+const RateCard = (props) => {    
     return (
         <>
             <div className="rate-container">
                 <div className="rate-box">
                     <div className="rate-left">
                         <div className="experience-info">
-                            <span className="profile-level">NÍVEL: 99</span>
+                            <span className="profile-level">NÍVEL: {props.level}</span>
                             {
                                 sessionStorage.getItem("my-profile") == atob("true") ? (
                                     <>
@@ -25,19 +25,21 @@ const RateCard = () => {
                             }
                         </div>
                         <div className="profile-rate">
-                            <span>3.65</span>
-                            <ReactStars
-                                count={5}
-                                edit={false}
-                                size={24}
-                                value={4.5}
-                                isHalf={true}
-                                activeColor="#ff0000"
-                            />
+                            <span>{props.profileRate}</span>
+
+                                <ReactStars
+                                    count={5}
+                                    edit={false}
+                                    size={24}
+                                    value={(props.profileRate)}
+                                    isHalf={true}
+                                    activeColor="#ff0000"
+                                />
+                           
                         </div>
                     </div>
                     <div className="rate-right">
-                        <span className="comments-number">+999 Comentários</span>
+                        <span className="comments-number">{props.qtdComments} {props.qtdComments > 1 ? ("Comentários") : ("Comentário")}</span>
                         <span className="upvotes-number">+999 UpVotes</span>
                     </div>
                 </div>
