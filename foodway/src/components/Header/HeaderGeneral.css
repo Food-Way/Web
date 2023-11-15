@@ -1,72 +1,74 @@
-@import url('../../assets/css/style.css');
+@import url("../../assets/css/style.css");
 
 header {
-    width: 100%;
-    height: 8vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    font-weight: 400;
-    background-color: var(--branco);
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 400;
+  background-color: var(--branco);
+  position: relative;
+  z-index: 100;
 }
 
 header h1 {
-    font-size: 1.91169rem;
-    font-weight: 700;
+  font-size: 1.91169rem;
+  font-weight: 700;
 }
 
 header div.container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  gap: 0.5rem;
 }
 
 header div div.left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .left img {
-    width: 5rem;
-    height: 5rem;
+  width: 5rem;
+  height: 5rem;
 }
 
 header div img {
-    width: 3.53106rem;
-    height: 3.7145rem;
+  width: 3.53106rem;
+  height: 3.7145rem;
 }
 
 header nav ul {
-    width: 20vw;
-    height: 5vh;
-    justify-content: space-around;
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 0.5rem;
+  width: 20vw;
+  height: 5vh;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0.5rem;
 }
 
 header nav ul li {
-    display: flex;
-    cursor: pointer;
-    transition: all .3s;
+  display: flex;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .linkItem {
-    text-decoration: none;
-    color: var(--preto);
+  text-decoration: none;
+  color: var(--preto);
 }
 
-header nav ul li:hover{
-    border-bottom: 1px solid var(--primary);
-    transition: all .3s;
+header nav ul li:hover {
+  border-bottom: 1px solid var(--primary);
+  transition: all 0.3s;
 }
 /* 
 header nav ul li:hover {
@@ -81,9 +83,9 @@ header nav ul li:hover {
 } */
 
 header nav ul li.active {
-    background-color: var(--primary);
-    color: var(--branco);
-    border: var(--borda);
-    border-radius: var(--arredondamento);
-    padding: 0.048rem;
+  background-color: var(--primary);
+  color: var(--branco);
+  border: var(--borda);
+  border-radius: var(--arredondamento);
+  padding: 0.048rem;
 }

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import InputField from "../../../components/InputField/InputField";
 import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
 import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ButtonPrimary,
   ButtonSecondary,
   ButtonStep,
 } from "../../../components/Button/Button";
-import { Link } from "react-router-dom";
+
 import { Auth } from "../../../components/Auth/Auth";
 import "./SignupCostumer.css";
 import { Button, Modal } from "@mui/material";
@@ -15,7 +16,8 @@ import api from "../../../services/api";
 
 const SignUpCostumer = () => {
   const [step, setStep] = useState(1);
-
+  const navigate = useNavigate();
+  const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const [selectedValues, setSelectedValues] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -95,36 +97,26 @@ const SignUpCostumer = () => {
 
   const handleRegisterCostumer = () => {
     if (selectedValues.length < 3) {
-      // toast.error("Selecione pelo menos tres preferências");
-      // return;
+      toast.error("Selecione pelo menos tres preferências");
     } else {
       handleClose();
+      const filteredCulinaries = selectedCulinaries
+        .filter((culinary) => selectedValues.includes(culinary.name))
+        .map(({ photo, ...rest }) => rest);
+      console.log(filteredCulinaries);
       setFormData({ ...formData, culinary: selectedValues });
 
-      console.log(formData);
       const data = {
         name: formData.name.trim() + " " + formData.lastname.trim(),
-        email: formData.email,
-        password: formData.password,
+        email: formData.email.trim(),
+        password: formData.password.trim(),
         typeUser: "CLIENT",
-        cpf: formData.cpf,
-        culinary: [
-          {
-            id: 1,
-            name: "Brasileira",
-          },
-          {
-            id: 2,
-            name: "Italiana",
-          },
-          {
-            id: 3,
-            name: "Japonesa",
-          },
-        ],
-        bio: "sss",
-        profilePhoto: "sss",
+        cpf: formData.cpf.replace(/[^\d]+/g, ""),
+        culinary: filteredCulinaries,
+        bio: "",
+        profilePhoto: "",
       };
+      console.log(data);
       api
         .post("customers", data)
         .then((response) => {
@@ -132,6 +124,9 @@ const SignUpCostumer = () => {
             toast.success(
               "Cadastro realizado com sucesso! Redirecionando... para login"
             );
+            setTimeout(() => {
+              navigate("/sign-in");
+            }, 2000);
           }
         })
         .catch((error) => {
@@ -161,6 +156,8 @@ const SignUpCostumer = () => {
                   <CheckboxSelect
                     selectedValues={selectedValues}
                     setSelectedValues={setSelectedValues}
+                    selectedCulinaries={selectedCulinaries}
+                    setSelectedCulinaries={setSelectedCulinaries}
                   />
                   <div className="button-div">
                     <div>
@@ -233,6 +230,7 @@ const SignUpCostumer = () => {
                     id="cpf"
                     value={formData.cpf}
                     onChange={handleInputChange}
+                    mask={"999.999.999-99"}
                   />
                   <InputField
                     type="password"
@@ -255,7 +253,7 @@ const SignUpCostumer = () => {
                 </>
               )}
               <span className="redirect-option">
-                Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
+                Já possui uma conta? <Link to="/sign-in">Faça login</Link>
               </span>
               {step === 1 && (
                 <ButtonPrimary text="Avançar" onclick={handleSteps} />

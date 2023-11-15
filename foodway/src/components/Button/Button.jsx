@@ -1,8 +1,8 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
-const ButtonPrimary = ({ text, onclick }) => {
+const ButtonPrimary = ({ text, onclick, className = "button-primary" }) => {
   return (
-    <button className="button-primary" onClick={onclick} type="button">
+    <button className={className} onClick={onclick} type="button">
       {text}
     </button>
   );
@@ -43,9 +43,9 @@ const ButtonPrimaryLink = ({ text, url }) => {
   );
 };
 
-const ButtonSecondary = ({ text, onclick }) => {
+const ButtonSecondary = ({ text, onclick, className = "button-secondary" }) => {
   return (
-    <button className="button-secondary" onClick={onclick} type="button">
+    <button className={className} onClick={onclick} type="button">
       {text}
     </button>
   );
