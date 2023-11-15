@@ -20,7 +20,7 @@ function SearchBar(props) {
                     console.log(oldCategory);
                     setOldCategory(category);
                     console.log(oldCategory);
-                    uriPath = `/category/${category}/establishment`;
+                    uriPath = `/culinaries/${category}`;
                     setPassed(true);
                     setSearched([]);
                     callGet(uriPath);
