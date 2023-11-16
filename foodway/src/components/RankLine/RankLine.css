@@ -1,0 +1,23 @@
+@import url(../../assets/css/style.css);
+
+.rank-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    background: rgba(0, 0, 0, 0.65);
+    height: 8vh;
+}
+
+.rank-line span {
+    color: var(--branco);
+}
+
+.estab-rank-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

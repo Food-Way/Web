@@ -15,6 +15,7 @@ import SearchEstablishment from "./pages/SearchEstablishment/SearchEstablishment
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
 import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
+import Relevance from "./pages/Relevance/Relevance";
 
 const Rotas = () => {
   return (
@@ -43,6 +44,7 @@ const Rotas = () => {
         <Route Component={CommentDash} path="/establishment/performance/comments" />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
         <Route Component={NotFound} path="*" />
+        <Route Component={Relevance} path="/establishment/performance/relevance" />
       </Routes>
     </BrowserRouter>
   );
