@@ -1,0 +1,47 @@
+@import url(../../assets/css/style.css);
+
+.best-relevance-box {
+    background: url("../../../public/capa.png") no-repeat center center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+    gap: 2rem;
+}
+
+.best-relevance {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.relevance-title {
+    background-color: var(--brancoGelo);
+    padding: 1rem;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.relevance-rank-container {
+    width: 100vw;
+    height: 50vh;
+}
+
+
+.relevance-rank-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.establishment-rank {
+    border-radius: 0.6845rem;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url('../../../public/rank-background.png'), lightgray 50% / cover no-repeat;
+    width: 52%
+}
