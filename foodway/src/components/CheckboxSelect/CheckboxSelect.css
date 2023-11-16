@@ -17,7 +17,7 @@ ul {
   /* overflow: hidden; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   /*  */
   /* height: 100%; */
   /* width: 50px; */
