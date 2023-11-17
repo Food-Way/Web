@@ -1,6 +1,7 @@
 @import url(../../assets/css/style.css);
 
 .comment-container {
+    width: 100px;
     height: 23rem;
     background-color: var(--branco);
     border-radius: var(--arredondamento);
@@ -41,9 +42,13 @@
 }
 
 .comment-content span {
+    width: 2vw;
     font-size: 1.8rem;
     font-weight: 700;
-    
+}
+
+.comment-footer {
+    margin-top: 5rem;
 }
 
 

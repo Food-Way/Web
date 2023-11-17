@@ -35,16 +35,20 @@ const UserProfile = () => {
           console.log("user: ", user);
           console.log("comments: ", comments);
           console.log("establishments: ", establishments);
+          firstAndEnd(response.data.name);
         }
       })
       .catch((erro) => console.log(erro));
   }
 
-  function firstAndEnd(phrase) {
-    let words = phrase.split(' ');
+  function firstAndEnd(nameUser) {
+    console.log(nameUser);
+    var nameUserDiv = document.querySelector(".profile-username");
+    let words = nameUser.split(' ');
     let firstWord = words[0];
     let endWord = words[words.length - 1];
-    return [firstWord + " " + endWord];
+    console.log([firstWord + " " + endWord]);
+    nameUserDiv.innerHTML = `${[firstWord + " " + endWord]}`;
   }
 
   const scrollToBottomAndBack = () => {
@@ -101,9 +105,9 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" ? DefaultImage : user.profilePhoto} alt="" />
-                  <span className="profile-username">{user.name}</span>
-                  <span className="profile-description">{user.bio}</span>
+                  <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
+                  <span className="profile-username"></span>
+                  {() => { showDescription(user.bio) }}
                   {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
@@ -122,12 +126,44 @@ const UserProfile = () => {
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
                 {comments.map((item) => (
+                  <>
                   <Comment
                     establishmentName={item.establishmentName}
                     rate={item.commentRate}
                     title={item.title}
                     comment={item.comment}
                   />
+                   <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                   <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                   <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                   <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                   <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
+                  </>
                 ))}
               </div>
             </div>
@@ -137,12 +173,32 @@ const UserProfile = () => {
               <span className="profile-title">Restaurantes favoritos</span>
               <div className="fav-estabs-box">
                 {establishments.map((item) => (
+                  <>
                   <HomeCardEstablishment
                     establishment={item.establishmentName}
                     category={item.culinary}
                     image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
                     rattingNumber={item.establishmentRate}
                   />
+                  <HomeCardEstablishment
+                    establishment={item.establishmentName}
+                    category={item.culinary}
+                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
+                    rattingNumber={item.establishmentRate}
+                  />
+                  <HomeCardEstablishment
+                    establishment={item.establishmentName}
+                    category={item.culinary}
+                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
+                    rattingNumber={item.establishmentRate}
+                  />
+                  <HomeCardEstablishment
+                    establishment={item.establishmentName}
+                    category={item.culinary}
+                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
+                    rattingNumber={item.establishmentRate}
+                  />
+                  </>
                 ))}
               </div>
             </div>

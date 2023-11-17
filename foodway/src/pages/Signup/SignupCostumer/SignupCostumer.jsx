@@ -70,7 +70,8 @@ const SignUpCostumer = () => {
     }
 
     if (step === 2) {
-      if (!formData.cpf || formData.cpf.length !== 11 || isNaN(formData.cpf)) {
+      console.log(formData.cpf);
+      if (!formData.cpf || formData.cpf.replace(/[^\d]+/g, "").length !== 11 || !isNaN(formData.cpf)) {
         toast.error("O CPF deve ter 11 caracteres numéricos.");
         return;
       }

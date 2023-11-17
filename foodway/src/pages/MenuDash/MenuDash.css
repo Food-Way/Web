@@ -1,6 +1,9 @@
 @import url(../../assets/css/style.css);
 
 .menu-dashboard-container {
+    top: 10vh;
+    left: 25vw;
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -15,32 +18,40 @@
 }
 
 .add-item {
+    width: 15vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: var(--branco);
-    width: 15vw;
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
+    border: var(--borda);
+    padding: 1rem;
+    margin-top: 1.5rem;
 }
 
-.add-item span {
-    font-weight: 700;
+.add-item-box {
+    width: 9vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;              
 }
 
 .menu-dash-container {
+    width: 49vw;
     display: flex;
     flex-direction: column;
     border-radius: var(--arredondamento);
     border: var(--borda);
     box-shadow: var(--sombra);
     padding: 10px;
-    margin-top: 6vh;
+    margin-top: 3vh;
     gap: 2rem;
 }
 
 .menu-dash-header {
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 2rem;
 }
@@ -50,27 +61,49 @@
 }
 
 .filter-box {
+    width: 29vw;
     display: flex;
     align-items: center;
-    cursor: pointer;
     position: relative;
     overflow: hidden;
-    width: 3.5vw;
-    transition: width 0.5s ease;
+    transition: all 0.5s ease;
     background-color: var(--preto);
     height: 5vh;
     border-radius: var(--arredondamento);
-    cursor: pointer;
-}
-
-.filter-box:hover {
-    width: 38.2vw;
 }
 
 .filter {
     margin: 0 10px;
 }
 
+.item-filter-box {
+    width: 83%;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    cursor: pointer;
+}
+
+.item-filter {
+    width: 11rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    user-select: none;
+}
+
+.item-filter-active {
+    height: 3rem;
+    color: var(--Vermelho-Primary, #ED0000);
+    border: 1px solid var(--primary);
+    border-radius: var(--arredondamento);
+    padding: .1rem;
+}
 
 .menu-dash-container img.filter {
     width: 3vw;
@@ -78,13 +111,18 @@
 }
 
 .menu-dash-box {
+    width: 47.4vw;
+    height: 54.5vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 60vw;
     gap: 1rem;
     overflow-y: scroll;
-    height: 54.5vh;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .side-infos {
@@ -93,13 +131,17 @@
     gap: 3.5rem;
 }
 
+.side-qr-code {
+    margin-top: 2.1rem;
+}
+
 .qr-code-box {
+    width: 15vw;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 15vw;
-    height: 25vh;
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
     border: var(--borda);
@@ -107,19 +149,27 @@
 }
 
 .qr-code {
-    width: 20vw;
-    height: 20vh;
+    width: 15vw;
+    height: 15vh;
 }
 
 
-.report-side-box {
-    margin-top: 1rem;
-    display: flex;
+.report-side-container {
+    height: 31.6rem;
     flex-direction: column;
+    display: flex;
+    margin-top: 1rem;
     gap: 1rem;
     padding: 1rem;
     align-items: center;
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
     border: var(--borda);
+    overflow-y: scroll;
+}
+
+.report-side-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

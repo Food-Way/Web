@@ -2,6 +2,8 @@
 
 
 .report-container {
+    width: 13.5vw;
+    height: 5.5rem;
     background-color: var(--branco);
     display: flex;
     flex-direction: row;
@@ -9,13 +11,21 @@
     justify-content: center;
     border: var(--borda);
     border-radius: var(--arredondamento);
-    box-shadow: var(--sombra);
-    width: 13.5vw;
-    height: 5vh;
+    box-shadow: var(--sombra);  
 }
 
 .report-box {
     display: flex;
-    flex-direction: row;
     gap: 2rem;
+}
+
+.report-box a {
+    width: 13.5vw;
+    height: 5.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black ;
 }
