@@ -1,0 +1,15 @@
+@import url(../../assets/css/style.css);
+
+.card-rate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.card-rate span {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
