@@ -49,6 +49,14 @@
     gap: 1rem;
 }
 
+.rate-right {
+    width: 15rem;
+}
+
+.rate-box-numbers {
+    display: flex;
+}
+
 .rate-left .profile-rate {
     display: flex;
     flex-direction: row;
@@ -72,4 +80,10 @@
 .upvotes-number {
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.amount-number {
+    display: flex;
+    width: 4rem;
+    font-weight: 700;
 }

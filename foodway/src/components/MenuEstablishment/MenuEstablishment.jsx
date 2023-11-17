@@ -8,7 +8,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import { toast } from "react-toastify";
 import './MenuEstablishment.css';
 
-function MenuEstablishment() {
+const MenuEstablishment = (props) => {
     const navigate = useNavigate();
     const [oldPath, setOldPath] = useState("");
     const [openSearch, setOpenSearch] = useState(false);
@@ -110,7 +110,7 @@ function MenuEstablishment() {
             <Sidebar
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
-                        height: "200vh",
+                        height: (props.height),
                         width: "22vw",
                         display: "flex",
                         flexDirection: "column",

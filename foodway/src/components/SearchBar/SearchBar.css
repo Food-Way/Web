@@ -54,9 +54,13 @@
 }
 
 .show {
+  height: 30rem;
+  overflow-y: scroll;
   display: block;
 }
 
 .hide {
+  height: 0;
+  overflow-y: hidden;
   display: none;
 }

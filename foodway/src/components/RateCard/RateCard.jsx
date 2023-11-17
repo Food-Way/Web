@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 
 import "./RateCard.css";
 
-const RateCard = (props) => {    
+const RateCard = (props) => {
     return (
         <>
             <div className="rate-container">
@@ -27,20 +27,26 @@ const RateCard = (props) => {
                         <div className="profile-rate">
                             <span>{props.profileRate}</span>
 
-                                <ReactStars
-                                    count={5}
-                                    edit={false}
-                                    size={24}
-                                    value={(props.profileRate)}
-                                    isHalf={true}
-                                    activeColor="#ff0000"
-                                />
-                           
+                            <ReactStars
+                                count={5}
+                                edit={false}
+                                size={24}
+                                value={(props.profileRate)}
+                                isHalf={true}
+                                activeColor="#ff0000"
+                            />
+
                         </div>
                     </div>
                     <div className="rate-right">
-                        <span className="comments-number">{props.qtdComments} {props.qtdComments > 1 ? ("Comentários") : ("Comentário")}</span>
-                        <span className="upvotes-number">+999 UpVotes</span>
+                        <div className="rate-box-numbers">
+                            <span className="amount-number">{props.qtdComments}</span>
+                            <span className="comments-number">{props.qtdComments > 1 ? ("Comentários") : ("Comentário")}</span>
+                        </div>
+                        <div className="rate-box-numbers">
+                            <span className="amount-number">+999</span>
+                            <span className="upvotes-number">UpVotes</span>
+                        </div>
                     </div>
                 </div>
             </div>

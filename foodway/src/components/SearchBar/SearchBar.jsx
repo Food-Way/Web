@@ -46,14 +46,14 @@ function SearchBar(props) {
                 Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
             },
         })
-            
+
             .then(response => {
-            if (response.status === 200) {
-                setSearched(response.data);
-            } else {
-                console.error('Erro ao buscar:', response.status);
-            }
-        })
+                if (response.status === 200) {
+                    setSearched(response.data);
+                } else {
+                    console.error('Erro ao buscar:', response.status);
+                }
+            })
             .catch(error => {
                 console.error('Erro ao buscar:', error);
             })
@@ -66,8 +66,15 @@ function SearchBar(props) {
         listSearched();
     }
 
+    function setSize() {
+        var searchBar = document.querySelector('.search-bar');
+        searchBar.style.width = props.width;
+        searchBar.style.height = props.height;
+    }
+
     useEffect(() => {
         listSearched();
+        setSize();
     }, []);
 
     function filterName(event) {
@@ -82,9 +89,11 @@ function SearchBar(props) {
         var dropdown = document.getElementById('dropdownList');
 
         if (value === '') {
+            dropdown.classList.remove('show');
             dropdown.classList.add('hide');
         } else {
             dropdown.classList.remove('hide');
+            dropdown.classList.add('show');
         }
     }
 

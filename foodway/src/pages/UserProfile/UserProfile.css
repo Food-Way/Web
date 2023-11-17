@@ -1,9 +1,9 @@
 @import url(../../assets/css/style.css);
 
 .profile-container {
-    top: 10vh;
+    top: 8vh;
     left: 34vw;
-    width: 50vw;
+    width: 55vw;
     position: absolute;
 }
 
@@ -15,11 +15,8 @@
     gap: 4.5rem;
 }
 
-.user-banner {
-    margin-left: 3.5rem;
-}
-
 .user-info-container {
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,15 +35,13 @@
     height: 15vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+} 
 
 .profile-photo {
     width: 250px;
     border-radius: 150px;
     position: absolute;
-    top: 20vh;
+    top: 18rem;
     border: 0.5rem solid var(--cinza);
 }
 
@@ -55,14 +50,14 @@
 }
 
 .user-info-left span.profile-username {
-    width: 14vw;
+    width: 25rem;
     text-transform: capitalize;
     font-size: 3rem;
     font-weight: 600;
 }
 
 .user-info-left span.profile-description {
-    width: 13vw;
+    width: 25rem;
     height: 10vh;
     font-size: 1.5rem;
     font-weight: 400;
@@ -76,10 +71,12 @@
 }
 
 .last-comment-container {
-    height: 35vw;
+    width: 60vw;
+    height: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    /* background-color: blue; */
 }
 
 .last-comment-box {
@@ -89,13 +86,14 @@
     flex-wrap: wrap;
     gap: 1rem;
     overflow-y: scroll;
-    height: 65vh;
+    height: 50vh;
     margin-top: 3rem;
+    margin-left: 2rem;
 }
 
 .fav-estabs-container {
-    width: 55vw;
-    height: 25vw;
+    width: 60vw;
+    height: 18vw;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -103,8 +101,10 @@
 }
 
 .fav-estabs-box {
+    width: 120vw;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .profile-title {

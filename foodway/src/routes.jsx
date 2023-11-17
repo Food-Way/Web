@@ -20,8 +20,8 @@ import Relevance from "./pages/Relevance/Relevance";
 const Rotas = () => {
   return (
     <BrowserRouter>
-    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ?  <HeaderGeneral /> : "" }
-    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment /> : <HeaderGeneral />}
+    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ||  window.location.pathname == "/establishment/performance/menu" ?  <HeaderGeneral /> : "" }
+    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`${location.pathname == "/establishment/performance/menu" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
