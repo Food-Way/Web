@@ -1,16 +1,20 @@
 @import url(../../assets/css/style.css);
 
 .rank-line {
+    width: 45vw;
+    height: 7vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 1rem;
     border: var(--borda);
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
-    background: rgba(0, 0, 0, 0.65);
-    height: 8vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    margin: 1rem;
 }
 
 .rank-line span {

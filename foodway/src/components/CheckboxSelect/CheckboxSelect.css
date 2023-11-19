@@ -51,6 +51,7 @@ label:before {
   left: 154px;
   width: 25px;
   height: 25px;
+  /* font-size e transform tem confilto - fernandes */
   font-size: larger;
   font-weight: bold;
   text-align: center;

@@ -8,9 +8,6 @@ const CommentDash = () => {
     return (
         <>
             <div className="comment-dashboard-container">
-                <div>
-                    {/* menu */}
-                </div>
                 <div className="comment-dashboard-box">
                     <span className="title">Comentários</span>
                     <section>

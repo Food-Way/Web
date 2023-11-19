@@ -19,8 +19,8 @@ import Relevance from "./pages/Relevance/Relevance";
 const Rotas = () => {
   return (
     <BrowserRouter>
-    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ||  window.location.pathname == "/establishment/performance/menu" ?  <HeaderGeneral /> : "" }
-    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`${location.pathname == "/establishment/performance/menu" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
+    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ||  window.location.pathname == "/establishment/performance/menu" || window.location.pathname == "/establishment/performance/relevance" || window.location.pathname == "/establishment/performance/comments" ?  <HeaderGeneral /> : "" }
+    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`${location.pathname == "/establishment/performance/menu" || location.pathname == "/establishment/performance/relevance" || location.pathname == "/establishment/performance/comments" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
@@ -41,9 +41,9 @@ const Rotas = () => {
         <Route path="/establishment/performance" />
         <Route Component={CommentDash} path="/establishment/performance/comments" />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
-        <Route Component={NotFound} path="*" />
         <Route Component={SearchUser} path="/search-user" />
         <Route Component={Relevance} path="/establishment/performance/relevance" />
+        <Route Component={NotFound} path="*" />
       </Routes>
     </BrowserRouter>
   );

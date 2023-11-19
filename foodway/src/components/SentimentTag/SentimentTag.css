@@ -1,25 +1,25 @@
 @import url(../../assets/css/style.css);
 
 .sentiment-tag {
+    width: 15vh;
+    height: 3.4vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     border-radius: var(--arredondamento);
-    height: 5vh;
-    width: 20vh;
     box-shadow: var(--sombra);
     gap: 1rem;
 }
 
 .sentiment-tag span.sentiment-label {
     font-size: 1.5rem;
+    font-weight: 800;
     color: var(--preto);
 }
 
 .sentiment-tag img {
-    /* width: 2.4vw; */
-    height: 2.4vh;
+    height: 2vh;
 }
 
 .positive {
