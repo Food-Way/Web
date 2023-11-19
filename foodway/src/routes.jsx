@@ -14,12 +14,13 @@ import SearchUser from "./pages/SearchUser/SearchUser";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
 import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
+import Relevance from "./pages/Relevance/Relevance";
 
 const Rotas = () => {
   return (
     <BrowserRouter>
-    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ?  <HeaderGeneral /> : "" }
-    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment /> : <HeaderGeneral />}
+    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ||  window.location.pathname == "/establishment/performance/menu" ?  <HeaderGeneral /> : "" }
+    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`${location.pathname == "/establishment/performance/menu" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
@@ -42,6 +43,7 @@ const Rotas = () => {
         <Route Component={MenuDash} path="/establishment/performance/menu" />
         <Route Component={NotFound} path="*" />
         <Route Component={SearchUser} path="/search-user" />
+        <Route Component={Relevance} path="/establishment/performance/relevance" />
       </Routes>
     </BrowserRouter>
   );

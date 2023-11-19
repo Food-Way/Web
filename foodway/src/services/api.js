@@ -1,7 +1,11 @@
 import axios from "axios";
 
+let ambiente = "desenvolvimento";
+let urlProducao = "https://lobster-app-ompes.ondigitalocean.app/";
+let urlDesenvolvimento = "http://localhost:8080/";
+
 const api = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: ambiente == "producao" ? urlProducao : urlDesenvolvimento,
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,6 +17,5 @@ const api_mock = axios.create({
     "Content-Type": "application/json",
   },
 });
-
 export default api;
-export { api_mock };
+export { api_mock, api };

@@ -17,10 +17,10 @@ ul {
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
-  
-  height: 100%;
-  width: 50px;
+  justify-content: center;
+  /*  */
+  /* height: 100%; */
+  /* width: 50px; */
 }
 
 li {

@@ -30,6 +30,23 @@ const MenuDash = () => {
             .catch((erro) => console.log(erro));
     };
 
+    function showFilter() {
+        var filter = document.querySelector(".filter-box");
+        filter.classList.toggle("filter-box-show");
+    }
+
+    function selectFilter(id) {
+        var selectedFilter = document.getElementById(id);
+
+        for (let index = 1; index <= 4; index++) {
+            var indexFilter = document.getElementById(`${index}`);
+            if (indexFilter.classList.contains("item-filter-active") && `${index}` != id) {
+                indexFilter.classList.toggle("item-filter-active");
+            }
+        }
+        selectedFilter.classList.toggle("item-filter-active");
+    }
+
     useEffect(() => {
         getMenu();
     }, []);
@@ -41,9 +58,10 @@ const MenuDash = () => {
                 <div className="menu-dashboard-box">
                     <span className="title">Cardápio</span>
                     <div className="add-item">
-                        <img src={Adicionar} alt="" />
+                        <div className="add-item-box">
+                            <img src={Adicionar} alt="" />
 
-                        <HandleFormModal 
+                            <HandleFormModal
                                 confirmText="Criar"
                                 cancelText="Cancelar"
                                 lblCampo1="Nome"
@@ -55,14 +73,23 @@ const MenuDash = () => {
                                 status={201}
                                 method="post"
                                 uri="products"
-                        />
+                            />
+                        </div>
                     </div>
                     <div className="dash-container">
                         <section>
                             <div className="menu-dash-container">
                                 <div className="menu-dash-header">
                                     <SearchBar placeholder="Buscar produto" />
-                                    <Filter />
+                                    <div className="filter-box">
+                                        <img src={Filter} className="filter" alt="" />
+                                        <div className="item-filter-box">
+                                            <span className="item-filter" id="1" onClick={() => { selectFilter("1") }}>Preço -</span>
+                                            <span className="item-filter" id="2" onClick={() => { selectFilter("2") }}>Preço +</span>
+                                            <span className="item-filter" id="3" onClick={() => { selectFilter("3") }}>A-Z</span>
+                                            <span className="item-filter" id="4" onClick={() => { selectFilter("4") }}>Z-A</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="menu-dash-box">
                                     {menu.map((item) => (
@@ -87,12 +114,18 @@ const MenuDash = () => {
                             </div>
                             <div className="side-report">
                                 <span className="title">Relatórios</span>
-                                <div className="report-side-box">
-                                    <Report />
-                                    <Report />
-                                    <Report />
-                                    <Report />
-                                    <Report />
+                                <div className="report-side-container">
+                                    <div className="report-side-box">
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                        <Report />
+                                    </div>
                                 </div>
                             </div>
                         </div>
