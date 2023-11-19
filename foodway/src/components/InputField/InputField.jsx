@@ -9,13 +9,14 @@ const InputField = ({
   value,
   onChange,
   className = "input-field-default",
+  classNameGeral = "form-group",
   onMouseLeave = () => {},
   autocomplete,
   mask,
   maxLength = 3000,
 }) => {
   return (
-    <div className="form-group">
+    <div className={classNameGeral}>
       <label htmlFor={id}>{label}</label>
       {mask ? (
         <InputMask
@@ -46,4 +47,40 @@ const InputField = ({
   );
 };
 
+const TextAreaField = ({
+  id,
+  type,
+  placeholder,
+  label,
+  value,
+  onChange,
+  rows = 5,
+  className = "input-field-default",
+  classNameGeral = "form-group",
+  onMouseLeave = () => {},
+  autocomplete,
+  mask,
+  maxLength = 3000,
+}) => {
+  return (
+    <div className={classNameGeral}>
+      <label htmlFor={id}>{label}</label>
+      <textarea
+        style={{ resize: "none" }}
+        rows={rows}
+        className={className}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onMouseEnter={onMouseLeave}
+        autoComplete={autocomplete}
+        maxLength={maxLength}
+      />
+    </div>
+  );
+};
+
 export default InputField;
+export { TextAreaField };
