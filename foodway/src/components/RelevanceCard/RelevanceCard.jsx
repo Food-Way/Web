@@ -1,6 +1,10 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import RateNumberStar from "../RateNumberStar/RateNumberStar";
+import BronzeMedal from "../../../public/bronze-medal.svg";
+import SilverMedal from "../../../public/silver-medal.svg";
+import GoldMedal from "../../../public/gold-medal.svg";
+
 import "./RelevanceCard.css";
 
 
@@ -11,12 +15,14 @@ const RelevanceCard = () => {
         <>
             <div className="relevance-card-container">
                 <div className="relevance-card-box">
-                    {/* <img src={BronzeMedal} alt="" /> */}
-                    <div className="relevance-card-body">
-                        <img src={LogoFoodway} alt="" />
-                        <span className="best-card-name">Leonardo</span>
-                        <RateNumberStar />
-                        <span>Avaliações: 200</span>
+                    <div className="relevance-card-back">
+                        <div className="relevance-card-body">
+                            <img src={BronzeMedal} alt="medal" className="medal" />
+                            <img src={LogoFoodway} alt="logo" />
+                            <span className="best-card-name">Leonardo</span>
+                            <RateNumberStar color="black" />
+                            <span>Avaliações: 200</span>
+                        </div>
                     </div>
                 </div>
             </div>

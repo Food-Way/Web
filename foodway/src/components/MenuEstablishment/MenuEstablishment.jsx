@@ -11,7 +11,7 @@ import './MenuEstablishment.css';
 const MenuEstablishment = (props) => {
     const navigate = useNavigate();
     const [oldPath, setOldPath] = useState("");
-    const [openSearch, setOpenSearch] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
 
     const [establishment, setEstablishment] = useState([
         { "id": 1, "nome": "Restaurante Italiano" },
@@ -70,19 +70,19 @@ const MenuEstablishment = (props) => {
 
             if (search.classList.contains("item-active") && className != ".search-item") {
                 search.classList.remove("item-active");
-            } 
+            }
 
             if (establishment.classList.contains("item-active") && className != ".establishment-item") {
                 establishment.classList.remove("item-active");
-            } 
+            }
 
             if (users.classList.contains("item-active") && className != ".users-item") {
                 users.classList.remove("item-active");
-            } 
+            }
 
             if (out.classList.contains("item-active") && className != ".out-item") {
                 out.classList.remove("item-active");
-            } 
+            }
         }
 
         console.log(className);
@@ -107,19 +107,27 @@ const MenuEstablishment = (props) => {
 
     return (
         <>
+                <button className="btn-menu-switch" onClick={() => { 
+                    setOpenMenu(!openMenu)  
+                    var btn = document.querySelector(".btn-menu-switch");
+                    btn.classList.toggle("btn-menu-animate");
+                    }}></button>
             <Sidebar
+                collapsed={openMenu}
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
                         height: (props.height),
-                        width: "22vw",
+                        width: openMenu ? "75px" : "22vw",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-between",
                         backgroundColor: "var(--branco)",
                         paddingBottom: "3rem",
+                        transition: "all 0.3s   "
                     }
                 }}
             >
+
                 <Menu>
                     <MenuItem icon={(<FontAwesomeIcon icon={faUser} className="profile-item" />)} onClick={() => { setNavigate(".profile-item") }}>
                         <span className="profile-item">Perfil</ span>
@@ -169,9 +177,9 @@ const MenuEstablishment = (props) => {
                         ''
                     )}
                 </Menu>
-                <div className="boxCopyright">
-                    <span>Todos os direitos reservados</span>
-                    <b>FoodWay © 2023</b>
+                <div className="box-copyright">
+                    <span> { openMenu ? "" : "Todos os direitos reservados"} </span>
+                    <b> {openMenu ? "© 2023" : "FoodWay © 2023"} </b>
                 </div>
             </Sidebar>
         </>

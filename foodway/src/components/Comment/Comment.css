@@ -2,7 +2,7 @@
 
 .comment-container {
     width: 100px;
-    height: 23rem;
+    height: 25rem;
     background-color: var(--branco);
     border-radius: var(--arredondamento);
     width: 50rem;
@@ -35,10 +35,16 @@
 }
 
 .comment-content p {
-    font-size: 1.2rem;
+    width: 22.5vw;
+    height: 5.5rem;
+    font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;
+    padding-right: 1rem;
+}
 
+.comment-content-show-scroll {
+    overflow-y: scroll;
 }
 
 .comment-content span {
@@ -47,9 +53,17 @@
     font-weight: 700;
 }
 
-.comment-footer {
-    margin-top: 5rem;
+.more-text {
+    width: 15%;
+    cursor: pointer;
+    user-select: none;
 }
 
+.more-text span {
+    font-size: 1.2rem;
+}
 
-
+.more-text span:hover {
+    color: var(--primary);
+    transition: all .3s;
+}

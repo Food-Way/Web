@@ -1,6 +1,9 @@
 @import url(../../assets/css/style.css);
 
 .comment-dashboard-container {
+    position: absolute;
+    top: 13rem;
+    left: 33vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,13 +12,13 @@
 }
 
 .comment-dash-box {
+    width: 54vw;
+    height: 75vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 70vw;
     gap: 1rem;
     overflow-y: scroll;
-    height: 75vh;
     justify-content: center;
     margin-top: 2vh;
 }

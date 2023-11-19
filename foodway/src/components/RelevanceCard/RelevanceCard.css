@@ -1,28 +1,43 @@
 @import url(../../assets/css/style.css);
 
 .relevance-card-container {
-    /* background-color: green; */
     width: 17vw;
     height: 15vh;
 }
 
 .relevance-card-box {
+    display: flex;
+    justify-content: center;
+}
+
+.relevance-card-back {
+    width: 13vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    border-radius: var(--arredondamento);
+}
+
+.relevance-card-body {
+    width: 90%;
+    height: 18vh;
     background-color: var(--brancoGelo);
     border: var(--borda);
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 90%;
+    align-items: center;
 }
 
-.relevance-card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.medal {
+    position: absolute;
+    left: 1.3vw;
+    top: .7rem;
 }
 
 .best-card-name {
