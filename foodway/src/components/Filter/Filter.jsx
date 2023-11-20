@@ -1,4 +1,4 @@
-        import React from "react";
+import React from "react";
 import Filter from "../../../public/filter.svg";
 import "./Filter.css";
 

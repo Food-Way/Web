@@ -1,22 +1,22 @@
 @import url(../../assets/css/style.css);
 
 .filter-box {
+    width: 3.5vw;
+    height: 5vh;
     display: flex;
     align-items: center;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    width: 3.5vw;
     transition: width 0.5s ease;
     background-color: var(--preto);
-    height: 5vh;
     border-radius: var(--arredondamento);
     cursor: pointer;
 }
 
-.filter-box:hover {
+/* .filter-box:hover {
     width: 38.2vw;
-}
+} */
 
 .filter {
     margin: 0 10px;

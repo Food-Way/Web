@@ -5,7 +5,6 @@ import { Neutral, Positive, Negative } from "../../components/SentimentTag/Senti
 import "./Comment.css";
 
 const Comment = (props) => {
-    console.log(props);
     const [updateText, setUpdateText] = useState(false);
 
     function analysisText(text, category, upText) {
