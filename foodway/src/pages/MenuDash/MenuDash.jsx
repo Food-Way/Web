@@ -4,7 +4,8 @@ import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
 import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../../public/filter.svg";
+import Filter from "../../components/Filter/Filter";
+import ImageFilter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
 import api from "../../services/api";
 
@@ -81,8 +82,8 @@ const MenuDash = () => {
                             <div className="menu-dash-container">
                                 <div className="menu-dash-header">
                                     <SearchBar placeholder="Buscar produto" />
-                                    <div className="filter-box">
-                                        <img src={Filter} className="filter" alt="" />
+                                    <div className="menu-filter-box">
+                                        <img src={ImageFilter} className="filter" alt="" />
                                         <div className="item-filter-box">
                                             <span className="item-filter" id="1" onClick={() => { selectFilter("1") }}>Preço -</span>
                                             <span className="item-filter" id="2" onClick={() => { selectFilter("2") }}>Preço +</span>

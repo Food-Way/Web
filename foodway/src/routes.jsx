@@ -6,12 +6,11 @@ import NotFound from "./pages/NotFound/NotFound";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import HeaderGeneral from "./components/Header/HeaderGeneral";
-import Footer from "./components/Footer/Footer";
 import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import SearchEstablishment from "./pages/SearchEstablishment/SearchEstablishment";
+import SearchUser from "./pages/SearchUser/SearchUser";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
 import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
@@ -25,29 +24,11 @@ const Rotas = () => {
   const token = sessionStorage.getItem("token");
   return (
     <BrowserRouter>
-      {(sessionStorage.getItem("token") &&
-        window.location.pathname == "/user-profile") ||
-      window.location.pathname == "/establishment/performance/menu" ? (
-        <HeaderGeneral />
-      ) : (
-        ""
-      )}
-      {sessionStorage.getItem("token") &&
-      window.location.pathname != "/" &&
-      window.location.pathname != "/sign-in" &&
-      window.location.pathname != "/sign-up" &&
-      window.location.pathname != "/sign-up-costumer" &&
-      window.location.pathname != "/sign-up-establishment" ? (
-        <MenuEstablishment
-          height={`${
-            location.pathname == "/establishment/performance/menu"
-              ? "88.8rem"
-              : "170rem"
-          }`}
-        />
-      ) : (
-        <HeaderGeneral />
-      )}
+ 
+    { sessionStorage.getItem("token") && window.location.pathname == "/user-profile" ||  window.location.pathname == "/establishment/performance/menu" || window.location.pathname == "/establishment/performance/relevance" || window.location.pathname == "/establishment/performance/comments" || window.location.pathname == "/search-user" ?  <HeaderGeneral /> : "" }
+    { sessionStorage.getItem("token") && window.location.pathname != "/" && window.location.pathname != "/sign-in" && window.location.pathname != "/sign-up" && window.location.pathname != "/sign-up-costumer" && window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`${location.pathname == "/establishment/performance/menu" || location.pathname == "/establishment/performance/relevance" || location.pathname == "/establishment/performance/comments" || window.location.pathname == "/search-user" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
+
+ 
       <ToastContainer position="top-left" />
       <Routes>
         {/* Não logado */}
@@ -61,8 +42,12 @@ const Rotas = () => {
           path="/sign-up-establishment"
         />
         <Route Component={UserProfile} path="/user-profile" />
+
         <Route Component={SearchEstablishment} path="/establishment/search" />
         <Route path="/menu" Component={Cardapio} />
+
+        <Route path="/profile" />
+
         <Route path="/establishment" />
         {/* Não logado */}
         {/* Logados */}
@@ -77,12 +62,10 @@ const Rotas = () => {
           path="/establishment/performance/comments"
         />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
+
+        <Route Component={SearchUser} path="/search-user" />
+        <Route Component={Relevance} path="/establishment/performance/relevance" />
         <Route Component={NotFound} path="*" />
-        <Route
-          Component={Relevance}
-          path="/establishment/performance/relevance"
-        />
-        {/* Logados */}
       </Routes>
     </BrowserRouter>
   );

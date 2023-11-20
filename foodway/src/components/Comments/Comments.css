@@ -1,6 +1,6 @@
 @import url(../../assets/css/style.css);
 
-.upvotes {
+.comments-qtd-container {
     width: 4.75rem;
     height: 2rem;
     display: flex;
@@ -8,11 +8,12 @@
     gap: 0.5rem;
 }
 
-.upvotes img {
+.comments-qtd-container img {
     width: 2.125rem;
     height: 2rem;
+    border: none;
 }
 
-.upvotes span {
+.comments-qtd-container span {
     font-weight: 700;
 } 

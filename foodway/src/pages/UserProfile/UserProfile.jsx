@@ -5,7 +5,6 @@ import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCa
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondary } from "../../components/Button/Button"
-import HeaderGeneral from "../../components/Header/HeaderGeneral";
 import api from "../../services/api";
 
 import "./UserProfile.css";
