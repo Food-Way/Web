@@ -6,7 +6,7 @@
 }
 
 .costumer-cover {
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   object-position: center;
 }
@@ -169,7 +169,15 @@
 }
 .cover-img-preview {
   width: 90%;
-  margin: 2 0px 10px 0px 10px;
+  margin: 20px 10px 0px 10px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+.picture-img-preview {
+  border-radius: 3000px;
+  width: 200px;
+  margin: 20px 10px 0px 10px;
   height: 200px;
   object-fit: cover;
   object-position: center;
@@ -238,4 +246,16 @@
 .descriptio-warn {
   font-size: 16px;
   padding: 10px 0px;
+}
+.picture-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.picture-section h2 {
+  font-size: 24px;
+  margin: 20px 0px 0px 0px;
 }
