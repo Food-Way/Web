@@ -33,6 +33,7 @@
 .card-body {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .card-header {
@@ -52,26 +53,27 @@
     display: flex;
     flex-direction: row-reverse;
     padding-right: 10px;
+    margin-top: 6rem;
 }
 
 .user-title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
 .user-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 400;
 }
 
 .user-description {
     color: #5F5A5A;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 400;
 }
 
 .rate-box {
-    height: 12vh;
+    height: 1vh;
     display: flex;
     align-items: center;
     flex-direction: row;

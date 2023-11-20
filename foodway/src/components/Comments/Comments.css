@@ -11,4 +11,9 @@
 .comments-qtd-container img {
     width: 2.125rem;
     height: 2rem;
+    border: none;
 }
+
+.comments-qtd-container span {
+    font-weight: 700;
+} 

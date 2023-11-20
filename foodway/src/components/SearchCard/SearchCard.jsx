@@ -3,10 +3,10 @@ import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-
+import starBlack from "../../../public/star-black.svg";
 import "./SearchCard.css";
 
-const SearchCard = () => {
+const SearchCard = (props) => {
     const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
     return (
         <>
@@ -24,18 +24,15 @@ const SearchCard = () => {
                             size={20}
                             value={5}
                             isHalf={true}
-                            // emptyIcon={faStar}
-                            // halfIcon={faStarHalfAlt}
-                            // fullIcon={faStar}
-                            activeColor="#222"
+                            activeColor={"#222"}
                         />
                         <p className="user-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque ratione tempore laborum id rem ipsum in, a expedita, delectus libero enim rerum debitis blanditiis reiciendis est repudiandae aspernatur nihil eum?</p>
                     </div>
                     <div className="card-footer">
                         <div className="rate-box">
-                                <Comments />
-                                <Upvotes />
-                            </div>
+                            <Comments />
+                            <Upvotes />
+                        </div>
                         <div className="card-footer-box">
                             <div className="favorite">
                                 <ReactStars
@@ -44,7 +41,6 @@ const SearchCard = () => {
                                     size={24}
                                     value={1}
                                     isHalf={false}
-                                    activeColor="#FAFF00"
                                 />
                             </div>
                         </div>

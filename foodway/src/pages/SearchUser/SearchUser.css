@@ -1,6 +1,9 @@
 @import url('../../assets/css/style.css');
 
 .search-user-container {
+    position: absolute;
+    left: 13vw;
+    top: 12rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,10 +32,9 @@
 .search-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    margin: 2rem;
+    margin-bottom: 2rem;
 }
 
 .user-detail-name {
@@ -41,15 +43,36 @@
 }
 
 .search-results {
+    width: 5vw;
+    font-size: 1.5rem;
+    font-weight: 700;
     border-bottom: 2px solid var(--primary);
 }
 
-.search-bar {
-    width: 30vw;
-}
-
 .search-body {
+    height: 65vh;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    overflow-y: scroll;
+    padding-right: 1rem;
+}
+
+.item-filter-user {
+    width: 4.7vw;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    user-select: none;
+    margin: 1rem;
+}
+
+.user-details-container {
+    margin-top: 7rem;
+}
+
+.maps-box {
+    margin-top: 2vh;
 }

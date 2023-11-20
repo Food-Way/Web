@@ -1,5 +1,5 @@
 import React from "react";
-import CommentIcon from "../../../public/comment-icon.svg"
+import CommentIcon from "../../../public/comment-icon.png"
 import "./Comments.css";
 
 const Comments = () => {

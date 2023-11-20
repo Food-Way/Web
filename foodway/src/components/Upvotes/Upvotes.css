@@ -12,3 +12,7 @@
     width: 2.125rem;
     height: 2rem;
 }
+
+.upvotes span {
+    font-weight: 700;
+} 

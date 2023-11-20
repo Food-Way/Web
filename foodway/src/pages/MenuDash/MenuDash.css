@@ -60,8 +60,8 @@
     position: relative;
 }
 
-.filter-box {
-    width: 29vw;
+.menu-filter-box {
+    /* width: 29vw; */
     display: flex;
     align-items: center;
     position: relative;
@@ -88,13 +88,14 @@
 }
 
 .item-filter {
-    width: 11rem;
+    width: 5.2vw;
     height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     user-select: none;
+    margin: 1rem;
 }
 
 .item-filter-active {
