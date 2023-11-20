@@ -62,46 +62,19 @@ const SignUpCostumer = () => {
         return;
       }
 
-      //
-      if (/\d/.test(formData.name) || /\d/.test(formData.lastname)) {
-        // regex para verificar se há números
-        toast.error("O nome e sobrenome não podem conter números.");
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("As senhas não correspondem.");
         return;
       }
-
-      if (!formData.email.includes("@")) {
-        toast.error("Preencha o campo email corretamente");
-        return;
-      }
-
-      if (/^\d+$/.test(formData.email)) {
-        // regex para verificar se há números
-        toast.error("O email não pode conter só números.");
-        return;
-      }
-
-      // validações adicionais
-      if (formData.email.match(/^(\d)+@/)) {
-        toast.error("O email não pode conter apenas números antes do @.");
-        return;
-      }
-
       handleNext();
     }
 
     if (step === 2) {
       console.log(formData.cpf);
-
-      if (
-        !formData.cpf ||
-        formData.cpf.replace(/[^\d]+/g, "").length !== 11 ||
-        !isNaN(formData.cpf)
-      ) {
+      if (!formData.cpf || formData.cpf.replace(/[^\d]+/g, "").length !== 11 || !isNaN(formData.cpf)) {
         toast.error("O CPF deve ter 11 caracteres numéricos.");
         return;
       }
-      //valide que o cpf não possa conter letras
-
       if (
         !formData.password ||
         formData.password.length < 8 ||
@@ -116,7 +89,7 @@ const SignUpCostumer = () => {
         return;
       }
       if (formData.password !== formData.confirmPassword) {
-        toast.error("As credenciais devem ser idênticas");
+        toast.error("As senhas não correspondem.");
         return;
       }
       handleOpen();
