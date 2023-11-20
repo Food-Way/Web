@@ -79,6 +79,24 @@ const SignupEstablishment = () => {
         toast.error("Preencha o campo Email");
         return;
       }
+      if (!formData.email.includes("@")) {
+        toast.error("Preencha o campo email corretamente");
+        return;
+      }
+
+      if (/^\d+$/.test(formData.email)) {
+        // regex para verificar se há números
+        toast.error("O email não pode conter só números.");
+        return;
+      }
+
+      // validações adicionais
+      if (formData.email.match(/^(\d)+@/)) {
+        toast.error("O email não pode conter apenas números antes do @.");
+        return;
+      }
+
+      handleNext();
       handleNext();
     }
     if (step === 2) {
