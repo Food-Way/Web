@@ -1,0 +1,125 @@
+.establishment-edit {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.establishment-edit-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.establishment-edit-container-form {
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 12.15035px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background-color: white;
+}
+.establishment-edit-container-form .title {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+}
+.establishment-edit-container-form .title h2 {
+  font-size: 36px;
+  color: #000000;
+  margin: 20px 20px 20px 0px;
+  padding: 0px;
+}
+.establishment-edit-container-form form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.input-field-default-establisment-edit {
+  width: 100%;
+  border-radius: var(--arredondamento);
+  border: var(--borda);
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px 0px 10px 10px;
+  margin: 0px 20px;
+  margin: 0px 0px 10px 0px;
+}
+.form-group-establisment-edit {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0px 10px 0px 0px;
+  width: 90%;
+}
+
+.input-fields {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0px 0px;
+}
+
+.form-group-establisment-edit input::placeholder {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px;
+}
+.form-group-establisment-edit label {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  margin: 10px 0px 10px 0px;
+}
+.establishment-edit-sec-btn {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.button-establishment-edit {
+  max-width: fit-content;
+  min-width: 40%;
+  margin: 20px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  padding: 10px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.button-establishment-edit:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+.form-container-edit-profile {
+  width: 80%;
+  padding: 20px 0px;
+}
+.form-group-establisment-edit-fill {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4px 20px 4px 20px;
+  width: 100%;
+}
+
+.form-group-establisment-edit-fill label {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  margin: 10px 0px 10px 0px;
+}

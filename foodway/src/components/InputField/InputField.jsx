@@ -83,4 +83,4 @@ const TextAreaField = ({
 };
 
 export default InputField;
-export { TextAreaField };
+export { InputField, TextAreaField };
