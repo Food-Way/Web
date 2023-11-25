@@ -49,6 +49,7 @@
   padding: 10px 0px 10px 10px;
   margin: 0px 20px;
   margin: 0px 0px 10px 0px;
+  background-color: #e5e5e5;
 }
 .form-group-establisment-edit {
   display: flex;
@@ -83,8 +84,9 @@
 
 .button-establishment-edit {
   max-width: fit-content;
-  min-width: 40%;
-  margin: 20px;
+  width: 30%;
+  min-width: 20%;
+  margin: 10px 0px 10px 0px;
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -108,7 +110,7 @@
 }
 .form-container-edit-profile {
   width: 80%;
-  padding: 20px 0px;
+  padding: 50px 0px;
 }
 .form-group-establisment-edit-fill {
   display: flex;

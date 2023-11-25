@@ -14,12 +14,14 @@ const InputField = ({
   autocomplete,
   mask,
   maxLength = 3000,
+  disabled = false,
 }) => {
   return (
     <div className={classNameGeral}>
       <label htmlFor={id}>{label}</label>
       {mask ? (
         <InputMask
+          disabled={disabled}
           className={className}
           type={type}
           id={id}
@@ -32,6 +34,7 @@ const InputField = ({
         />
       ) : (
         <input
+          disabled={disabled}
           className={className}
           type={type}
           id={id}

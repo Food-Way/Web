@@ -285,7 +285,7 @@ const CostumerEdit = () => {
               console.log("coverImageName after set", coverImageName);
 
               const profileUpdateData = {
-                name: " ",
+                name: "",
                 profilePhoto: "",
                 email: atob(sessionStorage.getItem("email")),
                 bio: "",

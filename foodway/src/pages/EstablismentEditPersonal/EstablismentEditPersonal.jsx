@@ -48,6 +48,8 @@ const EstablismentEditPersonal = () => {
                 <InputField
                   id={"nome-establishment"}
                   label="Nome Estabelecimentos"
+                  defaultValue={formData.establishmentName}
+                  value={formData.establishmentName}
                   type="text"
                   placeholder="Nome do estabelecimento"
                   className="input-field-default-establisment-edit"
@@ -55,9 +57,12 @@ const EstablismentEditPersonal = () => {
                 />
 
                 <InputField
+                  disabled={true}
                   id={"cnpj"}
                   label="CNPJ"
                   type="text"
+                  defaultValue={formData.cnpj}
+                  value={formData.cnpj}
                   placeholder="CNPJ"
                   mask="99.999.999/9999-99"
                   className="input-field-default-establisment-edit"
@@ -67,10 +72,25 @@ const EstablismentEditPersonal = () => {
               <InputField
                 id={"email"}
                 label="E-mail"
+                defaultValue={formData.email}
+                value={formData.email}
                 type="email"
                 placeholder="E-mail"
                 classNameGeral="form-group-establisment-edit-fill"
               />
+              <hr
+                style={{
+                  width: "100%",
+                  height: "1px",
+                  backgroundColor: "#979797",
+                  border: "none",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <div className="title">
+                <h2>Pagina do estabelecimento</h2>
+              </div>
             </form>
             <div className="establishment-edit-sec-btn">
               <ButtonPrimary
