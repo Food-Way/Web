@@ -13,18 +13,18 @@ const CommentDash = () => {
                     <section>
                         <div className="comment-dash-container">
                             <div className="comment-dash-box">
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
-                                <Comment />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
+                                <Comment size="20" />
                             </div>
                         </div>
                     </section>
