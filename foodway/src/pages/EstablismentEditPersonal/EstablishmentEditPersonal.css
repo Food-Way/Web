@@ -1,3 +1,17 @@
+.input-files {
+  font-size: 16px;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-files:hover {
+  background-color: #ffffff;
+}
+
 .establishment-edit {
   width: 100vw;
   height: 100vh;
@@ -33,6 +47,14 @@
   margin: 20px 20px 20px 0px;
   padding: 0px;
 }
+
+.establishment-edit-container-form .title h3 {
+  font-size: 24px;
+  color: #000000;
+  margin: 10px 20px 0px 0px;
+  padding: 0px;
+}
+
 .establishment-edit-container-form form {
   width: 100%;
   display: flex;
@@ -82,6 +104,35 @@
   justify-content: end;
 }
 
+.establishment-edit-sec-delete {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.establishment-edit-sec-delete:hover {
+  background: #3c3c3c;
+  color: white;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
 .button-establishment-edit {
   max-width: fit-content;
   width: 30%;
@@ -124,4 +175,63 @@
   font-family: var(--defaultFonte);
   font-size: 1.9rem;
   margin: 10px 0px 10px 0px;
+}
+.files_input_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  width: 100%;
+  height: 200px;
+  border: 1px solid #8d8d8d;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+.files_input_container img {
+  width: 230px;
+  height: 145px;
+  object-fit: cover;
+  margin: 5px;
+}
+
+.files_input_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+}
+
+.files_input_btn input {
+  display: none;
+}
+.files_input_btn label {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.files_input_btn label:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
 }

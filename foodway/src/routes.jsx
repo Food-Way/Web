@@ -19,6 +19,7 @@ import Relevance from "./pages/Relevance/Relevance";
 import EstablismentEditPersonal from "./pages/EstablismentEditPersonal/EstablismentEditPersonal";
 import Cardapio from "./pages/Cardapio/Cardapio";
 import CostumerEdit from "./pages/CostumerEdit/CostumerEdit";
+import CustomerEditPersonal from "./pages/CustomerEditPersonal/CustomerEditPersonal";
 
 const Rotas = () => {
   const token = sessionStorage.getItem("token");
@@ -77,6 +78,12 @@ const Rotas = () => {
           path="/establishment-edit-personal"
           Component={EstablismentEditPersonal}
         />
+
+        <Route
+          path="/customer-edit-personal-info"
+          Component={CustomerEditPersonal}
+        />
+
         {/* Não logado */}
         {/* Logados */}
         <Route Component={CostumerEdit} path="/user-profile-edit" />

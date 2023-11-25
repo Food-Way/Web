@@ -223,13 +223,13 @@ const MenuEstablishment = (props) => {
                         onClick={() => setCheck("e" + item.id)}
                       >
                         <div className="menu-item">
-                          <div class="pretty p-icon p-round p-smooth check-culinary">
+                          <div className="pretty p-icon p-round p-smooth check-culinary">
                             <input
                               type="checkbox"
                               onClick={() => setCheck("e" + item.id)}
                               id={"e" + item.id}
                             />
-                            <div class="state">
+                            <div className="state">
                               <DoneIcon className="icon check" />
                               <label>{item.nome}</label>
                             </div>
