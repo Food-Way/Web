@@ -12,11 +12,11 @@ const RateCard = (props) => {
                         <div className="experience-info">
                             <span className="profile-level">NÍVEL: {props.level}</span>
                             {
-                                sessionStorage.getItem("my-profile") == atob("true") ? (
+                                sessionStorage.getItem("my-profile") == atob(true) ? (
                                     <>
                                         <div className="experience">
                                             <span>EXP</span>
-                                            <progress value="50" max="100"></progress>
+                                            <progress value={props.xp} max="100"></progress>
                                         </div>
                                     </>
                                 ) : (

@@ -17,5 +17,17 @@ const api_mock = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+
+const api_maps = axios.create({
+  baseURL: "https://maps.googleapis.com/maps/api/",
+  headers: {
+    "Content-Type": "image/png",
+  },
+});
+
+
 export default api;
-export { api_mock, api };
+export { api_mock, api, api_maps};
+
+
