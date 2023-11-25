@@ -16,13 +16,13 @@ const SearchCard = (props) => {
                         <img src={LogoFoodway} alt="" className="card-image" />
                     </div>
                     <div className="card-body">
-                        <span className="user-title">Figueira Rubaiyat</span>
-                        <span className="user-subtitle">Restaurante japônes</span>
+                        <span className="user-title">{props.name}</span>
+                        <span className="user-subtitle">{props.culinary}</span>
                         <ReactStars
                             count={5}
                             edit={false}
                             size={20}
-                            value={5}
+                            value={props.generalRate}
                             isHalf={true}
                             activeColor={"#222"}
                         />
@@ -30,8 +30,12 @@ const SearchCard = (props) => {
                     </div>
                     <div className="card-footer">
                         <div className="rate-box">
-                            <Comments />
-                            <Upvotes />
+                            <Comments 
+                                // comments={props.comments}
+                            />
+                            <Upvotes 
+                                upvotes={props.upvote}
+                            />
                         </div>
                         <div className="card-footer-box">
                             <div className="favorite">

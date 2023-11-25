@@ -74,17 +74,16 @@ const UserProfile = () => {
   };
 
   function showDescription(bio) {
-
     if (bio.length > 30) {
       return (
         <span className="profile-description" ref={profileDescriptionRef}>
-          {user.bio}
+          {bio}
         </span>
       )
     } else {
       return (
         <span className="profile-description description-scroll" ref={profileDescriptionRef}>
-          {user.bio}
+          {bio}
         </span>
       )
     }
@@ -100,13 +99,13 @@ const UserProfile = () => {
       <div className="profile-container">
         <div className="profile">
           <section>
-            <img className="user-banner" src={Banner} alt="" />
+            <img className="user-banner" src={user.profileHeaderImg} alt="" />
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
                   <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
                   <span className="profile-username"></span>
-                  {() => { showDescription(user.bio) }}
+                  {(() => showDescription(user.bio))()}
                   {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">

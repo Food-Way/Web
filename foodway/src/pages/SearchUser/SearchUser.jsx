@@ -4,11 +4,27 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import Filter from "../../components/Filter/Filter";
 import ImageFilter from "../../../public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
+import api from "../../services/api";
 
 import './SearchUser.css';
 
 function SearchUser() {
+    const [search, setSearch] = useState([]);
     var typeUser = "ESTABLISHMENT";
+
+    function getSearch() {
+        const response = api.get(`/establishments/search`, {
+            headers: {
+                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+            },
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log("response: ", response.data);
+                    setSearch(response.data);
+                }
+            })
+    }
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
@@ -22,6 +38,10 @@ function SearchUser() {
         selectedFilter.classList.toggle("item-filter-active");
     }
 
+    useEffect(() => {
+        getSearch();
+    }, []);
+
     return (
         <>
             <div className="search-user-container">
@@ -30,26 +50,33 @@ function SearchUser() {
                         <div className="search-container">
                             <div className="search-box">
                                 <div className="search-header">
-                                    <span className="search-results">10 resultados</span>
+                                    <span className="search-results">{search.length} resultados</span>
                                     <SearchBar placeholder="Pesquisar" />
                                     <div className="menu-filter-box">
                                         <img src={ImageFilter} className="filter" alt="" />
                                         <div className="item-filter-box">
                                             <span className="item-filter-user" id="1" onClick={() => { selectFilter("1") }}>Nível</span>
-                                            <span className="item-filter-user" id="2" onClick={() => { selectFilter("2") }}>Commet</span>
+                                            <span className="item-filter-user" id="2" onClick={() => { selectFilter("2") }}>Comentário</span>
                                             <span className="item-filter-user" id="3" onClick={() => { selectFilter("3") }}>Relevante</span>
                                             <span className="item-filter-user" id="4" onClick={() => { selectFilter("4") }}>Upvote</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
+                                    {search.map((item) => (
+                                        <SearchCard
+                                            key={item.id}
+                                            name={item.name}
+                                            bio={item.bio}
+                                            generalRate={item.generalRate}
+                                            lastComment={item.lastComment}
+                                            lat={item.lat}
+                                            lng={item.lng}
+                                            photo={item.photo}
+                                            upvote={item.upvote}
+                                            culinary={item.culinary}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -59,11 +86,11 @@ function SearchUser() {
                             <div className="user-details-box">
                                 <SearchDetails />
                             </div>
-                            { typeUser == "ESTABLISHMENT" ? 
-                            <div className="maps-box">
-                                <span className="title">Localização</span>
-                                <img src="" alt="" />
-                            </div> : ""}   
+                            {typeUser == "ESTABLISHMENT" ?
+                                <div className="maps-box">
+                                    <span className="title">Localização</span>
+                                    <img src="" alt="" />
+                                </div> : ""}
                         </div>
                     </section>
                 </div>
