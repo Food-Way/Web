@@ -1,0 +1,43 @@
+@import url('../../assets/css/style.css');
+@import url('../../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css');
+
+.avaliation-general-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.avaliation-general-box {
+    width: 10vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.points-value-box {
+    width: 5vw;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.adjust-point-dash {
+    margin-bottom: .8rem;
+}
+
+.check-static {
+    background-color: var(--preto);
+}
+
+.check-static-primary {
+    background-color: var(--primary);
+}
+
+.check-static-disabled {
+    display: block;
+    border: 1px solid var(--preto) !important;
+}
+
+.check-static-disabled-primary {
+    display: block;
+    background-color: var(--brancoGelo) !important;
+}

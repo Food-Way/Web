@@ -29,7 +29,7 @@ const UserProfile = () => {
         if (response.status === 200) {
           setUser(response.data);
           setComments(response.data.comments);
-          setEstablishments(response.data.establishmentDTOs);
+          setEstablishments(response.data.establishmentDTOs);  
           console.log("response: ", response.data);
           console.log("user: ", user);
           console.log("comments: ", comments);
@@ -132,36 +132,6 @@ const UserProfile = () => {
                     title={item.title}
                     comment={item.comment}
                   />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
                   </>
                 ))}
               </div>
@@ -175,26 +145,8 @@ const UserProfile = () => {
                   <>
                   <HomeCardEstablishment
                     establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
+                    category={item.culinary[0].name}
+                    image={item.photo}
                     rattingNumber={item.establishmentRate}
                   />
                   </>

@@ -64,12 +64,25 @@ function formModal(props) {
         </div>
       </div>
     </div>
-  ` : alert("teste")
+    ` : `
+    <div className="modal-container">
+        <div className="modal-box">
+          <div className="modal-input-box">
+            <label htmlFor="${props.iptProductName}">${props.lblCampo1}</label>
+            <input type="text" id="${props.iptProductName}" value=${props.name === undefined ? " " : props.name}>
+          </div>
+          <div className="modal-input-box">
+            <label htmlFor="${props.iptProductPrice}">${props.lblCampo2}</label>
+            <input type="text" id="${props.iptProductPrice}" value=${props.price === undefined ? " " : props.price}>
+          </div>
+        </div>
+      </div>
+    `
     }).then((result) => {
         if (result.isConfirmed) {
             var data;
 
-            if(location.pathname === '/establishment/performance/menu') {
+            if (location.pathname === '/establishment/performance/menu') {
                 data = {
                     name: document.getElementById(props.iptProductName).value,
                     price: document.getElementById(props.iptProductPrice).value,
