@@ -1,0 +1,52 @@
+@import url("../../assets/css/style.css");
+@import url("../../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css");
+
+.btn-menu-switch {
+  width: 2.5rem;
+  height: 10vh;
+  position: absolute;
+  z-index: 4;
+  top: 40%;
+  left: 21.3vw;
+  border: none;
+  background-color: var(--preto);
+  background-image: url("../../../public/hideMenu.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: var(--arredondamento);
+  transition: all 0.3s;
+}
+
+.btn-menu-animate {
+  background-image: url("../../../public/hideMenu.png");
+  left: 5.5rem;
+  transition: all 0.3s;
+}
+
+.menu-item label {
+  user-select: none;
+  padding-left: 1rem;
+}
+
+.box-copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-copyright span {
+  transition: all 0.3s;
+}
+
+.item-active {
+  color: var(--primary);
+}
+
+.check {
+  background-color: var(--primary);
+  color: white;
+}
+
+.ola {
+  background-color: var(--primary);
+}
