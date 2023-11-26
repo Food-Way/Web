@@ -21,6 +21,7 @@ const Cardapio = (props) => {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
+        minHeight: "100vh",
       }}
     >
       <MenuEstablishmentContainer

@@ -157,6 +157,7 @@ const MenuEstablishment = (props) => {
             backgroundColor: "var(--branco)",
             paddingBottom: "3rem",
             transition: "all 0.3s   ",
+            position: "fixed",
           },
         }}
       >
