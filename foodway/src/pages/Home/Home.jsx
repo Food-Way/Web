@@ -1,13 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
-import Header from "../../components/Header/HeaderGeneral";
-import "./Home.css";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
+import api from "../../services/api";
+import "./Home.css";
 
-import Footer from "../../components/Footer/Footer";
 const Home = () => {
   const establishmentIMG =
     "https://foodway.blob.core.windows.net/public/establishment.png";
@@ -27,14 +26,51 @@ const Home = () => {
 
     width: "100%",
   };
+
+  const [greaterRateEstab, setGreaterRateEstab] = useState([]);
+  const [greaterCommentsEstab, setGreaterEstab] = useState([]);
+
+  const greaterRate = () => {
+    api.get("/establishments/order-by-greater-rate")
+      .then(response => {
+        if (response.status === 200) {
+          console.log(response.data.vetor);
+          setGreaterRateEstab(response.data.vetor);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar estabelecimentos:', error);
+      });
+  }
+
+  const greaterComments = () =>  {
+    const culinary = null;
+
+    api.get(`/establishments/most-commented?culinary=${culinary}`)
+      .then(response => {
+        if (response.status === 200) {
+          console.log(response.data);
+          setGreaterEstab(response.data);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar estabelecimentos:', error);
+      });
+  }
+
+  useEffect(() => {
+    greaterRate();
+    greaterComments();
+  }, []);
+
   return (
     <main>
       <Auth />
       <MainBanner />
       <ContainerCardFood />
       <div style={styleDiv}>
-        <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" />
-        <CarrosselEstablishment headerText="Mais Comentados:" />
+        <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" establishment={greaterRateEstab} />
+        <CarrosselEstablishment headerText="Mais Comentados:" establishment={greaterCommentsEstab} />
         <img
           src={card}
           alt="avalie-os-restaurantes"
