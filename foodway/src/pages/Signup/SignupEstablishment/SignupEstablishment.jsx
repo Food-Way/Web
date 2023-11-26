@@ -69,11 +69,22 @@ const SignupEstablishment = () => {
 
   const handleSteps = () => {
     if (step === 1) {
+      if (formData.nameFantasy === "" || formData.nameResponsible === "" || formData.email === "") {
+        toast.error("Preencha todos os campos obrigatórios.");
+        return;
+      }
       if (formData.nameFantasy === "") {
         toast.error("Preencha o campo Nome Fantasia");
         return;
+      } else if (/\d/.test(formData.nameFantasy)) {
+        toast.error("Preencha o campo nome fantasia corretamente");
+        return;
       } else if (formData.nameResponsible === "") {
         toast.error("Preencha o campo Nome Responsável");
+        return;
+
+      } else if (/\d/.test(formData.nameResponsible)) {
+        toast.error("Preencha o campo nome responsavel corretamente");
         return;
       } else if (formData.email === "") {
         toast.error("Preencha o campo Email");
@@ -100,14 +111,17 @@ const SignupEstablishment = () => {
       handleNext();
     }
     if (step === 2) {
+      const cepRegex = /^\d{5}-\d{3}$/;
+
       if (addressData.cep === "") {
         toast.error("Preencha o campo CEP");
         return;
+      } else if (!cepRegex.test(addressData.cep)) {
+        toast.error("O formato do CEP é inválido. Use o formato XXXXX-XXX.");
+        return;
+
       } else if (addressData.number_address === "") {
         toast.error("Preencha o campo Número");
-        return;
-      } else if (formData.complement === "") {
-        toast.error("Preencha o campo Complemento");
         return;
       }
       handleNext();
@@ -124,6 +138,18 @@ const SignupEstablishment = () => {
         return;
       } else if (formData.password !== formData.confirmPassword) {
         toast.error("As senhas não coincidem");
+        return;
+      } else if (formData.password.length < 8) {
+        toast.error("A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo");
+        return;
+      } else if (!/[A-Z]/.test(formData.password)) {
+        toast.error("A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo");
+        return;
+      } else if (!/[a-z]/.test(formData.password)) {
+        toast.error("A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo");
+        return;
+      } else if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(formData.password)) {
+        toast.error("A senha deve ter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um símbolo");
         return;
       }
       handleOpen();

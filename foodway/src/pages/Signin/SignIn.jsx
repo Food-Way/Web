@@ -49,6 +49,7 @@ const SignIn = () => {
     } else {
       try {
         const response = await api.post("users/login", data);
+
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
