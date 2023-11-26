@@ -7,8 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "./CarrosselEstablishment.css";
+import { useEffect } from "react";
 
 const CarrosselEstablishment = ({ headerText, establishment }) => {
+  useEffect(() => {
+    console.log("CarrosselEstablishment");
+    console.log(establishment);
+  }, [establishment]);
+
   return (
     <div className="carrossel-establishment-container">
       <div className="carrossel-establishment">
@@ -22,14 +28,29 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
           slidesPerView={4}
           navigation
         >
-
-          {establishment.map((item, index) => {
-            <SwiperSlide className="slider-card" key={index}>
-              <HomeCardEstablishment
-                establishment={item.establishmentName}
-
-              />
-            </SwiperSlide>
+          {establishment.map((item) => {
+            return (
+              <SwiperSlide className="slider-card">
+                <HomeCardEstablishment
+                  establishment={item.establishmentName}
+                  category={item.culinary[0].name}
+                  image={item.culinary[0].photo}
+                  rattingNumber={item.generalRate}
+                />
+              </SwiperSlide>
+            );
+          })}
+          {establishment.map((item) => {
+            return (
+              <SwiperSlide className="slider-card">
+                <HomeCardEstablishment
+                  establishment={item.establishmentName}
+                  category={item.culinary[0].name}
+                  image={item.culinary[0].photo}
+                  rattingNumber={item.generalRate}
+                />
+              </SwiperSlide>
+            );
           })}
         </Swiper>
 

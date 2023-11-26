@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomeCardEstablishment.css";
 import { Rating } from "react-simple-star-rating";
+import { SwiperSlide } from "swiper/react";
 
 const HomeCardEstablishment = ({
   establishment,
