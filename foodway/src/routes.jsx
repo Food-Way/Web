@@ -69,7 +69,7 @@ const Rotas = () => {
         />
         <Route Component={UserProfile} path="/user-profile" />
 
-        <Route path="/menu" Component={Cardapio} />
+        <Route path="/establishment-menu/:id" Component={Cardapio} />
 
         <Route path="/profile" />
 

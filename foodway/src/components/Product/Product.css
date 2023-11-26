@@ -1,40 +1,40 @@
 @import url(../../assets/css/style.css);
 
 .menu-item-container {
-    width: 15vw;
-    height: 22rem;
-    display: flex;
-    justify-content: center;
-    background-color: var(--branco);
-    padding-block: 10px;
-    border-radius: var(--arredondamento);
+  width: 287px;
+  height: 22rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--branco);
+  padding-block: 10px;
+  border-radius: var(--arredondamento);
 }
 
 .menu-item-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .menu-header span.product-title {
-    font-size: 1.8rem;
-    font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .menu-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu-footer span {
-    font-size: 1.8rem;
-    font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .menu-footer .operations {
-    display: flex;
-    flex-direction: row;
-    gap: .5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
