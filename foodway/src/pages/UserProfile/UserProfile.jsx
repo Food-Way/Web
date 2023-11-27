@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Banner from "../../../public/capa.png"
-import Comment from "../../components/Comment/Comment";
+import { Comment } from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";

@@ -41,7 +41,7 @@
 }
 
 .establishment-avaliation-value {
-    width: 10vw;
+    width: 8vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -329,6 +329,7 @@
     font-weight: 500;
     color: var(--branco);
     padding-left: 1rem;
+    text-decoration: none;
 }
 
 .establishment-contact-btn {

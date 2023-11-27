@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import GraphCard from "../../components/GraphCard/GraphCard.jsx";
-import Comment from "../../components/Comment/Comment";
+import { Comment } from "../../components/Comment/Comment";
 import SentimentCard from "../../components/SentimentCard/SentimentCard";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
 import TagDashCard from "../../components/TagDashCard/TagDashCard";

@@ -67,7 +67,7 @@ const SignIn = () => {
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {
             console.log("Redirecting to /establishment/performance...");
-            navigate("/establishment/performance");
+            navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
           }
         } else {
           console.log("Login failed with status code:", response.status);
