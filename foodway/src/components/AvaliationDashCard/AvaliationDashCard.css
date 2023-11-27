@@ -28,7 +28,16 @@
     background-color: var(--preto);
 }
 
+.check-static-primary {
+    background-color: var(--primary);
+}
+
 .check-static-disabled {
     display: block;
     border: 1px solid var(--preto) !important;
+}
+
+.check-static-disabled-primary {
+    display: block;
+    background-color: var(--brancoGelo) !important;
 }

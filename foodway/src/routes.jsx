@@ -17,7 +17,6 @@ import MenuDash from "./pages/MenuDash/MenuDash";
 import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment";
 import Relevance from "./pages/Relevance/Relevance";
 import EstablishmentPage from "./pages/EstablishmentPage/EstablishmentPage";
-
 import EstablismentEditPersonal from "./pages/EstablismentEditPersonal/EstablismentEditPersonal";
 import Cardapio from "./pages/Cardapio/Cardapio";
 import CostumerEdit from "./pages/CostumerEdit/CostumerEdit";
@@ -27,35 +26,29 @@ const Rotas = () => {
   const token = sessionStorage.getItem("token");
   return (
     <BrowserRouter>
-      {(sessionStorage.getItem("token") &&
-        window.location.pathname == "/user-profile") ||
-      window.location.pathname == "/establishment/performance/menu" ||
-      window.location.pathname == "/establishment/performance/relevance" ||
-      window.location.pathname == "/establishment/performance/comments" ||
-      window.location.pathname == "/search-user" ? (
-        <HeaderGeneral />
-      ) : (
-        ""
-      )}
-      {sessionStorage.getItem("token") &&
-      window.location.pathname != "/" &&
-      window.location.pathname != "/sign-in" &&
-      window.location.pathname != "/sign-up" &&
-      window.location.pathname != "/sign-up-costumer" &&
-      window.location.pathname != "/sign-up-establishment" ? (
-        <MenuEstablishment
-          height={`${
-            location.pathname == "/establishment/performance/menu" ||
-            location.pathname == "/establishment/performance/relevance" ||
-            location.pathname == "/establishment/performance/comments" ||
-            window.location.pathname == "/search-user"
-              ? "88.8rem"
-              : "170rem"
-          }`}
-        />
-      ) : (
-        <HeaderGeneral />
-      )}
+    { sessionStorage.getItem("token") && 
+    window.location.pathname == "/user-profile" || 
+    window.location.pathname == "/establishment/performance/menu" || 
+    window.location.pathname == "/establishment/performance/relevance" || 
+    window.location.pathname == "/establishment/performance/comments" || 
+    window.location.pathname == "/search-user" || 
+    window.location.pathname == "/establishment/performance/insights" || 
+    window.location.pathname == "/establishment/info" || 
+    window.location.pathname == "/establishment" ?  <HeaderGeneral /> : "" }
+
+    { sessionStorage.getItem("token") && 
+    window.location.pathname != "/" && 
+    window.location.pathname != "/sign-in" && 
+    window.location.pathname != "/sign-up" && 
+    window.location.pathname != "/sign-up-costumer" && 
+    window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`
+    ${location.pathname == "/establishment/performance/menu" || 
+    location.pathname == "/establishment/performance/relevance" || 
+    location.pathname == "/establishment/performance/comments" ||  
+    window.location.pathname == "/search-user" || 
+    window.location.pathname == "/establishment/performance/insights" || 
+    window.location.pathname == "/establishment/info" || 
+    window.location.pathname == "/establishment" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
@@ -99,6 +92,7 @@ const Rotas = () => {
         />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
 
+        <Route Component={EstablishmentPage} path="/establishment/info" />
         <Route Component={SearchUser} path="/search-user" />
         <Route
           Component={Relevance}

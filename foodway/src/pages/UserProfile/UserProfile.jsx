@@ -50,7 +50,7 @@ const UserProfile = () => {
         if (response.status === 200) {
           setUser(response.data);
           setComments(response.data.comments);
-          setEstablishments(response.data.establishmentDTOs);
+          setEstablishments(response.data.establishmentDTOs);  
           console.log("response: ", response.data);
           console.log("user: ", user);
           console.log("comments: ", comments);
@@ -146,12 +146,12 @@ const UserProfile = () => {
               <div className="last-comment-box">
                 {comments.map((item) => (
                   <>
-                    <Comment
-                      establishmentName={item.establishmentName}
-                      rate={item.commentRate}
-                      title={item.title}
-                      comment={item.comment}
-                    />
+                  <Comment
+                    establishmentName={item.establishmentName}
+                    rate={item.commentRate}
+                    title={item.title}
+                    comment={item.comment}
+                  />
                   </>
                 ))}
               </div>
@@ -163,12 +163,12 @@ const UserProfile = () => {
               <div className="fav-estabs-box">
                 {establishments.map((item) => (
                   <>
-                    <HomeCardEstablishment
-                      establishment={item.establishmentName}
-                      category={item.culinary[0].name}
-                      image={item.photo}
-                      rattingNumber={item.establishmentRate}
-                    />
+                  <HomeCardEstablishment
+                    establishment={item.establishmentName}
+                    category={item.culinary[0].name}
+                    image={item.photo}
+                    rattingNumber={item.establishmentRate}
+                  />
                   </>
                 ))}
               </div>

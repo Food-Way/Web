@@ -18,7 +18,6 @@ const api_mock = axios.create({
   },
 });
 
-
 const api_maps = axios.create({
   baseURL: "https://maps.googleapis.com/maps/api/",
   headers: {
@@ -26,8 +25,5 @@ const api_maps = axios.create({
   },
 });
 
-
 export default api;
-export { api_mock, api, api_maps};
-
-
+export { api_mock, api, api_maps };

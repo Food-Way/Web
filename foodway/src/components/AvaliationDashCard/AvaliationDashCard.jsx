@@ -11,10 +11,10 @@ function AvaliationDashCard(props) {
             // var nanoidInput = nanoid();
             // points.push(<input type="checkbox" name="point" id={`point-${index}`} checked={index <= props.rate ? true : false} disabled />);
             points.push(
-                <div className="pretty p-icon p-round p-smooth">
+                <div class="pretty p-icon p-round p-smooth">
                     <input type="checkbox" checked={true} />
-                    <div className="state adjust-point-dash">
-                        <div className={`icon ${index <= props.rate ? "check-static" : "check-static-disabled"}`} />
+                    <div class="state adjust-point-dash">
+                        <div className={`icon ${index <= props.rate ? props.color == "red" ? "check-static-primary" : "check-static" : props.color == "red" ? "check-static-disabled-primary" : "check-static-disabled"}`} />
                     </div>
                 </div>
             );
