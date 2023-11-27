@@ -58,6 +58,7 @@ const SignIn = () => {
           sessionStorage.setItem("token", btoa(response.data.token));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
+          sessionStorage.setItem("profile-photo", btoa(response.data.photo));
           toast.success("Login realizado com sucesso!");
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
