@@ -9,7 +9,6 @@ import starBlack from "../../../public/star-black.svg";
 import "./SearchDetails.css";
 
 const SearchDetails = (props) => {
-    const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png";
     const [updateText, setUpdateText] = useState(false);
 
     function analysisText(text, category, upText) {
@@ -36,19 +35,17 @@ const SearchDetails = (props) => {
 
     var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
 
-    var title = "AAAAAAAAAAAAAAAAAAAAA";
-
     return (
         <>
             <div className="search-details-container">
                 <div className="search-details-box">
                     <div className="search-detail-header">
                         <div className="left-header-side">
-                            <img src={LogoFoodway} alt="" />
+                            <img src={props.photo} alt="" />
                             <CulinaryTag />
                         </div>
                         <div className="middle-header-side">
-                            <span className="user-detail-name"> {analysisText(title, "title")} </span>
+                            <span className="user-detail-name"> {analysisText(props.name, "title")} </span>
                             <div className="rate-detail-user">
                                 <span className="user-rate-number">5.0</span>
                                 <ReactStars

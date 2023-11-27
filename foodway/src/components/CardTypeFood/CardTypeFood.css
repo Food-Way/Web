@@ -17,9 +17,9 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  transition: 0.5s;
-  overflow: hidden
-  ;
+  transition: 0.5s; 
+  overflow: hidden;
+  filter: brightness(0.8);
 }
 
 @media (max-width: 850px) {

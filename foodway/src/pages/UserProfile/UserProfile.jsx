@@ -8,19 +8,40 @@ import { ButtonSecondary } from "../../components/Button/Button"
 import api from "../../services/api";
 
 import "./UserProfile.css";
+import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
+  const params = useParams();
+  const id = params.id;
   const [user, setUser] = useState([]);
   const profileDescriptionRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
 
-  function getUser() {
+  const ProfileShow = () => (
+    <ContentLoader
+      speed={2}
+      width={300}
+      height={170}
+      viewBox="0 0 400 170"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <circle cx="248" cy="59" r="49" />
+      <circle cx="263" cy="66" r="8" />
+      <rect x="175" y="120" rx="0" ry="0" width="156" height="8" />
+      <rect x="204" y="137" rx="0" ry="0" width="100" height="8" />
+      <rect x="248" y="128" rx="0" ry="0" width="0" height="1" />
+      <rect x="247" y="126" rx="0" ry="0" width="1" height="8" />
+      <rect x="252" y="166" rx="0" ry="0" width="1" height="0" />
+    </ContentLoader>
+  );
 
+  function getUser() {
     const idUser = atob(sessionStorage.getItem("idUser"));
     console.log("idUser: ", idUser);
 
-    const response = api.get(`/customers/profile/${idUser}`, {
+    const response = api.get(`/customers/profile/${id}`, {
       headers: {
         Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
       },
@@ -125,42 +146,12 @@ const UserProfile = () => {
               <div className="last-comment-box">
                 {comments.map((item) => (
                   <>
-                  <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
+                    <Comment
+                      establishmentName={item.establishmentName}
+                      rate={item.commentRate}
+                      title={item.title}
+                      comment={item.comment}
+                    />
                   </>
                 ))}
               </div>
@@ -172,30 +163,12 @@ const UserProfile = () => {
               <div className="fav-estabs-box">
                 {establishments.map((item) => (
                   <>
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
+                    <HomeCardEstablishment
+                      establishment={item.establishmentName}
+                      category={item.culinary[0].name}
+                      image={item.photo}
+                      rattingNumber={item.establishmentRate}
+                    />
                   </>
                 ))}
               </div>

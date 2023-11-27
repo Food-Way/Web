@@ -1,49 +1,87 @@
 import { useState, React, useEffect, require } from "react";
 import SearchCard from "../../components/SearchCard/SearchCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter";
 import ImageFilter from "../../../public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
 import { api, api_maps } from "../../services/api";
+import ContentLoader from 'react-content-loader'
 
 import './SearchUser.css';
 
+const MyLoader = () => (
+    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+        speed={2}
+        width={1500}
+        height={875}
+        viewBox="0 0 1500 875"
+        backgroundColor="#ffffff"
+        foregroundColor="#c4c4c4"
+    >
+        <rect x="0" y="23" rx="0" ry="0" width="1500" height="230" />
+        <rect x="0" y="289" rx="0" ry="0" width="1500" height="230" />
+        <rect x="0" y="558" rx="0" ry="0" width="1500" height="230" />
+    </ContentLoader>
+)
+
 function SearchUser() {
+
+    const [searchEstab, setSearchEstab] = useState([]);
+    const [searchCustomer, setSearchCustomer] = useState([]);
     const [search, setSearch] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [showMap, setShowMap] = useState(false); 
+
+
     const [url, setUrl] = useState(null);
     var typeUser = "ESTABLISHMENT";
     const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
-    async function getSearch() {
+    async function getSearchEstab() {
         try {
-            const response = await api.get(`/establishments/search`, {
+            const establishmentResponse = await api.get(`/establishments/search`, {
                 headers: {
                     Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+                    ID_SESSION: atob(sessionStorage.getItem("idUser")),
                 },
             });
-            if (response.status === 200) {
-                setSearch(response.data);
+            if (establishmentResponse.status === 200) {
+                console.log("Response da API de Busca (Estab):", establishmentResponse.data);
+                setSearchEstab(establishmentResponse.data);
             }
         } catch (error) {
             console.error('Erro ao buscar estabelecimentos:', error);
         }
     }
 
+    async function getSearchCustomer() {
+        try {
+            const customerResponse = await api.get(`/customers/search`, {
+                headers: {
+                    Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+                },
+            });
+            if (customerResponse.status === 200) {
+                console.log("Response da API de Busca (Customer):", customerResponse.data);
+                setSearchCustomer(customerResponse.data);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar clientes:', error);
+        }
+    }
+
     async function getMaps(lat, lng) {
         if (search.length > 0) {
-
             try {
                 const response = await api_maps.get(`staticmap?center=${lat},${lng}&zoom=19&size=400x400&key=${apiKey}`, {
-                    responseType: 'arraybuffer', // Indica que a resposta é binária
+                    responseType: 'arraybuffer',
                 });
-                console.log("Response da API de Mapas:", response);
+                // console.log("Response da API de Mapas:", response);
 
                 if (response.status === 200 && response.data) {
-                    // Cria uma URL de dados a partir do conteúdo binário
                     const blob = new Blob([response.data], { type: 'image/png' });
                     const dataUrl = URL.createObjectURL(blob);
-
-                    console.log("URL do Mapa:", dataUrl);
+                    showMap(true);
+                    // console.log("URL do Mapa:", dataUrl);
                     setUrl(dataUrl);
                 } else {
                     console.error('Resposta inválida da API de Mapas:', response);
@@ -53,7 +91,6 @@ function SearchUser() {
             }
         }
     }
-
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
@@ -67,13 +104,23 @@ function SearchUser() {
         selectedFilter.classList.toggle("item-filter-active");
     }
 
+    const handleCardClick = (index) => {
+        console.log("Card selecionado:", index);
+        setSelectedCard(index);
+    };
+
     useEffect(() => {
-        getSearch();
+        setSearch([...searchCustomer, ...searchEstab]);
+    }, [searchCustomer, searchEstab]);
+
+    useEffect(() => {
+        getSearchEstab();
+        getSearchCustomer();
     }, []);
 
     useEffect(() => {
         getMaps();
-    }, [search]);
+    }, [searchCustomer, searchEstab]);
 
     return (
         <>
@@ -96,17 +143,41 @@ function SearchUser() {
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    {search.map((item) => (
-                                        <div onClick={() => { getMaps(item.lat, item.lng) }}>
+                                    <MyLoader />
+                                    {searchEstab && searchEstab.map((establishment, index) => (
+                                        <div onClick={(e) => {
+                                            e.preventDefault();
+                                            handleCardClick(index)
+                                            getMaps(establishment.lat, establishment.lng)
+                                        }}>
                                             <SearchCard
-                                                key={item.id}
-                                                name={item.name}
-                                                bio={item.bio}
-                                                generalRate={item.generalRate}
-                                                lastComment={item.lastComment}
-                                                photo={item.photo}
-                                                upvote={item.upvote}
-                                                culinary={item.culinary}
+                                                key={index}
+                                                name={establishment.name}
+                                                bio={establishment.bio}
+                                                generalRate={establishment.generalRate}
+                                                lastComment={establishment.lastComment}
+                                                photo={establishment.photo}
+                                                upvote={establishment.upvote}
+                                                culinary={establishment.culinary[0].name}
+                                                typeUser={establishment.typeUser}
+                                                idEstablishment={establishment.idEstablishment}
+                                            />
+                                        </div>
+                                    ))}
+                                    {searchCustomer && searchCustomer.map((customer, index) => (
+                                        <div onClick={(e) => {
+                                            e.preventDefault()
+                                            handleCardClick(index)
+                                        }}>
+                                            <SearchCard
+                                                key={index}
+                                                name={customer.name}
+                                                bio={customer.bio}
+                                                generalRate={customer.generalRate}
+                                                photo={customer.photo}
+                                                upvote={customer.upvotes}
+                                                culinary={customer.culinary[0].name}
+                                                typeUser={customer.typeUser}
                                             />
                                         </div>
                                     ))}
@@ -117,9 +188,18 @@ function SearchUser() {
                     <section>
                         <div className="user-details-container">
                             <div className="user-details-box">
-                                <SearchDetails />
+                                {selectedCard !== null && (
+                                    <SearchDetails
+                                        name={search[selectedCard].name}
+                                        photo={search[selectedCard].photo}
+                                        tag={search[selectedCard].tag}
+                                        rate={search[selectedCard].rate}
+                                        comments={search[selectedCard].comments}
+                                        bio={search[selectedCard].bio}
+                                    />
+                                )}
                             </div>
-                            {typeUser === "ESTABLISHMENT" && url && (
+                            {typeUser === "ESTABLISHMENT" && showMap && url &&(
                                 <div className="maps-box">
                                     <span className="title">Localização</span>
                                     <img src={url} alt="Mapa" />

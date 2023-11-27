@@ -85,7 +85,7 @@ const Home = () => {
             />
           </>
         ) : (
-          <>Teste</>
+          "Carregando..."
         )}
         <img
           src={card}

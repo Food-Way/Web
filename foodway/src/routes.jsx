@@ -38,7 +38,7 @@ const Rotas = () => {
         />
 
         {/* Logado */}
-        <Route Component={UserProfile} path="/user-profile" />
+        <Route Component={UserProfile} path="/user-profile/:id" />
         {/* <Route path="/profile" />
         <Route path="/establishment" />
         <Route path="/menu" />
