@@ -52,7 +52,7 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          sessionStorage.setItem("name", btoa(response.data.name));
+          sessionStorage.setItem("name", response.data.name);
           sessionStorage.setItem("email", btoa(response.data.email));
           sessionStorage.setItem("idUser", btoa(response.data.idUser));
           sessionStorage.setItem("token", btoa(response.data.token));

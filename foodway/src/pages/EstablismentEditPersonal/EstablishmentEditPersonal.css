@@ -133,11 +133,39 @@
   transition: 0.3s;
 }
 
+.button-establishment-editPassword {
+  max-width: fit-content;
+  width: 30%;
+  min-width: 20%;
+  margin: 10px 10px 10px 10px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  padding: 10px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.button-establishment-editPassword:hover {
+  background: #222222;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
 .button-establishment-edit {
   max-width: fit-content;
   width: 30%;
   min-width: 20%;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 10px 10px 10px;
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -156,7 +184,7 @@
   background: #f7464b;
   color: var(--Branco-Branco, #fff);
   cursor: pointer;
-  transform: scale(1.1);
+
   transition: 0.3s;
 }
 .form-container-edit-profile {
@@ -170,8 +198,16 @@
   margin: 4px 20px 4px 20px;
   width: 100%;
 }
+.form-group-establisment-edit-fill-edit {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4px 0px 4px 0px;
+  width: 100%;
+}
 
-.form-group-establisment-edit-fill label {
+.form-group-establisment-edit-fill label,
+.form-group-establisment-edit-fill-edit label {
   font-family: var(--defaultFonte);
   font-size: 1.9rem;
   margin: 10px 0px 10px 0px;

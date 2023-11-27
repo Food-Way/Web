@@ -1,0 +1,34 @@
+.profile-form-edit {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+.title-edit-profile {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 20px 20px;
+  color: var(--preto);
+}
+.modal-edit-profile {
+  background-color: white;
+  width: 30vw;
+  min-height: 40vh;
+  height: fit-content;
+  max-height: 80vh;
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.edit-modal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.edit-modal h2 {
+  font-size: 24px;
+  margin: 20px 0px 0px 0px;
+}
