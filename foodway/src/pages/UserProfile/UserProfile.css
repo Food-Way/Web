@@ -1,5 +1,11 @@
 @import url(../../assets/css/style.css);
 
+.user-banner {
+    width: 100vw;
+    height: 28vh;
+    object-fit: cover;
+}
+
 .profile-container {
     top: 8vh;
     left: 34vw;

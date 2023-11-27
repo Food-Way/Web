@@ -7,8 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "./CarrosselEstablishment.css";
+import { useEffect } from "react";
 
-const CarrosselEstablishment = ({ headerText }) => {
+const CarrosselEstablishment = ({ headerText, establishment }) => {
+  useEffect(() => {
+    console.log("CarrosselEstablishment");
+    console.log(establishment);
+  }, [establishment]);
+
   return (
     <div className="carrossel-establishment-container">
       <div className="carrossel-establishment">
@@ -22,103 +28,37 @@ const CarrosselEstablishment = ({ headerText }) => {
           slidesPerView={4}
           navigation
         >
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Japônes"
-              image="https://www.construtoradubai.com.br/wp-content/uploads/2021/05/restaurante-japones-em-osasco-os-7-melhores.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Ratatui"
-              category="Italiana"
-              image="https://media-cdn.tripadvisor.com/media/photo-s/0c/16/aa/0c/restaurante-famiglia.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Fogo de chão"
-              category="Brasileira"
-              image="https://blog.originalmiles.com.br/wp-content/uploads/2014/01/santinho-700x525.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Chinesa"
-              image="https://www.construtoradubai.com.br/wp-content/uploads/2021/05/restaurante-japones-em-osasco-os-7-melhores.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Japônes"
-              image="https://www.construtoradubai.com.br/wp-content/uploads/2021/05/restaurante-japones-em-osasco-os-7-melhores.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Ratatui"
-              category="Italiana"
-              image="https://media-cdn.tripadvisor.com/media/photo-s/0c/16/aa/0c/restaurante-famiglia.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Fogo de chão"
-              category="Brasileira"
-              image="https://blog.originalmiles.com.br/wp-content/uploads/2014/01/santinho-700x525.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Chinesa"
-              image="https://www.construtoradubai.com.br/wp-content/uploads/2021/05/restaurante-japones-em-osasco-os-7-melhores.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Japônes"
-              image="https://www.construtoradubai.com.br/wp-content/uploads/2021/05/restaurante-japones-em-osasco-os-7-melhores.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Ratatui"
-              category="Italiana"
-              image="https://media-cdn.tripadvisor.com/media/photo-s/0c/16/aa/0c/restaurante-famiglia.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Fogo de chão"
-              category="Brasileira"
-              image="https://blog.originalmiles.com.br/wp-content/uploads/2014/01/santinho-700x525.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
-          <SwiperSlide className="slider-card">
-            <HomeCardEstablishment
-              establishment="Chi Fu"
-              category="Chinesa"
-              image="https://blog.originalmiles.com.br/wp-content/uploads/2014/01/santinho-700x525.jpg"
-              rattingNumber={4.6}
-            />
-          </SwiperSlide>
+          {establishment.map((item) => {
+            return (
+              <SwiperSlide className="slider-card">
+                <HomeCardEstablishment
+                  establishment={item.establishmentName}
+                  category={item.culinary[0].name}
+                  image={item.culinary[0].photo}
+                  rattingNumber={item.generalRate}
+                />
+              </SwiperSlide>
+            );
+          })}
+          {establishment.map((item) => {
+            return (
+              <SwiperSlide className="slider-card">
+                <HomeCardEstablishment
+                  establishment={item.establishmentName}
+                  category={item.culinary[0].name}
+                  image={item.culinary[0].photo}
+                  rattingNumber={item.generalRate}
+                />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
+
+        {/* {establishment.map((item) => {
+                category={item.culinary[0].name}
+                image={item.profilePhoto}
+                rattingNumber={item.generalRate}
+          })} */}
       </div>
     </div>
   );

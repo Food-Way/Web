@@ -2,7 +2,7 @@ import React from "react";
 import CommentIcon from "../../../public/comment-icon.png"
 import "./Comments.css";
 
-const Comments = () => {
+const Comments = (props) => {
     return(
         <>
             <div className="comments-qtd-container">

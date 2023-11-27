@@ -61,7 +61,7 @@ const SignIn = () => {
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate("/user-profile");
+              navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
               location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);

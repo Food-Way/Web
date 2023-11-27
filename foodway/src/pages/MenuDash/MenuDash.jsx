@@ -4,7 +4,6 @@ import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
 import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter";
 import ImageFilter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
 import api from "../../services/api";

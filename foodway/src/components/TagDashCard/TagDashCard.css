@@ -1,0 +1,56 @@
+@import url(../../assets/css/style.css);
+
+.tag-dash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}	
+
+.selection-tag-box {
+    width: 27rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.title-selection-tag {
+    font-weight: 700;
+}
+
+.btn-dash-tag {
+    background-color: var(--preto);
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.btn-dash-tag span {
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.tag-dash-itens {
+    width: 25rem;
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: center;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    padding: .7rem;
+    gap: .5rem;
+}
+
+.tag-dash-item {
+    width: 3.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    padding: .3rem;
+}
