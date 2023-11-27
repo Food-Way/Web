@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import Comment from "../../components/Comment/Comment";
+import { Comment } from "../../components/Comment/Comment";
 
 import "./CommentDash.css";
 

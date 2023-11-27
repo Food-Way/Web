@@ -1,7 +1,9 @@
 import { React, useEffect, useState } from "react";
-import ReactStars from "react-rating-stars-component";
-import Upvotes from "../Upvotes/Upvotes";
 import { Neutral, Positive, Negative } from "../../components/SentimentTag/SentimentTag";
+import ReactStars from "react-rating-stars-component";
+import Upvotes from "../../components/Upvotes/Upvotes";
+import ImageComment from "../../../public/comment-icon.png"
+import DefaultUserImage from "../../../public/default-user-image.png"
 import "./Comment.css";
 
 const Comment = (props) => {
@@ -43,7 +45,6 @@ const Comment = (props) => {
         });
     }
 
-
     let sentimentAnalysis = 8.0;
 
     var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
@@ -55,7 +56,7 @@ const Comment = (props) => {
     useEffect(() => {
         setSize(props.width, props.height, props.text)
     }, []);
-    
+
     return (
         <>
             <div className="comment-container">
@@ -105,4 +106,132 @@ const Comment = (props) => {
     )
 }
 
-export default Comment;
+const CommentIndividual = (props) => {
+
+    const [updateText, setUpdateText] = useState(false);
+
+    function analysisText(text, category, upText) {
+        var newText = "";
+        const tamanho = text.length;
+        if (tamanho > props.size && category == "title") {
+            newText = text.substring(0, props.size) + "..."
+            return newText;
+        }
+
+        if (tamanho > 100 && category == "text" && upText == false) {
+            newText = text.substring(0, 100) + "..."
+            return newText;
+        }
+
+        return text;
+    }
+
+    function scrollTextShow() {
+        var obj = document.querySelector(".comment-content-text");
+        obj.classList.toggle("comment-content-show-scroll");
+        setUpdateText(!updateText);
+    }
+
+    let sentimentAnalysis = 8.0;
+
+    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
+
+    var title = "AAAAAAAAAAAAAAAAAAAAA";
+
+    var id = 1;
+
+    return (
+        <>
+            <div className="establishment-comments-box">
+                <div className="user-content-comment">
+                    {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
+                    <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                    <div className="user-content-values">
+                        <ReactStars
+                            size={24}
+                            activeColor={"var(--primary)"}
+                            edit={false}
+                            value={2} />
+                        <p className="comment-content-text">{analysisText(textao, "text", updateText)}</p>
+                        <div className="establishment-upcomment-box">
+                            <div className="establishment-upcomment-values">
+                                <Upvotes />
+                                <img src={ImageComment} alt="Image comment" />
+                            </div>
+                            {textao.length > 100 ?
+                                <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
+                                    <span> {updateText ? "Ver menos" : "Ver mais"} </span>
+                                </div> : <div className="more-text"></div>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+const CommentReply = (props) => {
+
+    const [updateText, setUpdateText] = useState(false);
+
+    function analysisText(text, category, upText) {
+        var newText = "";
+        const tamanho = text.length;
+        if (tamanho > props.size && category == "title") {
+            newText = text.substring(0, props.size) + "..."
+            return newText;
+        }
+
+        if (tamanho > 100 && category == "text" && upText == false) {
+            newText = text.substring(0, 100) + "..."
+            return newText;
+        }
+
+        return text;
+    }
+
+    function scrollTextShow() {
+        var obj = document.querySelector(".comment-content-text");
+        obj.classList.toggle("comment-content-show-scroll");
+        setUpdateText(!updateText);
+    }
+
+    let sentimentAnalysis = 8.0;
+
+    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
+
+    var title = "AAAAAAAAAAAAAAAAAAAAA";
+
+    var id = 1;
+
+    return (
+        <>
+            <div className="user-content-comment">
+                <div className="establishment-bar" />
+                {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
+                <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                <div className="user-content-values">
+                    <ReactStars
+                        size={24}
+                        activeColor={"var(--primary)"}
+                        edit={false}
+                        value={2} />
+                    <p className="comment-content-text">{analysisText(textao, "text", updateText)}</p>
+                    <div className="establishment-upcomment-box">
+                        <div className="establishment-upcomment-values">
+                            <Upvotes />
+                            <img src={ImageComment} alt="Image comment" />
+                        </div>
+                        {textao.length > 100 ?
+                            <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
+                                <span> {updateText ? "Ver menos" : "Ver mais"} </span>
+                            </div> : <div className="more-text"></div>}
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+
+export { Comment, CommentIndividual, CommentReply };

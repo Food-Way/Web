@@ -7,15 +7,17 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import ImageFilter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
 import api from "../../services/api";
-
+import { useParams } from "react-router-dom";
 
 import "./MenuDash.css";
 
 const MenuDash = () => {
+    const routeParams = useParams();
+    const id = routeParams.id;
     const [menu, setMenu] = useState([]);
 
-    function getMenu() {
-        const response = api.get('menu', {
+    function getMenu({ filter }) {
+        const response = api.get(`products/establishments/${id}/${filter}`, {
             headers: {
                 Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
             },
@@ -37,18 +39,32 @@ const MenuDash = () => {
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
-
-        for (let index = 1; index <= 4; index++) {
-            var indexFilter = document.getElementById(`${index}`);
-            if (indexFilter.classList.contains("item-filter-active") && `${index}` != id) {
-                indexFilter.classList.toggle("item-filter-active");
-            }
+    
+        if (id == 1) {
+          getMenu({ filter: "minPrice" });
+        } else if (id == 2) {
+          getMenu({ filter: "maxPrice" });
+        } else if (id == 3) {
+          getMenu({ filter: "name" });
+        } else if (id == 4) {
+          getMenu({ filter: "nameDesc" });
         }
+    
+        for (let index = 1; index <= 4; index++) {
+          var indexFilter = document.getElementById(`${index}`);
+          if (
+            indexFilter.classList.contains("item-filter-active") &&
+            `${index}` != id
+          ) {
+            indexFilter.classList.toggle("item-filter-active");
+          }
+        }
+    
         selectedFilter.classList.toggle("item-filter-active");
-    }
+      }
 
     useEffect(() => {
-        getMenu();
+        getMenu({ filter: "name" });
     }, []);
 
 
