@@ -90,7 +90,7 @@ const Rotas = () => {
           Component={CommentDash}
           path="/establishment/performance/comments"
         />
-        <Route Component={MenuDash} path="/establishment/performance/menu" />
+        <Route Component={MenuDash} path="/establishment/performance/menu/:id" />
 
         <Route Component={EstablishmentPage} path="/establishment/info/:id" />
         <Route Component={SearchUser} path="/search-user" />

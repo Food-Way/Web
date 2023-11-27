@@ -39,7 +39,7 @@ function HandleModalDelete(props) {
 }
 
 function formModal(props) {
-    console.log(props);
+    console.log("props" + props);
     Swal.fire({
         customClass: {
             heightAuto: false,
@@ -86,6 +86,7 @@ function formModal(props) {
                 data = {
                     name: document.getElementById(props.iptProductName).value,
                     price: document.getElementById(props.iptProductPrice).value,
+                    idEstablishment: atob(sessionStorage.getItem('idUser')),
                 };
             }
 
