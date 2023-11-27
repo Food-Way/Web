@@ -7,7 +7,7 @@ const RateCard = (props) => {
     return (
         <>
             <div className="rate-container">
-                <div className="rate-box">
+                <div className="rate-box-user">
                     <div className="rate-left">
                         <div className="experience-info">
                             <span className="profile-level">NÍVEL: {props.level}</span>
