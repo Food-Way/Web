@@ -10,6 +10,7 @@ import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import PerformanceDash from "./pages/PerformanceDash/PerformanceDash";
 import SearchUser from "./pages/SearchUser/SearchUser";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";

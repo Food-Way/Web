@@ -79,3 +79,11 @@
     flex-direction: row;
     gap: 4rem;
 }
+
+.favorite-active {
+    color: #ffd700;
+}
+
+.favorite-desactive {
+    color: none;
+}

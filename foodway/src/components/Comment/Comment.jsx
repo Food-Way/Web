@@ -10,23 +10,37 @@ const Comment = (props) => {
     function analysisText(text, category, upText) {
         var newText = "";
         const tamanho = text.length;
-        if (tamanho > 20 && category == "title") {
-            newText = text.substring(0, 20) + "..."
+        if (tamanho > props.size && category == "title") {
+            newText = text.substring(0, props.size) + "..."
             return newText;
         }
-    
+
         if (tamanho > 100 && category == "text" && upText == false) {
             newText = text.substring(0, 100) + "..."
             return newText;
         }
-    
+
         return text;
     }
-    
+
     function scrollTextShow() {
         var obj = document.querySelector(".comment-content-text");
         obj.classList.toggle("comment-content-show-scroll");
         setUpdateText(!updateText);
+    }
+
+    function setSize(width, height, text) {
+        var minhaDiv = document.querySelectorAll(".comment-container");
+        var textContent = document.querySelectorAll(".comment-content-text");
+
+        minhaDiv.forEach(element => {
+            element.style.width = width;
+            element.style.height = height;
+        });
+
+        textContent.forEach(element => {
+            element.style.width = text;
+        });
     }
 
 
@@ -38,6 +52,10 @@ const Comment = (props) => {
 
     var id = 1;
 
+    useEffect(() => {
+        setSize(props.width, props.height, props.text)
+    }, []);
+    
     return (
         <>
             <div className="comment-container">
@@ -73,10 +91,10 @@ const Comment = (props) => {
                     <div className="comment-content">
                         <span>Tesete</span>
                         <p className="comment-content-text"> {analysisText(textao, "text", updateText)} </p>
-                        { textao.length > 100 ? 
-                        <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
-                            <span> { updateText ? "Ver menos" : "Ver mais" } </span>
-                        </div> : <div className="more-text"></div> }
+                        {textao.length > 100 ?
+                            <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
+                                <span> {updateText ? "Ver menos" : "Ver mais"} </span>
+                            </div> : <div className="more-text"></div>}
                     </div>
                     <div className="comment-footer">
                         <Upvotes />

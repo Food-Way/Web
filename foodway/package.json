@@ -11,6 +11,7 @@
     "start": "npm i --force && npm run dev"
   },
   "dependencies": {
+    "@djpfs/react-vlibras": "^2.0.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -21,8 +22,12 @@
     "@material-ui/icons": "^4.11.3",
     "@mui/material": "^5.14.16",
     "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
+    "nanoid": "^5.0.3",
     "pretty-checkbox": "^3.0.3",
     "react": "^18.2.0",
+    "react-animated-heart": "^0.0.8",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-input-mask": "^2.0.4",
     "react-pro-sidebar": "^1.1.0-alpha.1",
@@ -33,6 +38,7 @@
     "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.3",
+    "recharts": "^2.10.1",
     "searchpal": "^2.1.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.8",
