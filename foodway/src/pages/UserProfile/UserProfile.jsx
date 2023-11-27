@@ -121,7 +121,7 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
+                  <img className="profile-photo" src={user.profilePhoto} alt="" />
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()} */}
                   {sessionStorage.getItem("my-profile") === atob(true) ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
