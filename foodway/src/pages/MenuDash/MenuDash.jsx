@@ -39,29 +39,29 @@ const MenuDash = () => {
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
-    
+
         if (id == 1) {
-          getMenu({ filter: "minPrice" });
+            getMenu({ filter: "minPrice" });
         } else if (id == 2) {
-          getMenu({ filter: "maxPrice" });
+            getMenu({ filter: "maxPrice" });
         } else if (id == 3) {
-          getMenu({ filter: "name" });
+            getMenu({ filter: "name" });
         } else if (id == 4) {
-          getMenu({ filter: "nameDesc" });
+            getMenu({ filter: "nameDesc" });
         }
-    
+
         for (let index = 1; index <= 4; index++) {
-          var indexFilter = document.getElementById(`${index}`);
-          if (
-            indexFilter.classList.contains("item-filter-active") &&
-            `${index}` != id
-          ) {
-            indexFilter.classList.toggle("item-filter-active");
-          }
+            var indexFilter = document.getElementById(`${index}`);
+            if (
+                indexFilter.classList.contains("item-filter-active") &&
+                `${index}` != id
+            ) {
+                indexFilter.classList.toggle("item-filter-active");
+            }
         }
-    
+
         selectedFilter.classList.toggle("item-filter-active");
-      }
+    }
 
     useEffect(() => {
         getMenu({ filter: "name" });
@@ -111,6 +111,7 @@ const MenuDash = () => {
                                     {menu.map((item) => (
                                         <>
                                             <Product
+                                                editIsAble={true}
                                                 key={item.idProduct}
                                                 idProduct={item.idProduct}
                                                 name={item.name}
