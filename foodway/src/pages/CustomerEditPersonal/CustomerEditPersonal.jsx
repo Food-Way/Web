@@ -38,10 +38,22 @@ const CustomerEditPersonal = () => {
       data.passwordConfirm = "";
     }
 
+    // Validate passwordNew
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/;
+    if (!passwordRegex.test(data.passwordNew)) {
+      toast.error(
+        "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 símbolo especial."
+      );
+      return;
+    }
+
     if (data.passwordNew !== data.passwordConfirm) {
       toast.error("As senhas não conferem!");
       return;
     }
+
+    // Rest of the code...
 
     api
       .patch(`customers/personal/${id}`, formData, {
