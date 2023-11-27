@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./Product.css";
 
-const Product = (props, { editIsAble = true }) => {
+const Product = (props) => {
   return (
     <>
       <div className="menu-item-container">
@@ -19,7 +19,7 @@ const Product = (props, { editIsAble = true }) => {
           </div>
           <div className="menu-footer">
             <span>R$ {props.price}</span>
-            {editIsAble === true ? null : (
+            {props.editIsAble === true ? (
               <div className="operations">
                 <HandleModalDelete
                   title={"Excluir " + props.name}
@@ -47,7 +47,8 @@ const Product = (props, { editIsAble = true }) => {
                   uri={"products/" + props.idProduct}
                 />
               </div>
-            )}
+            ) : 
+          null}
           </div>
         </div>
       </div>

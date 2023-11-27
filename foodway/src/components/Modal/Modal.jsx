@@ -82,7 +82,8 @@ function formModal(props) {
         if (result.isConfirmed) {
             var data;
 
-            if (location.pathname === '/establishment/performance/menu') {
+            if (location.pathname.startsWith('/establishment/performance/menu')) {
+                console.log(atob(sessionStorage.getItem('idUser')))
                 data = {
                     name: document.getElementById(props.iptProductName).value,
                     price: document.getElementById(props.iptProductPrice).value,

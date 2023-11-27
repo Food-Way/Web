@@ -11,7 +11,7 @@ function SearchBar(props) {
 
     function listSearched() {
         var uriPath;
-
+        
         switch (document.location.pathname) {
             case '/':
                 if (oldCategory != atob(sessionStorage.getItem('category'))) {
@@ -25,9 +25,10 @@ function SearchBar(props) {
                     setSearched([]);
                     callGet(uriPath);
                 }
+                
                 break;
-            case '/establishment/performance/menu':
-                uriPath = `/menu`;
+            case document.location.pathname.startsWith('/establishment/performance/menu'):
+                uriPath = `/products/establishments/${id}/null`;
                 setPassed(true);
                 setSearched([]);
                 callGet(uriPath);
@@ -42,9 +43,13 @@ function SearchBar(props) {
 
     function callGet(uriPath) {
         api.get(uriPath, {
+            data: {
+                idEstablishment: atob(sessionStorage.getItem('idUser'))
+            },
             headers: {
                 Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
             },
+
         })
 
             .then(response => {

@@ -3,12 +3,12 @@ import RateNumberStar from "../../components/RateNumberStar/RateNumberStar";
 
 import "./RankLine.css";
 
-const RankLine = () => {
+const RankLine = (props) => {
     return (
         <>
             <li className="rank-line">
-                <span className="estab-rank-text">4° Fernandes</span>
-                <span>Avaliações: 200</span>
+                <span className="estab-rank-text">{props.id}° {props.name}</span>
+                <span>Avaliações: {props.rate}</span>
                 <RateNumberStar color="branco" />
             </li>
         </>
