@@ -25,7 +25,7 @@
   align-items: center;
 }
 .establishment-edit-container-form {
-  width: 80%;
+  width: 100%;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
 }
 .input-field-default-establisment-edit {
@@ -108,6 +108,27 @@
   margin-left: auto;
   padding: 10px 0px;
   width: 40%;
+  max-width: 100px;
+  min-width: 80px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.establishment-edit-sec-add {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
   max-width: 300px;
   min-width: 200px;
   color: var(--Branco-Branco, #fff);
@@ -118,7 +139,7 @@
   font-weight: 700;
   line-height: normal;
   border-radius: 5px;
-  background: #000000;
+  background: #ff0000;
   border: none;
   cursor: pointer;
   margin: 10px 10px 10px 0px;
@@ -188,8 +209,11 @@
   transition: 0.3s;
 }
 .form-container-edit-profile {
-  width: 80%;
+  width: 95%;
   padding: 50px 0px;
+  display: flex;
+
+  justify-content: space-around;
 }
 .form-group-establisment-edit-fill {
   display: flex;
@@ -217,7 +241,6 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-
   width: 100%;
   height: 200px;
   border: 1px solid #8d8d8d;
@@ -270,4 +293,61 @@
   cursor: pointer;
 
   transition: 0.3s;
+}
+
+.btnAdicionarFiles {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.form_1 {
+  width: 50%;
+  height: 500px;
+}
+.form_2 {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: start;
+  padding: 0px 10px;
+  border-left: 1px solid black;
+}
+.section-btn-profile-picture {
+  width: 100%;
+}
+.perfil-edit-establishment-preview {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.main-section-btn-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.section-01 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }

@@ -74,6 +74,9 @@ const CustomerEditPersonal = () => {
         if (error.response.status === 401) {
           toast.error("Erro ao se autenticar!");
         }
+        if (error.response.status === 404) {
+          toast.error("Erro ao atualizar dados!");
+        }
       });
   };
 
@@ -230,7 +233,7 @@ const CustomerEditPersonal = () => {
                   label="Email"
                   type="text"
                   defaultValue={formData.email}
-                  value={formData.emailNew}
+                  value={formData.email}
                   placeholder="Email"
                   className="input-field-default-establisment-edit"
                   classNameGeral="form-group-establisment-edit-fill-edit"

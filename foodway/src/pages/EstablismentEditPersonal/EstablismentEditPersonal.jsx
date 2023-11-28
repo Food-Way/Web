@@ -103,131 +103,147 @@ const EstablismentEditPersonal = () => {
       <div className="establishment-edit-container">
         <div className="establishment-edit-container-form">
           <div className="form-container-edit-profile">
-            {" "}
-            <div className="title">
-              <h2>Informações do estabelecimento</h2>
-            </div>
-            <form>
-              <div className="input-fields">
-                <InputField
-                  id={"nome-establishment"}
-                  label="Nome Estabelecimento"
-                  defaultValue={formData.establishmentName}
-                  value={formData.establishmentName}
-                  type="text"
-                  placeholder="Nome do estabelecimento"
-                  className="input-field-default-establisment-edit"
-                  classNameGeral="form-group-establisment-edit"
-                  onChange={handleInputChange}
-                />
-
-                <InputField
-                  disabled={true}
-                  id={"cnpj"}
-                  label="CNPJ"
-                  type="text"
-                  defaultValue={formData.cnpj}
-                  value={formData.cnpj}
-                  placeholder="CNPJ"
-                  mask="99.999.999/9999-99"
-                  className="input-field-default-establisment-edit"
-                  classNameGeral="form-group-establisment-edit"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="input-fields">
-                <InputField
-                  id={"email"}
-                  label="E-mail"
-                  defaultValue={formData.email}
-                  value={formData.email}
-                  type="email"
-                  placeholder="E-mail"
-                  className="input-field-default-establisment-edit"
-                  classNameGeral="form-group-establisment-edit"
-                  onChange={handleInputChange}
-                />
-                <InputField
-                  text={"Número comercial"}
-                  mask="(99) 99999-9999"
-                  id={"phone"}
-                  label="Telefone"
-                  defaultValue={formData.phone}
-                  value={formData.phone}
-                  type="text"
-                  placeholder="Telefone"
-                  className="input-field-default-establisment-edit"
-                  classNameGeral="form-group-establisment-edit"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <TextAreaField
-                label="Descrição"
-                id={"description"}
-                defaultValue={formData.description}
-                value={formData.description}
-                placeholder="Descrição do estabelecimento"
-                classNameGeral="form-group-establisment-edit-fill"
-                onChange={handleInputChange}
-              />
-              <hr
-                style={{
-                  width: "100%",
-                  height: "1px",
-                  backgroundColor: "#979797",
-                  border: "none",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-              />
+            <div className="form_1">
               <div className="title">
-                <h2>Pagina do estabelecimento</h2>
+                <h2>Informações do estabelecimento</h2>
               </div>
-              <div className="title">
-                <h3>Adicione imagens do seu estabelecimento</h3>
-              </div>
-              <div className="files_input_btn">
-                <label for="files-image">
-                  Adicionar imagens
-                  <input
-                    type="file"
-                    name="files-image"
-                    id="files-image"
-                    multiple
-                    onChange={handleFileChangeEstablishmentImages}
+              <form>
+                <div className="input-fields">
+                  <InputField
+                    id={"nome-establishment"}
+                    label="Nome Estabelecimento"
+                    defaultValue={formData.establishmentName}
+                    value={formData.establishmentName}
+                    type="text"
+                    placeholder="Nome do estabelecimento"
+                    className="input-field-default-establisment-edit"
+                    classNameGeral="form-group-establisment-edit"
+                    onChange={handleInputChange}
                   />
-                </label>
-                <ButtonPrimary
-                  onclick={handleRemoveEstablishmentImages}
-                  className="establishment-edit-sec-delete"
-                  text={"Remover"}
+
+                  <InputField
+                    disabled={true}
+                    id={"cnpj"}
+                    label="CNPJ"
+                    type="text"
+                    defaultValue={formData.cnpj}
+                    value={formData.cnpj}
+                    placeholder="CNPJ"
+                    mask="99.999.999/9999-99"
+                    className="input-field-default-establisment-edit"
+                    classNameGeral="form-group-establisment-edit"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="input-fields">
+                  <InputField
+                    id={"email"}
+                    label="E-mail"
+                    defaultValue={formData.email}
+                    value={formData.email}
+                    type="email"
+                    placeholder="E-mail"
+                    className="input-field-default-establisment-edit"
+                    classNameGeral="form-group-establisment-edit"
+                    onChange={handleInputChange}
+                  />
+                  <InputField
+                    text={"Número comercial"}
+                    mask="(99) 99999-9999"
+                    id={"phone"}
+                    label="Telefone"
+                    defaultValue={formData.phone}
+                    value={formData.phone}
+                    type="text"
+                    placeholder="Telefone"
+                    className="input-field-default-establisment-edit"
+                    classNameGeral="form-group-establisment-edit"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <TextAreaField
+                  label="Descrição"
+                  id={"description"}
+                  defaultValue={formData.description}
+                  value={formData.description}
+                  placeholder="Descrição do estabelecimento"
+                  classNameGeral="form-group-establisment-edit-fill"
+                  onChange={handleInputChange}
                 />
-              </div>
-              <div className="files_input_container">
-                <ul>
-                  {selectedFilesEstablishmentImages.length ? (
-                    <ul>
-                      {selectedFilesEstablishmentImages.map((file) => (
-                        <li key={file.name}>
-                          <img
-                            src={URL.createObjectURL(file)}
-                            alt={file.name}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>Nenhum arquivo selecionado</p>
-                  )}
-                </ul>
-              </div>
-            </form>
-            <div className="establishment-edit-sec-btn">
-              <ButtonPrimary
-                className="button-establishment-edit"
-                text={"Atualizar"}
-              />
+              </form>
             </div>
+            <div
+              style={{
+                width: "50%",
+                margin: "0px 20px",
+              }}
+            >
+              <form className="form_2">
+                <div className="section-01">
+                  <div className="title">
+                    <h2>Pagina do estabelecimento</h2>
+                  </div>
+                  <div className="perfil-edit-establishment-preview">
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
+                      src="https://foodway.blob.core.windows.net/user-images/marcelo-alcatra-cover-00onl-1700935012373.jpg"
+                      alt=""
+                    />
+                    <img
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                        position: "absolute",
+                        top: "40rem",
+                        left: "53vw",
+                      }}
+                      src=" https://foodway.blob.core.windows.net/user-images/matheus-fernandes-rodrigues-cover-aafdn-1700865720614.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="section-01">
+                  <div className="main-section-btn-preview">
+                    <div className="section-btn-profile-picture">
+                      <ButtonPrimary
+                        onclick={handleRemoveEstablishmentImages}
+                        className="establishment-edit-sec-add"
+                        text={"Adicionar foto de capa"}
+                      />
+                      <ButtonPrimary
+                        onclick={handleRemoveEstablishmentImages}
+                        className="establishment-edit-sec-delete"
+                        text={"R"}
+                      />
+                    </div>
+                    <div className="section-btn-profile-picture">
+                      <ButtonPrimary
+                        onclick={handleRemoveEstablishmentImages}
+                        className="establishment-edit-sec-add"
+                        text={"Adicionar foto de perfil"}
+                      />
+                      <ButtonPrimary
+                        onclick={handleRemoveEstablishmentImages}
+                        className="establishment-edit-sec-delete"
+                        text={"R"}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="establishment-edit-sec-btn">
+            <ButtonPrimary
+              className="button-establishment-edit"
+              text={"Atualizar"}
+            />
           </div>
         </div>
       </div>

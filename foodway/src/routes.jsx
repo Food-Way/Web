@@ -17,7 +17,7 @@ import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment"
 import Relevance from "./pages/Relevance/Relevance";
 
 import EstablismentEditPersonal from "./pages/EstablismentEditPersonal/EstablismentEditPersonal";
-import Cardapio from "./pages/Cardapio/Cardapio";
+import MenuUser from "./pages/MenuUser/MenuUser";
 import CostumerEdit from "./pages/CostumerEdit/CostumerEdit";
 import CustomerEditPersonal from "./pages/CustomerEditPersonal/CustomerEditPersonal";
 
@@ -69,13 +69,13 @@ const Rotas = () => {
         />
         <Route Component={UserProfile} path="/user-profile" />
 
-        <Route path="/establishment-menu/:id" Component={Cardapio} />
+        <Route path="/establishment-menu/:id" Component={MenuUser} />
 
         <Route path="/profile" />
 
         <Route path="/establishment" />
         <Route
-          path="/establishment-edit-personal"
+          path="/establishment-edit"
           Component={EstablismentEditPersonal}
         />
 

@@ -79,6 +79,21 @@ const SignIn = () => {
           toast.error("Email ou senha incorretos!");
           console.log("Response data:", error.response.data);
         }
+        if (error.response.status === 400) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 404) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 500) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Erro ao se autenticar!");
+          console.log("Response data:", error.response.data);
+        }
       }
     }
   };
