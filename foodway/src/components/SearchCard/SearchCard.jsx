@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
-import DefaultImage from "../../../public/default-user-image.png";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Heart from "react-animated-heart";
 import api from "../../services/api";
 

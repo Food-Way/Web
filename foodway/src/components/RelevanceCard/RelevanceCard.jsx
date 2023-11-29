@@ -1,7 +1,6 @@
 import React from "react";
 import RateNumberStar from "../RateNumberStar/RateNumberStar";
-import BronzeMedal from "../../../public/bronze-medal.svg";
-import DefaultImage from "../../../public/default-user-image.png";
+const BronzeMedal = "https://foodway.blob.core.windows.net/public/bronze-medal.svg";
 
 import "./RelevanceCard.css";
 

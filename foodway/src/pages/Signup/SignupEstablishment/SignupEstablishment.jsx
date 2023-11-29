@@ -161,7 +161,7 @@ const SignupEstablishment = () => {
             clearFields();
             toast.success("Cadastro realizado com sucesso! Redirecionando...");
             setTimeout(() => {
-              navigate("/login");
+              navigate("/sign-in");
             }, 2000);
           }
         })

@@ -1,7 +1,7 @@
 import { useState, React, useEffect, require } from "react";
 import SearchCard from "../../components/SearchCard/SearchCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import ImageFilter from "../../../public/filter.svg";
+const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
 import { api, api_maps } from "../../services/api";
 import ContentLoader from 'react-content-loader'

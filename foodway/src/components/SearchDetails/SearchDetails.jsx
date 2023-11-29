@@ -4,7 +4,7 @@ import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
 import CulinaryTag from "../CulinaryTag/CulinaryTag";
 import { ButtonPrimaryLink } from "../Button/Button";
-import starBlack from "../../../public/star-black.svg";
+const starBlack = "https://foodway.blob.core.windows.net/public/star-black.svg";
 
 import "./SearchDetails.css";
 

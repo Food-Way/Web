@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-import Adicionar from "../../../public/adicionar.svg";
+const Adicionar = "https://foodway.blob.core.windows.net/public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import ImageFilter from "../../../public/filter.svg";
+const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import Report from "../../components/Report/Report";
 import api from "../../services/api";
 import { useParams } from "react-router-dom";
@@ -208,8 +208,8 @@ const MenuDash = () => {
                                 cancelText="Cancelar"
                                 lblCampo1="Nome"
                                 lblCampo2="Preço"
-                                iptProductPrice="productPrice"
-                                iptProductName="productName"
+                                iptCampo2="productPrice"
+                                iptCampo1="productName"
                                 successTitle="Produto Criado!"
                                 content="Criar Produto"
                                 status={201}

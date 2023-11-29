@@ -1,6 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import api from '../../services/api';
+import ReactStars from "react-rating-stars-component";
 
 import './Modal.css';
 
@@ -39,7 +40,6 @@ function HandleModalDelete(props) {
 }
 
 function formModal(props) {
-    console.log("props" + props);
     Swal.fire({
         customClass: {
             heightAuto: false,
@@ -55,12 +55,12 @@ function formModal(props) {
     <div className="modal-container">
       <div className="modal-box">
         <div className="modal-input-box">
-          <label htmlFor="${props.iptProductName}">${props.lblCampo1}</label>
-          <input type="text" id="${props.iptProductName}" value=${props.name === undefined ? " " : props.name}>
+          <label htmlFor="${props.iptCampo1}">${props.lblCampo1}</label>
+          <input type="text" id="${props.iptCampo1}" value=${props.name === undefined ? " " : props.name}>
         </div>
         <div className="modal-input-box">
-          <label htmlFor="${props.iptProductPrice}">${props.lblCampo2}</label>
-          <input type="text" id="${props.iptProductPrice}" value=${props.price === undefined ? " " : props.price}>
+          <label htmlFor="${props.iptCampo2}">${props.lblCampo2}</label>
+          <input type="text" id="${props.iptCampo2}" value=${props.price === undefined ? " " : props.price}>
         </div>
       </div>
     </div>
@@ -68,12 +68,16 @@ function formModal(props) {
     <div className="modal-container">
         <div className="modal-box">
           <div className="modal-input-box">
-            <label htmlFor="${props.iptProductName}">${props.lblCampo1}</label>
-            <input type="text" id="${props.iptProductName}" value=${props.name === undefined ? " " : props.name}>
+            <label htmlFor="${props.iptCampo1}">${props.lblCampo1}</label>
+            <input type="text" id="${props.iptCampo1}" value=${props.title === undefined ? " " : props.title}>
           </div>
           <div className="modal-input-box">
-            <label htmlFor="${props.iptProductPrice}">${props.lblCampo2}</label>
-            <input type="text" id="${props.iptProductPrice}" value=${props.price === undefined ? " " : props.price}>
+            <label htmlFor="${props.iptCampo2}">${props.lblCampo2}</label>
+            <input type="text" id="${props.iptCampo2}" value=${props.comment === undefined ? " " : props.comment}>
+          </div>
+          <div>
+            <label htmlFor="${props.iptCampo3}">${props.lblCampo3}</label>
+            <input type="text" id="${props.iptCampo3}" value=${props.comment === undefined ? " " : props.comment}>
           </div>
           </div>
         </div>
@@ -82,19 +86,31 @@ function formModal(props) {
     }).then((result) => {
         if (result.isConfirmed) {
             var data;
-
+            console.log(props.idCustomer)
+            console.log(document.getElementById(props.iptCampo1).value)
+            console.log(document.getElementById(props.iptCampo2).value)
             if (location.pathname.startsWith('/establishment/performance/menu')) {
                 console.log(atob(sessionStorage.getItem('idUser')))
                 data = {
-                    name: document.getElementById(props.iptProductName).value,
-                    price: document.getElementById(props.iptProductPrice).value,
+                    name: document.getElementById(props.iptCampo1).value,
+                    price: document.getElementById(props.iptCampo2).value,
                     idEstablishment: atob(sessionStorage.getItem('idUser')),
+                };
+            } else {
+                data = {
+                    idCustomer: props.idCustomer,
+                    idEstablishment: props.idEstablishment,
+                    comment: document.getElementById(props.iptCampo2).value,
                 };
             }
 
             const headers = {
                 Authorization: 'Bearer ' + atob(sessionStorage.getItem('token')),
             };
+
+            console.log("idC" + data.idCustomer);
+            console.log("idE" + data.idEstablishment);
+            console.log("c" + data.comment);
 
             api({
                 method: props.method,

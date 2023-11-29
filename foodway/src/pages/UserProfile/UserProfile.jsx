@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Banner from "../../../public/capa.png"
 import { Comment } from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
-import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api from "../../services/api";
 import ContentLoader from 'react-content-loader'
@@ -142,7 +140,7 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
-                <MyLoader />
+                {/* <MyLoader /> */}
                 {comments.map((item) => (
                   <>
                     <Comment
@@ -150,6 +148,7 @@ const UserProfile = () => {
                       rate={item.commentRate}
                       title={item.title}
                       comment={item.comment}
+                      upvotes={item.upvotes}
                     />
                   </>
                 ))}

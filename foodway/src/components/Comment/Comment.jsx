@@ -2,9 +2,9 @@ import { React, useEffect, useState } from "react";
 import { Neutral, Positive, Negative } from "../../components/SentimentTag/SentimentTag";
 import ReactStars from "react-rating-stars-component";
 import Upvotes from "../../components/Upvotes/Upvotes";
-import ImageComment from "../../../public/comment-icon.png"
-import DefaultUserImage from "../../../public/default-user-image.png"
 import "./Comment.css";
+
+const ImageComment = "https://foodway.blob.core.windows.net/public/comment-icon.png";
 
 const Comment = (props) => {
     const [updateText, setUpdateText] = useState(false);
@@ -60,7 +60,7 @@ const Comment = (props) => {
                     <div className="comment-header">
                         <div className="header-initial">
                             <span> {analysisText(props.establishmentName, "title", false)} </span>
-                            {
+                            {/* {
                                 document.location.pathname != "/user-profile" ? (
                                     sentimentAnalysis < 5.0 ? (
                                         <Negative />
@@ -74,7 +74,7 @@ const Comment = (props) => {
                                 ) : (
                                     ""
                                 )
-                            }
+                            } */}
                         </div>
                         <ReactStars
                             count={5}
@@ -94,8 +94,8 @@ const Comment = (props) => {
                             </div> : <div className="more-text"></div>}
                     </div>
                     <div className="comment-footer">
-                        <Upvotes
-                            upvotes = {props.upvotes}
+                        <Upvotes 
+                            upvotes={props.upvotes}
                         />
                     </div>
                 </div>
@@ -132,31 +132,31 @@ const CommentIndividual = (props) => {
 
     let sentimentAnalysis = 8.0;
 
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
-    var title = "AAAAAAAAAAAAAAAAAAAAA";
-
     var id = 1;
 
     return (
         <>
             <div className="establishment-comments-box">
                 <div className="user-content-comment">
-                    {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
-                    <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                    <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
                     <div className="user-content-values">
                         <ReactStars
                             size={24}
                             activeColor={"var(--primary)"}
                             edit={false}
                             value={2} />
-                        <p className="comment-content-text">{analysisText(textao, "text", updateText)}</p>
+                        <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                         <div className="establishment-upcomment-box">
                             <div className="establishment-upcomment-values">
-                                <Upvotes />
+                                <Upvotes 
+                                    upvotes={props.upvotes}
+                                    idComment={props.idComment}
+                                    idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                    idEstablishment={props.idEstablishment}
+                                />
                                 <img src={ImageComment} alt="Image comment" />
                             </div>
-                            {textao.length > 100 ?
+                            {props.comment.length > 100 ?
                                 <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
                                     <span> {updateText ? "Ver menos" : "Ver mais"} </span>
                                 </div> : <div className="more-text"></div>}
@@ -196,31 +196,31 @@ const CommentReply = (props) => {
 
     let sentimentAnalysis = 8.0;
 
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
-    var title = "AAAAAAAAAAAAAAAAAAAAA";
-
     var id = 1;
 
     return (
         <>
             <div className="user-content-comment">
                 <div className="establishment-bar" />
-                {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
-                <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
                 <div className="user-content-values">
                     <ReactStars
                         size={24}
                         activeColor={"var(--primary)"}
                         edit={false}
                         value={2} />
-                    <p className="comment-content-text">{analysisText(textao, "text", updateText)}</p>
+                    <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                     <div className="establishment-upcomment-box">
                         <div className="establishment-upcomment-values">
-                            <Upvotes />
+                            <Upvotes 
+                                upvotes={props.upvotes}
+                                idComment={props.idComment}
+                                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                idEstablishment={props.idEstablishment}
+                            />
                             <img src={ImageComment} alt="Image comment" />
                         </div>
-                        {textao.length > 100 ?
+                        {props.comment.length > 100 ?
                             <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
                                 <span> {updateText ? "Ver menos" : "Ver mais"} </span>
                             </div> : <div className="more-text"></div>}

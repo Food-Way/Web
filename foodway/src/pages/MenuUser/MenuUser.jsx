@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../services/api";
-import { Menu } from "react-pro-sidebar";
 import MenuEstablishmentContainer from "../../components/MenuEstablishmentContainer/MenuEstablishmentContainer";
 
 const MenuUser = (props) => {

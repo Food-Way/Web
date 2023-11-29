@@ -2,10 +2,10 @@ import { React, useState } from "react";
 import api, { api_maps } from "../../services/api.js";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
-import Phone from "../../../public/phone.png"
-import BookMenu from "../../../public/book-menu.png"
-import Report from "../../../public/report.png"
-import Add from "../../../public/adicionar.svg"
+const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
+const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
+const Report = "https://foodway.blob.core.windows.net/public/report.png";
+const Add = "https://foodway.blob.core.windows.net/public/adicionar.svg";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CommentIndividual, CommentReply } from "../../components/Comment/Comment.jsx";
@@ -18,6 +18,7 @@ const EstablishmentPage = () => {
     const [updateText, setUpdateText] = useState(false);
     const [url, setUrl] = useState("");
     const [profile, setProfile] = useState([]);
+    const [comments, setComments] = useState([]);
     const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
     function getEstablishmentProfileData() {
@@ -31,6 +32,8 @@ const EstablishmentPage = () => {
                 if (response.status === 200) {
                     console.log("response: ", response.data);
                     setProfile(response.data);
+                    setComments(response.data.comments);
+                    getMaps(response.data.lat, response.data.lng);
                 }
             })
             .catch((erro) => console.log(erro));
@@ -67,14 +70,17 @@ const EstablishmentPage = () => {
                 confirmText="Comentar"
                 cancelText="Cancelar"
                 lblCampo1="Título"
-                lblCampo2="Assunto         "
-                iptProductPrice="productPrice"
-                iptProductName="productName"
+                lblCampo2="Assunto"
+                lblCampo3="Avaliação"
+                iptCampo2="productPrice"
+                iptCampo1="productName"
                 successTitle="Comentário criado!"
                 content="Adicionar comentário"
                 status={201}
                 method="post"
-                uri="products"
+                uri="comments"
+                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                idEstablishment={idEstablishment}
             />
         )
     }
@@ -82,15 +88,9 @@ const EstablishmentPage = () => {
     useEffect(() => {
         console.log("idEstablishment: ", idEstablishment);
         getEstablishmentProfileData();
-        getMaps(profile.lat, profile.lng);
     }, []);
 
     var id = 1;
-
-    var qtd = ["sus", "lala"];
-
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
     return (
         <>
             <div className="establishment-content-container">
@@ -104,7 +104,7 @@ const EstablishmentPage = () => {
                             <div className="establishment-avaliation-principal">
                                 <div className="establishment-avaliation-value">
                                     <span>Avaliação</span>
-                                    <span>{profile.generalRate.toFixed(2)}</span>
+                                    <span>{profile.generalRate}</span>
                                 </div>
                                 <div className="avaliation-general-points">
                                     <AvaliationDashCard rate={profile.foodRate} color="red" category="Comida" />
@@ -124,34 +124,59 @@ const EstablishmentPage = () => {
                             </div>
                         </div>
                         <div className="establishment-comments-info-container">
-                            <div className={qtd.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
-
-                                {/* {qtd.length == 1 ?
+                            <div className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
+                                {comments.length == 1 ?
                                     <>
-                                        {profile.comments.map((item) => (
-                                            <CommentIndividual 
+                                        {comments.map((item) => (
+                                            console.log(item),
+                                            <CommentIndividual
                                                 establishmentName={item.establishmentName}
                                                 rate={item.commentRate}
                                                 title={item.title}
                                                 comment={item.comment}
+                                                upvotes={item.upvotes}
+                                                idComment={item.idComment}
+                                                userPhoto={item.userPhoto}
                                             />
                                         ))}
                                     </> :
                                     <>
-                                        <div className="establishment-comments-box-more">
-                                            {profile.comments.map((item) => (
-                                                <CommentIndividual />
-                                            ))}
-                                            <div className={qtd.length > 1 ? "scroll-comments" : "establishment-more-box"}>
-                                                {profile.comments.reply.map((item) => (
-                                                    <CommentReply />
-                                                ))}
+                                        {comments.map((commentParent) => (
+                                            <div className="establishment-comments-box-more">
+                                                <>
+                                                    <CommentIndividual
+                                                        establishmentName={commentParent.establishmentName}
+                                                        rate={commentParent.commentRate}
+                                                        title={commentParent.title}
+                                                        comment={commentParent.comment}
+                                                        upvotes={commentParent.upvotes}
+                                                        idComment={commentParent.idComment}
+                                                        idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                                        idEstablishment={idEstablishment}
+                                                        userPhoto={commentParent.userPhoto}
+                                                    />
+                                                    <div className={commentParent.childComments.length > 1 ? "scroll-comments" : "establishment-more-box"}>
+                                                        {commentParent.childComments.map((commentReply) => (
+                                                            <CommentReply
+                                                                establishmentName={commentReply.establishmentName}
+                                                                rate={commentReply.commentRate}
+                                                                title={commentReply.title}
+                                                                upvotes={commentReply.upvotes}
+                                                                comment={commentReply.comment}
+                                                                idComment={commentReply.idComment}
+                                                                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                                                idEstablishment={idEstablishment}
+                                                                userPhoto={commentReply.userPhoto}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </>
                                             </div>
-                                        </div>
-                                    </>} */}
+                                        ))}
+                                    </>}
                             </div>
                             <div className="establishment-side-box">
-                                <div className="establishment-tags-box">
+                                {/* <div className="establishment-tags-box">
                                     <span className="establishment-tags-title">Tags</span>
                                     <div className="establishment-tag-content">
                                         <div className="establishment-tag-box">
@@ -167,7 +192,7 @@ const EstablishmentPage = () => {
                                             <span>Pode fumar</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="establishment-general-box">
                                     <div className="establishment-value-box">
                                         <span className="establishment-info-value">{profile.qtdComments}</span>
