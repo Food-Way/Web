@@ -127,19 +127,17 @@
 }
 
 .establishment-comments-box {
-    width: 40vw;
+    width: 38vw;
     height: 15rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: var(--branco);
-    border: var(--borda);
-    border-radius: var(--arrendondamento);
 }
 
 .establishment-comments-box-more {
     width: 40vw;
-    height: 56.5rem;
+    /* height: 56.5rem; */
     background-color: var(--branco);
     border: var(--borda);
     border-radius: var(--arrendondamento);
@@ -213,7 +211,7 @@
 
 .scroll-comments {
     width: 39vw;
-    height: 40rem;
+    height: 25rem;
     display: flex;
     flex-direction: column;
     align-items: center;

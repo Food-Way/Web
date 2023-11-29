@@ -33,6 +33,7 @@ const EstablishmentPage = () => {
                     console.log("response: ", response.data);
                     setProfile(response.data);
                     setComments(response.data.comments);
+                    getMaps(response.data.lat, response.data.lng);
                 }
             })
             .catch((erro) => console.log(erro));
@@ -70,6 +71,7 @@ const EstablishmentPage = () => {
                 cancelText="Cancelar"
                 lblCampo1="Título"
                 lblCampo2="Assunto"
+                lblCampo3="Avaliação"
                 iptCampo2="productPrice"
                 iptCampo1="productName"
                 successTitle="Comentário criado!"
@@ -85,7 +87,6 @@ const EstablishmentPage = () => {
 
     useEffect(() => {
         getEstablishmentProfileData();
-        getMaps(profile.lat, profile.lng);
     }, []);
 
     var id = 1;
@@ -126,6 +127,7 @@ const EstablishmentPage = () => {
                                 {comments.length == 1 ?
                                     <>
                                         {comments.map((item) => (
+                                            console.log(item),
                                             <CommentIndividual
                                                 establishmentName={item.establishmentName}
                                                 rate={item.commentRate}
@@ -137,8 +139,8 @@ const EstablishmentPage = () => {
                                         ))}
                                     </> :
                                     <>
-                                        <div className="establishment-comments-box-more">
-                                            {comments.map((commentParent) => (
+                                        {comments.map((commentParent) => (
+                                            <div className="establishment-comments-box-more">
                                                 <>
                                                     <CommentIndividual
                                                         establishmentName={commentParent.establishmentName}
@@ -150,7 +152,7 @@ const EstablishmentPage = () => {
                                                         idCustomer={atob(sessionStorage.getItem("idUser"))}
                                                         idEstablishment={idEstablishment}
                                                     />
-                                                    <div className={commentParent.childComments.length > 0 ? "scroll-comments" : "establishment-more-box"}>
+                                                    <div className={commentParent.childComments.length > 1 ? "scroll-comments" : "establishment-more-box"}>
                                                         {commentParent.childComments.map((commentReply) => (
                                                             <CommentReply
                                                                 establishmentName={commentReply.establishmentName}
@@ -165,8 +167,8 @@ const EstablishmentPage = () => {
                                                         ))}
                                                     </div>
                                                 </>
-                                            ))}
-                                        </div>
+                                            </div>
+                                        ))}
                                     </>}
                             </div>
                             <div className="establishment-side-box">
