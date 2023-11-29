@@ -44,8 +44,8 @@ const RateCard = (props) => {
                             <span className="comments-number">{props.qtdComments > 1 ? ("Comentários") : ("Comentário")}</span>
                         </div>
                         <div className="rate-box-numbers">
-                            <span className="amount-number">+999</span>
-                            <span className="upvotes-number">UpVotes</span>
+                            <span className="amount-number">{props.upvotes}</span>
+                            <span className="upvotes-number">{props.upvotes > 1 ? ("Upvotes") : ("Upvote")}</span>
                         </div>
                     </div>
                 </div>
