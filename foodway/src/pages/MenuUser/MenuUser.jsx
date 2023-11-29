@@ -12,16 +12,7 @@ const MenuUser = (props) => {
   }, [routeParams]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="menu-user-container" >
       <MenuEstablishmentContainer
         menu={menu}
         setMenu={setMenu}

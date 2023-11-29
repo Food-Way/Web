@@ -62,7 +62,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
   }, []);
 
   return (
-    <div className="dash-container">
+    <div className="menu-user-container">
       <section>
         <div className="menu-dash-container">
           <div className="menu-dash-header">
@@ -110,15 +110,21 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
             </div>
           </div>
           <div className="menu-dash-box">
-            {menu.map((item, index) => (
-              <Product
-                editIsAble={false}
-                key={index}
-                idProduct={item.idProduct}
-                name={item.name}
-                price={item.price}
-              />
-            ))}
+            {console.log("Menu: ", menu)}
+            {menu.length == 0 ? (
+              <>
+                {menu.map((item, index) => (
+                  <Product
+                    editIsAble={false}
+                    key={index}
+                    idProduct={item.idProduct}
+                    name={item.name}
+                    price={item.price}
+                  />
+                ))}
+              </>
+
+            ) : "Nenhum produto cadastrado"}
           </div>
         </div>
       </section>

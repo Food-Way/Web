@@ -95,6 +95,7 @@ const EstablishmentPage = () => {
         <>
             <div className="establishment-content-container">
                 <section>
+                    {console.log("profile: ", profile)}
                     <div className="establishment-banner-box" style={{backgroundImage: `url(${profile.profileHeaderImg})`}}>
                         <div className="establishment-content-banner-box">
                             <div className="establishment-title-box">
@@ -214,10 +215,10 @@ const EstablishmentPage = () => {
                                             <span>Cardápio</span>
                                         </div>
                                     </Link>
-                                    <div className="establishment-contact-btn">
+                                    {/* <div className="establishment-contact-btn">
                                         <img src={Phone} alt="Phone" />
                                         <span>Contato</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="establishment-location-box">
                                     <span className="establishment-location-title">Localização</span>
@@ -225,10 +226,10 @@ const EstablishmentPage = () => {
                                         <img src={url} alt="" />
                                     </div>
                                 </div>
-                                <div className="establishment-report-box">
+                                {/* <div className="establishment-report-box">
                                     <img src={Report} alt="" />
                                     <span>Reportar</span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

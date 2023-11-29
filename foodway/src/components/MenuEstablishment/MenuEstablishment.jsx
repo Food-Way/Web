@@ -98,19 +98,19 @@ const MenuEstablishment = (props) => {
         search.classList.remove("item-active");
       }
 
-      if (
-        establishment.classList.contains("item-active") &&
-        className != ".establishment-item"
-      ) {
-        establishment.classList.remove("item-active");
-      }
+      // if (
+      //   establishment.classList.contains("item-active") &&
+      //   className != ".establishment-item"
+      // ) {
+      //   establishment.classList.remove("item-active");
+      // }
 
-      if (
-        users.classList.contains("item-active") &&
-        className != ".users-item"
-      ) {
-        users.classList.remove("item-active");
-      }
+      // if (
+      //   users.classList.contains("item-active") &&
+      //   className != ".users-item"
+      // ) {
+      //   users.classList.remove("item-active");
+      // }
 
       if (out.classList.contains("item-active") && className != ".out-item") {
         out.classList.remove("item-active");
@@ -120,14 +120,19 @@ const MenuEstablishment = (props) => {
     console.log(className);
     if (className == "") {
       navigate("/*");
+      location.reload();
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
+      location.reload();
     } else if (className == ".profile-item") {
       navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
+      location.reload();
     } else if (className == ".users-item") {
       navigate("/users");
-    } else if(className == ".search-item") {
+      location.reload();
+    } else if (className == ".search-item") {
       navigate("/search-user");
+      location.reload();
     } else if (className == ".out-item") {
       handleLogoff();
     }
@@ -158,6 +163,16 @@ const MenuEstablishment = (props) => {
           if (location.pathname.startsWith("/search-user")) {
             var profileContainer = document.querySelector(".search-user-container");
             profileContainer.classList.toggle("search-user-container-switch");
+          }
+
+          if (location.pathname.startsWith("/establishment/info")) {
+            var profileContainer = document.querySelector(".establishment-content-container");
+            profileContainer.classList.toggle("establishment-content-container-switch");
+          }
+
+          if (location.pathname.startsWith("/establishment-menu")) {
+            var profileContainer = document.querySelector(".menu-user-container");
+            profileContainer.classList.toggle("menu-user-container-switch");
           }
 
           btnImage.classList.toggle("btn-menu-rotate");
@@ -194,28 +209,47 @@ const MenuEstablishment = (props) => {
           </MenuItem>
 
           {/* Utilizar parseJWT */}
-          {typeUser === "ESTABLISHMENT " ? (
+          {atob(typeUser) == "ESTABLISHMENT" ? (
             <>
-              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg" />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg"
+                className="performance-item"
+              />}
+                onClick={() => {
+                  setNavigate(".performance-item");
+                }}>
                 {" "}
                 Desempenho{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg" />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
+                className="menuReal-item"
+              />}
+                onClick={() => {
+                  setNavigate(".menuReal-item");
+                }}>
                 {" "}
                 Cardápio{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg" />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
+                className="relevance-item"
+              />}
+                onClick={() => {
+                  setNavigate(".comments-item");
+                }}>
                 {" "}
                 Comentários{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg" />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
+                onClick={() => {
+                  setNavigate(".relevance-item");
+                }}
+              />}>
                 {" "}
                 Relevância{" "}
               </MenuItem>
             </>
           ) : (
             <>
-              <SubMenu
+              <MenuItem
                 icon={
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
@@ -223,12 +257,12 @@ const MenuEstablishment = (props) => {
                     className="search-item"
                   />
                 }
-                label={"Busca"}
                 onClick={() => {
                   setNavigate(".search-item");
                 }}
               >
-              </SubMenu>
+                <span className="search-item">Busca</span>
+              </MenuItem>
             </>
 
             //     <SubMenu
