@@ -1,12 +1,14 @@
 import React from "react";
 import "./HomeCardEstablishment.css";
 import { Rating } from "react-simple-star-rating";
+import { SwiperSlide } from "swiper/react";
 
 const HomeCardEstablishment = ({
   establishment,
   image,
   category,
   rattingNumber,
+  onclick,
 }) => {
   const ratingOptions = {
     size: "20px",
@@ -28,7 +30,7 @@ const HomeCardEstablishment = ({
   };
 
   return (
-    <span style={styleCard} className="card-establishment">
+    <span style={styleCard} className="card-establishment" onClick={onclick}>
       <div className="card-establishment-content">
         <p>{establishment}</p>
         <p>Restaurante {category}</p>

@@ -1,15 +1,12 @@
 import React from "react";
-import ReactStars from "react-rating-stars-component";
 import RateNumberStar from "../RateNumberStar/RateNumberStar";
 import BronzeMedal from "../../../public/bronze-medal.svg";
-import SilverMedal from "../../../public/silver-medal.svg";
-import GoldMedal from "../../../public/gold-medal.svg";
+import DefaultImage from "../../../public/default-user-image.png";
 
 import "./RelevanceCard.css";
 
 
-const RelevanceCard = () => {
-    const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
+const RelevanceCard = (props) => {
 
     return (
         <>
@@ -18,10 +15,10 @@ const RelevanceCard = () => {
                     <div className="relevance-card-back">
                         <div className="relevance-card-body">
                             <img src={BronzeMedal} alt="medal" className="medal" />
-                            <img src={LogoFoodway} alt="logo" />
-                            <span className="best-card-name">Leonardo</span>
-                            <RateNumberStar color="black" />
-                            <span>Avaliações: 200</span>
+                            {/* <img src={props.profilePhoto} className="establishment-user-icon" alt="logo" /> */}
+                            <span className="best-card-name">{props.establishmentName}</span>
+                            <RateNumberStar color="black" generalRate={props.generalRate} />
+                            <span>Avaliações: {props.qtdRates}</span>
                         </div>
                     </div>
                 </div>

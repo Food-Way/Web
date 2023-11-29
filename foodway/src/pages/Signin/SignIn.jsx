@@ -56,18 +56,21 @@ const SignIn = () => {
           sessionStorage.setItem("email", btoa(response.data.email));
           sessionStorage.setItem("idUser", btoa(response.data.idUser));
           sessionStorage.setItem("token", btoa(response.data.token));
+          sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
+          sessionStorage.setItem("culinary", btoa(response.data.culinary));
+          sessionStorage.setItem("profile-photo", btoa(response.data.photo));
           toast.success("Login realizado com sucesso!");
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate("/user-profile");
+              navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
               location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {
             console.log("Redirecting to /establishment/performance...");
-            navigate("/establishment/performance");
+            navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
           }
         } else {
           console.log("Login failed with status code:", response.status);

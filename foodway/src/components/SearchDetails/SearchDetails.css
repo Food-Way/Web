@@ -37,12 +37,13 @@
 
 .left-header-side img {
     width: 5vw;
+    border-radius: 10rem;
 }
 
 .middle-header-side {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
+    margin: 1rem 0 0 2rem;
 }
 
 .middle-header-side .user-detail-name {
@@ -71,6 +72,7 @@
 
 .search-detail-body {
     width: 15vw;
+    height: 8rem;
 }
 
 .search-detail-body span{
@@ -84,7 +86,7 @@
 }
 
 .more-text {
-    width: 25%;
+    width: 10rem;
     cursor: pointer;
     user-select: none;
     margin-bottom: 2rem;

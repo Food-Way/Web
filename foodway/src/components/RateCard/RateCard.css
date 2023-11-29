@@ -1,17 +1,21 @@
 @import url(../../assets/css/style.css);
 
 .rate-container {
-  background-color: var(--branco);
-  border-radius: var(--arredondamento);
-  box-shadow: var(--sombra);
-  border: var(--borda);
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    border: var(--borda);
 }
 
-.rate-box-select {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 15px;
+.rate-box-user {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
 }
 
 .experience-info {

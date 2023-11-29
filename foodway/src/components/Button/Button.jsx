@@ -62,4 +62,14 @@ const ButtonSecondary = ({ text, onclick, className = "button-secondary" }) => {
   );
 };
 
-export { ButtonPrimary, ButtonSecondary, ButtonPrimaryLink, ButtonStep };
+const ButtonSecondaryLink = ({ text, url }) => {
+  return (
+    <Link className="button-secondary" to={url}>
+      {text}
+    </Link>
+  );
+};
+
+
+
+export { ButtonPrimary, ButtonSecondary, ButtonPrimaryLink, ButtonStep, ButtonSecondaryLink };

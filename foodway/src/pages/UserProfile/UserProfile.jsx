@@ -1,26 +1,44 @@
 import React, { useEffect, useRef, useState } from "react";
 import Banner from "../../../public/capa.png"
-import Comment from "../../components/Comment/Comment";
+import { Comment } from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
-import { ButtonSecondary } from "../../components/Button/Button"
+import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api from "../../services/api";
+import ContentLoader from 'react-content-loader'
+
 
 import "./UserProfile.css";
+import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
+  const params = useParams();
+  const id = params.id;
   const [user, setUser] = useState([]);
   const profileDescriptionRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
 
-  function getUser() {
+  const MyLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={1105}
+      height={451}
+      viewBox="0 0 1105 451"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="12" y="309" rx="2" ry="2" width="400" height="212" />
+      <rect x="407" y="323" rx="2" ry="2" width="400" height="212" />
+    </ContentLoader>
+  )
 
+  function getUser() {
     const idUser = atob(sessionStorage.getItem("idUser"));
     console.log("idUser: ", idUser);
 
-    const response = api.get(`/customers/profile/${idUser}`, {
+    const response = api.get(`/customers/profile/${id}`, {
       headers: {
         Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
       },
@@ -74,17 +92,16 @@ const UserProfile = () => {
   };
 
   function showDescription(bio) {
-
     if (bio.length > 30) {
       return (
         <span className="profile-description" ref={profileDescriptionRef}>
-          {user.bio}
+          {bio}
         </span>
       )
     } else {
       return (
         <span className="profile-description description-scroll" ref={profileDescriptionRef}>
-          {user.bio}
+          {bio}
         </span>
       )
     }
@@ -100,14 +117,14 @@ const UserProfile = () => {
       <div className="profile-container">
         <div className="profile">
           <section>
-            <img className="user-banner" src={Banner} alt="" />
+            <img className="user-banner" src={user.profileHeaderImg} alt="" />
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
+                  <img className="profile-photo" src={user.profilePhoto} alt="" />
                   <span className="profile-username"></span>
-                  {() => { showDescription(user.bio) }}
-                  {sessionStorage.getItem("my-profile") === atob("true") ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
+                  {/* {(() => showDescription(user.bio))()} */}
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
                   <RateCard
@@ -124,44 +141,15 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
+                <MyLoader />
                 {comments.map((item) => (
                   <>
-                  <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
-                   <Comment
-                    establishmentName={item.establishmentName}
-                    rate={item.commentRate}
-                    title={item.title}
-                    comment={item.comment}
-                  />
+                    <Comment
+                      establishmentName={item.establishmentName}
+                      rate={item.commentRate}
+                      title={item.title}
+                      comment={item.comment}
+                    />
                   </>
                 ))}
               </div>
@@ -173,30 +161,12 @@ const UserProfile = () => {
               <div className="fav-estabs-box">
                 {establishments.map((item) => (
                   <>
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
-                  <HomeCardEstablishment
-                    establishment={item.establishmentName}
-                    category={item.culinary}
-                    image="https://media.discordapp.net/attachments/1019746001331961939/1169723905053835285/Cantor_deleta_seu_TikTok_por_dancar_Loli_God_Requiem_1133x637.png?ex=65567147&is=6543fc47&hm=9b7c3676b01b7eaeb925d5336f18dbf5ac850ba9fe379f4b7d9034289e77871b&=&width=831&height=468"
-                    rattingNumber={item.establishmentRate}
-                  />
+                    <HomeCardEstablishment
+                      establishment={item.establishmentName}
+                      category={item.culinary[0].name}
+                      image={item.photo}
+                      rattingNumber={item.establishmentRate}
+                    />
                   </>
                 ))}
               </div>
