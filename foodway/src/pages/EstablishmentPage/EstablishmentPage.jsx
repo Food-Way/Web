@@ -103,7 +103,7 @@ const EstablishmentPage = () => {
                             <div className="establishment-avaliation-principal">
                                 <div className="establishment-avaliation-value">
                                     <span>Avaliação</span>
-                                    <span>{profile.generalRate}</span>
+                                    <span>{profile.generalRate.toFixed(2)}</span>
                                 </div>
                                 <div className="avaliation-general-points">
                                     <AvaliationDashCard rate={profile.foodRate} color="red" category="Comida" />

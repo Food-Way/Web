@@ -36,7 +36,7 @@ const Home = () => {
       .get("/establishments/order-by-greater-rate")
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data.vetor);
+          console.log("greater-rate: " + response.data.vetor);
           setGreaterRateEstab(response.data.vetor);
         }
       })
@@ -52,7 +52,7 @@ const Home = () => {
       .get(`/establishments/most-commented?culinary=${culinary}`)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
+          console.log("most-commented:" + response.data);
           setGreaterEstab(response.data);
         }
       })

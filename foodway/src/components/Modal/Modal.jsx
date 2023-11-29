@@ -75,14 +75,6 @@ function formModal(props) {
             <label htmlFor="${props.iptProductPrice}">${props.lblCampo2}</label>
             <input type="text" id="${props.iptProductPrice}" value=${props.price === undefined ? " " : props.price}>
           </div>
-          <div className="modal-input-box">
-          <input
-            className="input-file"
-            type="file"
-            name="cover"
-            id="cover"
-            onChange={handleFileChangeCover}
-            />
           </div>
         </div>
       </div>
@@ -91,7 +83,8 @@ function formModal(props) {
         if (result.isConfirmed) {
             var data;
 
-            if (location.pathname === '/establishment/performance/menu') {
+            if (location.pathname.startsWith('/establishment/performance/menu')) {
+                console.log(atob(sessionStorage.getItem('idUser')))
                 data = {
                     name: document.getElementById(props.iptProductName).value,
                     price: document.getElementById(props.iptProductPrice).value,
