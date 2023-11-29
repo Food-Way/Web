@@ -2,11 +2,11 @@ import React from "react";
 
 import "./CulinaryTag.css";
 
-const CulinaryTag = () => {
+const CulinaryTag = (props) => {
     return(
         <>
             <div className="culinary-tag-container">
-                <span>Fast Food</span>
+                <span>{props.culinary}</span>
             </div>
         </>
     );

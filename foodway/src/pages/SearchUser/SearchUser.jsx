@@ -182,6 +182,7 @@ function SearchUser() {
                                                 typeUser={item.typeUser}
                                                 idEstablishment={item.idEstablishment}
                                                 isFavorites={item.isFavorite}
+                                                qtdComments={item.qtdComments}
                                             />
                                         </div>
                                     ))}
@@ -202,6 +203,9 @@ function SearchUser() {
                                         comments={search[selectedCard].comments}
                                         bio={selectedCardType == "CLIENT" ? search[selectedCard].bio : search[selectedCard].lastComment}
                                         typeUser={selectedCardType}
+                                        upvote={search[selectedCard].upvote}
+                                        qtdComments={search[selectedCard].qtdComments}
+                                        culinary={search[selectedCard].culinary}
                                     />
                                 )}
                             </div>

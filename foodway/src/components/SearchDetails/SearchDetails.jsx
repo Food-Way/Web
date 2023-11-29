@@ -47,7 +47,9 @@ const SearchDetails = (props) => {
                     <div className="search-detail-header">
                         <div className="left-header-side">
                             <img src={props.photo} alt="" />
-                            <CulinaryTag />
+                            <CulinaryTag 
+                                culinary={props.culinary}
+                            />
                         </div>
                         <div className="middle-header-side">
                             <span className="user-detail-name"> {analysisText(props.name, "title")} </span>
@@ -66,8 +68,12 @@ const SearchDetails = (props) => {
                             </div>
                         </div>
                         <div className="right-header-side">
-                            <Upvotes />
-                            <Comments />
+                            <Upvotes 
+                                upvotes={props.upvote}
+                            />
+                            <Comments 
+                                comments={props.qtdComments}
+                            />
                         </div>
                     </div>
                     <div className="search-detail-body">

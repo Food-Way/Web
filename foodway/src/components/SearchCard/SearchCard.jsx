@@ -50,7 +50,7 @@ const SearchCard = (props) => {
                     <div className="card-footer">
                         <div className="rate-box">
                             <Comments
-                                comments={props.comments}
+                                comments={props.qtdComments}
                             />
                             <Upvotes
                                 upvotes={props.upvote}
