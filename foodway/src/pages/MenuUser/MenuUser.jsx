@@ -4,7 +4,7 @@ import api from "../../services/api";
 import { Menu } from "react-pro-sidebar";
 import MenuEstablishmentContainer from "../../components/MenuEstablishmentContainer/MenuEstablishmentContainer";
 
-const Cardapio = (props) => {
+const MenuUser = (props) => {
   const routeParams = useParams();
   const token = atob(sessionStorage.getItem("token"));
   const [menu, setMenu] = useState([]);
@@ -33,4 +33,4 @@ const Cardapio = (props) => {
     </div>
   );
 };
-export default Cardapio;
+export default MenuUser;
