@@ -63,7 +63,7 @@ const EstablismentEditPersonal = () => {
     console.log("Data");
     console.log(data);
     api
-      .patch(`establishments/profiles/${id}`, data, {
+      .patch(`establishments/profile/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
           contentType: "application/json",
@@ -191,42 +191,11 @@ const EstablismentEditPersonal = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenModal = (content) => {
+    // if (content === "edit-info") {
+    //   if(formData.establishmentName=== "" || formData.establishmentName=== undefined){
+    // }
     handleOpen();
     setContent(content);
-  };
-
-  const handleUpdateProfileInfo = async () => {
-    const profileUpdateData = {
-      name: formData.name,
-      bio: formData.bio,
-      email: atob(sessionStorage.getItem("email")),
-      profilePhoto: "",
-      profileHeaderImg: "",
-      password: formData.password,
-    };
-    try {
-      //atualiza os dados do perfil
-      const updateResponse = await api.patch(
-        `/customers/profile/${atob(sessionStorage.getItem("idUser"))}`,
-        profileUpdateData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
-          },
-        }
-      );
-      console.log("updateResponse", updateResponse);
-
-      if (updateResponse.status === 200) {
-        toast.success("Perfil atualizado com sucesso!");
-        setCoverImageUrlLocal(updateResponse.data.profileHeaderImg);
-        handleClose();
-      }
-    } catch (updateError) {
-      toast.error("Suas credenciais estão incorretas!");
-      console.error("Erro ao atualizar os dados do perfil:", updateError);
-    }
   };
 
   const handleFileChangeCover = async (event) => {
@@ -575,7 +544,7 @@ const EstablismentEditPersonal = () => {
       >
         <Box className="modal-edit-profile">
           {content === "edit-info" ? (
-            <div>
+            <div className="edit-modal-default ">
               <h3 className="title-edit-profile">Confirme Informações</h3>
               <InputField
                 id="passwordpasswordConfirmacao"
@@ -594,7 +563,7 @@ const EstablismentEditPersonal = () => {
             <></>
           )}
           {content === "edit-password" ? (
-            <div>
+            <div className="edit-modal-default ">
               <h3 className="title-edit-profile">Confirme Informações</h3>
               <InputField
                 id="passwordpasswordConfirmacao"
@@ -629,7 +598,7 @@ const EstablismentEditPersonal = () => {
             <></>
           )}
           {content === "edit-cover-image" ? (
-            <div className="edit-cover-image">
+            <div className="edit-modal-default ">
               <h3 className="title-edit-profile">Altere a foto de capa</h3>
               <img
                 style={{
@@ -660,7 +629,7 @@ const EstablismentEditPersonal = () => {
             <></>
           )}
           {content === "edit-profile-image" ? (
-            <div className="edit-cover-image">
+            <div className="edit-modal-default ">
               <h3 className="title-edit-profile">Altere a foto de perfil</h3>
               <img
                 style={{
@@ -722,7 +691,7 @@ const EstablismentEditPersonal = () => {
                 type="password"
                 defaultValue={formData.passwordpasswordConfirmacaoEditPhoto}
                 value={formData.passwordpasswordConfirmacaoEditPhoto}
-                onChange={handleDelete}
+                onChange={handleInputChange}
               />
               <ButtonPrimary
                 text="Confirmar"
@@ -744,7 +713,7 @@ const EstablismentEditPersonal = () => {
               <form>
                 <div className="input-fields">
                   <InputField
-                    id={"nome-establishment"}
+                    id={"establishmentName"}
                     label="Nome Estabelecimento"
                     defaultValue={formData.establishmentName}
                     value={formData.establishmentName}
@@ -760,7 +729,6 @@ const EstablismentEditPersonal = () => {
                     id={"cnpj"}
                     label="CNPJ"
                     type="text"
-                    form-container-edit-profile
                     defaultValue={formData.cnpj}
                     value={formData.cnpj}
                     placeholder="CNPJ"
@@ -817,7 +785,7 @@ const EstablismentEditPersonal = () => {
                 />
                 <ButtonPrimary
                   width="200px"
-                  className="establ ishment-edit-sec-delete"
+                  className="establishment-edit-sec-delete"
                   text={"Atualizar senha"}
                   onclick={() => {
                     handleOpenModal("edit-password");

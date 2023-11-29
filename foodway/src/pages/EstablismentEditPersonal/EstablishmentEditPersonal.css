@@ -372,3 +372,9 @@
   top: 40rem;
   left: 53vw;
 }
+
+.edit-modal-default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
