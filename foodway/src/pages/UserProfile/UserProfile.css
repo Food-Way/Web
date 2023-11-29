@@ -7,10 +7,13 @@
 }
 
 .profile-container {
-    top: 8vh;
-    left: 34vw;
-    width: 55vw;
-    position: absolute;
+    width: calc(122vw - 15vw);
+    transition: all 0.3s;
+}
+
+.profile-container-switch {
+    width: calc(105vw + 15vw);
+    transition: all 0.3s;
 }
 
 .profile {
@@ -26,14 +29,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-left: 5rem;
 }
 
 .user-info-box {
-    width: 65vw;
+    width: 55vw;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    margin-top: 12%;
+    justify-content: space-between;
+    margin-top: 8rem;
 }
 
 .user-info-left {
@@ -41,7 +46,7 @@
     height: 15vh;
     display: flex;
     flex-direction: column;
-} 
+}
 
 .profile-photo {
     width: 250px;
@@ -53,6 +58,7 @@
 
 .user-info-right {
     width: 25.5vw;
+    margin-left: 30rem;
 }
 
 .user-info-left span.profile-username {

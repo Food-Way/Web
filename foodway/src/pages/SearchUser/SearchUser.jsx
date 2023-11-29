@@ -29,10 +29,11 @@ function SearchUser() {
     const [searchCustomer, setSearchCustomer] = useState([]);
     const [search, setSearch] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
-    const [showMap, setShowMap] = useState(false); 
-
-
+    const [selectedCardType, setSelectedCardType] = useState(null);
+    const [viewDetails, setViewDetails] = useState(false);
+    const [showMap, setShowMap] = useState(false);
     const [url, setUrl] = useState(null);
+
     var typeUser = "ESTABLISHMENT";
     const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
@@ -53,9 +54,9 @@ function SearchUser() {
         }
     }
 
-    async function getSearchCustomer() {
+    async function getSearchCustomer(filter) {
         try {
-            const customerResponse = await api.get(`/customers/search`, {
+            const customerResponse = await api.get(filter ? `/customers/search?searchFilter=${filter}` : `/customers/search`, {
                 headers: {
                     Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
                 },
@@ -72,7 +73,7 @@ function SearchUser() {
     async function getMaps(lat, lng) {
         if (search.length > 0) {
             try {
-                const response = await api_maps.get(`staticmap?center=${lat},${lng}&zoom=19&size=400x400&key=${apiKey}`, {
+                const response = await api_maps.get(`staticmap?center=${lat},${lng}&zoom=19&size=330x186&key=${apiKey}`, {
                     responseType: 'arraybuffer',
                 });
                 // console.log("Response da API de Mapas:", response);
@@ -80,7 +81,7 @@ function SearchUser() {
                 if (response.status === 200 && response.data) {
                     const blob = new Blob([response.data], { type: 'image/png' });
                     const dataUrl = URL.createObjectURL(blob);
-                    showMap(true);
+                    setShowMap(true);
                     // console.log("URL do Mapa:", dataUrl);
                     setUrl(dataUrl);
                 } else {
@@ -104,9 +105,11 @@ function SearchUser() {
         selectedFilter.classList.toggle("item-filter-active");
     }
 
-    const handleCardClick = (index) => {
+    const handleCardClick = (index, type) => {
         console.log("Card selecionado:", index);
+        setViewDetails(!viewDetails);
         setSelectedCard(index);
+        setSelectedCardType(type);
     };
 
     useEffect(() => {
@@ -144,40 +147,27 @@ function SearchUser() {
                                 </div>
                                 <div className="search-body">
                                     <MyLoader />
-                                    {searchEstab && searchEstab.map((establishment, index) => (
+                                    {search && search.map((item, index) => (
                                         <div onClick={(e) => {
                                             e.preventDefault();
-                                            handleCardClick(index)
-                                            getMaps(establishment.lat, establishment.lng)
+                                            handleCardClick(index, item.typeUser)
+                                            if (item.typeUser == "ESTABLISHMENT") {
+                                                getMaps(item.lat, item.lng)
+                                            }
                                         }}>
+                                            {console.log("item:", item)}
                                             <SearchCard
                                                 key={index}
-                                                name={establishment.name}
-                                                bio={establishment.bio}
-                                                generalRate={establishment.generalRate}
-                                                lastComment={establishment.lastComment}
-                                                photo={establishment.photo}
-                                                upvote={establishment.upvote}
-                                                culinary={establishment.culinary[0].name}
-                                                typeUser={establishment.typeUser}
-                                                idEstablishment={establishment.idEstablishment}
-                                            />
-                                        </div>
-                                    ))}
-                                    {searchCustomer && searchCustomer.map((customer, index) => (
-                                        <div onClick={(e) => {
-                                            e.preventDefault()
-                                            handleCardClick(index)
-                                        }}>
-                                            <SearchCard
-                                                key={index}
-                                                name={customer.name}
-                                                bio={customer.bio}
-                                                generalRate={customer.generalRate}
-                                                photo={customer.photo}
-                                                upvote={customer.upvotes}
-                                                culinary={customer.culinary[0].name}
-                                                typeUser={customer.typeUser}
+                                                name={item.name}
+                                                bio={item.typeUser == "CLIENT" ? item.bio : item.lastComment}
+                                                generalRate={item.generalRate}
+                                                lastComment={item.lastComment}
+                                                photo={item.photo}
+                                                upvote={item.upvote}
+                                                culinary={item.culinary[0].name}
+                                                typeUser={item.typeUser}
+                                                idEstablishment={item.idEstablishment}
+                                                isFavorites={item.isFavorite}
                                             />
                                         </div>
                                     ))}
@@ -188,18 +178,20 @@ function SearchUser() {
                     <section>
                         <div className="user-details-container">
                             <div className="user-details-box">
-                                {selectedCard !== null && (
+                                {selectedCard !== null && viewDetails && (
                                     <SearchDetails
+                                        idUser={selectedCardType == "CLIENT" ? search[selectedCard].idCustomer : search[selectedCard].idEstablishment}
                                         name={search[selectedCard].name}
                                         photo={search[selectedCard].photo}
                                         tag={search[selectedCard].tag}
                                         rate={search[selectedCard].rate}
                                         comments={search[selectedCard].comments}
-                                        bio={search[selectedCard].bio}
+                                        bio={selectedCardType == "CLIENT" ? search[selectedCard].bio : search[selectedCard].lastComment}
+                                        typeUser={selectedCardType}
                                     />
                                 )}
                             </div>
-                            {typeUser === "ESTABLISHMENT" && showMap && url &&(
+                            {selectedCardType === "ESTABLISHMENT" && showMap && url && viewDetails && (
                                 <div className="maps-box">
                                     <span className="title">Localização</span>
                                     <img src={url} alt="Mapa" />

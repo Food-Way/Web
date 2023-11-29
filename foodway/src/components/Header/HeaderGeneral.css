@@ -19,13 +19,19 @@ header h1 {
   font-weight: 700;
 }
 
-header div.container {
+.container-header {
+  width: 88%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
   gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.container-switch-header {
+  width: 94.2%;
+  transition: all 0.3s;
 }
 
 header div div.left {
@@ -33,6 +39,29 @@ header div div.left {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+}
+
+.establishment-title-user-profile {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.header-geral-token {
+  width: 12vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-geral-token span{
+  font-size: 1.5 rem;
+  font-weight: 700;
+}
+
+.header-geral-token img {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 10rem;
 }
 
 .left img {

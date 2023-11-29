@@ -7,7 +7,7 @@ const Upvotes = (props) => {
         <>
             <div className="upvotes">
                 <img src={UpvoteIcon} alt="" />
-                <span>{props.upvotes}</span>
+                <span>{props.upvotes ? props.upvotes : 0}</span>
             </div>
         </>
     )
