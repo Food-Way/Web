@@ -18,6 +18,7 @@ const EstablishmentPage = () => {
     const [updateText, setUpdateText] = useState(false);
     const [url, setUrl] = useState("");
     const [profile, setProfile] = useState([]);
+    const [comments, setComments] = useState([]);
     const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
     function getEstablishmentProfileData() {
@@ -31,6 +32,7 @@ const EstablishmentPage = () => {
                 if (response.status === 200) {
                     console.log("response: ", response.data);
                     setProfile(response.data);
+                    setComments(response.data.comments);
                 }
             })
             .catch((erro) => console.log(erro));
@@ -67,14 +69,16 @@ const EstablishmentPage = () => {
                 confirmText="Comentar"
                 cancelText="Cancelar"
                 lblCampo1="Título"
-                lblCampo2="Assunto         "
-                iptProductPrice="productPrice"
-                iptProductName="productName"
+                lblCampo2="Assunto"
+                iptCampo2="productPrice"
+                iptCampo1="productName"
                 successTitle="Comentário criado!"
                 content="Adicionar comentário"
                 status={201}
                 method="post"
-                uri="products"
+                uri="comments"
+                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                idEstablishment={idEstablishment}
             />
         )
     }
@@ -85,11 +89,6 @@ const EstablishmentPage = () => {
     }, []);
 
     var id = 1;
-
-    var qtd = ["sus", "lala"];
-
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
     return (
         <>
             <div className="establishment-content-container">
@@ -123,34 +122,55 @@ const EstablishmentPage = () => {
                             </div>
                         </div>
                         <div className="establishment-comments-info-container">
-                            <div className={qtd.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
-
-                                {/* {qtd.length == 1 ?
+                            <div className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
+                                {comments.length == 1 ?
                                     <>
-                                        {profile.comments.map((item) => (
-                                            <CommentIndividual 
+                                        {comments.map((item) => (
+                                            <CommentIndividual
                                                 establishmentName={item.establishmentName}
                                                 rate={item.commentRate}
                                                 title={item.title}
                                                 comment={item.comment}
+                                                upvotes={item.upvotes}
+                                                idComment={item.idComment}
                                             />
                                         ))}
                                     </> :
                                     <>
                                         <div className="establishment-comments-box-more">
-                                            {profile.comments.map((item) => (
-                                                <CommentIndividual />
+                                            {comments.map((commentParent) => (
+                                                <>
+                                                    <CommentIndividual
+                                                        establishmentName={commentParent.establishmentName}
+                                                        rate={commentParent.commentRate}
+                                                        title={commentParent.title}
+                                                        comment={commentParent.comment}
+                                                        upvotes={commentParent.upvotes}
+                                                        idComment={commentParent.idComment}
+                                                        idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                                        idEstablishment={idEstablishment}
+                                                    />
+                                                    <div className={commentParent.childComments.length > 0 ? "scroll-comments" : "establishment-more-box"}>
+                                                        {commentParent.childComments.map((commentReply) => (
+                                                            <CommentReply
+                                                                establishmentName={commentReply.establishmentName}
+                                                                rate={commentReply.commentRate}
+                                                                title={commentReply.title}
+                                                                upvotes={commentReply.upvotes}
+                                                                comment={commentReply.comment}
+                                                                idComment={commentReply.idComment}
+                                                                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                                                idEstablishment={idEstablishment}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </>
                                             ))}
-                                            <div className={qtd.length > 1 ? "scroll-comments" : "establishment-more-box"}>
-                                                {profile.comments.reply.map((item) => (
-                                                    <CommentReply />
-                                                ))}
-                                            </div>
                                         </div>
-                                    </>} */}
+                                    </>}
                             </div>
                             <div className="establishment-side-box">
-                                <div className="establishment-tags-box">
+                                {/* <div className="establishment-tags-box">
                                     <span className="establishment-tags-title">Tags</span>
                                     <div className="establishment-tag-content">
                                         <div className="establishment-tag-box">
@@ -166,7 +186,7 @@ const EstablishmentPage = () => {
                                             <span>Pode fumar</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="establishment-general-box">
                                     <div className="establishment-value-box">
                                         <span className="establishment-info-value">{profile.qtdComments}</span>

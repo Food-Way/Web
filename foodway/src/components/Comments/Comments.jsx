@@ -7,7 +7,7 @@ const Comments = (props) => {
         <>
             <div className="comments-qtd-container">
                 <img src={CommentIcon} alt="" />
-                <span>+99</span>
+                <span>{props.comments}</span>
             </div>
         </>
     );

@@ -132,6 +132,7 @@ const UserProfile = () => {
                     level={user.level}
                     profileRate={user.profileRate}
                     qtdComments={user.qtdComments}
+                    qtdUpvotes={user.qtdUpvotes}
                   />
                 </div>
               </div>
@@ -141,7 +142,7 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
-                <MyLoader />
+                {/* <MyLoader /> */}
                 {comments.map((item) => (
                   <>
                     <Comment
@@ -149,6 +150,7 @@ const UserProfile = () => {
                       rate={item.commentRate}
                       title={item.title}
                       comment={item.comment}
+                      upvotes={item.upvotes}
                     />
                   </>
                 ))}

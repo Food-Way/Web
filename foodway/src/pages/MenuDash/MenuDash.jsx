@@ -82,8 +82,8 @@ const MenuDash = () => {
                                 cancelText="Cancelar"
                                 lblCampo1="Nome"
                                 lblCampo2="Preço"
-                                iptProductPrice="productPrice"
-                                iptProductName="productName"
+                                iptCampo2="productPrice"
+                                iptCampo1="productName"
                                 successTitle="Produto Criado!"
                                 content="Criar Produto"
                                 status={201}

@@ -161,6 +161,7 @@ function SearchUser() {
                                                 culinary={establishment.culinary[0].name}
                                                 typeUser={establishment.typeUser}
                                                 idEstablishment={establishment.idEstablishment}
+                                                qtdComments={establishment.qtdComments}
                                             />
                                         </div>
                                     ))}
@@ -178,6 +179,7 @@ function SearchUser() {
                                                 upvote={customer.upvotes}
                                                 culinary={customer.culinary[0].name}
                                                 typeUser={customer.typeUser}
+                                                qtdComments={customer.qtdComments}
                                             />
                                         </div>
                                     ))}

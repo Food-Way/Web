@@ -49,7 +49,7 @@ const SearchCard = (props) => {
                     <div className="card-footer">
                         <div className="rate-box">
                             <Comments
-                            // comments={props.comments}
+                                comments={props.qtdComments}
                             />
                             <Upvotes
                                 upvotes={props.upvote}
@@ -59,7 +59,7 @@ const SearchCard = (props) => {
                             <div className="favorite">
                                 {props.typeUser === "ESTABLISHMENT" ? (
                                     <Heart isClick={props.isFavorite} onClick={() => {
-                                        favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment) 
+                                        favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment)
                                         setIsFavorite(!isFavorite)
                                     }} />
                                 ) : ""}

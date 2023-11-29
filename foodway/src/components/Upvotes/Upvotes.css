@@ -11,6 +11,7 @@
 .upvotes img {
     width: 2.125rem;
     height: 2rem;
+    cursor: pointer;
 }
 
 .upvotes span {
