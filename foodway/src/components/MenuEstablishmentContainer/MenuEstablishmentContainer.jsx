@@ -111,7 +111,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
           </div>
           <div className="menu-dash-box">
             {console.log("Menu: ", menu)}
-            {menu.length == 0 ? (
+            {/* {menu.length == 0 ? ( */}
               <>
                 {menu.map((item, index) => (
                   <Product
@@ -124,7 +124,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
                 ))}
               </>
 
-            ) : "Nenhum produto cadastrado"}
+            {/* ) : "Nenhum produto cadastrado"} */}
           </div>
         </div>
       </section>
