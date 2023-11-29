@@ -75,14 +75,6 @@ function formModal(props) {
             <label htmlFor="${props.iptProductPrice}">${props.lblCampo2}</label>
             <input type="text" id="${props.iptProductPrice}" value=${props.price === undefined ? " " : props.price}>
           </div>
-          <div className="modal-input-box">
-            <input
-                className="input-file"
-                type="file"
-                name="cover"
-                id="cover"
-                onChange={handleFileChangeCover}
-            />
           </div>
         </div>
       </div>

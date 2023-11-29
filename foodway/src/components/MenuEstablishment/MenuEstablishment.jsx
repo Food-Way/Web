@@ -29,7 +29,7 @@ import "./MenuEstablishment.css";
 const MenuEstablishment = (props) => {
   const navigate = useNavigate();
   const [oldPath, setOldPath] = useState("");
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
 
   const [establishment, setEstablishment] = useState([
     { id: 1, nome: "Restaurante Italiano" },
@@ -56,8 +56,10 @@ const MenuEstablishment = (props) => {
   const handleLogoff = () => {
     sessionStorage.clear();
     toast.success("Logout realizado com sucesso!");
-    navigate("/");
-    location.reload();
+    setTimeout(() => {
+      navigate("/");
+      location.reload();
+    }, 2000);
   };
 
   function setCheck(id) {
@@ -121,9 +123,11 @@ const MenuEstablishment = (props) => {
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
     } else if (className == ".profile-item") {
-      navigate("/user-profile");
+      navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
     } else if (className == ".users-item") {
       navigate("/users");
+    } else if(className == ".search-item") {
+      navigate("/search-user");
     } else if (className == ".out-item") {
       handleLogoff();
     }
@@ -139,10 +143,26 @@ const MenuEstablishment = (props) => {
     <>
       <button
         className="btn-menu-switch"
-        onClick={() => {
+        onClick={(event) => {
+          console.log("clicou");
           setOpenMenu(!openMenu);
+          var btnImage = event.currentTarget;
           var btn = document.querySelector(".btn-menu-switch");
+          var headerContainer = document.querySelector(".container-header");
+
+          if (location.pathname.startsWith("/user-profile")) {
+            var profileContainer = document.querySelector(".profile-container");
+            profileContainer.classList.toggle("profile-container-switch");
+          }
+
+          if (location.pathname.startsWith("/search-user")) {
+            var profileContainer = document.querySelector(".search-user-container");
+            profileContainer.classList.toggle("search-user-container-switch");
+          }
+
+          btnImage.classList.toggle("btn-menu-rotate");
           btn.classList.toggle("btn-menu-animate");
+          headerContainer.classList.toggle("container-switch-header");
         }}
       ></button>
       <Sidebar
@@ -150,20 +170,22 @@ const MenuEstablishment = (props) => {
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             height: props.height,
-            width: openMenu ? "75px" : "22vw",
+            width: openMenu ? "75px" : "17vw",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
             backgroundColor: "var(--branco)",
+            paddingTop: "5rem",
+            paddingLeft: openMenu ? "0" : "3rem", // Adicione essa linha para definir a margem à esquerda quando a barra lateral estiver expandida
             paddingBottom: "3rem",
-            transition: "all 0.3s   ",
-            position: "fixed",
+            transition: "all 0.3s",
+            position: "absolute",
           },
         }}
       >
         <Menu>
           <MenuItem
-            icon={<FontAwesomeIcon icon={faUser} className="profile-item" />}
+            icon={<FontAwesomeIcon icon={faUser} size="lg" className="profile-item" />}
             onClick={() => {
               setNavigate(".profile-item");
             }}
@@ -174,19 +196,19 @@ const MenuEstablishment = (props) => {
           {/* Utilizar parseJWT */}
           {typeUser === "ESTABLISHMENT " ? (
             <>
-              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg" />}>
                 {" "}
                 Desempenho{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg" />}>
                 {" "}
                 Cardápio{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faComments} />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg" />}>
                 {" "}
                 Comentários{" "}
               </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} />}>
+              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg" />}>
                 {" "}
                 Relevância{" "}
               </MenuItem>
@@ -197,6 +219,7 @@ const MenuEstablishment = (props) => {
                 icon={
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
+                    size="lg"
                     className="search-item"
                   />
                 }
@@ -205,65 +228,70 @@ const MenuEstablishment = (props) => {
                   setNavigate(".search-item");
                 }}
               >
-                <SubMenu
-                  icon={
-                    <FontAwesomeIcon
-                      icon={faStore}
-                      className="establishment-item"
-                    />
-                  }
-                  label={"Estabelecimento " + "(" + establishment.length + ")"}
-                  onClick={() => {
-                    setNavigate(".establishment-item");
-                  }}
-                >
-                  {establishment.map((item) => {
-                    return (
-                      <MenuItem
-                        key={item.id}
-                        onClick={() => setCheck("e" + item.id)}
-                      >
-                        <div className="menu-item">
-                          <div className="pretty p-icon p-round p-smooth check-culinary">
-                            <input
-                              type="checkbox"
-                              onClick={() => setCheck("e" + item.id)}
-                              id={"e" + item.id}
-                            />
-                            <div className="state">
-                              <DoneIcon className="icon check" />
-                              <label>{item.nome}</label>
-                            </div>
-                          </div>
-                        </div>
-                      </MenuItem>
-                    );
-                  })}
-                </SubMenu>
-                {sessionStorage.getItem("token") !== null ? (
-                  <MenuItem
-                    className="users-item"
-                    icon={
-                      <FontAwesomeIcon
-                        icon={faUserLarge}
-                        onClick={() => {
-                          setNavigate(".users-item");
-                        }}
-                      />
-                    }
-                  >
-                    <span>Usuários ({users.length})</span>
-                  </MenuItem>
-                ) : (
-                  ""
-                )}
               </SubMenu>
             </>
+
+            //     <SubMenu
+            //       icon={
+            //         <FontAwesomeIcon
+            //           icon={faStore}
+            //           size="lg"
+            //           className="establishment-item"
+            //         />
+            //       }
+            //       label={"Estabelecimento " + "(" + establishment.length + ")"}
+            //       onClick={() => {
+            //         setNavigate(".establishment-item");
+            //       }}
+            //     >
+            //       {establishment.map((item) => {
+            //         return (
+            //           <MenuItem
+            //             key={item.id}
+            //             onClick={() => setCheck("e" + item.id)}
+            //           >
+            //             <div className="menu-item">
+            //               <div className="pretty p-icon p-round p-smooth check-culinary">
+            //                 <input
+            //                   type="checkbox"
+            //                   onClick={() => setCheck("e" + item.id)}
+            //                   id={"e" + item.id}
+            //                 />
+            //                 <div className="state">
+            //                   <DoneIcon className="icon check" />
+            //                   <label>{item.nome}</label>
+            //                 </div>
+            //               </div>
+            //             </div>
+            //           </MenuItem>
+            //         );
+            //       })}
+            //     </SubMenu>
+            //     {sessionStorage.getItem("token") !== null ? (
+            //       <MenuItem
+            //         className="users-item"
+            //         icon={
+            //           <FontAwesomeIcon
+            //             icon={faUserLarge}
+            //             size="lg"
+            //             onClick={() => {
+            //               setNavigate(".users-item");
+            //             }}
+            //           />
+            //         }
+            //       >
+            //         <span>Usuários ({users.length})</span>
+            //       </MenuItem>
+            //     ) : (
+            //       ""
+            //     )}
+            //   </SubMenu>
+            // </>
           )}
           {sessionStorage.getItem("token") !== null ? (
             <MenuItem
               className="out-item"
-              icon={<FontAwesomeIcon icon={faArrowRightFromBracket} />}
+              icon={<FontAwesomeIcon icon={faArrowRightFromBracket} size="lg" />}
               onClick={() => {
                 setNavigate(".out-item");
               }}

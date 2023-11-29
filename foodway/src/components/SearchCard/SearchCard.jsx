@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
@@ -26,12 +26,16 @@ const SearchCard = (props) => {
         }
     }
 
+    useEffect(() => {
+        setIsFavorite(props.isFavorites);
+    }, []);
+
     return (
         <>
             <div className="card-container">
                 <div className="card-box">
                     <div className="card-header">
-                        <img src={props.photo === "" || props.photo == undefined ? DefaultImage : props.photo} alt="" className="card-image" />
+                        <img src={props.photo} alt="" className="card-image" />
                     </div>
                     <div className="card-body">
                         <span className="user-title">{props.name}</span>
@@ -44,12 +48,12 @@ const SearchCard = (props) => {
                             isHalf={true}
                             activeColor={"#ffd700"}
                         />
-                        <p className="user-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque ratione tempore laborum id rem ipsum in, a expedita, delectus libero enim rerum debitis blanditiis reiciendis est repudiandae aspernatur nihil eum?</p>
+                        <p className="user-description">{props.bio}</p>
                     </div>
                     <div className="card-footer">
                         <div className="rate-box">
                             <Comments
-                            // comments={props.comments}
+                                comments={props.comments}
                             />
                             <Upvotes
                                 upvotes={props.upvote}
@@ -58,8 +62,8 @@ const SearchCard = (props) => {
                         <div className="card-footer-box">
                             <div className="favorite">
                                 {props.typeUser === "ESTABLISHMENT" ? (
-                                    <Heart isClick={props.isFavorite} onClick={() => {
-                                        favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment) 
+                                    <Heart isClick={isFavorite} onClick={() => {
+                                        favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment)
                                         setIsFavorite(!isFavorite)
                                     }} />
                                 ) : ""}

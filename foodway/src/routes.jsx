@@ -24,16 +24,17 @@ import CustomerEditPersonal from "./pages/CustomerEditPersonal/CustomerEditPerso
 
 const Rotas = () => {
   const token = sessionStorage.getItem("token");
+
   return (
     <BrowserRouter>
     { sessionStorage.getItem("token") && 
-    window.location.pathname == "/user-profile" || 
+    window.location.pathname.startsWith("/user-profile") || 
     window.location.pathname == "/establishment/performance/menu" || 
     window.location.pathname == "/establishment/performance/relevance" || 
     window.location.pathname == "/establishment/performance/comments" || 
     window.location.pathname == "/search-user" || 
-    window.location.pathname == "/establishment/performance/insights" || 
-    window.location.pathname == "/establishment/info" || 
+    window.location.pathname.startsWith("/establishment/performance/insights") || 
+    window.location.pathname.startsWith("/establishment/info") || 
     window.location.pathname == "/establishment" ?  <HeaderGeneral /> : "" }
 
     { sessionStorage.getItem("token") && 
@@ -45,10 +46,9 @@ const Rotas = () => {
     ${location.pathname == "/establishment/performance/menu" || 
     location.pathname == "/establishment/performance/relevance" || 
     location.pathname == "/establishment/performance/comments" ||  
-    window.location.pathname == "/search-user" || 
-    window.location.pathname == "/establishment/performance/insights" || 
-    window.location.pathname == "/establishment/info" || 
-    window.location.pathname == "/establishment" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
+    window.location.pathname.startsWith("/search-user") || 
+    window.location.pathname.startsWith("/establishment/performance/insights") || 
+    window.location.pathname.startsWith("/establishment/info") ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
@@ -93,6 +93,7 @@ const Rotas = () => {
         <Route Component={MenuDash} path="/establishment/performance/menu/:id" />
 
         <Route Component={EstablishmentPage} path="/establishment/info/:id" />
+        <Route Component={PerformanceDash} path="/establishment/performance/insights" />
         <Route Component={SearchUser} path="/search-user" />
         <Route
           Component={Relevance}

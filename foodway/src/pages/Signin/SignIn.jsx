@@ -51,11 +51,11 @@ const SignIn = () => {
         const response = await api.post("users/login", data);
         if (response.status === 200) {
           console.log("Login successful!");
-          console.log("Response data:", response.data);
           sessionStorage.setItem("name", btoa(response.data.name));
           sessionStorage.setItem("email", btoa(response.data.email));
           sessionStorage.setItem("idUser", btoa(response.data.idUser));
           sessionStorage.setItem("token", btoa(response.data.token));
+          sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
           sessionStorage.setItem("profile-photo", btoa(response.data.photo));
