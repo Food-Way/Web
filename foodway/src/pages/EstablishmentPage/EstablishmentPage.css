@@ -1,14 +1,21 @@
 @import url(../../assets/css/style.css);
 
 .establishment-content-container {
-    width: 80vw;
-    position: absolute;
-    top: 8rem;
-    left: 22vw;
+    width: calc(120vw - 15vw);
+    height: 88.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.establishment-content-container-switch {
+    width: calc(103vw + 15vw);
+    transition: all 0.3s;
 }
 
 .establishment-banner-box {
-    width: 100%;
+    width: 100vw;
     height: 25rem;
     display: flex;
     justify-content: center;
@@ -22,7 +29,7 @@
 }
 
 .establishment-content-banner-box {
-    width: 78%;
+    width: 68vw;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -65,9 +72,9 @@
 }
 
 .establishment-global-container {
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 

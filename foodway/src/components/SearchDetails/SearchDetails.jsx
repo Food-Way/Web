@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
@@ -10,6 +10,7 @@ import "./SearchDetails.css";
 
 const SearchDetails = (props) => {
     const [updateText, setUpdateText] = useState(false);
+    // const [one, setoOne] = useState(0);
 
     function analysisText(text, category, upText) {
         var newText = "";
@@ -32,6 +33,12 @@ const SearchDetails = (props) => {
         obj.classList.toggle("content-show-scroll");
         setUpdateText(!updateText);
     }
+
+    // useEffect(() => {
+    //     if (one == 0) {
+    //         setoOne(one + 1);
+    //     }
+    // }, []);
 
     return (
         <>

@@ -1,14 +1,18 @@
 @import url(../../assets/css/style.css);
 
-.menu-dashboard-container {
-  top: 10vh;
-  left: 25vw;
-  position: absolute;
+.menu-user-container {
+  width: calc(120vw - 15vw);
+  height: 78.9rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 3vh;
+  transition: all 0.3s;
+}
+
+.menu-user-container-switch {
+  width: calc(100vw + 15vw);
+  transition: all 0.3s;
 }
 
 .dash-container {

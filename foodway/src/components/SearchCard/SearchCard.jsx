@@ -24,7 +24,7 @@ const SearchCard = (props) => {
     }
 
     useEffect(() => {
-        setIsFavorite(props.isFavorites);
+        setIsFavorite(props.isFavorites);   
     }, []);
 
     return (
