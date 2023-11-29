@@ -59,7 +59,8 @@ const Comment = (props) => {
                 <div className="comment-box">
                     <div className="comment-header">
                         <div className="header-initial">
-                            <span> {analysisText(props.establishmentName, "title", false)} </span>
+                            {/* <span> {analysisText(props.establishmentName, "title", false)} </span> */}
+                            <span> {props.establishmentName} </span>
                             {/* {
                                 document.location.pathname != "/user-profile" ? (
                                     sentimentAnalysis < 5.0 ? (
@@ -87,11 +88,12 @@ const Comment = (props) => {
                     </div>
                     <div className="comment-content">
                         <span>{props.title}</span>
-                        <p className="comment-content-text"> {analysisText(props.comment, "text", updateText)} </p>
-                        {props.comment.length > 100 ?
+                        {/* <p className="comment-content-text"> {analysisText(props.comment, "text", updateText)} </p> */}
+                        <p className="comment-content-text"> {props.comment} </p>
+                        {/* {props.comment.length > 100 ?
                             <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
                                 <span> {updateText ? "Ver menos" : "Ver mais"} </span>
-                            </div> : <div className="more-text"></div>}
+                            </div> : <div className="more-text"></div>} */}
                     </div>
                     <div className="comment-footer">
                         <Upvotes 

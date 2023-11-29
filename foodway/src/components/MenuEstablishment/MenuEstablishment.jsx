@@ -76,8 +76,12 @@ const MenuEstablishment = (props) => {
 
     var profile = document.querySelector(".profile-item");
     var search = document.querySelector(".search-item");
-    var establishment = document.querySelector(".establishment-item");
-    var users = document.querySelector(".users-item");
+    // var establishment = document.querySelector(".establishment-item");
+    // var users = document.querySelector(".users-item");
+    var performance = document.querySelector(".performance-item");
+    var menuReal = document.querySelector(".menuReal-item");
+    var comments = document.querySelector(".comments-item");
+    var relevance = document.querySelector(".relevance-item");
     var out = document.querySelector(".out-item");
 
     if (oldPath != className) {
@@ -112,6 +116,34 @@ const MenuEstablishment = (props) => {
       //   users.classList.remove("item-active");
       // }
 
+      if (
+        performance.classList.contains("item-active") &&
+        className != ".performance-item"
+      ) {
+        search.classList.remove("item-active");
+      }
+
+      if (
+        menuReal.classList.contains("item-active") &&
+        className != ".menuReal-item"
+      ) {
+        search.classList.remove("item-active");
+      }
+
+      if (
+        comments.classList.contains("item-active") &&
+        className != ".comments-item"
+      ) {
+        search.classList.remove("item-active");
+      }
+
+      if (
+        relevance.classList.contains("item-active") &&
+        className != ".relevance-item"
+      ) {
+        search.classList.remove("item-active");
+      }
+
       if (out.classList.contains("item-active") && className != ".out-item") {
         out.classList.remove("item-active");
       }
@@ -132,6 +164,18 @@ const MenuEstablishment = (props) => {
       location.reload();
     } else if (className == ".search-item") {
       navigate("/search-user");
+      location.reload();
+    } else if (className == ".performance-item") {
+      navigate("/establishment/performance/insights");
+      location.reload();
+    } else if (className == ".menuReal-item") {
+      navigate("/establishment/performance/menu");
+      location.reload();
+    } else if (className == ".comments-item") {
+      navigate("/establishment/performance/comments");
+      location.reload();
+    } else if (className == ".relevance-item") {
+      navigate("/establishment/performance/relevance");
       location.reload();
     } else if (className == ".out-item") {
       handleLogoff();
@@ -173,6 +217,21 @@ const MenuEstablishment = (props) => {
           if (location.pathname.startsWith("/establishment-menu")) {
             var profileContainer = document.querySelector(".menu-user-container");
             profileContainer.classList.toggle("menu-user-container-switch");
+          }
+
+          if (location.pathname.startsWith("/establishment/performance")) {
+            var profileContainer = document.querySelector(".performance-dash-container");
+            profileContainer.classList.toggle("performance-dash-container-switch");
+          }
+
+          if (location.pathname.startsWith("/establishment/performance/relevance")) {
+            var profileContainer = document.querySelector(".relevance-container");
+            profileContainer.classList.toggle("relevance-container-switch");
+          }
+
+          if (location.pathname.startsWith("/user-profile-edit")) {
+            var profileContainer = document.querySelector(".costumer");
+            profileContainer.classList.toggle("costumer-switch");
           }
 
           btnImage.classList.toggle("btn-menu-rotate");
@@ -230,7 +289,7 @@ const MenuEstablishment = (props) => {
                 Cardápio{" "}
               </MenuItem>
               <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
-                className="relevance-item"
+                className="comments-item"
               />}
                 onClick={() => {
                   setNavigate(".comments-item");
@@ -239,10 +298,11 @@ const MenuEstablishment = (props) => {
                 Comentários{" "}
               </MenuItem>
               <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
+                className="relevance-item"
+              />}
                 onClick={() => {
                   setNavigate(".relevance-item");
-                }}
-              />}>
+                }}>
                 {" "}
                 Relevância{" "}
               </MenuItem>

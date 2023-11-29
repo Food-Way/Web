@@ -42,10 +42,11 @@
 }
 
 .user-info-left {
-    width: 27rem;
+    width: 25rem;
     height: 15vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .profile-photo {
@@ -62,7 +63,7 @@
 }
 
 .user-info-left span.profile-username {
-    width: 25rem;
+    width: 20rem;
     text-transform: capitalize;
     font-size: 3rem;
     font-weight: 600;

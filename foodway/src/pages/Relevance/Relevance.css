@@ -1,15 +1,21 @@
 @import url(../../assets/css/style.css);
 
 .relevance-container {
-    position: absolute;
-    top: 4rem;
-    left: 10vw;
+    width: calc(132vw - 15vw);
+    transition: all 0.3s;
+}
+
+.relevance-container-switch {
+    width: calc(155vw + 15vw);
+    transition: all 0.3s;
 }
 
 .best-relevance-box {
+    width: 100vw;
     height: 35vh;
     background-image: url("../../../public/banner-relevance.png");
     background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;

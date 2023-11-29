@@ -36,7 +36,16 @@ const UserProfile = () => {
     const idUser = atob(sessionStorage.getItem("idUser"));
     console.log("idUser: ", idUser);
 
-    const response = api.get(`/customers/profile/${id}`, {
+    var type = atob(sessionStorage.getItem("typeUser"));
+    var typeReq = "";
+
+    if (type == "ESTABLISHMENT") {
+      typeReq = "establishments";
+    } else {
+      typeReq = "customer";
+    }
+
+    const response = api.get(`/${typeReq}/profile/${id}`, {
       headers: {
         Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
       },
@@ -45,7 +54,6 @@ const UserProfile = () => {
         if (response.status === 200) {
           setUser(response.data);
           setComments(response.data.comments);
-          setEstablishments(response.data.establishmentDTOs);
           console.log("response: ", response.data);
           console.log("user: ", user);
           console.log("comments: ", comments);
@@ -119,9 +127,9 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto} alt="" />
+                  <img className="profile-photo" src={atob(sessionStorage.getItem("profile-photo"))} alt="" />
                   <span className="profile-username"></span>
-                  {/* {(() => showDescription(user.bio))()} */}
+                  {/* {(() => showDescription(user.bio))()}  */}
                   {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
