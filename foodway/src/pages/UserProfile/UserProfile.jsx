@@ -50,6 +50,7 @@ const UserProfile = () => {
           console.log("comments: ", comments);
           console.log("establishments: ", establishments);
           firstAndEnd(response.data.name);
+          setEstablishments(response.data.establishmentDTOs);
         }
       })
       .catch((erro) => console.log(erro));
