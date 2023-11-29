@@ -42,6 +42,11 @@
     font-weight: bold;
 }
 
+.establishment-title-box {
+    display: flex;
+    flex-direction: column;
+}
+
 .establishment-title-box span {
     font-size: 2rem;
     color: var(--branco);

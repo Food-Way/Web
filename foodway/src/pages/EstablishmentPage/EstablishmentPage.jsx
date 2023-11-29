@@ -111,7 +111,9 @@ const EstablishmentPage = () => {
               <div className="establishment-title-box">
                 <h1 className="title-establishment">{profile.name}</h1>
                 <span>{profile.culinary}</span>
+                {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> : ""}
               </div>
+
               <div className="establishment-avaliation-principal">
                 <div className="establishment-avaliation-value">
                   <span>Avaliação</span>
@@ -137,7 +139,7 @@ const EstablishmentPage = () => {
               </div>
             </div>
           </div>
-          <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} />
+          {/* <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> */}
         </section>
         <section>
           <div className="establishment-global-container">

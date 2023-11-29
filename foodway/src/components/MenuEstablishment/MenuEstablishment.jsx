@@ -133,7 +133,11 @@ const MenuEstablishment = (props) => {
       navigate("/establishment/search");
       location.reload();
     } else if (className == ".profile-item") {
-      navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
+      if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
+        navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
+      } else {
+        navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
+      }
       location.reload();
     } else if (className == ".users-item") {
       navigate("/users");
