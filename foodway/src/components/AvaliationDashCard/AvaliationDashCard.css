@@ -7,9 +7,15 @@
 }
 
 .avaliation-general-box {
-    width: 10vw;
+    width: 12vw;
     display: flex;
     justify-content: space-between;
+}
+
+.avaliation-general-box span:last-child {
+    width: 7vw;
+    font-size: 1.5rem;
+    margin-left: 1rem;
 }
 
 .points-value-box {

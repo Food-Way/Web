@@ -388,6 +388,7 @@ const CostumerEdit = () => {
               console.log("ImageName before set", imageName);
               setProfileImageName(imageName); // this set is not working
               console.log("ProfileImageName after set", profileImageName);
+              sessionStorage.setItem("profile-photo", btoa(`https://foodway.blob.core.windows.net/user-images/${imageName}`));
 
               const profileUpdateData = {
                 name: " ",

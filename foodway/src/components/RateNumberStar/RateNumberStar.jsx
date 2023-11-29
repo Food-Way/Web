@@ -1,8 +1,8 @@
 import React from "react";
 
 import ReactStars from "react-rating-stars-component";
-import starWhite from "../../../public/star-white.svg";
-import starBlack from "../../../public/star-black.svg";
+const starWhite = "https://foodway.blob.core.windows.net/public/star-white.svg";
+const starBlack = "https://foodway.blob.core.windows.net/public/star-black.svg";
 
 
 import "./RateNumberStar.css";
@@ -11,7 +11,7 @@ const RateNumberStar = (props) => {
     return (
         <>
             <div className="card-rate">
-                <span>5.0</span>
+                <span>{props.generalRate}</span>
                 <ReactStars
                     count={1}
                     edit={false}

@@ -10,7 +10,7 @@
     border: var(--borda);
 }
 
-.rate-box {
+.rate-box-user {
     width: 80vw;
     display: flex;
     justify-content: space-between;

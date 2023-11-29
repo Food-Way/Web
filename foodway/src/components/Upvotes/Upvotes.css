@@ -2,7 +2,7 @@
 
 .upvotes {
     width: 4.75rem;
-    height: 2rem;
+    height: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -11,6 +11,7 @@
 .upvotes img {
     width: 2.125rem;
     height: 2rem;
+    cursor: pointer;
 }
 
 .upvotes span {

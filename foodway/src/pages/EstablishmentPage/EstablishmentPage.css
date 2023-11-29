@@ -1,19 +1,26 @@
 @import url(../../assets/css/style.css);
 
 .establishment-content-container {
-    width: 80vw;
-    position: absolute;
-    top: 8rem;
-    left: 22vw;
+    width: calc(120vw - 15vw);
+    height: 88.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.establishment-content-container-switch {
+    width: calc(103vw + 15vw);
+    transition: all 0.3s;
 }
 
 .establishment-banner-box {
-    width: 100%;
+    width: 100vw;
     height: 25rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../../../public/bannerEstablishment.png);
+    /* background-image: url(../../../public/bannerEstablishment.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,7 +29,7 @@
 }
 
 .establishment-content-banner-box {
-    width: 78%;
+    width: 68vw;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -41,7 +48,7 @@
 }
 
 .establishment-avaliation-value {
-    width: 10vw;
+    width: 8vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -65,9 +72,9 @@
 }
 
 .establishment-global-container {
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -127,19 +134,17 @@
 }
 
 .establishment-comments-box {
-    width: 40vw;
+    width: 38vw;
     height: 15rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: var(--branco);
-    border: var(--borda);
-    border-radius: var(--arrendondamento);
 }
 
 .establishment-comments-box-more {
     width: 40vw;
-    height: 56.5rem;
+    /* height: 56.5rem; */
     background-color: var(--branco);
     border: var(--borda);
     border-radius: var(--arrendondamento);
@@ -196,7 +201,7 @@
 }
 
 .more-text {
-    width: 15%;
+    width: 10rem;
     cursor: pointer;
     user-select: none;
     margin-top: 1.5rem;
@@ -213,7 +218,7 @@
 
 .scroll-comments {
     width: 39vw;
-    height: 40rem;
+    height: 25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -329,6 +334,7 @@
     font-weight: 500;
     color: var(--branco);
     padding-left: 1rem;
+    text-decoration: none;
 }
 
 .establishment-contact-btn {

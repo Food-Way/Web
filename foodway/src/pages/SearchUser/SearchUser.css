@@ -1,19 +1,21 @@
 @import url('../../assets/css/style.css');
 
 .search-user-container {
-    position: absolute;
-    left: 13vw;
-    top: 12rem;
+    width: calc(109vw - 15vw);
+    height: 88.9rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    transition: all 0.3s;
+}
+
+.search-user-container-switch {
+    width: calc(70vw + 15vw);
+    transition: all 0.3s;
 }
 
 .search-user{
-    width: 60%;
+    width: 46%;
 }
 
 .search-container {
@@ -74,5 +76,8 @@
 }
 
 .maps-box {
-    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
 }

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import ProductImage from "../../../public/product.png";
 import { HandleModalDelete, HandleFormModal } from "../Modal/Modal";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+const ProductImage = "https://foodway.blob.core.windows.net/public/product.png"
 import "./Product.css";
 
-const Product = (props, { editIsAble = true }) => {
+const Product = (props) => {
   return (
     <>
       <div className="menu-item-container">
@@ -19,7 +18,7 @@ const Product = (props, { editIsAble = true }) => {
           </div>
           <div className="menu-footer">
             <span>R$ {props.price}</span>
-            {editIsAble === true ? null : (
+            {props.editIsAble === true ? (
               <div className="operations">
                 <HandleModalDelete
                   title={"Excluir " + props.name}
@@ -38,8 +37,8 @@ const Product = (props, { editIsAble = true }) => {
                   cancelText="Cancelar"
                   lblCampo1="Nome"
                   lblCampo2="Preço"
-                  iptProductPrice="productPrice"
-                  iptProductName="productName"
+                  iptCampo2="productPrice"
+                  iptCampo1="productName"
                   status={200}
                   successTitle="Produto editado!"
                   content={<FontAwesomeIcon icon={faPenToSquare} />}
@@ -47,7 +46,8 @@ const Product = (props, { editIsAble = true }) => {
                   uri={"products/" + props.idProduct}
                 />
               </div>
-            )}
+            ) : 
+          null}
           </div>
         </div>
       </div>

@@ -1,0 +1,140 @@
+@import url(../../assets/css/style.css);
+
+.performance-dash-container {
+    width: calc(122vw - 15vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.performance-dash-container-switch  {
+    width: calc(130vw - 15vw);
+}
+
+.sentiment-banner {
+    width: 100vw;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../../public/banner-relevance.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sentiment-dash-box {
+    width: 65vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.content-dash-avaliation {
+    width: 61vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avaliation-dash-container {
+    width: 30vw;
+    height: 57rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.avaliation-dash-box {
+    width: 38vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avaliation-dash-values {
+    width: 18.7vw;
+    height: 15rem;
+    display: flex;
+    justify-content: space-evenly;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    /* background-color: var(--brancoGelo); */
+}
+
+.rate-dash-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rate-dash-value span:first-child {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.rate-dash-value span:last-child {
+    font-size: 5rem;
+    font-weight: 500;
+}
+
+.avaliation-dash-card {
+    width: 10vw;
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tag-dash-box {
+    width: 18.7vw;
+    height: 15rem;
+    display: flex;
+    justify-content: space-around;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+}
+
+.graph-dash-box {
+    width: 38vw;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    margin-top: 2rem;
+}
+
+.graph-dash-box span {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.comment-relevant-container {
+    height: 52rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    margin-top: 2.5rem;
+    padding: 1rem;
+}
+
+.title-comment-relevant {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.comment-relevant-box {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 2rem;
+    padding-right: 1rem;
+}

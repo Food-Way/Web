@@ -1,26 +1,144 @@
-import { useState, React, useEffect } from "react";
+import { useState, React, useEffect, require } from "react";
 import SearchCard from "../../components/SearchCard/SearchCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter";
-import ImageFilter from "../../../public/filter.svg";
+const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
+import { api, api_maps } from "../../services/api";
+import ContentLoader from 'react-content-loader'
 
 import './SearchUser.css';
 
+const MyLoader = () => (
+    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+        speed={2}
+        width={1500}
+        height={875}
+        viewBox="0 0 1500 875"
+        backgroundColor="#ffffff"
+        foregroundColor="#c4c4c4"
+    >
+        <rect x="0" y="23" rx="0" ry="0" width="1500" height="230" />
+        <rect x="0" y="289" rx="0" ry="0" width="1500" height="230" />
+        <rect x="0" y="558" rx="0" ry="0" width="1500" height="230" />
+    </ContentLoader>
+)
+
 function SearchUser() {
+
+    const [searchEstab, setSearchEstab] = useState([]);
+    const [searchCustomer, setSearchCustomer] = useState([]);
+    const [search, setSearch] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedCardType, setSelectedCardType] = useState(null);
+    const [viewDetails, setViewDetails] = useState(false);
+    const [showMap, setShowMap] = useState(false);
+    const [url, setUrl] = useState(null);
+
     var typeUser = "ESTABLISHMENT";
+    const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
+
+    async function getSearchEstab({ filter }) {
+        try {
+            const establishmentResponse = await api.get(filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, {
+                headers: {
+                    Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+                    ID_SESSION: atob(sessionStorage.getItem("idUser")),
+                },
+            });
+            if (establishmentResponse.status === 200) {
+                console.log("Response da API de Busca (Estab):", establishmentResponse.data);
+                setSearchEstab(establishmentResponse.data);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar estabelecimentos:', error);
+        }
+    }
+
+    async function getSearchCustomer() {
+        try {
+            const customerResponse = await api.get(`/customers/search`, {
+                headers: {
+                    Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
+                },
+            });
+            if (customerResponse.status === 200) {
+                console.log("Response da API de Busca (Customer):", customerResponse.data);
+                setSearchCustomer(customerResponse.data);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar clientes:', error);
+        }
+    }
+
+    async function getMaps(lat, lng) {
+        if (search.length > 0) {
+            try {
+                const response = await api_maps.get(`staticmap?center=${lat},${lng}&zoom=19&size=330x186&key=${apiKey}`, {
+                    responseType: 'arraybuffer',
+                });
+                // console.log("Response da API de Mapas:", response);
+
+                if (response.status === 200 && response.data) {
+                    const blob = new Blob([response.data], { type: 'image/png' });
+                    const dataUrl = URL.createObjectURL(blob);
+                    setShowMap(true);
+                    // console.log("URL do Mapa:", dataUrl);
+                    setUrl(dataUrl);
+                } else {
+                    console.error('Resposta inválida da API de Mapas:', response);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar o mapa:', error);
+            }
+        }
+    }
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
 
+        if (id == 2) {
+            getSearchEstab({ filter: "COMMENTS" });
+            // getSearchCustomer({ filter: "COMMENTS" });
+        } else if (id == 3) {
+            getSearchEstab({ filter: "RELEVANCE" });
+            // getSearchCustomer({ filter: "RELEVANCE" });
+        } else if (id == 4) {
+            getSearchEstab({ filter: "UPVOTES" });
+            // getSearchCustomer({ filter: "UPVOTES" });
+        }
+
         for (let index = 1; index <= 4; index++) {
             var indexFilter = document.getElementById(`${index}`);
-            if (indexFilter.classList.contains("item-filter-active") && `${index}` != id) {
+            if (
+                indexFilter.classList.contains("item-filter-active") &&
+                `${index}` != id
+            ) {
                 indexFilter.classList.toggle("item-filter-active");
             }
         }
+
         selectedFilter.classList.toggle("item-filter-active");
     }
+
+    const handleCardClick = (index, type) => {
+        // console.log("Card selecionado:", index);
+        setViewDetails(!viewDetails);
+        setSelectedCard(index);
+        setSelectedCardType(type);
+    };
+
+    useEffect(() => {
+        setSearch([...searchEstab, ...searchCustomer]);
+    }, [searchCustomer, searchEstab]);
+
+    useEffect(() => {
+        getSearchEstab({ filter: "RELEVANCE" });
+        getSearchCustomer({ filter: "RELEVANCE" });
+    }, []);
+
+    useEffect(() => {
+        getMaps();
+    }, [searchCustomer, searchEstab]);
 
     return (
         <>
@@ -30,26 +148,44 @@ function SearchUser() {
                         <div className="search-container">
                             <div className="search-box">
                                 <div className="search-header">
-                                    <span className="search-results">10 resultados</span>
+                                    <span className="search-results">{search.length} resultados</span>
                                     <SearchBar placeholder="Pesquisar" />
                                     <div className="menu-filter-box">
                                         <img src={ImageFilter} className="filter" alt="" />
                                         <div className="item-filter-box">
-                                            <span className="item-filter-user" id="1" onClick={() => { selectFilter("1") }}>Nível</span>
-                                            <span className="item-filter-user" id="2" onClick={() => { selectFilter("2") }}>Commet</span>
-                                            <span className="item-filter-user" id="3" onClick={() => { selectFilter("3") }}>Relevante</span>
+                                            <span className="item-filter-user" id="1" >Filtros</span>
+                                            <span className="item-filter-user" id="2" onClick={() => { selectFilter("2") }}>Comentário</span>
+                                            <span className="item-filter-user" id="3" onClick={() => { selectFilter("3") }}>Relevância</span>
                                             <span className="item-filter-user" id="4" onClick={() => { selectFilter("4") }}>Upvote</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
-                                    <SearchCard />
+                                    <MyLoader />
+                                    {search && search.map((item, index) => (
+                                        <div onClick={(e) => {
+                                            e.preventDefault();
+                                            handleCardClick(index, item.typeUser)
+                                            if (item.typeUser == "ESTABLISHMENT") {
+                                                getMaps(item.lat, item.lng)
+                                            }
+                                        }}>
+                                            <SearchCard
+                                                key={index}
+                                                name={item.name}
+                                                bio={item.typeUser == "CLIENT" ? item.bio : item.lastComment}
+                                                generalRate={item.generalRate}
+                                                lastComment={item.lastComment}
+                                                photo={item.photo}
+                                                upvote={item.upvote}
+                                                culinary={item.culinary[0].name}
+                                                typeUser={item.typeUser}
+                                                idEstablishment={item.idEstablishment}
+                                                isFavorites={item.isFavorite}
+                                                qtdComments={item.qtdComments}
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -57,13 +193,28 @@ function SearchUser() {
                     <section>
                         <div className="user-details-container">
                             <div className="user-details-box">
-                                <SearchDetails />
+                                {selectedCard !== null && viewDetails && (
+                                    <SearchDetails
+                                        idUser={selectedCardType == "CLIENT" ? search[selectedCard].idCustomer : search[selectedCard].idEstablishment}
+                                        name={search[selectedCard].name}
+                                        photo={search[selectedCard].photo}
+                                        tag={search[selectedCard].tag}
+                                        rate={search[selectedCard].rate}
+                                        comments={search[selectedCard].comments}
+                                        bio={selectedCardType == "CLIENT" ? search[selectedCard].bio : search[selectedCard].lastComment}
+                                        typeUser={selectedCardType}
+                                        upvote={search[selectedCard].upvote}
+                                        qtdComments={search[selectedCard].qtdComments}
+                                        culinary={search[selectedCard].culinary}
+                                    />
+                                )}
                             </div>
-                            { typeUser == "ESTABLISHMENT" ? 
-                            <div className="maps-box">
-                                <span className="title">Localização</span>
-                                <img src="" alt="" />
-                            </div> : ""}   
+                            {selectedCardType === "ESTABLISHMENT" && showMap && url && viewDetails && (
+                                <div className="maps-box">
+                                    <span className="title">Localização</span>
+                                    <img src={url} alt="Mapa" />
+                                </div>
+                            )}
                         </div>
                     </section>
                 </div>

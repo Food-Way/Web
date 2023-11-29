@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import QRCode from "react-qr-code";
-import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter";
-import ImageFilter from "../../../public/filter.svg";
-import Report from "../../components/Report/Report";
+const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import api from "../../services/api";
 import "./MenuEstablishmentContainer.css";
 
@@ -67,7 +62,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
   }, []);
 
   return (
-    <div className="dash-container">
+    <div className="menu-user-container">
       <section>
         <div className="menu-dash-container">
           <div className="menu-dash-header">
@@ -115,15 +110,21 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
             </div>
           </div>
           <div className="menu-dash-box">
-            {menu.map((item, index) => (
-              <Product
-                editIsAble={false}
-                key={index}
-                idProduct={item.idProduct}
-                name={item.name}
-                price={item.price}
-              />
-            ))}
+            {console.log("Menu: ", menu)}
+            {menu.length == 0 ? (
+              <>
+                {menu.map((item, index) => (
+                  <Product
+                    editIsAble={false}
+                    key={index}
+                    idProduct={item.idProduct}
+                    name={item.name}
+                    price={item.price}
+                  />
+                ))}
+              </>
+
+            ) : "Nenhum produto cadastrado"}
           </div>
         </div>
       </section>

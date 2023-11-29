@@ -1,16 +1,16 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
 import CulinaryTag from "../CulinaryTag/CulinaryTag";
 import { ButtonPrimaryLink } from "../Button/Button";
-import starBlack from "../../../public/star-black.svg";
+const starBlack = "https://foodway.blob.core.windows.net/public/star-black.svg";
 
 import "./SearchDetails.css";
 
 const SearchDetails = (props) => {
-    const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png";
     const [updateText, setUpdateText] = useState(false);
+    // const [one, setoOne] = useState(0);
 
     function analysisText(text, category, upText) {
         var newText = "";
@@ -34,9 +34,11 @@ const SearchDetails = (props) => {
         setUpdateText(!updateText);
     }
 
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
-    var title = "AAAAAAAAAAAAAAAAAAAAA";
+    // useEffect(() => {
+    //     if (one == 0) {
+    //         setoOne(one + 1);
+    //     }
+    // }, []);
 
     return (
         <>
@@ -44,11 +46,13 @@ const SearchDetails = (props) => {
                 <div className="search-details-box">
                     <div className="search-detail-header">
                         <div className="left-header-side">
-                            <img src={LogoFoodway} alt="" />
-                            <CulinaryTag />
+                            <img src={props.photo} alt="" />
+                            <CulinaryTag 
+                                culinary={props.culinary}
+                            />
                         </div>
                         <div className="middle-header-side">
-                            <span className="user-detail-name"> {analysisText(title, "title")} </span>
+                            <span className="user-detail-name"> {analysisText(props.name, "title")} </span>
                             <div className="rate-detail-user">
                                 <span className="user-rate-number">5.0</span>
                                 <ReactStars
@@ -64,19 +68,23 @@ const SearchDetails = (props) => {
                             </div>
                         </div>
                         <div className="right-header-side">
-                            <Upvotes />
-                            <Comments />
+                            <Upvotes 
+                                upvotes={props.upvote}
+                            />
+                            <Comments 
+                                comments={props.qtdComments}
+                            />
                         </div>
                     </div>
                     <div className="search-detail-body">
-                        <span> {analysisText(textao, "text", updateText)} </span>
+                        <span> {analysisText(props.bio, "text", updateText)} </span>
                     </div>
-                    {textao.length > 150 ?
+                    {props.bio.length > 150 ?
                         <div className={`read-more-one more-text`} onClick={() => scrollTextShow(`read-more-one`)}>
                             <span> {updateText ? "Ver menos" : "Ver mais"} </span>
                         </div> : <div className="more-text"></div>}
                     <div className="search-detail-footer">
-                        <ButtonPrimaryLink text="Acessar" />
+                        <ButtonPrimaryLink text="Acessar" url={props.typeUser == "ESTABLISHMENT" ? "/establishment/info/" + props.idUser : "/user-profile/" + props.idUser} />
                     </div>
                 </div>
             </div>

@@ -187,7 +187,7 @@ const SignupEstablishment = () => {
             clearFields();
             toast.success("Cadastro realizado com sucesso! Redirecionando...");
             setTimeout(() => {
-              navigate("/login");
+              navigate("/sign-in");
             }, 2000);
           }
         })
@@ -228,9 +228,22 @@ const SignupEstablishment = () => {
           state: uf,
         });
 
-        setMessageCEP(
-          `CEP encontrado: ${logradouro}, ${bairro}, ${localidade}, ${uf}`
-        );
+        setTimeout(() => {
+          if (addressData.street === "") {
+            setMessageCEP("CEP não encontrado");
+            toast.error("CEP não encontrado");
+            return;
+          } else if (addressData.street === undefined) {
+            setMessageCEP("CEP não encontrado");
+            toast.error("CEP não encontrado");
+            return;
+          } else {
+            setMessageCEP(
+              `CEP encontrado: ${logradouro}, ${bairro}, ${localidade}, ${uf}`
+            );
+          }
+        }, 1000);
+
         setFindCep(true);
         console.log(messageCEP);
       } catch (error) {
@@ -395,6 +408,7 @@ const SignupEstablishment = () => {
                   />
                 </>
               )}
+              o
               {step === 3 && (
                 <>
                   <InputField
@@ -428,7 +442,7 @@ const SignupEstablishment = () => {
                 </>
               )}
               <span className="redirect-option">
-                Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
+                Já possui uma conta? <Link to="/sign-in">Faça login</Link>
               </span>
               {step === 1 && (
                 <ButtonPrimary text="Avançar" onclick={handleSteps} />

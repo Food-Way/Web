@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "../../../public/filter.svg";
+const Filter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import "./Filter.css";
 
 const filter = () => {

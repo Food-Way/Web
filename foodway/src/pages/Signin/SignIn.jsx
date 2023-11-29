@@ -57,18 +57,24 @@ const SignIn = () => {
           sessionStorage.setItem("email", btoa(response.data.email));
           sessionStorage.setItem("idUser", btoa(response.data.idUser));
           sessionStorage.setItem("token", btoa(response.data.token));
+          sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
+          sessionStorage.setItem("culinary", btoa(response.data.culinary));
           toast.success("Login realizado com sucesso!");
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate("/user-profile");
+              navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
               location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {
-            console.log("Redirecting to /establishment/performance...");
-            navigate("/establishment/performance");
+            setTimeout(() => {
+              console.log("Redirecting to /establishment/performance...");
+              navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
+              location.reload();
+            }, 2000);
+
           }
         } else {
           console.log("Login failed with status code:", response.status);
@@ -81,13 +87,20 @@ const SignIn = () => {
           toast.error("Usuário ou senha inválidos");
           console.log("Response data:", error.response.data);
         }
-        else if (error.response && error.response.status === 404) {
+        if (error.response.status === 400) {
           console.log("Login failed with status code:", error.response.status);
-          toast.error("Usuário não cadastrado");
+          toast.error("Email ou senha incorretos!");
           console.log("Response data:", error.response.data);
-        } else {
-          console.error("Error during login:", error);
-          toast.error("Usuario não localizado");
+        }
+        if (error.response.status === 404) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 500) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Erro ao se autenticar!");
+          console.log("Response data:", error.response.data);
         }
       }
     }

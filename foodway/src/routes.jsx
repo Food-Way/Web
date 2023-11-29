@@ -10,6 +10,7 @@ import SignupCostumer from "./pages/Signup/SignupCostumer/SignupCostumer";
 import SignupCostumerEstablishment from "./pages/Signup/SignupEstablishment/SignupEstablishment";
 import SignIn from "./pages/Signin/SignIn";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import PerformanceDash from "./pages/PerformanceDash/PerformanceDash";
 import SearchUser from "./pages/SearchUser/SearchUser";
 import CommentDash from "./pages/CommentDash/CommentDash";
 import MenuDash from "./pages/MenuDash/MenuDash";
@@ -17,22 +18,25 @@ import MenuEstablishment from "./components/MenuEstablishment/MenuEstablishment"
 import Relevance from "./pages/Relevance/Relevance";
 import EstablishmentPage from "./pages/EstablishmentPage/EstablishmentPage";
 import EstablismentEditPersonal from "./pages/EstablismentEditPersonal/EstablismentEditPersonal";
-import Cardapio from "./pages/Cardapio/Cardapio";
+import MenuUser from "./pages/MenuUser/MenuUser";
 import CostumerEdit from "./pages/CostumerEdit/CostumerEdit";
 import CustomerEditPersonal from "./pages/CustomerEditPersonal/CustomerEditPersonal";
 
 const Rotas = () => {
   const token = sessionStorage.getItem("token");
+
   return (
     <BrowserRouter>
     { sessionStorage.getItem("token") && 
-    window.location.pathname == "/user-profile" || 
-    window.location.pathname == "/establishment/performance/menu" || 
+    window.location.pathname.startsWith("/user-profile") || 
+    window.location.pathname.startsWith("/establishment/performance/menu") || 
     window.location.pathname == "/establishment/performance/relevance" || 
     window.location.pathname == "/establishment/performance/comments" || 
     window.location.pathname == "/search-user" || 
-    window.location.pathname == "/establishment/performance/insights" || 
-    window.location.pathname == "/establishment/info" || 
+    window.location.pathname == "/user-profile-edit" || 
+    window.location.pathname.startsWith("/establishment/performance/insights") || 
+    window.location.pathname.startsWith("/establishment-menu/:id") || 
+    window.location.pathname.startsWith("/establishment/info") || 
     window.location.pathname == "/establishment" ?  <HeaderGeneral /> : "" }
 
     { sessionStorage.getItem("token") && 
@@ -41,13 +45,14 @@ const Rotas = () => {
     window.location.pathname != "/sign-up" && 
     window.location.pathname != "/sign-up-costumer" && 
     window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`
-    ${location.pathname == "/establishment/performance/menu" || 
-    location.pathname == "/establishment/performance/relevance" || 
-    location.pathname == "/establishment/performance/comments" ||  
-    window.location.pathname == "/search-user" || 
-    window.location.pathname == "/establishment/performance/insights" || 
-    window.location.pathname == "/establishment/info" || 
-    window.location.pathname == "/establishment" ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
+    ${window.location.pathname.startsWith("/establishment/performance/menu") || 
+    window.location.pathname == "/establishment/performance/relevance" || 
+    window.location.pathname == "/user-profile-edit" || 
+    window.location.pathname == "/establishment/performance/comments" ||  
+    window.location.pathname.startsWith("/search-user") || 
+    window.location.pathname.startsWith("/establishment/performance/insights") || 
+    window.location.pathname.startsWith("/establishment-menu/:id") || 
+    window.location.pathname.startsWith("/establishment/info") ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>
@@ -61,15 +66,15 @@ const Rotas = () => {
           Component={SignupCostumerEstablishment}
           path="/sign-up-establishment"
         />
-        <Route Component={UserProfile} path="/user-profile" />
+        <Route Component={UserProfile} path="/user-profile/:id" />
 
-        <Route path="/establishment-menu/:id" Component={Cardapio} />
+        <Route path="/establishment-menu/:id" Component={MenuUser} />
 
         <Route path="/profile" />
 
         <Route path="/establishment" />
         <Route
-          path="/establishment-edit-personal"
+          path="/establishment-edit"
           Component={EstablismentEditPersonal}
         />
 
@@ -91,7 +96,8 @@ const Rotas = () => {
         />
         <Route Component={MenuDash} path="/establishment/performance/menu" />
 
-        <Route Component={EstablishmentPage} path="/establishment/info" />
+        <Route Component={EstablishmentPage} path="/establishment/info/:id" />
+        <Route Component={PerformanceDash} path="/establishment/performance/insights" />
         <Route Component={SearchUser} path="/search-user" />
         <Route
           Component={Relevance}
