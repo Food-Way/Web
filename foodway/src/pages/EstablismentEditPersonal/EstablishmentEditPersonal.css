@@ -107,9 +107,7 @@
 .establishment-edit-sec-delete {
   margin-left: auto;
   padding: 10px 0px;
-  width: 40%;
-  max-width: 100px;
-  min-width: 80px;
+
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -145,6 +143,13 @@
   margin: 10px 10px 10px 0px;
   transition: 0.3s;
   text-decoration: none;
+}
+.establishment-edit-sec-add:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
 }
 .establishment-edit-sec-delete:hover {
   background: #3c3c3c;
@@ -211,6 +216,7 @@
 .form-container-edit-profile {
   width: 95%;
   padding: 50px 0px;
+
   display: flex;
 
   justify-content: space-around;
@@ -350,4 +356,19 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.cover-img-edit-establishment {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.cover-img-edit-establishment-profile {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 40rem;
+  left: 53vw;
 }
