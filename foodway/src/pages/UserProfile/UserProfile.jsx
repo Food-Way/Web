@@ -132,6 +132,7 @@ const UserProfile = () => {
                     level={user.level}
                     profileRate={user.profileRate}
                     qtdComments={user.qtdComments}
+                    upvotes={user.qtdUpvotes}
                   />
                 </div>
               </div>
