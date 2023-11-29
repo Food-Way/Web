@@ -4,7 +4,7 @@ import { Comment } from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
-import { ButtonSecondary } from "../../components/Button/Button"
+import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api from "../../services/api";
 
 import "./UserProfile.css";
@@ -127,7 +127,7 @@ const UserProfile = () => {
                   <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()} */}
-                  {sessionStorage.getItem("my-profile") === atob(true) ? <ButtonSecondary text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="user-info-right">
                   <RateCard

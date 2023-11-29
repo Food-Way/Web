@@ -37,9 +37,9 @@ function SearchUser() {
     var typeUser = "ESTABLISHMENT";
     const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
-    async function getSearchEstab() {
+    async function getSearchEstab({ filter }) {
         try {
-            const establishmentResponse = await api.get(`/establishments/search`, {
+            const establishmentResponse = await api.get(filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, {
                 headers: {
                     Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
                     ID_SESSION: atob(sessionStorage.getItem("idUser")),
@@ -54,9 +54,9 @@ function SearchUser() {
         }
     }
 
-    async function getSearchCustomer(filter) {
+    async function getSearchCustomer() {
         try {
-            const customerResponse = await api.get(filter ? `/customers/search?searchFilter=${filter}` : `/customers/search`, {
+            const customerResponse = await api.get(`/customers/search`, {
                 headers: {
                     Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
                 },
@@ -96,29 +96,44 @@ function SearchUser() {
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
 
+        if (id == 2) {
+            getSearchEstab({ filter: "COMMENTS" });
+            // getSearchCustomer({ filter: "COMMENTS" });
+        } else if (id == 3) {
+            getSearchEstab({ filter: "RELEVANCE" });
+            // getSearchCustomer({ filter: "RELEVANCE" });
+        } else if (id == 4) {
+            getSearchEstab({ filter: "UPVOTES" });
+            // getSearchCustomer({ filter: "UPVOTES" });
+        }
+
         for (let index = 1; index <= 4; index++) {
             var indexFilter = document.getElementById(`${index}`);
-            if (indexFilter.classList.contains("item-filter-active") && `${index}` != id) {
+            if (
+                indexFilter.classList.contains("item-filter-active") &&
+                `${index}` != id
+            ) {
                 indexFilter.classList.toggle("item-filter-active");
             }
         }
+
         selectedFilter.classList.toggle("item-filter-active");
     }
 
     const handleCardClick = (index, type) => {
-        console.log("Card selecionado:", index);
+        // console.log("Card selecionado:", index);
         setViewDetails(!viewDetails);
         setSelectedCard(index);
         setSelectedCardType(type);
     };
 
     useEffect(() => {
-        setSearch([...searchCustomer, ...searchEstab]);
+        setSearch([...searchEstab, ...searchCustomer]);
     }, [searchCustomer, searchEstab]);
 
     useEffect(() => {
-        getSearchEstab();
-        getSearchCustomer();
+        getSearchEstab({ filter: "RELEVANCE" });
+        getSearchCustomer({ filter: "RELEVANCE" });
     }, []);
 
     useEffect(() => {
@@ -155,7 +170,6 @@ function SearchUser() {
                                                 getMaps(item.lat, item.lng)
                                             }
                                         }}>
-                                            {console.log("item:", item)}
                                             <SearchCard
                                                 key={index}
                                                 name={item.name}

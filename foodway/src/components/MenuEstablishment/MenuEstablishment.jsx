@@ -123,9 +123,11 @@ const MenuEstablishment = (props) => {
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
     } else if (className == ".profile-item") {
-      navigate("/user-profile");
+      navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
     } else if (className == ".users-item") {
       navigate("/users");
+    } else if(className == ".search-item") {
+      navigate("/search-user");
     } else if (className == ".out-item") {
       handleLogoff();
     }
@@ -226,62 +228,65 @@ const MenuEstablishment = (props) => {
                   setNavigate(".search-item");
                 }}
               >
-                <SubMenu
-                  icon={
-                    <FontAwesomeIcon
-                      icon={faStore}
-                      size="lg"
-                      className="establishment-item"
-                    />
-                  }
-                  label={"Estabelecimento " + "(" + establishment.length + ")"}
-                  onClick={() => {
-                    setNavigate(".establishment-item");
-                  }}
-                >
-                  {establishment.map((item) => {
-                    return (
-                      <MenuItem
-                        key={item.id}
-                        onClick={() => setCheck("e" + item.id)}
-                      >
-                        <div className="menu-item">
-                          <div className="pretty p-icon p-round p-smooth check-culinary">
-                            <input
-                              type="checkbox"
-                              onClick={() => setCheck("e" + item.id)}
-                              id={"e" + item.id}
-                            />
-                            <div className="state">
-                              <DoneIcon className="icon check" />
-                              <label>{item.nome}</label>
-                            </div>
-                          </div>
-                        </div>
-                      </MenuItem>
-                    );
-                  })}
-                </SubMenu>
-                {sessionStorage.getItem("token") !== null ? (
-                  <MenuItem
-                    className="users-item"
-                    icon={
-                      <FontAwesomeIcon
-                        icon={faUserLarge}
-                        size="lg"
-                        onClick={() => {
-                          setNavigate(".users-item");
-                        }}
-                      />
-                    }
-                  >
-                    <span>Usuários ({users.length})</span>
-                  </MenuItem>
-                ) : (
-                  ""
-                )}
               </SubMenu>
             </>
+
+            //     <SubMenu
+            //       icon={
+            //         <FontAwesomeIcon
+            //           icon={faStore}
+            //           size="lg"
+            //           className="establishment-item"
+            //         />
+            //       }
+            //       label={"Estabelecimento " + "(" + establishment.length + ")"}
+            //       onClick={() => {
+            //         setNavigate(".establishment-item");
+            //       }}
+            //     >
+            //       {establishment.map((item) => {
+            //         return (
+            //           <MenuItem
+            //             key={item.id}
+            //             onClick={() => setCheck("e" + item.id)}
+            //           >
+            //             <div className="menu-item">
+            //               <div className="pretty p-icon p-round p-smooth check-culinary">
+            //                 <input
+            //                   type="checkbox"
+            //                   onClick={() => setCheck("e" + item.id)}
+            //                   id={"e" + item.id}
+            //                 />
+            //                 <div className="state">
+            //                   <DoneIcon className="icon check" />
+            //                   <label>{item.nome}</label>
+            //                 </div>
+            //               </div>
+            //             </div>
+            //           </MenuItem>
+            //         );
+            //       })}
+            //     </SubMenu>
+            //     {sessionStorage.getItem("token") !== null ? (
+            //       <MenuItem
+            //         className="users-item"
+            //         icon={
+            //           <FontAwesomeIcon
+            //             icon={faUserLarge}
+            //             size="lg"
+            //             onClick={() => {
+            //               setNavigate(".users-item");
+            //             }}
+            //           />
+            //         }
+            //       >
+            //         <span>Usuários ({users.length})</span>
+            //       </MenuItem>
+            //     ) : (
+            //       ""
+            //     )}
+            //   </SubMenu>
+            // </>
           )}
           {sessionStorage.getItem("token") !== null ? (
             <MenuItem
