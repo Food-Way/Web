@@ -73,12 +73,21 @@ const SignIn = () => {
         } else {
           console.log("Login failed with status code:", response.status);
           console.log("Response data:", response.data);
+          toast.error("Usuário ou senha inválidos");
         }
       } catch (error) {
         if (error.response.status === 401) {
           console.log("Login failed with status code:", error.response.status);
-          toast.error("Email ou senha incorretos!");
+          toast.error("Usuário ou senha inválidos");
           console.log("Response data:", error.response.data);
+        }
+        else if (error.response && error.response.status === 404) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Usuário não cadastrado");
+          console.log("Response data:", error.response.data);
+        } else {
+          console.error("Error during login:", error);
+          toast.error("Usuario não localizado");
         }
       }
     }

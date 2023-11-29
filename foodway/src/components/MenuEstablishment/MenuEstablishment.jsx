@@ -105,25 +105,120 @@ const MenuEstablishment = (props) => {
         item.classList.toggle("item-active");
     }
 
-    return (
-        <>
-                <button className="btn-menu-switch" onClick={() => { 
-                    setOpenMenu(!openMenu)  
-                    var btn = document.querySelector(".btn-menu-switch");
-                    btn.classList.toggle("btn-menu-animate");
-                    }}></button>
-            <Sidebar
-                collapsed={openMenu}
-                rootStyles={{
-                    [`.${sidebarClasses.container}`]: {
-                        height: (props.height),
-                        width: openMenu ? "75px" : "22vw",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                        backgroundColor: "var(--branco)",
-                        paddingBottom: "3rem",
-                        transition: "all 0.3s   "
+  return (
+    <>
+      <button
+        className="btn-menu-switch"
+        onClick={() => {
+          setOpenMenu(!openMenu);
+          var btn = document.querySelector(".btn-menu-switch");
+          btn.classList.toggle("btn-menu-animate");
+        }}
+      ></button>
+      <Sidebar
+        collapsed={openMenu}
+        rootStyles={{
+          [`.${sidebarClasses.container}`]: {
+            height: props.height,
+            width: openMenu ? "75px" : "22vw",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            backgroundColor: "var(--branco)",
+            paddingBottom: "3rem",
+            transition: "all 0.3s   ",
+            position: "fixed",
+          },
+        }}
+      >
+        <Menu>
+          <MenuItem
+            icon={<FontAwesomeIcon icon={faUser} className="profile-item" />}
+            onClick={() => {
+              setNavigate(".profile-item");
+            }}
+          >
+            <span className="profile-item">Perfil</span>
+          </MenuItem>
+
+          {/* Utilizar parseJWT */}
+          {typeUser === "ESTABLISHMENT " ? (
+            <>
+              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
+                {" "}
+                Desempenho{" "}
+              </MenuItem>
+              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} />}>
+                {" "}
+                Cardápio{" "}
+              </MenuItem>
+              <MenuItem icon={<FontAwesomeIcon icon={faComments} />}>
+                {" "}
+                Comentários{" "}
+              </MenuItem>
+              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} />}>
+                {" "}
+                Relevância{" "}
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <SubMenu
+                icon={
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="search-item"
+                  />
+                }
+                label={"Busca"}
+                onClick={() => {
+                  setNavigate(".search-item");
+                }}
+              >
+                <SubMenu
+                  icon={
+                    <FontAwesomeIcon
+                      icon={faStore}
+                      className="establishment-item"
+                    />
+                  }
+                  label={"Estabelecimento " + "(" + establishment.length + ")"}
+                  onClick={() => {
+                    setNavigate(".establishment-item");
+                  }}
+                >
+                  {establishment.map((item) => {
+                    return (
+                      <MenuItem
+                        key={item.id}
+                        onClick={() => setCheck("e" + item.id)}
+                      >
+                        <div className="menu-item">
+                          <div className="pretty p-icon p-round p-smooth check-culinary">
+                            <input
+                              type="checkbox"
+                              onClick={() => setCheck("e" + item.id)}
+                              id={"e" + item.id}
+                            />
+                            <div className="state">
+                              <DoneIcon className="icon check" />
+                              <label>{item.nome}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </MenuItem>
+                    );
+                  })}
+                </SubMenu>
+                {sessionStorage.getItem("token") !== null ? (
+                  <MenuItem
+                    className="users-item"
+                    icon={
+                      <FontAwesomeIcon
+                        icon={faUserLarge}
+                        onClick={() => {
+                          setNavigate(".users-item");
+                        }}
                     }
                 }}
             >

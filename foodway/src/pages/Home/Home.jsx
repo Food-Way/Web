@@ -34,7 +34,7 @@ const Home = () => {
       <ContainerCardFood />
       <div style={styleDiv}>
         <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" />
-        <CarrosselEstablishment headerText="Mais Comentados:" />
+        <CarrosselEstablishment headerText="Mais Comentados:" listaRes />
         <img
           src={card}
           alt="avalie-os-restaurantes"
