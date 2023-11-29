@@ -36,16 +36,7 @@ const UserProfile = () => {
     const idUser = atob(sessionStorage.getItem("idUser"));
     console.log("idUser: ", idUser);
 
-    var type = atob(sessionStorage.getItem("typeUser"));
-    var typeReq = "";
-
-    if (type == "ESTABLISHMENT") {
-      typeReq = "establishments";
-    } else {
-      typeReq = "customer";
-    }
-
-    const response = api.get(`/${typeReq}/profile/${id}`, {
+    const response = api.get(`/customers/profile/${id}`, {
       headers: {
         Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
       },
@@ -130,7 +121,7 @@ const UserProfile = () => {
                   <img className="profile-photo" src={atob(sessionStorage.getItem("profile-photo"))} alt="" />
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("typeUser")) == "CLIENT") ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> }
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : "" }
                 </div>
                 <div className="user-info-right">
                   <RateCard

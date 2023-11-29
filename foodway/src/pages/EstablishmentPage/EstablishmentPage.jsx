@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import api, { api_maps } from "../../services/api.js";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
+import { ButtonSecondaryLink } from "../../components/Button/Button"
 const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
 const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
 const Report = "https://foodway.blob.core.windows.net/public/report.png";
@@ -136,6 +137,7 @@ const EstablishmentPage = () => {
               </div>
             </div>
           </div>
+          <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} />
         </section>
         <section>
           <div className="establishment-global-container">
