@@ -49,6 +49,7 @@ const SignIn = () => {
     } else {
       try {
         const response = await api.post("users/login", data);
+
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
@@ -78,11 +79,12 @@ const SignIn = () => {
         } else {
           console.log("Login failed with status code:", response.status);
           console.log("Response data:", response.data);
+          toast.error("Usuário ou senha inválidos");
         }
       } catch (error) {
         if (error.response.status === 401) {
           console.log("Login failed with status code:", error.response.status);
-          toast.error("Email ou senha incorretos!");
+          toast.error("Usuário ou senha inválidos");
           console.log("Response data:", error.response.data);
         }
         if (error.response.status === 400) {

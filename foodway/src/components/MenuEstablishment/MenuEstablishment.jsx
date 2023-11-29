@@ -1,57 +1,39 @@
 import { useState, React, useEffect } from "react";
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  sidebarClasses,
-  menuClasses,
-} from "react-pro-sidebar";
-import {
-  faUser,
-  faMagnifyingGlass,
-  faStore,
-  faUserLarge,
-  faArrowRightFromBracket,
-  faChartSimple,
-  faComments,
-  faRankingStar,
-  faBookOpen,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, menuClasses } from 'react-pro-sidebar';
+import { faUser, faMagnifyingGlass, faStore, faUserLarge, faArrowRightFromBracket, faChartSimple, faComments, faRankingStar, faBookOpen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from "react-router-dom";
 import UserProfile from "../../pages/UserProfile/UserProfile";
-import DoneIcon from "@material-ui/icons/Done";
+import DoneIcon from '@material-ui/icons/Done';
 import { toast } from "react-toastify";
-import "./MenuEstablishment.css";
+import './MenuEstablishment.css';
 
 const MenuEstablishment = (props) => {
   const navigate = useNavigate();
   const [oldPath, setOldPath] = useState("");
   const [openMenu, setOpenMenu] = useState(true);
 
-  const [establishment, setEstablishment] = useState([
-    { id: 1, nome: "Restaurante Italiano" },
-    { id: 2, nome: "Churrascaria" },
-    { id: 3, nome: "Comida Mexicana" },
-    { id: 4, nome: "Sushi Bar" },
-    { id: 5, nome: "Cafeteria" },
-    { id: 6, nome: "Pizzaria" },
-    { id: 7, nome: "Restaurante Vegetariano" },
-    { id: 8, nome: "Comida Indiana" },
-    { id: 9, nome: "Restaurante de Frutos do Mar" },
-  ]);
+    const [establishment, setEstablishment] = useState([
+        { "id": 1, "nome": "Restaurante Italiano" },
+        { "id": 2, "nome": "Churrascaria" },
+        { "id": 3, "nome": "Comida Mexicana" },
+        { "id": 4, "nome": "Sushi Bar" },
+        { "id": 5, "nome": "Cafeteria" },
+        { "id": 6, "nome": "Pizzaria" },
+        { "id": 7, "nome": "Restaurante Vegetariano" },
+        { "id": 8, "nome": "Comida Indiana" },
+        { "id": 9, "nome": "Restaurante de Frutos do Mar" }
+    ]);
 
-  const [users, setUsers] = useState([
-    { id: 1, nome: "Alice" },
-    { id: 2, nome: "Bob" },
-    { id: 3, nome: "Charlie" },
-    { id: 4, nome: "David" },
-    { id: 5, nome: "Eva" },
-  ]);
+    const [users, setUsers] = useState([
+        { "id": 1, "nome": "Alice" },
+        { "id": 2, "nome": "Bob" },
+        { "id": 3, "nome": "Charlie" },
+        { "id": 4, "nome": "David" },
+        { "id": 5, "nome": "Eva" }
+    ]);
 
-  const typeUser = sessionStorage.getItem("typeUser");
+    const typeUser = sessionStorage.getItem("typeUser");
 
   const handleLogoff = () => {
     sessionStorage.clear();
@@ -62,17 +44,17 @@ const MenuEstablishment = (props) => {
     }, 2000);
   };
 
-  function setCheck(id) {
-    var check = document.getElementById(id);
-    if (check.checked) {
-      check.checked = false;
-    } else {
-      check.checked = true;
+    function setCheck(id) {
+        var check = document.getElementById(id);
+        if (check.checked) {
+            check.checked = false;
+        } else {
+            check.checked = true;
+        }
     }
-  }
 
-  function setNavigate(className) {
-    className = className || <UserProfile />;
+    function setNavigate(className) {
+        className = className || <UserProfile />;
 
     var profile = document.querySelector(".profile-item");
     var search = document.querySelector(".search-item");
@@ -84,23 +66,17 @@ const MenuEstablishment = (props) => {
     var relevance = document.querySelector(".relevance-item");
     var out = document.querySelector(".out-item");
 
-    if (oldPath != className) {
-      setColor(className);
-      setOldPath(className);
+        if (oldPath != className) {
+            setColor(className);
+            setOldPath(className);
 
-      if (
-        profile.classList.contains("item-active") &&
-        className != ".profile-item"
-      ) {
-        profile.classList.remove("item-active");
-      }
+            if (profile.classList.contains("item-active") && className != ".profile-item") {
+                profile.classList.remove("item-active");
+            }
 
-      if (
-        search.classList.contains("item-active") &&
-        className != ".search-item"
-      ) {
-        search.classList.remove("item-active");
-      }
+            if (search.classList.contains("item-active") && className != ".search-item") {
+                search.classList.remove("item-active");
+            }
 
       // if (
       //   establishment.classList.contains("item-active") &&
@@ -144,10 +120,10 @@ const MenuEstablishment = (props) => {
         search.classList.remove("item-active");
       }
 
-      if (out.classList.contains("item-active") && className != ".out-item") {
-        out.classList.remove("item-active");
-      }
-    }
+            if (out.classList.contains("item-active") && className != ".out-item") {
+                out.classList.remove("item-active");
+            }
+        }
 
     console.log(className);
     if (className == "") {
@@ -183,10 +159,10 @@ const MenuEstablishment = (props) => {
     return className;
   }
 
-  function setColor(className) {
-    var item = document.querySelector(className);
-    item.classList.toggle("item-active");
-  }
+    function setColor(className) {
+        var item = document.querySelector(className);
+        item.classList.toggle("item-active");
+    }
 
   return (
     <>

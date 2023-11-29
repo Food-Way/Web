@@ -82,6 +82,12 @@ const CostumerEdit = () => {
   };
 
   const handleUpdateProfileInfo = async () => {
+    
+    if (!formData.name.trim() || !formData.bio.trim()) {
+      toast.error("Preencha todos os campos para prosseguir");
+      return;
+    }
+
     const profileUpdateData = {
       name: formData.name,
       bio: formData.bio,
