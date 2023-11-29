@@ -2,9 +2,9 @@ import { React, useEffect, useState } from "react";
 import { Neutral, Positive, Negative } from "../../components/SentimentTag/SentimentTag";
 import ReactStars from "react-rating-stars-component";
 import Upvotes from "../../components/Upvotes/Upvotes";
-import ImageComment from "../../../public/comment-icon.png"
-import DefaultUserImage from "../../../public/default-user-image.png"
 import "./Comment.css";
+
+const ImageComment = "https://foodway.blob.core.windows.net/public/comment-icon.png";
 
 const Comment = (props) => {
     const [updateText, setUpdateText] = useState(false);
@@ -138,8 +138,7 @@ const CommentIndividual = (props) => {
         <>
             <div className="establishment-comments-box">
                 <div className="user-content-comment">
-                    {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
-                    <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                    <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
                     <div className="user-content-values">
                         <ReactStars
                             size={24}
@@ -203,8 +202,7 @@ const CommentReply = (props) => {
         <>
             <div className="user-content-comment">
                 <div className="establishment-bar" />
-                {/*<img className="establishment-user-icon" src={props.userImage == null || undefined || "" ? DefaultUserImage : props.userImage} alt="User image" /> */}
-                <img className="establishment-user-icon" src={DefaultUserImage} alt="User image" />
+                <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
                 <div className="user-content-values">
                     <ReactStars
                         size={24}

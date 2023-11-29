@@ -1,5 +1,5 @@
 import React from "react";
-import UpvoteIcon from "../../../public/vector.svg";
+const UpvoteIcon = "https://foodway.blob.core.windows.net/public/upvotes.svg";
 import "./Upvotes.css";
 import api from "../../services/api";
 

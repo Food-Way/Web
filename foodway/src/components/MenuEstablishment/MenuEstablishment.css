@@ -10,7 +10,7 @@
     left: 21.3vw;
     border: none;
     background-color: var(--preto);
-    background-image: url('../../../public/hideMenu.png');
+    background-image: url('https://foodway.blob.core.windows.net/public/hideMenu.png');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: var(--arredondamento);
@@ -18,7 +18,7 @@
 }
 
 .btn-menu-animate {
-    background-image: url('../../../public/hideMenu.png');
+    background-image: url('https://foodway.blob.core.windows.net/public/hideMenu.png');
     left: 5.5rem;
     transition: all 0.3s;
 }

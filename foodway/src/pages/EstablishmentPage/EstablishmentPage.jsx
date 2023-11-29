@@ -2,10 +2,10 @@ import { React, useState } from "react";
 import api, { api_maps } from "../../services/api.js";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
-import Phone from "../../../public/phone.png"
-import BookMenu from "../../../public/book-menu.png"
-import Report from "../../../public/report.png"
-import Add from "../../../public/adicionar.svg"
+const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
+const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
+const Report = "https://foodway.blob.core.windows.net/public/report.png";
+const Add = "https://foodway.blob.core.windows.net/public/adicionar.svg";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CommentIndividual, CommentReply } from "../../components/Comment/Comment.jsx";
@@ -133,6 +133,7 @@ const EstablishmentPage = () => {
                                                 comment={item.comment}
                                                 upvotes={item.upvotes}
                                                 idComment={item.idComment}
+                                                userPhoto={item.userPhoto}
                                             />
                                         ))}
                                     </> :
@@ -149,6 +150,7 @@ const EstablishmentPage = () => {
                                                         idComment={commentParent.idComment}
                                                         idCustomer={atob(sessionStorage.getItem("idUser"))}
                                                         idEstablishment={idEstablishment}
+                                                        userPhoto={commentParent.userPhoto}
                                                     />
                                                     <div className={commentParent.childComments.length > 0 ? "scroll-comments" : "establishment-more-box"}>
                                                         {commentParent.childComments.map((commentReply) => (
@@ -161,6 +163,7 @@ const EstablishmentPage = () => {
                                                                 idComment={commentReply.idComment}
                                                                 idCustomer={atob(sessionStorage.getItem("idUser"))}
                                                                 idEstablishment={idEstablishment}
+                                                                userPhoto={commentReply.userPhoto}
                                                             />
                                                         ))}
                                                     </div>

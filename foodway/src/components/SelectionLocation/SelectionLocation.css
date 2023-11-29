@@ -12,7 +12,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../../../public/seta.svg") 100% 50% no-repeat;
+    background: url("https://foodway.blob.core.windows.net/public/seta.svg") 100% 50% no-repeat;
     /* border: none; */
     cursor: pointer;
 }

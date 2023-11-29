@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import QRCode from "react-qr-code";
-import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-import Adicionar from "../../../public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter";
-import ImageFilter from "../../../public/filter.svg";
-import Report from "../../components/Report/Report";
+const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import api from "../../services/api";
 import "./MenuEstablishmentContainer.css";
 

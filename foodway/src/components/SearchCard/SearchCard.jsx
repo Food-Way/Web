@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
-import DefaultImage from "../../../public/default-user-image.png";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Heart from "react-animated-heart";
 import api from "../../services/api";
 
@@ -31,7 +28,7 @@ const SearchCard = (props) => {
             <div className="card-container">
                 <div className="card-box">
                     <div className="card-header">
-                        <img src={props.photo === "" || props.photo == undefined ? DefaultImage : props.photo} alt="" className="card-image" />
+                        <img src={props.photo} alt="" className="card-image" />
                     </div>
                     <div className="card-body">
                         <span className="user-title">{props.name}</span>
