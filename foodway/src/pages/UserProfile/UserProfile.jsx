@@ -6,6 +6,8 @@ import RateCard from "../../components/RateCard/RateCard";
 import DefaultImage from "../../../public/default-user-image.png";
 import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api from "../../services/api";
+import ContentLoader from 'react-content-loader'
+
 
 import "./UserProfile.css";
 import { useParams } from "react-router-dom";
@@ -18,24 +20,19 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
 
-  const ProfileShow = () => (
+  const MyLoader = () => (
     <ContentLoader
       speed={2}
-      width={300}
-      height={170}
-      viewBox="0 0 400 170"
-      backgroundColor="#f3f3f3"
-      foregroundColor="#ecebeb"
+      width={1105}
+      height={451}
+      viewBox="0 0 1105 451"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
     >
-      <circle cx="248" cy="59" r="49" />
-      <circle cx="263" cy="66" r="8" />
-      <rect x="175" y="120" rx="0" ry="0" width="156" height="8" />
-      <rect x="204" y="137" rx="0" ry="0" width="100" height="8" />
-      <rect x="248" y="128" rx="0" ry="0" width="0" height="1" />
-      <rect x="247" y="126" rx="0" ry="0" width="1" height="8" />
-      <rect x="252" y="166" rx="0" ry="0" width="1" height="0" />
+      <rect x="12" y="309" rx="2" ry="2" width="400" height="212" />
+      <rect x="407" y="323" rx="2" ry="2" width="400" height="212" />
     </ContentLoader>
-  );
+  )
 
   function getUser() {
     const idUser = atob(sessionStorage.getItem("idUser"));
@@ -50,7 +47,7 @@ const UserProfile = () => {
         if (response.status === 200) {
           setUser(response.data);
           setComments(response.data.comments);
-          setEstablishments(response.data.establishmentDTOs);  
+          setEstablishments(response.data.establishmentDTOs);
           console.log("response: ", response.data);
           console.log("user: ", user);
           console.log("comments: ", comments);
@@ -124,7 +121,7 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={user.profilePhoto === "" || user.profilePhoto == undefined ? DefaultImage : user.profilePhoto} alt="" />
+                  <img className="profile-photo" src={user.profilePhoto} alt="" />
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()} */}
                   {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
@@ -144,6 +141,7 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
+                <MyLoader />
                 {comments.map((item) => (
                   <>
                     <Comment
