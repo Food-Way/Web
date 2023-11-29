@@ -76,7 +76,7 @@ const EstablishmentPage = () => {
                 iptCampo1="productName"
                 successTitle="Comentário criado!"
                 content="Adicionar comentário"
-                status={201}
+                status={200}
                 method="post"
                 uri="comments"
                 idCustomer={atob(sessionStorage.getItem("idUser"))}

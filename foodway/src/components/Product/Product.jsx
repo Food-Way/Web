@@ -37,8 +37,8 @@ const Product = (props) => {
                   cancelText="Cancelar"
                   lblCampo1="Nome"
                   lblCampo2="Preço"
-                  iptProductPrice="productPrice"
-                  iptProductName="productName"
+                  iptCampo2="productPrice"
+                  iptCampo1="productName"
                   status={200}
                   successTitle="Produto editado!"
                   content={<FontAwesomeIcon icon={faPenToSquare} />}

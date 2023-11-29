@@ -40,6 +40,9 @@ function HandleModalDelete(props) {
 }
 
 function formModal(props) {
+    console.log(props.name);
+    console.log(props.price);
+    console.log(props.method)
     Swal.fire({
         customClass: {
             heightAuto: false,
@@ -51,16 +54,16 @@ function formModal(props) {
         cancelButtonColor: '#222',
         confirmButtonText: props.confirmText,
         cancelButtonText: props.cancelText,
-        html: location.pathname === '/establishment/performance/menu' ? `
+        html: location.pathname.startsWith('/establishment/performance/menu') ? `
     <div className="modal-container">
       <div className="modal-box">
         <div className="modal-input-box">
           <label htmlFor="${props.iptCampo1}">${props.lblCampo1}</label>
-          <input type="text" id="${props.iptCampo1}" value=${props.name === undefined ? " " : props.name}>
+          <input type="text" id="${props.iptCampo1}" value="${props.name === undefined ? " " : props.name}">
         </div>
         <div className="modal-input-box">
           <label htmlFor="${props.iptCampo2}">${props.lblCampo2}</label>
-          <input type="text" id="${props.iptCampo2}" value=${props.price === undefined ? " " : props.price}>
+          <input type="text" id="${props.iptCampo2}" value="${props.price === undefined ? " " : props.price}">
         </div>
       </div>
     </div>
@@ -89,7 +92,12 @@ function formModal(props) {
             console.log(props.idCustomer)
             console.log(document.getElementById(props.iptCampo1).value)
             console.log(document.getElementById(props.iptCampo2).value)
-            if (location.pathname.startsWith('/establishment/performance/menu')) {
+            if(location.pathname.startsWith('/establishment/performance/menu') && props.method == 'put') {
+                data = {
+                    name: document.getElementById(props.iptCampo1).value,
+                    price: document.getElementById(props.iptCampo2).value,
+                };
+            } else if (location.pathname.startsWith('/establishment/performance/menu') && props.method == 'post') {
                 console.log(atob(sessionStorage.getItem('idUser')))
                 data = {
                     name: document.getElementById(props.iptCampo1).value,
@@ -107,10 +115,6 @@ function formModal(props) {
             const headers = {
                 Authorization: 'Bearer ' + atob(sessionStorage.getItem('token')),
             };
-
-            console.log("idC" + data.idCustomer);
-            console.log("idE" + data.idEstablishment);
-            console.log("c" + data.comment);
 
             api({
                 method: props.method,

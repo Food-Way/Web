@@ -248,7 +248,7 @@ const MenuDash = () => {
                                 </div>
                             </div>
                         </section>
-                        <div className="side-infos">
+                        {/* <div className="side-infos">
                             <div className="side-qr-code">
                                 <span className="title">QrCode</span>
                                 <div className="qr-code-box">
@@ -271,7 +271,7 @@ const MenuDash = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
