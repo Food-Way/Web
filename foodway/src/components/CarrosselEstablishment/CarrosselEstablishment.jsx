@@ -8,8 +8,11 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "./CarrosselEstablishment.css";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const CarrosselEstablishment = ({ headerText, establishment }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     console.log("CarrosselEstablishment");
     console.log(establishment);
@@ -36,6 +39,9 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
                   category={item.culinary[0].name}
                   image={item.culinary[0].photo}
                   rattingNumber={item.generalRate}
+                  onclick={() => {
+                    navigate(`/establishment/info/${item.idUser}`);
+                  }}
                 />
               </SwiperSlide>
             );

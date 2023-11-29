@@ -80,6 +80,7 @@ const EstablishmentPage = () => {
     }
 
     useEffect(() => {
+        console.log("idEstablishment: ", idEstablishment);
         getEstablishmentProfileData();
         getMaps(profile.lat, profile.lng);
     }, []);
@@ -94,7 +95,7 @@ const EstablishmentPage = () => {
         <>
             <div className="establishment-content-container">
                 <section>
-                    <div className="establishment-banner-box">
+                    <div className="establishment-banner-box" style={{backgroundImage: `url(${profile.profileHeaderImg})`}}>
                         <div className="establishment-content-banner-box">
                             <div className="establishment-title-box">
                                 <h1 className="title-establishment">{profile.name}</h1>
