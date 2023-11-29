@@ -1,5 +1,9 @@
 @import url(../../assets/css/style.css);
 
+.modal-box {
+    /* background-color: blue; */
+}
+
 .modal-button {
     border: none;
     text-decoration: none;
@@ -27,4 +31,29 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
+}
+
+.modal-input-box label {
+    text-align: start;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.modal-input-box input {
+    width: 93%;
+    height: 4rem;
+    border: var(--borda);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.swal2-confirm {
+    width: 6vw;
+    font-size: 1.5rem !important;
+}
+
+.swal2-cancel {
+    width: 6vw;
+    font-size: 1.5rem !important;
 }

@@ -33,6 +33,7 @@ const Rotas = () => {
     window.location.pathname == "/establishment/performance/relevance" || 
     window.location.pathname == "/establishment/performance/comments" || 
     window.location.pathname == "/search-user" || 
+    window.location.pathname == "/establishment-edit" || 
     window.location.pathname == "/user-profile-edit" || 
     window.location.pathname.startsWith("/establishment/performance/insights") || 
     window.location.pathname.startsWith("/establishment-menu/:id") || 
@@ -47,6 +48,7 @@ const Rotas = () => {
     window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`
     ${window.location.pathname.startsWith("/establishment/performance/menu") || 
     window.location.pathname == "/establishment/performance/relevance" || 
+    window.location.pathname == "/establishment-edit" || 
     window.location.pathname == "/user-profile-edit" || 
     window.location.pathname == "/establishment/performance/comments" ||  
     window.location.pathname.startsWith("/search-user") || 

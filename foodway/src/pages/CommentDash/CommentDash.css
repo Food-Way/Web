@@ -1,18 +1,21 @@
 @import url(../../assets/css/style.css);
 
 .comment-dashboard-container {
-    position: absolute;
-    top: 13rem;
-    left: 33vw;
+    width: calc(120vw - 15vw);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 4.5rem;
+    margin-top: 5rem;
+    transition: all 0.3s;
+}
+
+.comment-dashboard-container-switch {
+    width: calc(120vw - 15vw);
+    transition: all 0.3s;
 }
 
 .comment-dash-box {
-    width: 54vw;
+    width: 44vw;
     height: 75vh;
     display: flex;
     flex-direction: row;
