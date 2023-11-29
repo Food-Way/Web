@@ -52,10 +52,11 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          sessionStorage.setItem("name", btoa(response.data.name));
+          sessionStorage.setItem("name", response.data.name);
           sessionStorage.setItem("email", btoa(response.data.email));
           sessionStorage.setItem("idUser", btoa(response.data.idUser));
           sessionStorage.setItem("token", btoa(response.data.token));
+          sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
           sessionStorage.setItem("profile-photo", btoa(response.data.photo));
@@ -79,6 +80,21 @@ const SignIn = () => {
         if (error.response.status === 401) {
           console.log("Login failed with status code:", error.response.status);
           toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 400) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 404) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Email ou senha incorretos!");
+          console.log("Response data:", error.response.data);
+        }
+        if (error.response.status === 500) {
+          console.log("Login failed with status code:", error.response.status);
+          toast.error("Erro ao se autenticar!");
           console.log("Response data:", error.response.data);
         }
       }

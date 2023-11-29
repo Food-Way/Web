@@ -8,6 +8,7 @@ const HomeCardEstablishment = ({
   image,
   category,
   rattingNumber,
+  onclick,
 }) => {
   const ratingOptions = {
     size: "20px",
@@ -29,7 +30,7 @@ const HomeCardEstablishment = ({
   };
 
   return (
-    <span style={styleCard} className="card-establishment">
+    <span style={styleCard} className="card-establishment" onClick={onclick}>
       <div className="card-establishment-content">
         <p>{establishment}</p>
         <p>Restaurante {category}</p>

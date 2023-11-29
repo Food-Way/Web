@@ -7,20 +7,25 @@
     position: absolute;
     z-index: 4;
     top: 40%;
-    left: 21.3vw;
+    left: 5.5rem;
     border: none;
     background-color: var(--preto);
     background-image: url('https://foodway.blob.core.windows.net/public/hideMenu.png');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: var(--arredondamento);
-    transition: all 0.3s;
+    transition: all 0.35s;
+    transform: rotate(180deg);
 }
 
 .btn-menu-animate {
     background-image: url('https://foodway.blob.core.windows.net/public/hideMenu.png');
-    left: 5.5rem;
-    transition: all 0.3s;
+    left: 16.3vw;
+    transition: all 0.35s;
+}
+
+.btn-menu-rotate {
+    transform: rotate(0deg);
 }
 
 .menu-item label {

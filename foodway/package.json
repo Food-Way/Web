@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "app.jsx",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "start": "npm i --force && npm run dev"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@djpfs/react-vlibras": "^2.0.2",
@@ -29,6 +29,7 @@
     "react-animated-heart": "^0.0.8",
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
+    "react-heart": "^1.0.6",
     "react-input-mask": "^2.0.4",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-qr-code": "^2.0.12",

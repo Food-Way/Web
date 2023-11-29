@@ -1,8 +1,19 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
-const ButtonPrimary = ({ text, onclick, className = "button-primary" }) => {
+const ButtonPrimary = ({
+  text,
+  onclick,
+  className = "button-primary",
+  width,
+  height,
+}) => {
   return (
-    <button className={className} onClick={onclick} type="button">
+    <button
+      style={{ width: width, height: height }}
+      className={className}
+      onClick={onclick}
+      type="button"
+    >
       {text}
     </button>
   );
@@ -51,4 +62,14 @@ const ButtonSecondary = ({ text, onclick, className = "button-secondary" }) => {
   );
 };
 
-export { ButtonPrimary, ButtonSecondary, ButtonPrimaryLink, ButtonStep };
+const ButtonSecondaryLink = ({ text, url }) => {
+  return (
+    <Link className="button-secondary" to={url}>
+      {text}
+    </Link>
+  );
+};
+
+
+
+export { ButtonPrimary, ButtonSecondary, ButtonPrimaryLink, ButtonStep, ButtonSecondaryLink };

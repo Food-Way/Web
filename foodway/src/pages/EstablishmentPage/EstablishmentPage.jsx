@@ -86,6 +86,7 @@ const EstablishmentPage = () => {
     }
 
     useEffect(() => {
+        console.log("idEstablishment: ", idEstablishment);
         getEstablishmentProfileData();
     }, []);
 

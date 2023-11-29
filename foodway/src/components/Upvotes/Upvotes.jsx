@@ -33,7 +33,7 @@ const Upvotes = (props) => {
         <>
             <div className="upvotes" onClick={location.pathname.startsWith("/establishment/info/") ? ()=>{handleUpvotes(props.idComment, props.idEstablishment, props.idCustomer)} : ""}>
                 <img src={UpvoteIcon} alt="" />
-                <span>{props.upvotes}</span>
+                <span>{props.upvotes ? props.upvotes : 0}</span>
             </div>
         </>
     )

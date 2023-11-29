@@ -33,8 +33,6 @@ const SearchDetails = (props) => {
         setUpdateText(!updateText);
     }
 
-    var textao = "Lorem ipsum, dolor sit amet consectime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati magni, odit repellendus ipsa ducimus laboriosam atque! Maxime vel, nulla ipsa corporis eveniet magnam at fuga quam quasi enim, quia ut.";
-
     return (
         <>
             <div className="search-details-container">
@@ -66,14 +64,14 @@ const SearchDetails = (props) => {
                         </div>
                     </div>
                     <div className="search-detail-body">
-                        <span> {analysisText(textao, "text", updateText)} </span>
+                        <span> {analysisText(props.bio, "text", updateText)} </span>
                     </div>
-                    {textao.length > 150 ?
+                    {props.bio.length > 150 ?
                         <div className={`read-more-one more-text`} onClick={() => scrollTextShow(`read-more-one`)}>
                             <span> {updateText ? "Ver menos" : "Ver mais"} </span>
                         </div> : <div className="more-text"></div>}
                     <div className="search-detail-footer">
-                        <ButtonPrimaryLink text="Acessar" />
+                        <ButtonPrimaryLink text="Acessar" url={props.typeUser == "ESTABLISHMENT" ? "/establishment/info/" + props.idUser : "/user-profile/" + props.idUser} />
                     </div>
                 </div>
             </div>

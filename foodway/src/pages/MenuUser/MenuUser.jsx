@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MenuEstablishmentContainer from "../../components/MenuEstablishmentContainer/MenuEstablishmentContainer";
 
-const Cardapio = (props) => {
+const MenuUser = (props) => {
   const routeParams = useParams();
   const token = atob(sessionStorage.getItem("token"));
   const [menu, setMenu] = useState([]);
@@ -31,4 +31,4 @@ const Cardapio = (props) => {
     </div>
   );
 };
-export default Cardapio;
+export default MenuUser;
