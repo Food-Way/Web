@@ -118,7 +118,7 @@ const MenuEstablishment = (props) => {
     }
 
     console.log(className);
-    if (className == ".search-item") {
+    if (className == "") {
       navigate("/*");
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
