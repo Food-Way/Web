@@ -16,8 +16,8 @@ const RelevanceCard = (props) => {
                             <img src={BronzeMedal} alt="medal" className="medal" />
                             {/* <img src={props.profilePhoto} className="establishment-user-icon" alt="logo" /> */}
                             <span className="best-card-name">{props.establishmentName}</span>
-                            <RateNumberStar color="black" generalRate={props.generalRate} />
-                            <span>Avaliações: {props.qtdRates}</span>
+                            <RateNumberStar color="black" generalRate={props.generalRate == undefined || null ? 0 : props.generalRate} />
+                            <span>Avaliações: {props.qtdRates == undefined || null ? 0 : props.qtdRates}</span>
                         </div>
                     </div>
                 </div>

@@ -130,7 +130,7 @@ const UserProfile = () => {
                   <img className="profile-photo" src={atob(sessionStorage.getItem("profile-photo"))} alt="" />
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("typeUser")) == "CLIENT") ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> }
                 </div>
                 <div className="user-info-right">
                   <RateCard

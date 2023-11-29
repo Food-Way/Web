@@ -78,10 +78,6 @@ function formModal(props) {
             <label htmlFor="${props.iptCampo2}">${props.lblCampo2}</label>
             <input type="text" id="${props.iptCampo2}" value=${props.comment === undefined ? " " : props.comment}>
           </div>
-          <div>
-            <label htmlFor="${props.iptCampo3}">${props.lblCampo3}</label>
-            <input type="text" id="${props.iptCampo3}" value=${props.comment === undefined ? " " : props.comment}>
-          </div>
           </div>
         </div>
       </div>

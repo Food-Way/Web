@@ -1,11 +1,14 @@
 .costumer {
-  width: calc(122vw - 15vw);
+  width: calc(120vw - 15vw);
+  display: flex;
+  flex-direction: column;
   transition: all 0.3s;
 }
 
 .costumer-switch {
-  width: calc(102vw - 15vw);
+  width: calc(90vw - 15vw);
   transition: all 0.3s;
+  margin-left: 30rem;
 }
 
 .costumer-cover {

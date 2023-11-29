@@ -176,8 +176,13 @@ const MenuEstablishment = (props) => {
           var headerContainer = document.querySelector(".container-header");
 
           if (location.pathname.startsWith("/user-profile")) {
-            var profileContainer = document.querySelector(".profile-container");
-            profileContainer.classList.toggle("profile-container-switch");
+            if (location.pathname.startsWith("/user-profile-edit")) {
+              var profileContainer = document.querySelector(".costumer");
+              profileContainer.classList.toggle("costumer-switch");
+            } else {
+              var profileContainer = document.querySelector(".profile-container");
+              profileContainer.classList.toggle("profile-container-switch");
+            }
           }
 
           if (location.pathname.startsWith("/search-user")) {
@@ -195,19 +200,25 @@ const MenuEstablishment = (props) => {
             profileContainer.classList.toggle("menu-user-container-switch");
           }
 
-          if (location.pathname.startsWith("/establishment/performance")) {
-            var profileContainer = document.querySelector(".performance-dash-container");
-            profileContainer.classList.toggle("performance-dash-container-switch");
+          if (location.pathname.endsWith("/comments")) {
+            var profileContainer = document.querySelector(".comment-dashboard-container");
+            profileContainer.classList.toggle("comment-dashboard-container-switch");
+            
           }
 
-          if (location.pathname.startsWith("/establishment/performance/relevance")) {
+          if (location.pathname.endsWith("/relevance")) {
             var profileContainer = document.querySelector(".relevance-container");
             profileContainer.classList.toggle("relevance-container-switch");
           }
 
-          if (location.pathname.startsWith("/user-profile-edit")) {
-            var profileContainer = document.querySelector(".costumer");
-            profileContainer.classList.toggle("costumer-switch");
+          if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
+            if (location.pathname.startsWith("/establishment/performance/menu")) {
+              var profileContainer = document.querySelector(".menu-dashboard-container");
+              profileContainer.classList.toggle("menu-dashboard-container-switch");
+            } else {
+              var profileContainer = document.querySelector(".performance-dash-container");
+              profileContainer.classList.toggle("performance-dash-container-switch");
+            }  
           }
 
           btnImage.classList.toggle("btn-menu-rotate");
