@@ -1,6 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import api from '../../services/api';
+import ReactStars from "react-rating-stars-component";
 
 import './Modal.css';
 
@@ -74,6 +75,10 @@ function formModal(props) {
             <label htmlFor="${props.iptCampo2}">${props.lblCampo2}</label>
             <input type="text" id="${props.iptCampo2}" value=${props.comment === undefined ? " " : props.comment}>
           </div>
+          <div>
+            <label htmlFor="${props.iptCampo3}">${props.lblCampo3}</label>
+            <input type="text" id="${props.iptCampo3}" value=${props.comment === undefined ? " " : props.comment}>
+          </div>
         </div>
       </div>
     `
@@ -81,8 +86,8 @@ function formModal(props) {
         if (result.isConfirmed) {
             var data;
             console.log(props.idCustomer)
-            console.log( document.getElementById(props.iptCampo1).value)
-            console.log( document.getElementById(props.iptCampo2).value)
+            console.log(document.getElementById(props.iptCampo1).value)
+            console.log(document.getElementById(props.iptCampo2).value)
             if (location.pathname.startsWith('/establishment/performance/menu')) {
                 console.log(atob(sessionStorage.getItem('idUser')))
                 data = {
