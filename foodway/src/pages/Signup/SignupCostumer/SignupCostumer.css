@@ -94,10 +94,10 @@
   text-align: center;
 }
 
-* {
+/* * {
   scrollbar-width: auto;
   scrollbar-color: #ff0007 #ffffff;
-}
+} */
 
 *::-webkit-scrollbar {
   width: 7px;

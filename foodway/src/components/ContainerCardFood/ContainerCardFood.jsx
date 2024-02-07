@@ -7,17 +7,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import api from "../../services/api";
 
-const ContainerCardFood = () => {
-  const ar = "https://foodway.blob.core.windows.net/public/ar.png";
-  const br = "https://foodway.blob.core.windows.net/public/br.png";
-  const it = "https://foodway.blob.core.windows.net/public/it.png";
-  const jp = "https://foodway.blob.core.windows.net/public/jp.png";
-  const mx = "https://foodway.blob.core.windows.net/public/mx.png";
+const ContainerCardFood = (props) => {
 
   const [tamanhoDoElemento, setTamanhoDoElemento] = useState(0);
-  const [category, setCategory] = useState([]);
 
   const calcularSlidesPorVisualizacao = (tamanhoDoElemento) => {
     if (tamanhoDoElemento > 1300) {
@@ -33,7 +26,7 @@ const ContainerCardFood = () => {
     calcularSlidesPorVisualizacao(tamanhoDoElemento);
 
   useEffect(() => {
-    listCategory();
+    console.log(props)
     // Função para calcular o tamanho do elemento
     const calcularTamanhoDoElemento = () => {
       const elementoAlvo = document.getElementById("carrosselId");
@@ -57,19 +50,6 @@ const ContainerCardFood = () => {
     };
   }, []);
 
-  function listCategory() {
-    api.get("/culinaries")
-      .then(response => {
-        if (response.status === 200) {
-          console.log(response.data);
-          setCategory(response.data);
-        }
-      })
-      .catch(error => {
-        console.error('Erro ao buscar estabelecimentos:', error);
-      });
-  }
-
   return (
     <>
       <div className="carrossel-typefood">
@@ -82,13 +62,9 @@ const ContainerCardFood = () => {
           slidesPerView={slidesPorVisualizacao}
           navigation
         >
-          {category.map((item) => {
-            return (
-              <SwiperSlide key={item.id}>
-                <CardTypeFood typeFood={item.name} image={item.photo} />
-              </SwiperSlide>
-            )
-          })}
+          <SwiperSlide>
+            <CardTypeFood typeFood={props.typeFood} image={props.image} />
+          </SwiperSlide>
         </Swiper>
       </div>
     </>

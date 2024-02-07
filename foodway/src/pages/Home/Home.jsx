@@ -4,8 +4,11 @@ import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 import "./Home.css";
+import api from "../../services/api";
+import ContentLoader from 'react-content-loader'
+
 
 const Home = () => {
   const [establishmentLoad, setEstablishmentLoad] = useState(false);
@@ -30,62 +33,120 @@ const Home = () => {
 
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
+  const [category, setCategory] = useState([]);
 
-  const greaterRate = () => {
-    api
-      .get("/establishments/order-by-greater-rate")
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("greater-rate: " + response.data.vetor);
-          setGreaterRateEstab(response.data.vetor);
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar estabelecimentos:", error);
-      });
-  };
 
-  const greaterComments = () => {
+  const CategoryLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={1897}
+      height={131}
+      viewBox="0 0 1897 131"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
+      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
+      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="1058" y="15" rx="0" ry="0" width="250" height="250" />
+      <rect x="1322" y="14" rx="0" ry="0" width="250" height="250" />
+      <rect x="1586" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="1850" y="15" rx="0" ry="0" width="250" height="250" />
+    </ContentLoader>
+  )
+
+  const GreaterRateLoader = () => (
+    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+      speed={2}
+      width={1573}
+      height={250}
+      viewBox="0 0 1573 250"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
+      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
+      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
+    </ContentLoader>
+  )
+
+  const GreaterCommentsLoader = () => (
+    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+      speed={2}
+      width={1573}
+      height={250}
+      viewBox="0 0 1573 250"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
+      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
+      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
+    </ContentLoader>
+  )
+
+  async function listCategory() {
+    const response = await api_call("get", "/culinaries", null, null);
+    console.log(response);
+    setCategory(response);
+  }
+
+  async function greaterRate() {
+    const response = await api_call("get", "/establishments/order-by-greater-rate", null, null);
+    console.log(response)
+    setGreaterRateEstab(response.vetor)
+  }
+
+  async function greaterComments() {
     const culinary = null;
-
-    api
-      .get(`/establishments/most-commented?culinary=${culinary}`)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("most-commented:" + response.data);
-          setGreaterEstab(response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar estabelecimentos:", error);
-      });
-  };
+    const response = await api_call("get", `/establishments/most-commented?culinary=${culinary}`, null, null);
+    console.log(response)
+    setGreaterEstab(response)
+  }
 
   useEffect(() => {
+    listCategory();
     greaterRate();
     greaterComments();
-    setEstablishmentLoad(true);
   }, []);
 
   return (
     <main>
       <Auth />
       <MainBanner />
-      <ContainerCardFood />
+      {category.length === 0 ? (
+        <CategoryLoader />
+      ) : (
+        null
+        // category.map((item, index) => (
+        //   <ContainerCardFood
+        //     key={index}
+        //     typeFood={item.name}
+        //     image={item.photo}
+        //   />
+        // ))
+      )}
+
       <div style={styleDiv}>
-        {establishmentLoad === true ? (
-          <>
-            <CarrosselEstablishment
-              headerText="Melhores avaliados em suas categorias:"
-              establishment={greaterRateEstab}
-            />
-            <CarrosselEstablishment
-              headerText="Mais Comentados:"
-              establishment={greaterCommentsEstab}
-            />
-          </>
+        {greaterRateEstab.length === 0 ? (
+          <GreaterRateLoader />
         ) : (
-          "Carregando..."
+          <CarrosselEstablishment
+            headerText="Melhores avaliados em suas categorias:"
+            establishment={greaterRateEstab}
+          />
+        )}
+
+        {greaterCommentsEstab.length === 0 ? (
+          <GreaterCommentsLoader />
+        ) : (
+          <CarrosselEstablishment
+            headerText="Mais Comentados:"
+            establishment={greaterCommentsEstab}
+          />
         )}
         <img
           src={card}
