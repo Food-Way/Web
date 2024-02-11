@@ -7,11 +7,9 @@ import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
 import api from "../../services/api";
-import ContentLoader from 'react-content-loader'
-
+import ContentLoader from "react-content-loader";
 
 const Home = () => {
-  const [establishmentLoad, setEstablishmentLoad] = useState(false);
   const establishmentIMG =
     "https://foodway.blob.core.windows.net/public/establishment.png";
   const customerIMG =
@@ -19,6 +17,7 @@ const Home = () => {
   const card = "https://foodway.blob.core.windows.net/public/Card.png";
   const androidI = "https://foodway.blob.core.windows.net/public/android.svg";
   const androidBg = "https://foodway.blob.core.windows.net/public/emBreve.png";
+  const [isLoading, setIsLoading] = useState(true);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
   };
@@ -31,10 +30,25 @@ const Home = () => {
     width: "100%",
   };
 
+  useEffect(() => {
+    // Definindo a função assíncrona dentro do useEffect
+    async function fetchData() {
+      await Promise.all([
+        listCategory(),
+        greaterRate(),
+        greaterComments(),
+      ]);
+      setIsLoading(false); // Isso será executado depois que todas as chamadas acima estiverem completas
+    }
+  
+    // Invocando a função fetchData
+    fetchData();
+  }, []); // O array vazio indica que este efeito não depende de nenhuma prop ou estado, então ele roda apenas uma vez após o componente montar.
+  
+
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
   const [category, setCategory] = useState([]);
-
 
   const CategoryLoader = () => (
     <ContentLoader
@@ -54,10 +68,17 @@ const Home = () => {
       <rect x="1586" y="13" rx="0" ry="0" width="250" height="250" />
       <rect x="1850" y="15" rx="0" ry="0" width="250" height="250" />
     </ContentLoader>
-  )
+  );
 
   const GreaterRateLoader = () => (
-    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+    <ContentLoader
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       speed={2}
       width={1573}
       height={250}
@@ -70,10 +91,17 @@ const Home = () => {
       <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
       <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
     </ContentLoader>
-  )
+  );
 
   const GreaterCommentsLoader = () => (
-    <ContentLoader style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+    <ContentLoader
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       speed={2}
       width={1573}
       height={250}
@@ -86,7 +114,7 @@ const Home = () => {
       <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
       <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
     </ContentLoader>
-  )
+  );
 
   async function listCategory() {
     const response = await api_call("get", "/culinaries", null, null);
@@ -95,60 +123,61 @@ const Home = () => {
   }
 
   async function greaterRate() {
-    const response = await api_call("get", "/establishments/order-by-greater-rate", null, null);
-    console.log(response)
-    setGreaterRateEstab(response.vetor)
+    const response = await api_call(
+      "get",
+      "/establishments/order-by-greater-rate",
+      null,
+      null
+    );
+    console.log(response);
+    setGreaterRateEstab(response.vetor);
   }
 
   async function greaterComments() {
     const culinary = null;
-    const response = await api_call("get", `/establishments/most-commented?culinary=${culinary}`, null, null);
-    console.log(response)
-    setGreaterEstab(response)
+    const response = await api_call(
+      "get",
+      `/establishments/most-commented?culinary=${culinary}`,
+      null,
+      null
+    );
+    console.log(response);
+    setGreaterEstab(response);
   }
 
   useEffect(() => {
-    listCategory();
-    greaterRate();
-    greaterComments();
-  }, []);
+    // Função para carregar todos os dados necessários
+    async () => {
+      await Promise.all([
+        listCategory(),
+        greaterRate(),
+        greaterComments(),
+      ]);
+      setIsLoading(false); // Define o carregamento como falso após todas as chamadas de API serem concluídas
+    }})
 
   return (
     <main>
       <Auth />
       <MainBanner />
-      {category.length === 0 ? (
-        <CategoryLoader />
-      ) : (
-        // null
-        category.map((item, index) => (
-          <ContainerCardFood
-            key={index}
-            typeFood={item.name}
-            image={item.photo}
-          />
-        ))
-      )}
+      
 
       <div style={styleDiv}>
-        {greaterRateEstab.length === 0 ? (
-          <GreaterRateLoader />
-        ) : (
-          <CarrosselEstablishment
-            headerText="Melhores avaliados em suas categorias:"
-            establishment={greaterRateEstab}
-          />
-        )}
-
-        {greaterCommentsEstab.length === 0 ? (
-          <GreaterCommentsLoader />
-        ) : (
-          <CarrosselEstablishment
-            headerText="Mais Comentados:"
-            establishment={greaterCommentsEstab}
-          />
-        )}
-        <img
+      {isLoading ? (
+        <>
+        <CategoryLoader />
+        <GreaterCommentsLoader/>
+        <GreaterRateLoader/>
+        </>
+      ) : (
+        <>
+          <ContainerCardFood categories={category} />
+          <>
+          <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" establishment={greaterRateEstab} />
+          <CarrosselEstablishment headerText="Mais Comentados:" establishment={greaterCommentsEstab} />
+          </>
+        </>
+      )} <img
           src={card}
           alt="avalie-os-restaurantes"
           className="card-avalie-restaurantes"
