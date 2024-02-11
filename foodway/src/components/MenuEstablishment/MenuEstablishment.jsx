@@ -146,13 +146,13 @@ const MenuEstablishment = (props) => {
       navigate("/search-user");
       location.reload();
     } else if (className == ".performance-item") {
-      navigate("/establishment/performance/insights");
+      navigate(`/establishment/performance/insights/${atob(sessionStorage.getItem("idUser"))}`);
       location.reload();
     } else if (className == ".menuReal-item") {
-      navigate("/establishment/performance/menu");
+      navigate(`/establishment/performance/menu/${atob(sessionStorage.getItem("idUser"))}`);
       location.reload();
     } else if (className == ".comments-item") {
-      navigate("/establishment/performance/comments");
+      navigate(`/establishment/performance/comments/${atob(sessionStorage.getItem("idUser"))}`);
       location.reload();
     } else if (className == ".relevance-item") {
       navigate("/establishment/performance/relevance");

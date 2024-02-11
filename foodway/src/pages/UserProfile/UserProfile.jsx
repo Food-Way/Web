@@ -89,7 +89,7 @@ const UserProfile = () => {
   )
 
   async function getUser() {
-    const idUser = atob(sessionStorage.getItem("idUser"));
+    const idUser = id;
     const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
     console.log(response)
     setUser(response);

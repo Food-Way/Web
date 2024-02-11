@@ -120,14 +120,14 @@ const Home = () => {
       {category.length === 0 ? (
         <CategoryLoader />
       ) : (
-        null
-        // category.map((item, index) => (
-        //   <ContainerCardFood
-        //     key={index}
-        //     typeFood={item.name}
-        //     image={item.photo}
-        //   />
-        // ))
+        // null
+        category.map((item, index) => (
+          <ContainerCardFood
+            key={index}
+            typeFood={item.name}
+            image={item.photo}
+          />
+        ))
       )}
 
       <div style={styleDiv}>
