@@ -26,12 +26,13 @@ const Rotas = () => {
   const token = sessionStorage.getItem("token");
 
   return (
+    // Valida se tem algo no token e mostra o header geral se não fica vazio
     <BrowserRouter>
     { sessionStorage.getItem("token") && 
     window.location.pathname.startsWith("/user-profile") || 
     window.location.pathname.startsWith("/establishment/performance/menu") || 
     window.location.pathname == "/establishment/performance/relevance" || 
-    window.location.pathname == "/establishment/performance/comments" || 
+    window.location.pathname.startsWith("/establishment/performance/comments") || 
     window.location.pathname == "/search-user" || 
     window.location.pathname == "/establishment-edit" || 
     window.location.pathname == "/user-profile-edit" || 
@@ -40,17 +41,20 @@ const Rotas = () => {
     window.location.pathname.startsWith("/establishment/info") || 
     window.location.pathname == "/establishment" ?  <HeaderGeneral /> : "" }
 
-    { sessionStorage.getItem("token") && 
+    { 
+    // Valida se tem algo no token e mostra o menu geral (atribuindo seus valores de width e heigth), caso não tiver coloca o header geral
+    sessionStorage.getItem("token") && 
     window.location.pathname != "/" && 
     window.location.pathname != "/sign-in" && 
     window.location.pathname != "/sign-up" && 
     window.location.pathname != "/sign-up-costumer" && 
-    window.location.pathname != "/sign-up-establishment" ? <MenuEstablishment height={`
+    window.location.pathname != "/sign-up-establishment" ? 
+    <MenuEstablishment height={`
     ${window.location.pathname.startsWith("/establishment/performance/menu") || 
     window.location.pathname == "/establishment/performance/relevance" || 
     window.location.pathname == "/establishment-edit" || 
     window.location.pathname == "/user-profile-edit" || 
-    window.location.pathname == "/establishment/performance/comments" ||  
+    window.location.pathname.startsWith("/establishment/performance/comments") ||  
     window.location.pathname.startsWith("/search-user") || 
     window.location.pathname.startsWith("/establishment/performance/insights") || 
     window.location.pathname.startsWith("/establishment-menu/:id") || 

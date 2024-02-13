@@ -12,49 +12,51 @@ const MenuEstablishment = (props) => {
   const navigate = useNavigate();
   const [oldPath, setOldPath] = useState("");
   const [openMenu, setOpenMenu] = useState(true);
+  const [clickLogout, setClickLogout] = useState(false);
 
-    const [establishment, setEstablishment] = useState([
-        { "id": 1, "nome": "Restaurante Italiano" },
-        { "id": 2, "nome": "Churrascaria" },
-        { "id": 3, "nome": "Comida Mexicana" },
-        { "id": 4, "nome": "Sushi Bar" },
-        { "id": 5, "nome": "Cafeteria" },
-        { "id": 6, "nome": "Pizzaria" },
-        { "id": 7, "nome": "Restaurante Vegetariano" },
-        { "id": 8, "nome": "Comida Indiana" },
-        { "id": 9, "nome": "Restaurante de Frutos do Mar" }
-    ]);
+  const [establishment, setEstablishment] = useState([
+    { "id": 1, "nome": "Restaurante Italiano" },
+    { "id": 2, "nome": "Churrascaria" },
+    { "id": 3, "nome": "Comida Mexicana" },
+    { "id": 4, "nome": "Sushi Bar" },
+    { "id": 5, "nome": "Cafeteria" },
+    { "id": 6, "nome": "Pizzaria" },
+    { "id": 7, "nome": "Restaurante Vegetariano" },
+    { "id": 8, "nome": "Comida Indiana" },
+    { "id": 9, "nome": "Restaurante de Frutos do Mar" }
+  ]);
 
-    const [users, setUsers] = useState([
-        { "id": 1, "nome": "Alice" },
-        { "id": 2, "nome": "Bob" },
-        { "id": 3, "nome": "Charlie" },
-        { "id": 4, "nome": "David" },
-        { "id": 5, "nome": "Eva" }
-    ]);
+  const [users, setUsers] = useState([
+    { "id": 1, "nome": "Alice" },
+    { "id": 2, "nome": "Bob" },
+    { "id": 3, "nome": "Charlie" },
+    { "id": 4, "nome": "David" },
+    { "id": 5, "nome": "Eva" }
+  ]);
 
-    const typeUser = sessionStorage.getItem("typeUser");
+  const typeUser = sessionStorage.getItem("typeUser");
 
   const handleLogoff = () => {
-    sessionStorage.clear();
     toast.success("Logout realizado com sucesso!");
     setTimeout(() => {
       navigate("/");
-      location.reload();
+      window.location.reload();
+      sessionStorage.clear();
+      setClickLogout(true);
     }, 2000);
   };
 
-    function setCheck(id) {
-        var check = document.getElementById(id);
-        if (check.checked) {
-            check.checked = false;
-        } else {
-            check.checked = true;
-        }
+  function setCheck(id) {
+    var check = document.getElementById(id);
+    if (check.checked) {
+      check.checked = false;
+    } else {
+      check.checked = true;
     }
+  }
 
-    function setNavigate(className) {
-        className = className || <UserProfile />;
+  function setNavigate(className) {
+    className = className || <UserProfile />;
 
     var profile = document.querySelector(".profile-item");
     var search = document.querySelector(".search-item");
@@ -66,111 +68,111 @@ const MenuEstablishment = (props) => {
     var relevance = document.querySelector(".relevance-item");
     var out = document.querySelector(".out-item");
 
-        if (oldPath != className) {
-            setColor(className);
-            setOldPath(className);
+    // console.log("PROFILE: " + profile);
+    // console.log("SEARCH: " + search);
+    // console.log("ESTABLISHMENT: " + establishment);
+    // console.log("USERS: " + users);
+    // console.log("PERFORMANCE: " + performance);
+    // console.log("MENU REAL: " + menuReal);
+    // console.log("COMMENTS: " + comments);
+    // console.log("RELEVANCE: " + relevance);
+    // console.log("OUT: " + out);
 
-            if (profile.classList.contains("item-active") && className != ".profile-item") {
-                profile.classList.remove("item-active");
-            }
+    if (oldPath != className) {
+      setColor(className);
+      setOldPath(className);
+      // console.log("OLD PATH: " + oldPath);
+      // console.log("NEW PATH: " + className);
 
-            if (search.classList.contains("item-active") && className != ".search-item") {
-                search.classList.remove("item-active");
-            }
-
-      // if (
-      //   establishment.classList.contains("item-active") &&
-      //   className != ".establishment-item"
-      // ) {
-      //   establishment.classList.remove("item-active");
-      // }
-
-      // if (
-      //   users.classList.contains("item-active") &&
-      //   className != ".users-item"
-      // ) {
-      //   users.classList.remove("item-active");
-      // }
-
-      if (
-        performance.classList.contains("item-active") &&
-        className != ".performance-item"
-      ) {
-        search.classList.remove("item-active");
+      if (profile.classList.contains("item-active") && className != ".profile-item") {
+        profile.classList.remove("item-active");
       }
 
-      if (
-        menuReal.classList.contains("item-active") &&
-        className != ".menuReal-item"
-      ) {
-        search.classList.remove("item-active");
-      }
-
-      if (
-        comments.classList.contains("item-active") &&
-        className != ".comments-item"
-      ) {
-        search.classList.remove("item-active");
-      }
-
-      if (
-        relevance.classList.contains("item-active") &&
-        className != ".relevance-item"
-      ) {
-        search.classList.remove("item-active");
-      }
-
-            if (out.classList.contains("item-active") && className != ".out-item") {
-                out.classList.remove("item-active");
-            }
+      if (atob(sessionStorage.getItem("typeUser")) !== "ESTABLISHMENT") {
+        if (search.classList.contains("item-active") && className != ".search-item") {
+          search.classList.remove("item-active");
         }
+      }
+
+      if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
+        // if (establishment.classList.contains("item-active") && className != ".establishment-item") {
+        //   establishment.classList.remove("item-active");
+        // }
+
+        // if (users.classList.contains("item-active") && className != ".users-item") {
+        //   users.classList.remove("item-active");
+        // }
+
+        if (performance.classList.contains("item-active") && className != ".performance-item") {
+          performance.classList.remove("item-active");
+        }
+
+        if (menuReal.classList.contains("item-active") && className != ".menuReal-item") {
+          menuReal.classList.remove("item-active");
+        }
+
+        if (comments.classList.contains("item-active") && className != ".comments-item") {
+          comments.classList.remove("item-active");
+        }
+
+        if (relevance.classList.contains("item-active") && className != ".relevance-item") {
+          relevance.classList.remove("item-active");
+        }
+      }
+
+      if (out.classList.contains("item-active") && className != ".out-item") {
+        out.classList.remove("item-active");
+      }
+    }
 
     console.log(className);
     if (className == "") {
       navigate("/*");
-      location.reload();
+
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
-      location.reload();
+
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
         navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
       } else {
         navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
       }
-      location.reload();
+
     } else if (className == ".users-item") {
       navigate("/users");
-      location.reload();
+
     } else if (className == ".search-item") {
       navigate("/search-user");
-      location.reload();
+
     } else if (className == ".performance-item") {
       navigate(`/establishment/performance/insights/${atob(sessionStorage.getItem("idUser"))}`);
-      location.reload();
+
     } else if (className == ".menuReal-item") {
       navigate(`/establishment/performance/menu/${atob(sessionStorage.getItem("idUser"))}`);
-      location.reload();
+
     } else if (className == ".comments-item") {
       navigate(`/establishment/performance/comments/${atob(sessionStorage.getItem("idUser"))}`);
-      location.reload();
+
     } else if (className == ".relevance-item") {
       navigate("/establishment/performance/relevance");
-      location.reload();
+
     } else if (className == ".out-item") {
       handleLogoff();
     }
     return className;
   }
 
-    function setColor(className) {
-        var item = document.querySelector(className);
-        item.classList.toggle("item-active");
-    }
+  function setColor(className) {
+    var item = document.querySelector(className);
+    item.classList.toggle("item-active");
+  }
 
   return (
     <>
-      <button
+      {sessionStorage.getItem("token") ? (
+        <>
+        <button
         className="btn-menu-switch"
         onClick={(event) => {
           console.log("clicou");
@@ -207,7 +209,7 @@ const MenuEstablishment = (props) => {
           if (location.pathname.endsWith("/comments")) {
             var profileContainer = document.querySelector(".comment-dashboard-container");
             profileContainer.classList.toggle("comment-dashboard-container-switch");
-            
+
           }
 
           if (location.pathname.endsWith("/relevance")) {
@@ -222,7 +224,7 @@ const MenuEstablishment = (props) => {
             } else {
               var profileContainer = document.querySelector(".performance-dash-container");
               profileContainer.classList.toggle("performance-dash-container-switch");
-            }  
+            }
           }
 
           btnImage.classList.toggle("btn-menu-rotate");
@@ -373,7 +375,7 @@ const MenuEstablishment = (props) => {
             //   </SubMenu>
             // </>
           )}
-          {sessionStorage.getItem("token") !== null ? (
+          {!clickLogout ? (
             <MenuItem
               className="out-item"
               icon={<FontAwesomeIcon icon={faArrowRightFromBracket} size="lg" />}
@@ -381,8 +383,7 @@ const MenuEstablishment = (props) => {
                 setNavigate(".out-item");
               }}
             >
-              {" "}
-              Sair{" "}
+              Sair
             </MenuItem>
           ) : (
             ""
@@ -393,6 +394,11 @@ const MenuEstablishment = (props) => {
           <b> {openMenu ? "© 2023" : "FoodWay © 2023"} </b>
         </div>
       </Sidebar>
+        </>
+      ) : (
+        ""
+      )
+      }
     </>
   );
 };
