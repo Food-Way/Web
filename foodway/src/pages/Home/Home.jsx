@@ -193,7 +193,7 @@ const Home = () => {
               </div>
 
               <img src={establishmentIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" />
+              <ButtonPrimary text="Saiba Mais!" width={"50%"}/>
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">
@@ -204,7 +204,7 @@ const Home = () => {
               </div>
 
               <img src={customerIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" />
+              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@ const Home = () => {
                 <span>Android</span>
               </div>
               <img src={androidI} alt="android" />
-              <ButtonSecondary text="Veja" />
+              <ButtonSecondary text="Veja" width={"50%"} />
             </div>
           </div>
         </div>

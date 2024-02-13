@@ -55,10 +55,6 @@
   align-items: center;
 }
 
-.button-primary {
-  width: 75%;
-}
-
 .action-sec {
   display: flex;
   justify-content: center;

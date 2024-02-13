@@ -161,16 +161,14 @@ const SignUpCostumer = () => {
                     setSelectedCulinaries={setSelectedCulinaries}
                   />
                   <div className="button-div">
-                    <div>
-                      {" "}
+                     
                       <ButtonSecondary text="<" onclick={handleClose} />{" "}
-                    </div>
-                    <div>
-                      <ButtonPrimary
+                     
+                      <ButtonPrimary 
                         text="Criar >"
                         onclick={handleRegisterCostumer}
                       />
-                    </div>
+                     
                   </div>
                 </div>
               </div>

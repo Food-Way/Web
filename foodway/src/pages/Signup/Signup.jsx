@@ -16,6 +16,7 @@ const Signup = () => {
               url="/sign-up-costumer"
               className="buttonCostumerEstablishment"
               text="Sou um Cliente!"
+              width={"70%"}
             />
           </div>
           <div className="cardCostumerEstablishment">
@@ -24,6 +25,7 @@ const Signup = () => {
               url="/sign-up-establishment"
               className="buttonCostumerEstablishment"
               text="Tenho um Estabelecimento!"
+              width={"70%"}
             />
           </div>
         </div>
