@@ -18,19 +18,17 @@ function PerformanceDash(props) {
 
     const CommentLoader = () => (
         <ContentLoader
-            speed={2}
-            width={388}
-            height={222}
-            viewBox="0 0 388 222"
-            backgroundColor="#ffffff"
-            foregroundColor="#c4c4c4"
+          speed={2}
+          width={200}
+          height={400} 
+          viewBox="0 0 1244 1015" 
+          backgroundColor="#ffffff"
+          foregroundColor="#c4c4c4"
         >
-            <rect x="1196" y="348" rx="0" ry="0" width="293" height="217" />
-            {/* <rect x="4" y="239" rx="0" ry="0" width="500" height="250" />
-            <rect x="537" y="238" rx="0" ry="0" width="500" height="250" />
-            <rect x="532" y="-42" rx="0" ry="0" width="500" height="250" /> */}
+          <rect x="4" y="8" rx="0" ry="0" width="500" height="250" />
+          <rect x="4" y="277" rx="0" ry="0" width="500" height="250" />
         </ContentLoader>
-    )
+      )
 
     // async function getDashData() {
     //     const response = await api_call("get", "url", null, atob(sessionStorage.getItem("token")));
@@ -85,6 +83,7 @@ function PerformanceDash(props) {
                             <span className="title-comment-relevant">Comentários mais relevantes</span>
                             <div className="comment-relevant-box">
                                 <CommentLoader />
+                                <CommentLoader />
                                 {/* {dashData.comments.length === 0 ? (
                                     <CommentLoader />
                                 ) : (
@@ -102,10 +101,10 @@ function PerformanceDash(props) {
                                             />
                                         ))
                                     ))} */}
-                                {/* <Comment width="20vw" text="15vw" size="15" />
                                 <Comment width="20vw" text="15vw" size="15" />
                                 <Comment width="20vw" text="15vw" size="15" />
-                                <Comment width="20vw" text="15vw" size="15" /> */}
+                                <Comment width="20vw" text="15vw" size="15" />
+                                <Comment width="20vw" text="15vw" size="15" />
                             </div>
                         </div>
                     </section>

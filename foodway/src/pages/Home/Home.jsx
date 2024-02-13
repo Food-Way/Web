@@ -6,7 +6,7 @@ import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
-import api from "../../services/api";
+
 import ContentLoader from "react-content-loader";
 
 const Home = () => {

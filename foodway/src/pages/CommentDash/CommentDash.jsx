@@ -5,30 +5,25 @@ import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader'
 import "./CommentDash.css";
 
-
 const CommentDash = () => {
     const routeParams = useParams();
     const [comments, setComments] = useState([]);
 
     const CommentLoader = () => (
         <ContentLoader
-          speed={2}
-          width={1244}
-          height={1015} 
-          viewBox="0 0 1244 1015" 
-          backgroundColor="#ffffff"
-          foregroundColor="#c4c4c4"
+            speed={2}
+            width={700}
+            height={651}
+            viewBox="0 0 700 651"
+            backgroundColor="#ffffff"
+            foregroundColor="#c4c4c4"
         >
-          <rect x="4" y="8" rx="0" ry="0" width="500" height="250" />
-          <rect x="4" y="277" rx="0" ry="0" width="500" height="250" />
-          <rect x="537" y="276" rx="0" ry="0" width="500" height="250" />
-          <rect x="532" y="8" rx="0" ry="0" width="500" height="250" />
-          <rect x="4" y="546" rx="0" ry="0" width="500" height="250" />
-          <rect x="4" y="815" rx="0" ry="0" width="500" height="250" />
-          <rect x="537" y="545" rx="0" ry="0" width="500" height="250" />
-          <rect x="537" y="814" rx="0" ry="0" width="500" height="250" />
+            <rect x="4" y="8" rx="0" ry="0" width="340" height="250" />
+            <rect x="356" y="8" rx="0" ry="0" width="340" height="250" />
+            <rect x="4" y="277" rx="0" ry="0" width="340" height="250" />
+            <rect x="356" y="277" rx="0" ry="0" width="340" height="250" />
         </ContentLoader>
-      )
+    )
 
     async function getComments() {
         const id = routeParams.id;
@@ -50,7 +45,9 @@ const CommentDash = () => {
                         <div className="comment-dash-container">
                             <div className="comment-dash-box">
                                 {comments.length === 0 ? (
-                                    <CommentLoader />
+                                    <div>
+                                        <CommentLoader />
+                                    </div>
                                 ) : (
                                     comments.length === 0 ? (
                                         <span>Nenhum comentário</span>
