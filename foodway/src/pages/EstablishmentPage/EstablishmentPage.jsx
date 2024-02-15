@@ -54,7 +54,7 @@ const EstablishmentPage = () => {
   )
 
   const InfoLoader = () => (
-    <ContentLoader style={{borderRadius: "0.5rem"}}
+    <ContentLoader style={{ borderRadius: "0.5rem" }}
       speed={2}
       width={230}
       height={30}

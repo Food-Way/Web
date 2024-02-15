@@ -181,15 +181,15 @@ const MenuEstablishment = (props) => {
           var btn = document.querySelector(".btn-menu-switch");
           var headerContainer = document.querySelector(".container-header");
 
-          if (location.pathname.startsWith("/user-profile")) {
-            if (location.pathname.startsWith("/user-profile-edit")) {
-              var profileContainer = document.querySelector(".costumer");
-              profileContainer.classList.toggle("costumer-switch");
-            } else {
-              var profileContainer = document.querySelector(".profile-container");
-              profileContainer.classList.toggle("profile-container-switch");
-            }
-          }
+          // if (location.pathname.startsWith("/user-profile")) {
+          //   if (location.pathname.startsWith("/user-profile-edit")) {
+          //     var profileContainer = document.querySelector(".costumer");
+          //     profileContainer.classList.toggle("costumer-switch");
+          //   } else {
+          //     var profileContainer = document.querySelector(".profile-container");
+          //     profileContainer.classList.toggle("profile-container-switch");
+          //   }
+          // }
 
           if (location.pathname.startsWith("/search-user")) {
             var profileContainer = document.querySelector(".search-user-container");
@@ -217,15 +217,15 @@ const MenuEstablishment = (props) => {
             profileContainer.classList.toggle("relevance-container-switch");
           }
 
-          if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
-            if (location.pathname.startsWith("/establishment/performance/menu")) {
-              var profileContainer = document.querySelector(".menu-dashboard-container");
-              profileContainer.classList.toggle("menu-dashboard-container-switch");
-            } else {
-              var profileContainer = document.querySelector(".performance-dash-container");
-              profileContainer.classList.toggle("performance-dash-container-switch");
-            }
-          }
+          // if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
+          //   if (location.pathname.startsWith("/establishment/performance/menu")) {
+          //     var profileContainer = document.querySelector(".menu-dashboard-container");
+          //     profileContainer.classList.toggle("menu-dashboard-container-switch");
+          //   } else {
+          //     var profileContainer = document.querySelector(".performance-dash-container");
+          //     profileContainer.classList.toggle("performance-dash-container-switch");
+          //   }
+          // }
 
           btnImage.classList.toggle("btn-menu-rotate");
           btn.classList.toggle("btn-menu-animate");

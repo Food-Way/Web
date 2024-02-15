@@ -26,7 +26,6 @@ const Home = () => {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-
     width: "100%",
   };
 
@@ -40,11 +39,11 @@ const Home = () => {
       ]);
       setIsLoading(false); // Isso será executado depois que todas as chamadas acima estiverem completas
     }
-  
+
     // Invocando a função fetchData
     fetchData();
   }, []); // O array vazio indica que este efeito não depende de nenhuma prop ou estado, então ele roda apenas uma vez após o componente montar.
-  
+
 
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
@@ -70,51 +69,81 @@ const Home = () => {
     </ContentLoader>
   );
 
-  const GreaterRateLoader = () => (
-    <ContentLoader
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      speed={2}
-      width={1573}
-      height={250}
-      viewBox="0 0 1573 250"
-      backgroundColor="#ffffff"
-      foregroundColor="#c4c4c4"
-    >
-      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
-      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
-      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
-      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
-    </ContentLoader>
-  );
+  const GreaterRateLoader = () => {
+    const numRectangles = 5;
+    const totalWidth = 1600;
+    const rectangleWidth = 250;
+    const spacing = (totalWidth - (numRectangles * rectangleWidth)) / (numRectangles - 1);
 
-  const GreaterCommentsLoader = () => (
-    <ContentLoader
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      speed={2}
-      width={1573}
-      height={250}
-      viewBox="0 0 1573 250"
-      backgroundColor="#ffffff"
-      foregroundColor="#c4c4c4"
-    >
-      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
-      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
-      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
-      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
-    </ContentLoader>
-  );
+    return (
+      <ContentLoader
+        style={{
+          width: "105%",
+          height: "30vh",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        speed={2}
+        width={totalWidth}
+        height={250}
+        viewBox={`0 0 ${totalWidth} 250`}
+        backgroundColor="#ffffff"
+        foregroundColor="#c4c4c4"
+      >
+        {[...Array(numRectangles).keys()].map((index) => (
+          <rect
+            key={index}
+            x={index * (rectangleWidth + spacing)}
+            y="13"
+            rx="10"
+            ry="10"
+            width={rectangleWidth}
+            height="250"
+          />
+        ))}
+      </ContentLoader>
+    );
+  }
+
+  const GreaterCommentsLoader = () => {
+    const numRectangles = 5;
+    const totalWidth = 1600;
+    const rectangleWidth = 250;
+    const spacing = (totalWidth - (numRectangles * rectangleWidth)) / (numRectangles - 1);
+
+    return (
+      <ContentLoader
+        style={{
+          width: "105%",
+          height: "30vh",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        speed={2}
+        width={totalWidth}
+        height={250}
+        viewBox={`0 0 ${totalWidth} 250`}
+        backgroundColor="#ffffff"
+        foregroundColor="#c4c4c4"
+      >
+        {[...Array(numRectangles).keys()].map((index) => (
+          <rect
+            key={index}
+            x={index * (rectangleWidth + spacing)}
+            y="13"
+            rx="10"
+            ry="10"
+            width={rectangleWidth}
+            height="250"
+          />
+        ))}
+      </ContentLoader>
+    );
+  };
 
   async function listCategory() {
     const response = await api_call("get", "/culinaries", null, null);
@@ -154,30 +183,36 @@ const Home = () => {
         greaterComments(),
       ]);
       setIsLoading(false); // Define o carregamento como falso após todas as chamadas de API serem concluídas
-    }})
+    }
+  })
 
   return (
     <main>
       <Auth />
       <MainBanner />
-      
+
 
       <div style={styleDiv}>
-      {isLoading ? (
-        <>
-        <CategoryLoader />
-        <GreaterCommentsLoader/>
-        <GreaterRateLoader/>
-        </>
-      ) : (
-        <>
-          <ContainerCardFood categories={category} />
+        {isLoading ? (
           <>
-          <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" establishment={greaterRateEstab} />
-          <CarrosselEstablishment headerText="Mais Comentados:" establishment={greaterCommentsEstab} />
+            <div className="loader-container-home-category">
+              <CategoryLoader />
+            </div>
+
+            <div className="loader-container-home-establishments">
+              <GreaterCommentsLoader />
+              <GreaterRateLoader />
+            </div>
           </>
-        </>
-      )} <img
+        ) : (
+          <>
+            <ContainerCardFood categories={category} />
+            <>
+              <CarrosselEstablishment headerText="Melhores avaliados em suas categorias:" establishment={greaterRateEstab} />
+              <CarrosselEstablishment headerText="Mais Comentados:" establishment={greaterCommentsEstab} />
+            </>
+          </>
+        )} <img
           src={card}
           alt="avalie-os-restaurantes"
           className="card-avalie-restaurantes"
@@ -193,7 +228,7 @@ const Home = () => {
               </div>
 
               <img src={establishmentIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" width={"50%"}/>
+              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">

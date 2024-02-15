@@ -54,7 +54,7 @@ const ButtonPrimaryLink = ({ text, url }) => {
   );
 };
 
-const ButtonSecondary = ({  width,height, text, onclick, className = "button-secondary" }) => {
+const ButtonSecondary = ({  width, height, text, onclick, className = "button-secondary" }) => {
   return (
     <button className={className} onClick={onclick} type="button" style={{ width: width, height: height }}>
       {text}
@@ -62,9 +62,9 @@ const ButtonSecondary = ({  width,height, text, onclick, className = "button-sec
   );
 };
 
-const ButtonSecondaryLink = ({ text, url }) => {
+const ButtonSecondaryLink = ({ width, height, text, url }) => {
   return (
-    <Link className="button-secondary" to={url}>
+    <Link className="button-secondary" style={{ width: width, height: height }} to={url}>
       {text}
     </Link>
   );

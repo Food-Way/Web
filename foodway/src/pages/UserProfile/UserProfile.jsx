@@ -173,7 +173,7 @@ const UserProfile = () => {
                   )}
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"}  width={"11vw"} /> : ""}
                 </div>
                 {user.length === 0 ? (
                   <ProfileStatusLoader />
