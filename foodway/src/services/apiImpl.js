@@ -1,6 +1,8 @@
 import { api, api_maps } from "./api";
+const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
-async function api_call(methodParam, urlParam, dataParam, authorizationParam = "") {
+
+async function api_call(methodParam, urlParam, dataParam, authorizationParam = "", idSessionParam = "") {
   try {
     const response = await api({
       method: methodParam,
@@ -9,6 +11,7 @@ async function api_call(methodParam, urlParam, dataParam, authorizationParam = "
       headers: {
         "Content-Type": "application/json",
         Authorization: authorizationParam ? `Bearer ${authorizationParam}` : null,
+        ID_SESSION: idSessionParam ? idSessionParam : null,
       },
     });
 
@@ -22,7 +25,7 @@ async function api_call(methodParam, urlParam, dataParam, authorizationParam = "
   }
 }
 
-async function api_maps_call(lat, lng, apiKey) {
+async function api_maps_call(lat, lng) {
   try {
     const response = await api_maps.get(
       `staticmap?center=${lat},${lng}&zoom=15&size=225x100&key=${apiKey}`,
