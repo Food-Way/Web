@@ -25,7 +25,6 @@ const EstablishmentPage = () => {
   const [url, setUrl] = useState("");
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
