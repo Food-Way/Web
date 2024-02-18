@@ -137,6 +137,7 @@ const MenuEstablishment = (props) => {
         navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
       } else {
         navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
+        window.location.reload();
       }
 
     } else if (className == ".users-item") {
@@ -144,6 +145,7 @@ const MenuEstablishment = (props) => {
 
     } else if (className == ".search-item") {
       navigate("/search-user");
+      window.location.reload();
 
     } else if (className == ".performance-item") {
       navigate(`/establishment/performance/insights/${atob(sessionStorage.getItem("idUser"))}`);
@@ -168,232 +170,280 @@ const MenuEstablishment = (props) => {
     item.classList.toggle("item-active");
   }
 
+  function navigateColor(className) {
+    var profile = document.querySelector(className);
+
+    if (oldPath == "") {
+      setColor(className);
+      setOldPath(className);
+      profile.classList.add("item-active");
+    }
+  }
+
+  function pathForNavigationColor() {
+    var path = "";
+    
+    if (location.pathname.startsWith("/user-profile")) {
+      path = ".profile-item"; 
+    }
+    
+    if (location.pathname.startsWith("/establishment/info/")) {
+      path = ".profile-item";
+    }
+
+    if (location.pathname == "/search-user") {
+      path = ".search-item";
+    }
+
+    if (location.pathname.startsWith("/establishment/performance/insights")) {
+      path = ".performance-item"; 
+    }
+
+    if (location.pathname.startsWith("/establishment/performance/menu")) {
+      path = ".menuReal-item";
+    }
+
+    if (location.pathname.startsWith("/establishment/performance/comments")) {
+      path = ".comments-item";
+    }
+
+    if (location.pathname == "/establishment/performance/relevance" ) {
+      path = ".relevance-item";
+    }
+
+    return path;
+  }
+
+  useEffect(() => {
+    navigateColor(pathForNavigationColor());
+  }, []);
+
   return (
     <>
       {sessionStorage.getItem("token") ? (
         <>
-        <button
-        className="btn-menu-switch"
-        onClick={(event) => {
-          console.log("clicou");
-          setOpenMenu(!openMenu);
-          var btnImage = event.currentTarget;
-          var btn = document.querySelector(".btn-menu-switch");
-          var headerContainer = document.querySelector(".container-header");
+          <button
+            className="btn-menu-switch"
+            onClick={(event) => {
+              console.log("clicou");
+              setOpenMenu(!openMenu);
+              var btnImage = event.currentTarget;
+              var btn = document.querySelector(".btn-menu-switch");
+              var headerContainer = document.querySelector(".container-header");
 
-          // if (location.pathname.startsWith("/user-profile")) {
-          //   if (location.pathname.startsWith("/user-profile-edit")) {
-          //     var profileContainer = document.querySelector(".costumer");
-          //     profileContainer.classList.toggle("costumer-switch");
-          //   } else {
-          //     var profileContainer = document.querySelector(".profile-container");
-          //     profileContainer.classList.toggle("profile-container-switch");
-          //   }
-          // }
+              // if (location.pathname.startsWith("/user-profile")) {
+              //   if (location.pathname.startsWith("/user-profile-edit")) {
+              //     var profileContainer = document.querySelector(".costumer");
+              //     profileContainer.classList.toggle("costumer-switch");
+              //   } else {
+              //     var profileContainer = document.querySelector(".profile-container");
+              //     profileContainer.classList.toggle("profile-container-switch");
+              //   }
+              // }
 
-          if (location.pathname.startsWith("/search-user")) {
-            var profileContainer = document.querySelector(".search-user-container");
-            profileContainer.classList.toggle("search-user-container-switch");
-          }
+              if (location.pathname.startsWith("/search-user")) {
+                var profileContainer = document.querySelector(".search-user-container");
+                profileContainer.classList.toggle("search-user-container-switch");
+              }
 
-          if (location.pathname.startsWith("/establishment/info")) {
-            var profileContainer = document.querySelector(".establishment-content-container");
-            profileContainer.classList.toggle("establishment-content-container-switch");
-          }
+              if (location.pathname.startsWith("/establishment/info")) {
+                var profileContainer = document.querySelector(".establishment-content-container");
+                profileContainer.classList.toggle("establishment-content-container-switch");
+              }
 
-          if (location.pathname.startsWith("/establishment-menu")) {
-            var profileContainer = document.querySelector(".menu-user-container");
-            profileContainer.classList.toggle("menu-user-container-switch");
-          }
+              if (location.pathname.startsWith("/establishment-menu")) {
+                var profileContainer = document.querySelector(".menu-user-container");
+                profileContainer.classList.toggle("menu-user-container-switch");
+              }
 
-          if (location.pathname.endsWith("/comments")) {
-            var profileContainer = document.querySelector(".comment-dashboard-container");
-            profileContainer.classList.toggle("comment-dashboard-container-switch");
+              if (location.pathname.endsWith("/comments")) {
+                var profileContainer = document.querySelector(".comment-dashboard-container");
+                profileContainer.classList.toggle("comment-dashboard-container-switch");
 
-          }
+              }
 
-          if (location.pathname.endsWith("/relevance")) {
-            var profileContainer = document.querySelector(".relevance-container");
-            profileContainer.classList.toggle("relevance-container-switch");
-          }
+              if (location.pathname.endsWith("/relevance")) {
+                var profileContainer = document.querySelector(".relevance-container");
+                profileContainer.classList.toggle("relevance-container-switch");
+              }
 
-          // if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
-          //   if (location.pathname.startsWith("/establishment/performance/menu")) {
-          //     var profileContainer = document.querySelector(".menu-dashboard-container");
-          //     profileContainer.classList.toggle("menu-dashboard-container-switch");
-          //   } else {
-          //     var profileContainer = document.querySelector(".performance-dash-container");
-          //     profileContainer.classList.toggle("performance-dash-container-switch");
-          //   }
-          // }
+              // if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
+              //   if (location.pathname.startsWith("/establishment/performance/menu")) {
+              //     var profileContainer = document.querySelector(".menu-dashboard-container");
+              //     profileContainer.classList.toggle("menu-dashboard-container-switch");
+              //   } else {
+              //     var profileContainer = document.querySelector(".performance-dash-container");
+              //     profileContainer.classList.toggle("performance-dash-container-switch");
+              //   }
+              // }
 
-          btnImage.classList.toggle("btn-menu-rotate");
-          btn.classList.toggle("btn-menu-animate");
-          headerContainer.classList.toggle("container-switch-header");
-        }}
-      ></button>
-      <Sidebar
-        collapsed={openMenu}
-        rootStyles={{
-          [`.${sidebarClasses.container}`]: {
-            height: props.height,
-            width: openMenu ? "75px" : "17vw",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            backgroundColor: "var(--branco)",
-            paddingTop: "5rem",
-            paddingLeft: openMenu ? "0" : "3rem", // Adicione essa linha para definir a margem à esquerda quando a barra lateral estiver expandida
-            paddingBottom: "3rem",
-            transition: "all 0.3s",
-            position: "absolute",
-          },
-        }}
-      >
-        <Menu>
-          <MenuItem
-            icon={<FontAwesomeIcon icon={faUser} size="lg" className="profile-item" />}
-            onClick={() => {
-              setNavigate(".profile-item");
+              btnImage.classList.toggle("btn-menu-rotate");
+              btn.classList.toggle("btn-menu-animate");
+              headerContainer.classList.toggle("container-switch-header");
+            }}
+          ></button>
+          <Sidebar
+            collapsed={openMenu}
+            rootStyles={{
+              [`.${sidebarClasses.container}`]: {
+                height: props.height,
+                width: openMenu ? "75px" : "17vw",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                backgroundColor: "var(--branco)",
+                paddingTop: "5rem",
+                paddingLeft: openMenu ? "0" : "3rem", // Adicione essa linha para definir a margem à esquerda quando a barra lateral estiver expandida
+                paddingBottom: "3rem",
+                transition: "all 0.3s",
+                position: "absolute",
+              },
             }}
           >
-            <span className="profile-item">Perfil</span>
-          </MenuItem>
-
-          {/* Utilizar parseJWT */}
-          {atob(typeUser) == "ESTABLISHMENT" ? (
-            <>
-              <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg"
-                className="performance-item"
-              />}
-                onClick={() => {
-                  setNavigate(".performance-item");
-                }}>
-                {" "}
-                Desempenho{" "}
-              </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
-                className="menuReal-item"
-              />}
-                onClick={() => {
-                  setNavigate(".menuReal-item");
-                }}>
-                {" "}
-                Cardápio{" "}
-              </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
-                className="comments-item"
-              />}
-                onClick={() => {
-                  setNavigate(".comments-item");
-                }}>
-                {" "}
-                Comentários{" "}
-              </MenuItem>
-              <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
-                className="relevance-item"
-              />}
-                onClick={() => {
-                  setNavigate(".relevance-item");
-                }}>
-                {" "}
-                Relevância{" "}
-              </MenuItem>
-            </>
-          ) : (
-            <>
+            <Menu>
               <MenuItem
-                icon={
-                  <FontAwesomeIcon
-                    icon={faMagnifyingGlass}
-                    size="lg"
-                    className="search-item"
-                  />
-                }
+                icon={<FontAwesomeIcon icon={faUser} size="lg" className="profile-item" />}
                 onClick={() => {
-                  setNavigate(".search-item");
+                  setNavigate(".profile-item");
                 }}
               >
-                <span className="search-item">Busca</span>
+                <span className="profile-item">Perfil</span>
               </MenuItem>
-            </>
 
-            //     <SubMenu
-            //       icon={
-            //         <FontAwesomeIcon
-            //           icon={faStore}
-            //           size="lg"
-            //           className="establishment-item"
-            //         />
-            //       }
-            //       label={"Estabelecimento " + "(" + establishment.length + ")"}
-            //       onClick={() => {
-            //         setNavigate(".establishment-item");
-            //       }}
-            //     >
-            //       {establishment.map((item) => {
-            //         return (
-            //           <MenuItem
-            //             key={item.id}
-            //             onClick={() => setCheck("e" + item.id)}
-            //           >
-            //             <div className="menu-item">
-            //               <div className="pretty p-icon p-round p-smooth check-culinary">
-            //                 <input
-            //                   type="checkbox"
-            //                   onClick={() => setCheck("e" + item.id)}
-            //                   id={"e" + item.id}
-            //                 />
-            //                 <div className="state">
-            //                   <DoneIcon className="icon check" />
-            //                   <label>{item.nome}</label>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //           </MenuItem>
-            //         );
-            //       })}
-            //     </SubMenu>
-            //     {sessionStorage.getItem("token") !== null ? (
-            //       <MenuItem
-            //         className="users-item"
-            //         icon={
-            //           <FontAwesomeIcon
-            //             icon={faUserLarge}
-            //             size="lg"
-            //             onClick={() => {
-            //               setNavigate(".users-item");
-            //             }}
-            //           />
-            //         }
-            //       >
-            //         <span>Usuários ({users.length})</span>
-            //       </MenuItem>
-            //     ) : (
-            //       ""
-            //     )}
-            //   </SubMenu>
-            // </>
-          )}
-          {!clickLogout ? (
-            <MenuItem
-              className="out-item"
-              icon={<FontAwesomeIcon icon={faArrowRightFromBracket} size="lg" />}
-              onClick={() => {
-                setNavigate(".out-item");
-              }}
-            >
-              Sair
-            </MenuItem>
-          ) : (
-            ""
-          )}
-        </Menu>
-        <div className="box-copyright">
-          <span> {openMenu ? "" : "Todos os direitos reservados"} </span>
-          <b> {openMenu ? "© 2023" : "FoodWay © 2023"} </b>
-        </div>
-      </Sidebar>
+              {/* Utilizar parseJWT */}
+              {atob(typeUser) == "ESTABLISHMENT" ? (
+                <>
+                  <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg"
+                    className="performance-item"
+                  />}
+                    onClick={() => {
+                      setNavigate(".performance-item");
+                    }}>
+                    {" "}
+                    Desempenho{" "}
+                  </MenuItem>
+                  <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
+                    className="menuReal-item"
+                  />}
+                    onClick={() => {
+                      setNavigate(".menuReal-item");
+                    }}>
+                    {" "}
+                    Cardápio{" "}
+                  </MenuItem>
+                  <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
+                    className="comments-item"
+                  />}
+                    onClick={() => {
+                      setNavigate(".comments-item");
+                    }}>
+                    {" "}
+                    Comentários{" "}
+                  </MenuItem>
+                  <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
+                    className="relevance-item"
+                  />}
+                    onClick={() => {
+                      setNavigate(".relevance-item");
+                    }}>
+                    {" "}
+                    Relevância{" "}
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem
+                    icon={
+                      <FontAwesomeIcon
+                        icon={faMagnifyingGlass}
+                        size="lg"
+                        className="search-item"
+                      />
+                    }
+                    onClick={() => {
+                      setNavigate(".search-item");
+                    }}
+                  >
+                    <span className="search-item">Busca</span>
+                  </MenuItem>
+                </>
+
+                //     <SubMenu
+                //       icon={
+                //         <FontAwesomeIcon
+                //           icon={faStore}
+                //           size="lg"
+                //           className="establishment-item"
+                //         />
+                //       }
+                //       label={"Estabelecimento " + "(" + establishment.length + ")"}
+                //       onClick={() => {
+                //         setNavigate(".establishment-item");
+                //       }}
+                //     >
+                //       {establishment.map((item) => {
+                //         return (
+                //           <MenuItem
+                //             key={item.id}
+                //             onClick={() => setCheck("e" + item.id)}
+                //           >
+                //             <div className="menu-item">
+                //               <div className="pretty p-icon p-round p-smooth check-culinary">
+                //                 <input
+                //                   type="checkbox"
+                //                   onClick={() => setCheck("e" + item.id)}
+                //                   id={"e" + item.id}
+                //                 />
+                //                 <div className="state">
+                //                   <DoneIcon className="icon check" />
+                //                   <label>{item.nome}</label>
+                //                 </div>
+                //               </div>
+                //             </div>
+                //           </MenuItem>
+                //         );
+                //       })}
+                //     </SubMenu>
+                //     {sessionStorage.getItem("token") !== null ? (
+                //       <MenuItem
+                //         className="users-item"
+                //         icon={
+                //           <FontAwesomeIcon
+                //             icon={faUserLarge}
+                //             size="lg"
+                //             onClick={() => {
+                //               setNavigate(".users-item");
+                //             }}
+                //           />
+                //         }
+                //       >
+                //         <span>Usuários ({users.length})</span>
+                //       </MenuItem>
+                //     ) : (
+                //       ""
+                //     )}
+                //   </SubMenu>
+                // </>
+              )}
+              {!clickLogout ? (
+                <MenuItem
+                  className="out-item"
+                  icon={<FontAwesomeIcon icon={faArrowRightFromBracket} size="lg" />}
+                  onClick={() => {
+                    setNavigate(".out-item");
+                  }}
+                >
+                  Sair
+                </MenuItem>
+              ) : (
+                ""
+              )}
+            </Menu>
+            <div className="box-copyright">
+              <span> {openMenu ? "" : "Todos os direitos reservados"} </span>
+              <b> {openMenu ? "© 2023" : "FoodWay © 2023"} </b>
+            </div>
+          </Sidebar>
         </>
       ) : (
         ""

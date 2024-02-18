@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import sadCat from "../../../public/sadCat.png";
 import './SearchBar.css';
 import api from "../../services/api";
 
@@ -11,9 +12,9 @@ function SearchBar(props) {
 
     function listSearched() {
         var uriPath;
-        
+
         switch (document.location.pathname) {
-            case '/':
+            case '/adsad':
                 if (oldCategory != atob(sessionStorage.getItem('category'))) {
                     var category = atob(sessionStorage.getItem('category'));
                     console.log(category);
@@ -25,7 +26,7 @@ function SearchBar(props) {
                     setSearched([]);
                     callGet(uriPath);
                 }
-                
+
                 break;
             case document.location.pathname.startsWith('/establishment/performance/menu'):
                 uriPath = `/products/establishments/${id}/null`;
@@ -35,25 +36,19 @@ function SearchBar(props) {
                 break;
 
             default:
-                uriPath = `/establishment`;
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
                 break;
         }
 
     }
 
     function callGet(uriPath) {
-        api.get(uriPath, {
-            data: {
-                idEstablishment: atob(sessionStorage.getItem('idUser'))
-            },
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
-            },
-
-        })
-
+        api.get(uriPath)
             .then(response => {
                 if (response.status === 200) {
+                    console.log('Busca realizada com sucesso');
                     setSearched(response.data);
                 } else {
                     console.error('Erro ao buscar:', response.status);
@@ -83,13 +78,11 @@ function SearchBar(props) {
     }, []);
 
     function filterName(event) {
-        // var searchBar = document.querySelector('.search-bar');
-
         const value = event.target.value.toUpperCase();
         setFilter(value);
 
         setFiltred(searched.filter(item =>
-            item.name.toUpperCase().includes(value)
+            item.establishmentName.toUpperCase().includes(value)
         ));
         var dropdown = document.getElementById('dropdownList');
 
@@ -115,10 +108,16 @@ function SearchBar(props) {
                 id="dropdownList"
                 className={`dropdown-content`}
             >
+                {filtred.length === 0 && filter !== '' ?
+                    <div className='empty-results'>
+                        <div className='box-empty-results'>Nenhum resultado
+                        </div>
+                        <img className='img-sadCat' src={sadCat} alt="" />
+                    </div> : ''}
 
                 {filtred.map(item => (
-                    <div key={item.id} className='itens'>
-                        <a href={`/home`}>{item.name}</a>
+                    <div key={item.idUser} className='itens'>
+                        <a href={`/establishment/info/${item.idUser}`}>{item.establishmentName}</a>
                     </div>
                 ))}
             </div>

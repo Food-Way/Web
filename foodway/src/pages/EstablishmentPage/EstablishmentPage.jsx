@@ -80,18 +80,18 @@ const EstablishmentPage = () => {
   )
 
   async function getEstablishmentProfileData() {
-    const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, atob(sessionStorage.getItem("token")));
+    const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     console.log(response);
     setProfile(response);
     setComments(response.comments);
-    getMaps(response.lat, response.lng);
+    // getMaps(response.lat, response.lng);
   }
 
-  async function getMaps(lat, lng) {
-    const response = await api_maps_call(lat, lng, apiKey);
-    console.log(response)
-    setUrl(response);
-  }
+  // async function getMaps(lat, lng) {
+  //   const response = await api_maps_call(lat, lng, apiKey);
+  //   console.log(response)
+  //   setUrl(response);
+  // }
 
   function showFormAdd() {
     return (

@@ -38,7 +38,7 @@ const Rotas = () => {
     window.location.pathname == "/user-profile-edit" || 
     window.location.pathname.startsWith("/establishment/performance/insights") || 
     window.location.pathname.startsWith("/establishment-menu/:id") || 
-    window.location.pathname.startsWith("/establishment/info") || 
+    window.location.pathname.startsWith("/establishment/info/:id") || 
     window.location.pathname == "/establishment" ?  <HeaderGeneral /> : "" }
 
     { 
@@ -57,8 +57,7 @@ const Rotas = () => {
     window.location.pathname.startsWith("/establishment/performance/comments") ||  
     window.location.pathname.startsWith("/search-user") || 
     window.location.pathname.startsWith("/establishment/performance/insights") || 
-    window.location.pathname.startsWith("/establishment-menu/:id") || 
-    window.location.pathname.startsWith("/establishment/info") ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
+    window.location.pathname.startsWith("/establishment-menu/:id") ? "88.8rem" : "170rem"}`} /> : <HeaderGeneral />}
 
       <ToastContainer position="top-left" />
       <Routes>

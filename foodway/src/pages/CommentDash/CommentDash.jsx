@@ -12,16 +12,18 @@ const CommentDash = () => {
     const CommentLoader = () => (
         <ContentLoader
             speed={2}
-            width={700}
-            height={651}
-            viewBox="0 0 700 651"
+            width={1000}
+            height={851}
+            viewBox="0 0 1000 851"
             backgroundColor="#ffffff"
             foregroundColor="#c4c4c4"
         >
-            <rect x="4" y="8" rx="0" ry="0" width="340" height="250" />
-            <rect x="356" y="8" rx="0" ry="0" width="340" height="250" />
-            <rect x="4" y="277" rx="0" ry="0" width="340" height="250" />
-            <rect x="356" y="277" rx="0" ry="0" width="340" height="250" />
+            <rect x="4" y="8" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="8" rx="0" ry="0" width="500" height="250" />
+            <rect x="4" y="277" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="277" rx="0" ry="0" width="500" height="250" />
+            <rect x="4" y="545" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="545" rx="0" ry="0" width="500" height="250" />
         </ContentLoader>
     )
 
@@ -43,7 +45,7 @@ const CommentDash = () => {
                     <span className="title">Comentários</span>
                     <section>
                         <div className="comment-dash-container">
-                            <div className="comment-dash-box">
+                            <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader": ""}`}>
                                 {comments.length === 0 ? (
                                     <div>
                                         <CommentLoader />
