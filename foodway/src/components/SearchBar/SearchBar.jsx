@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import sadCat from "../../../public/sadCat.png";
 import './SearchBar.css';
-import api from "../../services/api";
+import api_call from '../../services/apiImpl';
 
 function SearchBar(props) {
     const [searched, setSearched] = useState([]);
@@ -26,7 +26,6 @@ function SearchBar(props) {
                     setSearched([]);
                     callGet(uriPath);
                 }
-
                 break;
             case document.location.pathname.startsWith('/establishment/performance/menu'):
                 uriPath = `/products/establishments/${id}/null`;
@@ -34,7 +33,6 @@ function SearchBar(props) {
                 setSearched([]);
                 callGet(uriPath);
                 break;
-
             default:
                 var category = atob(sessionStorage.getItem('category'));
                 uriPath = `establishments/culinary?idCulinary=${category}`;
@@ -44,22 +42,10 @@ function SearchBar(props) {
 
     }
 
-    function callGet(uriPath) {
-        api.get(uriPath)
-            .then(response => {
-                if (response.status === 200) {
-                    console.log('Busca realizada com sucesso');
-                    setSearched(response.data);
-                } else {
-                    console.error('Erro ao buscar:', response.status);
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar:', error);
-            })
-            .finally(() => {
-                console.log('Busca finalizada');
-            });
+    async function callGet(uriPath) {
+        const response = await api_call("get", uriPath, null, null);
+        console.log('Busca realizada com sucesso');
+        setSearched(response);
     }
 
     function search() {

@@ -3,24 +3,16 @@ import ReactStars from "react-rating-stars-component";
 import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
 import Heart from "react-animated-heart";
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 
 import "./SearchCard.css";
 
 const SearchCard = (props) => {
     const [isFavorite, setIsFavorite] = useState(false);
 
-    function favoriteEstablishment(idUser, idEstablishment) {
+    async function favoriteEstablishment(idUser, idEstablishment) {
         console.log("teste: " + idUser, idEstablishment);
-
-        const response = api.patch(`/customers/${idUser}/establishments/${idEstablishment}/favorite`, {
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-            },
-        });
-        if (response.status === 200) {
-            console.log("response: ", response.data);
-        }
+        const response = api_call("patch", `/customers/${idUser}/establishments/${idEstablishment}/favorite`, null, atob(sessionStorage.getItem("token")));
     }
 
     useEffect(() => {
