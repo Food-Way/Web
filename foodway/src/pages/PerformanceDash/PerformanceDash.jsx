@@ -10,12 +10,10 @@ import ContentLoader from 'react-content-loader'
 
 import "./PerformanceDash.css";
 
-function PerformanceDash(props) {
+function PerformanceDash() {
     const params = useParams();
     const id = params.id;
     const [dashData, setDashData] = useState([]);
-    const test = 0;
-
 
     const CardLoader = () => {
         const numRectangles = 4;
@@ -95,17 +93,50 @@ function PerformanceDash(props) {
         </ContentLoader>
     )
 
+    async function getDashData() {
+        const response = await api_call("get", `/comments/dashboard/${id}`, null, atob(sessionStorage.getItem("token")));
+        console.log(response);
+        setDashData(response);
+    }
+
+    const rate = [
+        {
+            category: "Comida",
+            score: 4,
+        },
+        {
+            category: "Serviço",
+            score: 2,
+        },
+        {
+            category: "Atendimento",
+            score: 3.5,
+        }
+    ];
+
+    const reviews = [
+        {
+            count: 85,
+            sentiment: "positive"
+        },
+        {
+            count: 25,
+            sentiment: "neutral"
+        },
+        {
+            count: 10,
+            sentiment: "negative"
+        },
+        {
+            count: 120,
+            sentiment: "total"
+        }
+    ];
 
 
-    // async function getDashData() {
-    //     const response = await api_call("get", "url", null, atob(sessionStorage.getItem("token")));
-    //     console.log(response);
-    //     setDashData(response);
-    // }
-
-    // useEffect(() => {
-    //     getDashData();
-    // }, []);
+    useEffect(() => {
+        getDashData();
+    }, []);
 
     return (
         <>
@@ -113,11 +144,13 @@ function PerformanceDash(props) {
                 <section>
                     <div className="sentiment-banner">
                         <div className="sentiment-dash-box">
-                            {/* <CardLoader /> */}
-                            <SentimentCard />
-                            <SentimentCard />
-                            <SentimentCard />
-                            <SentimentCard />
+                            {reviews.length === 0 ? (
+                                <CardLoader />
+                            ) : (
+                                reviews.map((item, index) => (
+                                    <SentimentCard sentiment={item.sentiment} count={item.count} key={index} />
+                                ))
+                            )}
                         </div>
                     </div>
                 </section>
@@ -125,55 +158,76 @@ function PerformanceDash(props) {
                     <section>
                         <div className="avaliation-dash-container">
                             <div className="avaliation-dash-box">
-                                {/* <RateLoader/> */}
-                                <div className="avaliation-dash-values">
-                                    <div className="rate-dash-value">
-                                        <span>Avaliação</span>
-                                        <span>3.65</span>
+                                {dashData.length === 0 ? (
+                                    <RateLoader />
+                                ) : (
+                                    <div className="avaliation-dash-values">
+                                        <div className="rate-dash-value">
+                                            <span>Avaliação</span>
+                                            <span>{dashData.evaluationEstablishment.toFixed(2)}</span>
+                                        </div>
+                                        <div className="avaliation-dash-card">
+                                            {rate.length === 0 ? (
+                                                <span className="no-content">Nenhuma avaliação recebida</span>
+                                            ) : (
+                                                rate.map((item, index) => (
+                                                    <AvaliationDashCard rate={item.score} category={item.category} key={index} />
+                                                ))
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="avaliation-dash-card">
-                                        <AvaliationDashCard rate={3} />
-                                        <AvaliationDashCard rate={4} />
-                                        <AvaliationDashCard rate={1} />
+                                )}
+                                {dashData.length === 0 ? (
+                                    <RateLoader />
+                                ) : (
+                                    // dashdata.tags.length === 0 
+                                    dashData.length === 0 ? (
+                                        <span className="no-content">Nenhuma Tag</span>
+                                    ) : (
+                                        <div className="tag-dash-box">
+                                            <TagDashCard />
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                            {dashData.length === 0 ? (
+                                <GraphLoader />
+                            ) : (
+                                // dashData.weekly.length === 0 
+                                dashData.length === 0 ? (
+                                    <span className="no-content">Nenhuma avaliação na última semana</span>
+                                ) : (
+                                    <div className="graph-dash-box">
+                                        <span>Avaliação Recebidas</span>
+                                        <GraphCard />
                                     </div>
-                                </div>
-                                {/* <RateLoader/>    */}
-                                <div className="tag-dash-box">
-                                    <TagDashCard />
-                                </div>
-                            </div>
-                            {/* <GraphLoader/> */}
-                            <div className="graph-dash-box">
-                                <span>Avaliação Recebidas</span>
-                                <GraphCard />
-                            </div>
+                                )
+                            )}
                         </div>
                     </section>
                     <section>
                         <div className="comment-relevant-container">
                             <span className="title-comment-relevant">Comentários mais relevantes</span>
                             <div className="comment-relevant-box">
-                                {/* {dashData.comments.length === 0 ? (
+                                {dashData.length === 0 ? (
                                     <CommentLoader />
                                 ) : (
-                                    dashData.comments.length === 0 ? (
+                                    dashData.comment.length === 0 ? (
                                         <span>Nenhum Comentário</span>
                                     ) : (
-                                        dashData.comments.map((item, index) => (
+                                        dashData.comment.map((item, index) => (
                                             <Comment
                                                 key={index}
                                                 establishmentName={item.establishmentName}
                                                 rate={item.commentRate}
+                                                comment={item.comment}
+                                                upvotes={item.upvotes}
                                                 width="20vw"
                                                 size="15"
                                                 text="15vw"
                                             />
                                         ))
-                                    ))} */}
-                                <Comment width="20vw" text="15vw" size="15" />
-                                <Comment width="20vw" text="15vw" size="15" />
-                                <Comment width="20vw" text="15vw" size="15" />
-                                <Comment width="20vw" text="15vw" size="15" />
+                                    ))}
                             </div>
                         </div>
                     </section>
