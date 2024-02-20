@@ -32,6 +32,7 @@ const Home = () => {
   useEffect(() => {
     // Definindo a função assíncrona dentro do useEffect
     async function fetchData() {
+      sessionStorage.setItem('category', btoa(999));
       await Promise.all([
         listCategory(),
         greaterRate(),

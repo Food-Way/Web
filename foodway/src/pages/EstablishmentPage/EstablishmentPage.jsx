@@ -93,24 +93,26 @@ const EstablishmentPage = () => {
   // }
 
   function showFormAdd() {
-    return (
-      <HandleFormModal
-        confirmText="Comentar"
-        cancelText="Cancelar"
-        lblCampo1="Título"
-        lblCampo2="Assunto"
-        lblCampo3="Avaliação"
-        iptCampo2="productPrice"
-        iptCampo1="productName"
-        successTitle="Comentário criado!"
-        content="Adicionar comentário"
-        status={200}
-        method="post"
-        uri="comments"
-        idCustomer={atob(sessionStorage.getItem("idUser"))}
-        idEstablishment={idEstablishment}
-      />
-    );
+    if (sessionStorage.getItem("token") !== null) {
+      return (
+        <HandleFormModal
+          confirmText="Comentar"
+          cancelText="Cancelar"
+          lblCampo1="Título"
+          lblCampo2="Assunto"
+          lblCampo3="Avaliação"
+          iptCampo2="productPrice"
+          iptCampo1="productName"
+          successTitle="Comentário criado!"
+          content="Adicionar comentário"
+          status={200}
+          method="post"
+          uri="comments"
+          idCustomer={atob(sessionStorage.getItem("idUser"))}
+          idEstablishment={idEstablishment}
+        />
+      );
+    }
   }
 
   useEffect(() => {
@@ -165,10 +167,15 @@ const EstablishmentPage = () => {
         <section>
           <div className="establishment-global-container">
             <div className="establishment-addcomment-box">
-              <div className="establishment-avaliation-box">
-                <img src={Add} alt="Add comment" />
-                {showFormAdd()}
-              </div>
+              {
+                sessionStorage.getItem("token") !== null ?
+                  (
+                    <div className="establishment-avaliation-box">
+                      <img src={Add} alt="Add comment" />
+                      {showFormAdd()}
+                    </div>
+                  ) : ""
+              }
             </div>
             <div className="establishment-comments-info-container">
               <div
