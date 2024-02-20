@@ -41,6 +41,10 @@ header div div.left {
   gap: 0.5rem;
 }
 
+.logoHover {
+  cursor: pointer;
+}
+
 .establishment-title-user-profile {
   font-size: 2rem;
   font-weight: 700;

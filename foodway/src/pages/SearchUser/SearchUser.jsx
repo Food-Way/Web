@@ -46,12 +46,12 @@ function SearchUser() {
         setSearchCustomer(response);
     }
 
-    async function getMaps(lat, lng) {
-        const response = await api_maps_call(lat, lng);
-        console.log(response);
-        setShowMap(true);
-        setUrl(response);
-    }
+    // async function getMaps(lat, lng) {
+    //     const response = await api_maps_call(lat, lng);
+    //     console.log(response);
+    //     setShowMap(true);
+    //     setUrl(response);
+    // }
 
     function selectFilter(id) {
         var selectedFilter = document.getElementById(id);
@@ -87,11 +87,14 @@ function SearchUser() {
     };
 
     useEffect(() => {
+        // getMaps();
         setSearch([...searchEstab, ...searchCustomer]);
+    }, [searchCustomer, searchEstab]);
+
+    useEffect(() => {
         getSearchEstab({ filter: "RELEVANCE" });
         getSearchCustomer({ filter: "RELEVANCE" });
-        getMaps();
-    }, [searchCustomer, searchEstab]);
+    }, []);
 
     return (
         <>
@@ -114,14 +117,16 @@ function SearchUser() {
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    <MyLoader />
+                                    {search.length === 0 && (
+                                        <MyLoader />
+                                    )}
                                     {search && search.map((item, index) => (
                                         <div onClick={(e) => {
                                             e.preventDefault();
                                             handleCardClick(index, item.typeUser)
-                                            if (item.typeUser == "ESTABLISHMENT") {
-                                                getMaps(item.lat, item.lng)
-                                            }
+                                            // if (item.typeUser == "ESTABLISHMENT") {
+                                            //     getMaps(item.lat, item.lng)
+                                            // }
                                         }}>
                                             <SearchCard
                                                 key={index}

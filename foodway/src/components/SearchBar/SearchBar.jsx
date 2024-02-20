@@ -14,24 +14,23 @@ function SearchBar(props) {
         var uriPath;
 
         switch (document.location.pathname) {
-            case '/adsad':
-                if (oldCategory != atob(sessionStorage.getItem('category'))) {
-                    var category = atob(sessionStorage.getItem('category'));
-                    console.log(category);
-                    console.log(oldCategory);
-                    setOldCategory(category);
-                    console.log(oldCategory);
-                    uriPath = `/culinaries/${category}`;
-                    setPassed(true);
-                    setSearched([]);
-                    callGet(uriPath);
-                }
+            case '/':
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
                 break;
             case document.location.pathname.startsWith('/establishment/performance/menu'):
                 uriPath = `/products/establishments/${id}/null`;
                 setPassed(true);
                 setSearched([]);
                 callGet(uriPath);
+                break;
+            case '/search-user':
+                var uriPathEstb = `/establishments`;
+                var uriPathCust = `/customers`;
+                setPassed(true);
+                setSearched([]);
+                callGetTwo(uriPathEstb, uriPathCust);
                 break;
             default:
                 var category = atob(sessionStorage.getItem('category'));
@@ -46,6 +45,13 @@ function SearchBar(props) {
         const response = await api_call("get", uriPath, null, null);
         console.log('Busca realizada com sucesso');
         setSearched(response);
+    }
+
+    async function callGetTwo(uriPathOne, uriPathTwo) {
+        const responseOne = await api_call("get", uriPathOne, null, null);
+        const responseTwo = await api_call("get", uriPathTwo, null, null);
+        console.log('Busca realizada com sucesso');
+        setSearched([...responseOne, ...responseTwo]);
     }
 
     function search() {
@@ -68,7 +74,8 @@ function SearchBar(props) {
         setFilter(value);
 
         setFiltred(searched.filter(item =>
-            item.establishmentName.toUpperCase().includes(value)
+            item.typeUser === 'ESTABLISHMENT' ? item.establishmentName.toUpperCase().includes(value) :
+            item.name.toUpperCase().includes(value)
         ));
         var dropdown = document.getElementById('dropdownList');
 
@@ -103,7 +110,7 @@ function SearchBar(props) {
 
                 {filtred.map(item => (
                     <div key={item.idUser} className='itens'>
-                        <a href={`/establishment/info/${item.idUser}`}>{item.establishmentName}</a>
+                        <a href={`/establishment/info/${item.idUser}`}>{item.typeUser === 'ESTABLISHMENT' ? item.establishmentName : item.name}</a>
                     </div>
                 ))}
             </div>
