@@ -16,10 +16,7 @@ function SearchBar(props) {
             case '/':
                 if (oldCategory != atob(sessionStorage.getItem('category'))) {
                     var category = atob(sessionStorage.getItem('category'));
-                    console.log(category);
-                    console.log(oldCategory);
                     setOldCategory(category);
-                    console.log(oldCategory);
                     uriPath = `/culinaries/${category}`;
                     setPassed(true);
                     setSearched([]);
@@ -46,9 +43,6 @@ function SearchBar(props) {
             data: {
                 idEstablishment: atob(sessionStorage.getItem('idUser'))
             },
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
-            },
 
         })
 
@@ -67,10 +61,7 @@ function SearchBar(props) {
             });
     }
 
-    function search() {
-        listSearched();
-    }
-
+   
     function setSize() {
         var searchBar = document.querySelector('.search-bar');
         searchBar.style.width = props.width;
@@ -109,7 +100,9 @@ function SearchBar(props) {
                 placeholder={props.placeholder}
                 className='search-bar'
                 onKeyUp={filterName}
-                onFocus={search}
+                onFocus={() =>{
+                    listSearched();
+                }}
             />
             <div
                 id="dropdownList"

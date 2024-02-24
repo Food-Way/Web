@@ -1,7 +1,6 @@
 @import url(../../assets/css/style.css);
 
 .establishment-content-container {
-    width: calc(120vw - 15vw);
     height: 88.9rem;
     display: flex;
     flex-direction: column;

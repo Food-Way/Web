@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+
 import api, { api_maps } from "../../services/api.js";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
@@ -7,7 +7,8 @@ const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
 const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
 const Report = "https://foodway.blob.core.windows.net/public/report.png";
 const Add = "https://foodway.blob.core.windows.net/public/adicionar.svg";
-import { useEffect } from "react";
+import { TextAreaFieldComment } from "../../components/InputField/InputField";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   CommentIndividual,
@@ -23,19 +24,13 @@ const EstablishmentPage = () => {
   const [url, setUrl] = useState("");
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
+  const apiKey = "AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE";
 
   function getEstablishmentProfileData() {
-    console.log(idEstablishment);
     const response = api
-      .get(`/establishments/profile/${idEstablishment}`, {
-        headers: {
-          Authorization: "Bearer " + atob(sessionStorage.getItem("token")),
-        },
-      })
+      .get(`/establishments/profile/${idEstablishment}`)
       .then((response) => {
         if (response.status === 200) {
-          console.log("response: ", response.data);
           setProfile(response.data);
           setComments(response.data.comments);
           getMaps(response.data.lat, response.data.lng);
@@ -51,16 +46,13 @@ const EstablishmentPage = () => {
       const response = await api_maps.get(
         `staticmap?center=${lat},${lng}&zoom=15&size=225x100&key=${apiKey}`,
         {
-          responseType: "arraybuffer", // Indica que a resposta é binária
+          responseType: "arraybuffer",
         }
       );
-      // console.log("Response da API de Mapas:", response);
 
       if (response.status === 200 && response.data) {
         const blob = new Blob([response.data], { type: "image/png" });
         const dataUrl = URL.createObjectURL(blob);
-
-        // console.log("URL do Mapa:", dataUrl);
         setUrl(dataUrl);
       } else {
         console.error("Resposta inválida da API de Mapas:", response);
@@ -71,29 +63,9 @@ const EstablishmentPage = () => {
     // }
   }
 
-  function showFormAdd() {
-    return (
-      <HandleFormModal
-        confirmText="Comentar"
-        cancelText="Cancelar"
-        lblCampo1="Título"
-        lblCampo2="Assunto"
-        lblCampo3="Avaliação"
-        iptCampo2="productPrice"
-        iptCampo1="productName"
-        successTitle="Comentário criado!"
-        content="Adicionar comentário"
-        status={200}
-        method="post"
-        uri="comments"
-        idCustomer={atob(sessionStorage.getItem("idUser"))}
-        idEstablishment={idEstablishment}
-      />
-    );
-  }
+
 
   useEffect(() => {
-    console.log("idEstablishment: ", idEstablishment);
     getEstablishmentProfileData();
   }, []);
 
@@ -102,7 +74,6 @@ const EstablishmentPage = () => {
     <>
       <div className="establishment-content-container">
         <section>
-          {console.log("profile: ", profile)}
           <div
             className="establishment-banner-box"
             style={{ backgroundImage: `url(${profile.profileHeaderImg})` }}
@@ -144,9 +115,10 @@ const EstablishmentPage = () => {
         <section>
           <div className="establishment-global-container">
             <div className="establishment-addcomment-box">
-              <div className="establishment-avaliation-box">
-                <img src={Add} alt="Add comment" />
-                {showFormAdd()}
+              <div className="add-comment-form">
+                {/* <TextAreaFieldComment placeholder={"Adicione um comentário"} /> */}
+                <button className="submit-comment-btn" >Comentar</button>
+                {/*onClick={handleAddComment}*/}
               </div>
             </div>
             <div className="establishment-comments-info-container">
@@ -157,90 +129,47 @@ const EstablishmentPage = () => {
                     : "establishment-comments-all"
                 }
               >
-                {comments.length == 1 ? (
-                  <>
-                    {comments.map(
-                      (item) => (
-                        console.log(item),
-                        (
-                          <CommentIndividual
-                            establishmentName={item.establishmentName}
-                            rate={item.commentRate}
-                            title={item.title}
-                            comment={item.comment}
-                            upvotes={item.upvotes}
-                            idComment={item.idComment}
-                            userPhoto={item.userPhoto}
-                          />
-                        )
-                      )
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {comments.map((commentParent) => (
-                      <div className="establishment-comments-box-more">
-                        <>
-                          <CommentIndividual
-                            establishmentName={commentParent.establishmentName}
-                            rate={commentParent.commentRate}
-                            title={commentParent.title}
-                            comment={commentParent.comment}
-                            upvotes={commentParent.upvotes}
-                            idComment={commentParent.idComment}
-                            idCustomer={atob(sessionStorage.getItem("idUser"))}
-                            idEstablishment={idEstablishment}
-                            userPhoto={commentParent.userPhoto}
-                          />
-                          <div
-                            className={
-                              commentParent.childComments.length > 1
-                                ? "scroll-comments"
-                                : "establishment-more-box"
-                            }
-                          >
-                            {commentParent.childComments.map((commentReply) => (
-                              <CommentReply
-                                establishmentName={
-                                  commentReply.establishmentName
-                                }
-                                rate={commentReply.commentRate}
-                                title={commentReply.title}
-                                upvotes={commentReply.upvotes}
-                                comment={commentReply.comment}
-                                idComment={commentReply.idComment}
-                                idCustomer={atob(
-                                  sessionStorage.getItem("idUser")
-                                )}
-                                idEstablishment={idEstablishment}
-                                userPhoto={commentReply.userPhoto}
-                              />
-                            ))}
-                          </div>
-                        </>
-                      </div>
-                    ))}
-                  </>
-                )}
+                {comments.map((commentParent, index) => (
+                  <div className="establishment-comments-box-more" key={commentParent.idComment}>
+                    <CommentIndividual
+                      key={commentParent.idComment} // Unique key for each parent comment
+                      establishmentName={commentParent.establishmentName}
+                      rate={commentParent.commentRate}
+                      title={commentParent.title}
+                      comment={commentParent.comment}
+                      upvotes={commentParent.upvotes}
+                      idComment={commentParent.idComment}
+                      idCustomer={atob(sessionStorage.getItem("idUser"))}
+                      idEstablishment={idEstablishment}
+                      userPhoto={commentParent.userPhoto}
+                    />
+                    <div
+                      className={
+                        commentParent.childComments.length > 1
+                          ? "scroll-comments"
+                          : "establishment-more-box"
+                      }
+                    >
+                      {commentParent.childComments.map((commentReply, indexx) => (
+                        <CommentReply
+                          key={`${commentParent.idComment}-${commentReply.idComment}`} // Concatenate to ensure uniqueness
+                          establishmentName={commentReply.establishmentName}
+                          rate={commentReply.commentRate}
+                          title={commentReply.title}
+                          upvotes={commentReply.upvotes}
+                          comment={commentReply.comment}
+                          idComment={commentReply.idComment}
+                          idCustomer={atob(sessionStorage.getItem("idUser"))}
+                          idEstablishment={idEstablishment}
+                          userPhoto={commentReply.userPhoto}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
               </div>
               <div className="establishment-side-box">
-                {/* <div className="establishment-tags-box">
-                                    <span className="establishment-tags-title">Tags</span>
-                                    <div className="establishment-tag-content">
-                                        <div className="establishment-tag-box">
-                                            <span>Pode fumar</span>
-                                        </div>
-                                        <div className="establishment-tag-box">
-                                            <span>Pode fumar</span>
-                                        </div>
-                                        <div className="establishment-tag-box">
-                                            <span>Pode fumar</span>
-                                        </div>
-                                        <div className="establishment-tag-box">
-                                            <span>Pode fumar</span>
-                                        </div>
-                                    </div>
-                                </div> */}
                 <div className="establishment-general-box">
                   <div className="establishment-value-box">
                     <span className="establishment-info-value">
@@ -271,10 +200,6 @@ const EstablishmentPage = () => {
                       <span>Cardápio</span>
                     </div>
                   </Link>
-                  {/* <div className="establishment-contact-btn">
-                                        <img src={Phone} alt="Phone" />
-                                        <span>Contato</span>
-                                    </div> */}
                 </div>
                 <div className="establishment-location-box">
                   <span className="establishment-location-title">
@@ -284,10 +209,6 @@ const EstablishmentPage = () => {
                     <img src={url} alt="" />
                   </div>
                 </div>
-                {/* <div className="establishment-report-box">
-                                    <img src={Report} alt="" />
-                                    <span>Reportar</span>
-                                </div> */}
               </div>
             </div>
           </div>

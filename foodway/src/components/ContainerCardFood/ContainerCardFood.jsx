@@ -61,7 +61,6 @@ const ContainerCardFood = () => {
     api.get("/culinaries")
       .then(response => {
         if (response.status === 200) {
-          console.log(response.data);
           setCategory(response.data);
         }
       })

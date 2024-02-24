@@ -19,7 +19,6 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
       .then((response) => {
         if (response.status === 200) {
           setMenu(response.data);
-          console.log("response: ", response.data);
           console.log("Menu: ", menu);
         }
       })

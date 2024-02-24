@@ -45,10 +45,7 @@ const UserProfile = () => {
         if (response.status === 200) {
           setUser(response.data);
           setComments(response.data.comments);
-          console.log("response: ", response.data);
-          console.log("user: ", user);
-          console.log("comments: ", comments);
-          console.log("establishments: ", establishments);
+          
           firstAndEnd(response.data.name);
           setEstablishments(response.data.establishmentDTOs);
         }

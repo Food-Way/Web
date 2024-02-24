@@ -19,7 +19,7 @@ const SearchCard = (props) => {
             },
         });
         if (response.status === 200) {
-            console.log("response: ", response.data);
+           
         }
     }
 

@@ -14,8 +14,7 @@ import { useNavigate } from "react-router-dom";
 const CarrosselEstablishment = ({ headerText, establishment }) => {
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("CarrosselEstablishment");
-    console.log(establishment);
+
   }, [establishment]);
 
   return (

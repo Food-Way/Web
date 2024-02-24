@@ -25,8 +25,6 @@ const MenuDash = () => {
             .then((response) => {
                 if (response.status === 200) {
                     setMenu(response.data);
-                    console.log("response: ", response.data);
-                    console.log("Menu: ", menu);
                 }
             })
             .catch((erro) => console.log(erro));

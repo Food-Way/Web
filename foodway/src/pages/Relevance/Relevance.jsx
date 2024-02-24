@@ -21,7 +21,6 @@ const Relevance = () => {
                 if (response.status === 200) {
                     setRelevance(response.data.slice(3, 11));
                     setTop3(response.data.slice(0, 3));
-                    console.log("response: ", response.data);
                 }
             })
             .catch((erro) => console.log(erro));
