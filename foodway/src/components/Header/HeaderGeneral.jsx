@@ -26,8 +26,8 @@ const Header = (props) => {
         <>
             <header>
                 <div className='container-header'>
-                    <div className='left'>
-                        <img src={LogoFoodway} className="logoHover" alt="Logo FoodWay" onClick={verifyTokenNavigate} />
+                    <div className='left' onClick={verifyTokenNavigate}>
+                        <img src={LogoFoodway} className="logoHover" alt="Logo FoodWay" />
                         <h1>FoodWay</h1>
                         {
                             atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
