@@ -15,15 +15,18 @@
 }
 
 .comment-dash-box {
-    width: 44vw;
+    width: 55vw;
     height: 75vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
     overflow-y: scroll;
-    justify-content: center;
     margin-top: 2vh;
+}
+
+.comment-loader {
+    overflow-y: hidden;
 }
 
 .title {

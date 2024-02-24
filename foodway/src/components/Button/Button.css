@@ -1,6 +1,5 @@
 .button-primary {
-  max-width: fit-content;
-  min-width: 60%;
+  min-width: fit-content;
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -31,8 +30,7 @@
   transition: 0.3s;
 }
 .button-secondary {
-  max-width: fit-content;
-  min-width: 60%;
+  min-width: fit-content;
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -44,7 +42,7 @@
   background: #000000;
   border: none;
   padding: 10px;
-  margin: 5px;
+  margin: 10px;
   transition: 0.3s;
   text-decoration: none;
 }

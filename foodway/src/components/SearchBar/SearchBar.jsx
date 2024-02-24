@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import sadCat from "../../../public/sadCat.png";
 import './SearchBar.css';
-import api from "../../services/api";
+import api_call from '../../services/apiImpl';
 
 function SearchBar(props) {
     const [searched, setSearched] = useState([]);
@@ -11,21 +12,12 @@ function SearchBar(props) {
 
     function listSearched() {
         var uriPath;
-        
+
         switch (document.location.pathname) {
             case '/':
-                if (oldCategory != atob(sessionStorage.getItem('category'))) {
-                    var category = atob(sessionStorage.getItem('category'));
-                    console.log(category);
-                    console.log(oldCategory);
-                    setOldCategory(category);
-                    console.log(oldCategory);
-                    uriPath = `/culinaries/${category}`;
-                    setPassed(true);
-                    setSearched([]);
-                    callGet(uriPath);
-                }
-                
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
                 break;
             case document.location.pathname.startsWith('/establishment/performance/menu'):
                 uriPath = `/products/establishments/${id}/null`;
@@ -33,38 +25,33 @@ function SearchBar(props) {
                 setSearched([]);
                 callGet(uriPath);
                 break;
-
+            case '/search-user':
+                var uriPathEstb = `/establishments`;
+                var uriPathCust = `/customers`;
+                setPassed(true);
+                setSearched([]);
+                callGetTwo(uriPathEstb, uriPathCust);
+                break;
             default:
-                uriPath = `/establishment`;
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
                 break;
         }
 
     }
 
-    function callGet(uriPath) {
-        api.get(uriPath, {
-            data: {
-                idEstablishment: atob(sessionStorage.getItem('idUser'))
-            },
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token"))
-            },
+    async function callGet(uriPath) {
+        const response = await api_call("get", uriPath, null, null);
+        console.log('Busca realizada com sucesso');
+        setSearched(response);
+    }
 
-        })
-
-            .then(response => {
-                if (response.status === 200) {
-                    setSearched(response.data);
-                } else {
-                    console.error('Erro ao buscar:', response.status);
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar:', error);
-            })
-            .finally(() => {
-                console.log('Busca finalizada');
-            });
+    async function callGetTwo(uriPathOne, uriPathTwo) {
+        const responseOne = await api_call("get", uriPathOne, null, null);
+        const responseTwo = await api_call("get", uriPathTwo, null, null);
+        console.log('Busca realizada com sucesso');
+        setSearched([...responseOne, ...responseTwo]);
     }
 
     function search() {
@@ -83,12 +70,11 @@ function SearchBar(props) {
     }, []);
 
     function filterName(event) {
-        // var searchBar = document.querySelector('.search-bar');
-
         const value = event.target.value.toUpperCase();
         setFilter(value);
 
         setFiltred(searched.filter(item =>
+            item.typeUser === 'ESTABLISHMENT' ? item.establishmentName.toUpperCase().includes(value) :
             item.name.toUpperCase().includes(value)
         ));
         var dropdown = document.getElementById('dropdownList');
@@ -115,10 +101,16 @@ function SearchBar(props) {
                 id="dropdownList"
                 className={`dropdown-content`}
             >
+                {filtred.length === 0 && filter !== '' ?
+                    <div className='empty-results'>
+                        <div className='box-empty-results'>Nenhum resultado
+                        </div>
+                        <img className='img-sadCat' src={sadCat} alt="" />
+                    </div> : ''}
 
                 {filtred.map(item => (
-                    <div key={item.id} className='itens'>
-                        <a href={`/home`}>{item.name}</a>
+                    <div key={item.idUser} className='itens'>
+                        <a href={`/establishment/info/${item.idUser}`}>{item.typeUser === 'ESTABLISHMENT' ? item.establishmentName : item.name}</a>
                     </div>
                 ))}
             </div>

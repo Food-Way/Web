@@ -4,6 +4,21 @@
 main {
   background-color: var(--cinza);
 }
+
+.loader-container-home-category {
+  margin-top: 2vh;
+}
+
+.loader-container-home-establishments{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70vh;
+  width: 80%;
+  flex-direction: column;
+  margin-top: 3vh;
+}
+
 .container-card-best-in-category {
   display: flex;
   justify-content: center;

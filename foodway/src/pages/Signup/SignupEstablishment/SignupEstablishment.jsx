@@ -303,18 +303,19 @@ const SignupEstablishment = () => {
                   />
                   <div className="button-div">
                     <div>
-                      {" "}
+                      
                       <ButtonSecondary
                         text="<"
                         onclick={handleClose}
                         className="button-secondary-v2"
-                      />{" "}
+                      />
                     </div>
-                    <div>
+                    <div  >
                       <ButtonPrimary
                         className="button-primary-v2"
                         text="Criar >"
                         onclick={handleRegisterEstablishment}
+                        
                       />
                     </div>
                   </div>

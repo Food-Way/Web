@@ -135,7 +135,7 @@ const SignIn = () => {
               <span className="">
                 Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
-              <ButtonPrimary text="Entrar" onclick={handleLogin} />
+              <ButtonPrimary text="Entrar" onclick={handleLogin} width={"50%"} />
             </form>
           </div>
         </div>

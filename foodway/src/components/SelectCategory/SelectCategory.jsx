@@ -6,6 +6,8 @@ import api from '../../services/api';
 function SelectCategory() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [category, setCategory] = useState([]);
+    
+    const general = ([{ value: "Geral", label: "Geral", id: 999 }]);
 
     function listCategory() {
         api.get("/culinaries")
@@ -14,7 +16,7 @@ function SelectCategory() {
                 response.data.map((item) => {
                     options.push({ value: item['name'], label: item['name'], id: item['id'] });
                 });
-                setCategory(options);
+                setCategory([...general, ...options]);
             })
             .catch(error => {
                 console.error('Erro ao buscar estabelecimentos:', error);
@@ -39,6 +41,7 @@ function SelectCategory() {
                 className="select-category"
                 placeholder="Categoria"
                 noOptionsMessage={() => "Nenhum Resultado"}
+                defaultValue={general}
             />
         </>
     )

@@ -3,7 +3,8 @@ import SearchCard from "../../components/SearchCard/SearchCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
-import { api, api_maps } from "../../services/api";
+import { api_call, api_maps_call } from "../../services/apiImpl";
+import api from "../../services/api";
 import ContentLoader from 'react-content-loader'
 
 import './SearchUser.css';
@@ -24,7 +25,6 @@ const MyLoader = () => (
 )
 
 function SearchUser() {
-
     const [searchEstab, setSearchEstab] = useState([]);
     const [searchCustomer, setSearchCustomer] = useState([]);
     const [search, setSearch] = useState([]);
@@ -34,63 +34,23 @@ function SearchUser() {
     const [showMap, setShowMap] = useState(false);
     const [url, setUrl] = useState(null);
 
-    var typeUser = "ESTABLISHMENT";
-    const apiKey = "AIzaSyBdmmGVqp3SOAYkQ8ef1SN9PDBkm8JjD_s";
-
-    async function getSearchEstab({ filter }) {
-        try {
-            const establishmentResponse = await api.get(filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, {
-                headers: {
-                    Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-                    ID_SESSION: atob(sessionStorage.getItem("idUser")),
-                },
-            });
-            if (establishmentResponse.status === 200) {
-                console.log("Response da API de Busca (Estab):", establishmentResponse.data);
-                setSearchEstab(establishmentResponse.data);
-            }
-        } catch (error) {
-            console.error('Erro ao buscar estabelecimentos:', error);
-        }
+    async function getSearchEstab ({filter}) {
+        const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), atob(sessionStorage.getItem("idUser")));
+        console.log(response)
+        setSearchEstab(response);
     }
-
+    
     async function getSearchCustomer() {
-        try {
-            const customerResponse = await api.get(`/customers/search`, {
-                headers: {
-                    Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-                },
-            });
-            if (customerResponse.status === 200) {
-                console.log("Response da API de Busca (Customer):", customerResponse.data);
-                setSearchCustomer(customerResponse.data);
-            }
-        } catch (error) {
-            console.error('Erro ao buscar clientes:', error);
-        }
+        const response = await api_call("get", `/customers/search`, null, atob(sessionStorage.getItem("token")));
+        console.log(response);
+        setSearchCustomer(response);
     }
 
     async function getMaps(lat, lng) {
-        if (search.length > 0) {
-            try {
-                const response = await api_maps.get(`staticmap?center=${lat},${lng}&zoom=19&size=330x186&key=${apiKey}`, {
-                    responseType: 'arraybuffer',
-                });
-                // console.log("Response da API de Mapas:", response);
-
-                if (response.status === 200 && response.data) {
-                    const blob = new Blob([response.data], { type: 'image/png' });
-                    const dataUrl = URL.createObjectURL(blob);
-                    setShowMap(true);
-                    // console.log("URL do Mapa:", dataUrl);
-                    setUrl(dataUrl);
-                } else {
-                    console.error('Resposta inválida da API de Mapas:', response);
-                }
-            } catch (error) {
-                console.error('Erro ao buscar o mapa:', error);
-            }
-        }
+        const response = await api_maps_call(lat, lng);
+        console.log(response);
+        setShowMap(true);
+        setUrl(response);
     }
 
     function selectFilter(id) {
@@ -121,13 +81,13 @@ function SearchUser() {
     }
 
     const handleCardClick = (index, type) => {
-        // console.log("Card selecionado:", index);
         setViewDetails(!viewDetails);
         setSelectedCard(index);
         setSelectedCardType(type);
     };
 
     useEffect(() => {
+        getMaps();
         setSearch([...searchEstab, ...searchCustomer]);
     }, [searchCustomer, searchEstab]);
 
@@ -135,10 +95,6 @@ function SearchUser() {
         getSearchEstab({ filter: "RELEVANCE" });
         getSearchCustomer({ filter: "RELEVANCE" });
     }, []);
-
-    useEffect(() => {
-        getMaps();
-    }, [searchCustomer, searchEstab]);
 
     return (
         <>
@@ -161,7 +117,9 @@ function SearchUser() {
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    <MyLoader />
+                                    {search.length === 0 && (
+                                        <MyLoader />
+                                    )}
                                     {search && search.map((item, index) => (
                                         <div onClick={(e) => {
                                             e.preventDefault();

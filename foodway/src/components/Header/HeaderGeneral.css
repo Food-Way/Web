@@ -17,6 +17,7 @@ header {
 header h1 {
   font-size: 1.91169rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .container-header {
@@ -39,6 +40,10 @@ header div div.left {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+}
+
+.logoHover {
+  cursor: pointer;
 }
 
 .establishment-title-user-profile {
