@@ -1,30 +1,61 @@
 import React, { useEffect, useState } from "react";
 import RelevanceCard from "../../components/RelevanceCard/RelevanceCard";
 import RankLine from "../../components/RankLine/RankLine";
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 import "./Relevance.css";
+import ContentLoader from 'react-content-loader'
+
 
 
 const Relevance = () => {
     const [relevance, setRelevance] = useState([]);
     const [top3, setTop3] = useState([]);
 
-    function getRelevance() {
+    async function getRelevance() {
         const culinary = atob(sessionStorage.getItem("culinary"));
+        const response = await api_call("get", `/establishments/relevance?culinary=${culinary}`, null, atob(sessionStorage.getItem("token")));
+        setRelevance(response.slice(3, 11));
+        setTop3(response.slice(0, 3));
+    }
 
-        const response = api.get(`/establishments/relevance?culinary=${culinary}`, {
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-            },
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    setRelevance(response.data.slice(3, 11));
-                    setTop3(response.data.slice(0, 3));
-                }
-            })
-            .catch((erro) => console.log(erro));
-    };
+    const CardLoader = () => {
+        const numRectangles = 3;
+        const totalWidth = 900;
+        const rectangleWidth = 250;
+        const rectangleHeight = 180;
+        const spacing = (totalWidth - (numRectangles * rectangleWidth)) / (numRectangles - 1);
+
+        return (
+            <ContentLoader
+                style={{
+                    width: "105%",
+                    height: "30vh",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+                speed={2}
+                width={totalWidth}
+                height={250}
+                viewBox={`0 0 ${totalWidth} 250`}
+                backgroundColor="#ffffff"
+                foregroundColor="#c4c4c4"
+            >
+                {[...Array(numRectangles).keys()].map((index) => (
+                    <rect
+                        key={index}
+                        x={index * (rectangleWidth + spacing)}
+                        y="13"
+                        rx="10"
+                        ry="10"
+                        width={rectangleWidth}
+                        height={rectangleHeight}
+                    />
+                ))}
+            </ContentLoader>
+        );
+    }
 
     useEffect(() => {
         getRelevance();
@@ -38,14 +69,18 @@ const Relevance = () => {
                         <div className="best-relevance-box">
                             <span className="relevance-title">Relevância - {atob(sessionStorage.getItem("culinary"))}</span>
                             <div className="best-relevance">
-                                {top3.map((item) => (
-                                    <RelevanceCard 
-                                        profilePhoto={item.profilePhoto}
-                                        establishmentName={item.establishmentName}
-                                        qtdRate={item.qtdRate}
-                                        generalRate={item.generalRate}
-                                    />
-                                ))}
+                                {top3.length === 0 ? (
+                                    <CardLoader />
+                                ) : (
+                                    top3.map((item) => (
+                                        <RelevanceCard
+                                            profilePhoto={item.profilePhoto}
+                                            establishmentName={item.establishmentName}
+                                            qtdRate={item.qtdRate}
+                                            generalRate={item.generalRate}
+                                        />
+                                    ))
+                                )}
                             </div>
                         </div>
                     </section>

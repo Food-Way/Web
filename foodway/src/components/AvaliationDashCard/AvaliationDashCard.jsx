@@ -25,7 +25,7 @@ function AvaliationDashCard(props) {
         <>
             <div className="avaliation-general-container">
                 <div className="avaliation-general-box">
-                    <span>0.0</span>
+                    <span>{props.rate.toFixed(2)}</span>
                     <div className="points-value-box">
                         {createPointsValue()}
                     </div>

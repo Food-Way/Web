@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Comment } from "../../components/Comment/Comment";
 import { useParams } from "react-router-dom";
-import api from "../../services/api";
-
+import api_call from "../../services/apiImpl";
+import ContentLoader from 'react-content-loader'
 import "./CommentDash.css";
-
 
 const CommentDash = () => {
     const routeParams = useParams();
-    const id = routeParams.id;
     const [comments, setComments] = useState([]);
 
-    function getComments() {
-        const response = api.get(`/establishments/${id}/comments`, {
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-            },
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    console.log(response.data)
-                    setComments(response.data);
-                }
-            })
-            .catch((erro) => console.log(erro));
-    }
+    const CommentLoader = () => (
+        <ContentLoader
+            speed={2}
+            width={1000}
+            height={851}
+            viewBox="0 0 1000 851"
+            backgroundColor="#ffffff"
+            foregroundColor="#c4c4c4"
+        >
+            <rect x="4" y="8" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="8" rx="0" ry="0" width="500" height="250" />
+            <rect x="4" y="277" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="277" rx="0" ry="0" width="500" height="250" />
+            <rect x="4" y="545" rx="0" ry="0" width="500" height="250" />
+            <rect x="518" y="545" rx="0" ry="0" width="500" height="250" />
+        </ContentLoader>
+    )
 
+    async function getComments() {
+        const id = routeParams.id;
+        const response = await api_call("get", `/establishments/${id}/comments`, null, atob(sessionStorage.getItem("token")));
+        console.log(response);
+        setComments(response);
+    }
 
     useEffect(() => {
         getComments();
@@ -38,17 +45,25 @@ const CommentDash = () => {
                     <span className="title">Comentários</span>
                     <section>
                         <div className="comment-dash-container">
-                            <div className="comment-dash-box">
-                                {comments.map((comment, index) => (
-                                    <Comment
-                                        key={index}
-                                        title={comment.title}
-                                        comment={comment.comment}
-                                        commentRate={comment.commentRate}
-                                        establishmentName={comment.establishmentName}
-                                        upvotes={comment.upvotes}
-                                    />
-                                ))}
+                            <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader": ""}`}>
+                                {comments.length === 0 ? (
+                                    <div>
+                                        <CommentLoader />
+                                    </div>
+                                ) : (
+                                    comments.length === 0 ? (
+                                        <span>Nenhum comentário</span>
+                                    ) : (
+                                        comments.map((comment, index) => (
+                                            <Comment
+                                                key={index}
+                                                title={comment.title}
+                                                comment={comment.comment}
+                                                commentRate={comment.commentRate}
+                                                establishmentName={comment.establishmentName}
+                                                upvotes={comment.upvotes}
+                                            />
+                                        ))))}
                             </div>
                         </div>
                     </section>

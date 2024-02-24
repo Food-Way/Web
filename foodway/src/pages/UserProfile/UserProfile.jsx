@@ -3,9 +3,8 @@ import { Comment } from "../../components/Comment/Comment";
 import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCardEstablishment";
 import RateCard from "../../components/RateCard/RateCard";
 import { ButtonSecondaryLink } from "../../components/Button/Button"
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader'
-
 
 import "./UserProfile.css";
 import { useParams } from "react-router-dom";
@@ -18,40 +17,87 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
 
-  const MyLoader = () => (
+  const ProfileHeaderLoader = () => (
     <ContentLoader
       speed={2}
-      width={1105}
-      height={451}
-      viewBox="0 0 1105 451"
+      width={2304}
+      height={291}
+      viewBox="0 0 2304 291"
       backgroundColor="#ffffff"
       foregroundColor="#c4c4c4"
     >
-      <rect x="12" y="309" rx="2" ry="2" width="400" height="212" />
-      <rect x="407" y="323" rx="2" ry="2" width="400" height="212" />
+      <rect x="0" y="0" rx="0" ry="0" width="2304" height="291" />
     </ContentLoader>
   )
 
-  function getUser() {
-    const idUser = atob(sessionStorage.getItem("idUser"));
-    console.log("idUser: ", idUser);
+  const ProfilePhotoLoader = () => (
+    <ContentLoader style={{ position: "absolute", top: "15rem", left: "50rem" }}
+      speed={2}
+      width={300}
+      height={265}
+      viewBox="0 0 300 265"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <circle cx="144" cy="125" r="125" />
+    </ContentLoader>
+  )
 
-    const response = api.get(`/customers/profile/${id}`, {
-      headers: {
-        Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          setUser(response.data);
-          setComments(response.data.comments);
-          
-          firstAndEnd(response.data.name);
-          setEstablishments(response.data.establishmentDTOs);
-        }
-      })
-      .catch((erro) => console.log(erro));
+  const ProfileStatusLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={490}
+      height={102}
+      viewBox="0 0 490 102"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="0" y="0" rx="0" ry="0" width="490" height="102" />
+    </ContentLoader>
+  )
+
+  const CommentLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={1244}
+      height={515}
+      viewBox="0 0 1244 515"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="4" y="-42" rx="0" ry="0" width="500" height="250" />
+      <rect x="4" y="239" rx="0" ry="0" width="500" height="250" />
+      <rect x="537" y="238" rx="0" ry="0" width="500" height="250" />
+      <rect x="532" y="-42" rx="0" ry="0" width="500" height="250" />
+    </ContentLoader>
+  )
+
+  const FavEstablishmentsLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={2764}
+      height={280}
+      viewBox="0 0 2764 280"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="2" y="13" rx="0" ry="0" width="250" height="250" />
+      <rect x="266" y="15" rx="0" ry="0" width="250" height="250" />
+      <rect x="530" y="14" rx="0" ry="0" width="250" height="250" />
+      <rect x="794" y="13" rx="0" ry="0" width="250" height="250" />
+    </ContentLoader>
+  )
+
+  async function getUser() {
+    const idUser = id;
+    const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
+    console.log(response)
+    setUser(response);
+    setComments(response.comments);
+    firstAndEnd(response.name);
+    setEstablishments(response.establishmentDTOs);
   }
+
 
   function firstAndEnd(nameUser) {
     console.log(nameUser);
@@ -112,24 +158,36 @@ const UserProfile = () => {
       <div className="profile-container">
         <div className="profile">
           <section>
-            <img className="user-banner" src={user.profileHeaderImg} alt="" />
+            {user.length === 0 ? (
+              <ProfileHeaderLoader />
+            ) : (
+              <img className="user-banner" src={user.profileHeaderImg} alt="" />
+            )}
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  <img className="profile-photo" src={atob(sessionStorage.getItem("profile-photo"))} alt="" />
+                  {user.length === 0 ? (
+                    <ProfilePhotoLoader />
+                  ) : (
+                    <img className="profile-photo" src={user.profilePhoto} alt="" />
+                  )}
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} /> : "" }
+                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"}  width={"11vw"} /> : ""}
                 </div>
-                <div className="user-info-right">
-                  <RateCard
-                    xp={user.xp}
-                    level={user.level}
-                    profileRate={user.profileRate}
-                    qtdComments={user.qtdComments}
-                    upvotes={user.qtdUpvotes}
-                  />
-                </div>
+                {user.length === 0 ? (
+                  <ProfileStatusLoader />
+                ) : (
+                  <div className="user-info-right">
+                    <RateCard
+                      xp={user.xp}
+                      level={user.level}
+                      profileRate={user.profileRate}
+                      qtdComments={user.qtdComments}
+                      upvotes={user.qtdUpvotes}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -137,18 +195,24 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
-                {/* <MyLoader /> */}
-                {comments.map((item) => (
-                  <>
-                    <Comment
-                      establishmentName={item.establishmentName}
-                      rate={item.commentRate}
-                      title={item.title}
-                      comment={item.comment}
-                      upvotes={item.upvotes}
-                    />
-                  </>
-                ))}
+                {comments.length === 0 ? (
+                  <CommentLoader />
+                ) : (
+                  comments.length === 0 ? (
+                    <span className="no-content">Nenhuma avaliação</span>
+                  ) : (
+                    comments.map((item, index) => (
+                      <Comment
+                        key={index}
+                        establishmentName={item.establishmentName}
+                        rate={item.commentRate}
+                        title={item.title}
+                        comment={item.comment}
+                        upvotes={item.upvotes}
+                      />
+                    ))
+                  )
+                )}
               </div>
             </div>
           </section>
@@ -156,16 +220,23 @@ const UserProfile = () => {
             <div className="fav-estabs-container">
               <span className="profile-title">Restaurantes favoritos</span>
               <div className="fav-estabs-box">
-                {establishments.map((item) => (
-                  <>
-                    <HomeCardEstablishment
-                      establishment={item.establishmentName}
-                      category={item.culinary[0].name}
-                      image={item.photo}
-                      rattingNumber={item.establishmentRate}
-                    />
-                  </>
-                ))}
+                {establishments.length === 0 ? (
+                  <FavEstablishmentsLoader />
+                ) : (
+                  establishments.length === 0 ? (
+                    <span className="no-content">Nenhum restaurante favorito</span>
+                  ) : (
+                    establishments.map((item, index) => (
+                      <HomeCardEstablishment
+                        key={index}
+                        establishment={item.establishmentName}
+                        category={item.culinary[0].name}
+                        image={item.photo}
+                        rattingNumber={item.establishmentRate}
+                      />
+                    ))
+                  )
+                )}
               </div>
             </div>
           </section>

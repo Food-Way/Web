@@ -54,3 +54,21 @@
     border-radius: var(--arredondamento);
     padding: .3rem;
 }
+
+.tag-modal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.tag-modal-selected {
+    width: 20vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag-modal-selected, .tag-modal-available {
+    display: flex;
+    flex-direction: column;
+}

@@ -16,13 +16,18 @@ const Header = (props) => {
         }, 2000);
     };
 
+    function verifyTokenNavigate() {
+        sessionStorage.clear();
+        window.location.href = "/"
+    }
+
     const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
     return (
         <>
             <header>
                 <div className='container-header'>
                     <div className='left'>
-                        <img src={LogoFoodway} alt="Logo FoodWay" />
+                        <img src={LogoFoodway} className="logoHover" alt="Logo FoodWay" onClick={verifyTokenNavigate} />
                         <h1>FoodWay</h1>
                         {
                             atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?

@@ -1,6 +1,8 @@
 @import url(../../assets/css/style.css);
 
 .establishment-content-container {
+/* .establishment-content-container {
+    width: calc(120vw - 15vw);
     height: 88.9rem;
     display: flex;
     flex-direction: column;
@@ -11,7 +13,7 @@
 .establishment-content-container-switch {
     width: calc(103vw + 15vw);
     transition: all 0.3s;
-}
+} */
 
 .establishment-banner-box {
     width: 100vw;
@@ -28,11 +30,12 @@
 }
 
 .establishment-content-banner-box {
-    width: 68vw;
+    width: 62vw;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 8vw;
 }
 
 .title-establishment {
@@ -52,7 +55,7 @@
 }
 
 .establishment-avaliation-value {
-    width: 8vw;
+    width: 9vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,6 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 3vw;
 }
 
 .establishment-addcomment-box {

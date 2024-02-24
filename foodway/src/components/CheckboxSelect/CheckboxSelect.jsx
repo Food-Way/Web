@@ -1,5 +1,5 @@
 import "./CheckboxSelect.css";
-import { api } from "../../services/api";
+import api_call from "../../services/apiImpl";
 import { useState, useEffect } from "react";
 
 const CheckboxSelect = ({
@@ -10,13 +10,14 @@ const CheckboxSelect = ({
 }) => {
   const [categories, setCategories] = useState([]);
 
+  async function getCulinaries () {
+    const response = await api_call("get", "culinaries", null, null); 
+    setCategories(response);
+    setSelectedCulinaries(response);
+  }
+  
   useEffect(() => {
-    api.get("culinaries").then((response) => {
-      if (response.status === 200) {
-        setCategories(response.data);
-        setSelectedCulinaries(response.data);
-      }
-    });
+    getCulinaries();
   }, []);
 
   const handleCheckboxChange = (event) => {
