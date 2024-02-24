@@ -137,6 +137,7 @@ const EstablishmentPage = () => {
                       comment={commentParent.comment}
                       upvotes={commentParent.upvotes}
                       idComment={commentParent.idComment}
+                      idEstablishment={idEstablishment}
                       userPhoto={commentParent.userPhoto}
                     />
                     {commentParent.childComments && commentParent.childComments.length > 0 && (
@@ -151,6 +152,7 @@ const EstablishmentPage = () => {
                             upvotes={commentReply.upvotes}
                             comment={commentReply.comment}
                             idComment={commentReply.idComment}
+                            idEstablishment={idEstablishment}
                             userPhoto={commentReply.userPhoto}
                           />
                         ))}

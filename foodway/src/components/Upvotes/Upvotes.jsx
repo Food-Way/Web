@@ -6,6 +6,9 @@ import api_call from "../../services/apiImpl";
 const Upvotes = (props) => {
 
     async function handleUpvotes(idComment, idEstablishment, idCustomer) {
+        console.log(idComment);
+        console.log(idEstablishment);
+        console.log(idCustomer);
         const response = await api_call("patch", "upvotes", {
             idCustomer: `${idCustomer}`,
             idEstablishment: `${idEstablishment}`,
