@@ -44,19 +44,17 @@ function SearchBar(props) {
     async function callGet(uriPath) {
         const response = await api_call("get", uriPath, null, null);
         console.log('Busca realizada com sucesso');
-        setSearched(response);
+        setSearched(response.data);
     }
 
     async function callGetTwo(uriPathOne, uriPathTwo) {
         const responseOne = await api_call("get", uriPathOne, null, null);
         const responseTwo = await api_call("get", uriPathTwo, null, null);
         console.log('Busca realizada com sucesso');
-        setSearched([...responseOne, ...responseTwo]);
+        setSearched([...responseOne.data, ...responseTwo.data]);
     }
 
-    function search() {
-        listSearched();
-    }
+    
 
     function setSize() {
         var searchBar = document.querySelector('.search-bar');

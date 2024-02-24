@@ -68,8 +68,8 @@ function TagDashCard(props) {
 
     async function getTags() {
         const response = await api_call("get", "/tags", null, atob(sessionStorage.getItem("token")));
-        setAllTags(response);
-        console.log(response);
+        setAllTags(response.data);
+        console.log(response.data);
     }
 
     useEffect(() => {

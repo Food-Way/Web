@@ -30,8 +30,8 @@ const CommentDash = () => {
     async function getComments() {
         const id = routeParams.id;
         const response = await api_call("get", `/establishments/${id}/comments`, null, atob(sessionStorage.getItem("token")));
-        console.log(response);
-        setComments(response);
+        console.log(response.data);
+        setComments(response.data);
     }
 
     useEffect(() => {

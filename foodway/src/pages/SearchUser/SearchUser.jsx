@@ -36,21 +36,21 @@ function SearchUser() {
 
     async function getSearchEstab ({filter}) {
         const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), atob(sessionStorage.getItem("idUser")));
-        console.log(response)
-        setSearchEstab(response);
+        console.log(response.data)
+        setSearchEstab(response.data);
     }
     
     async function getSearchCustomer() {
         const response = await api_call("get", `/customers/search`, null, atob(sessionStorage.getItem("token")));
-        console.log(response);
-        setSearchCustomer(response);
+        console.log(response.data);
+        setSearchCustomer(response.data);
     }
 
     async function getMaps(lat, lng) {
         const response = await api_maps_call(lat, lng);
-        console.log(response);
+        console.log(response.data);
         setShowMap(true);
-        setUrl(response);
+        setUrl(response.data);
     }
 
     function selectFilter(id) {

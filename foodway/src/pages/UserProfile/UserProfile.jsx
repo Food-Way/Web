@@ -91,11 +91,11 @@ const UserProfile = () => {
   async function getUser() {
     const idUser = id;
     const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
-    console.log(response)
-    setUser(response);
-    setComments(response.comments);
-    firstAndEnd(response.name);
-    setEstablishments(response.establishmentDTOs);
+    console.log(response.data)
+    setUser(response.data);
+    setComments(response.data.comments);
+    firstAndEnd(response.data.name);
+    setEstablishments(response.data.establishmentDTOs);
   }
 
 

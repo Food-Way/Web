@@ -12,8 +12,8 @@ const CheckboxSelect = ({
 
   async function getCulinaries () {
     const response = await api_call("get", "culinaries", null, null); 
-    setCategories(response);
-    setSelectedCulinaries(response);
+    setCategories(response.data);
+    setSelectedCulinaries(response.data);
   }
   
   useEffect(() => {

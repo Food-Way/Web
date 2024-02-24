@@ -14,8 +14,8 @@ const Relevance = () => {
     async function getRelevance() {
         const culinary = atob(sessionStorage.getItem("culinary"));
         const response = await api_call("get", `/establishments/relevance?culinary=${culinary}`, null, atob(sessionStorage.getItem("token")));
-        setRelevance(response.slice(3, 11));
-        setTop3(response.slice(0, 3));
+        setRelevance(response.data.slice(3, 11));
+        setTop3(response.data.slice(0, 3));
     }
 
     const CardLoader = () => {
