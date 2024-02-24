@@ -1,33 +1,18 @@
 import React from "react";
 const UpvoteIcon = "https://foodway.blob.core.windows.net/public/upvotes.svg";
 import "./Upvotes.css";
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 
 const Upvotes = (props) => {
 
-    function handleUpvotes(idComment, idEstablishment, idCustomer) {
-
-        console.log(props.idCustomer);
-        console.log(props.idEstablishment);
-        console.log(props.idComment);
-
-
-        const response = api.post(`upvotes`, {
+    async function handleUpvotes(idComment, idEstablishment, idCustomer) {
+        const response = await api_call("patch", "upvotes", {
             idCustomer: `${idCustomer}`,
             idEstablishment: `${idEstablishment}`,
             idComment: `${idComment}`,
-        }, {
-            headers: {
-                Authorization: 'Bearer ' + atob(sessionStorage.getItem("token")),
-            },
-        })
-            .then((response) => {
-                if (response.status === 201) {
-                    console.log("upvotado");
-                }
-            })
-            .catch((erro) => console.log(erro));
-    };
+        }, atob(sessionStorage.getItem("token")));
+        console.log("upvotado", response);
+    }
 
     return (
         <>

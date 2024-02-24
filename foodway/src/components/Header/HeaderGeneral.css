@@ -17,6 +17,7 @@ header {
 header h1 {
   font-size: 1.91169rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .container-header {
