@@ -16,11 +16,10 @@ async function api_call(methodParam, urlParam, dataParam, authorizationParam = "
     });
 
     if (response.status === 200) {
-      return response.data;
+      return response
     } else if (response.status === 204) {
       return [];
     }
-
   } catch (error) {
     console.error(error);
     throw error;

@@ -148,8 +148,8 @@ const Home = () => {
 
   async function listCategory() {
     const response = await api_call("get", "/culinaries", null, null);
-    console.log(response);
-    setCategory(response);
+    console.log(response.data);
+    setCategory(response.data);
   }
 
   async function greaterRate() {
@@ -159,8 +159,8 @@ const Home = () => {
       null,
       null
     );
-    console.log(response);
-    setGreaterRateEstab(response.vetor);
+    console.log(response.data);
+    setGreaterRateEstab(response.data.vetor);
   }
 
   async function greaterComments() {
@@ -171,8 +171,8 @@ const Home = () => {
       null,
       null
     );
-    console.log(response);
-    setGreaterEstab(response);
+    console.log(response.data);
+    setGreaterEstab(response.data);
   }
 
   useEffect(() => {

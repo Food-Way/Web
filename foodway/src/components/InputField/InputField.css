@@ -5,6 +5,24 @@
   margin: 4px 0px 4px 0px;
   width: 80%;
 }
+.input-field-comment{
+  width: 100%;
+  border: none;
+  border-bottom: rgb(37, 37, 37) 1px solid;
+  font-family: var(--defaultFonte);
+  font-size: 1.5rem;
+  padding: 5px;
+  background-color: #e5e5e5;
+}
+.input-field-comment:focus {
+  outline: none;
+}
+.form-group-comment {
+  width: 100%;
+  font-family: var(--defaultFonte);
+  font-size: 1.5rem;
+}
+
 .input-field-default {
   width: 100%;
   border-radius: var(--arredondamento);

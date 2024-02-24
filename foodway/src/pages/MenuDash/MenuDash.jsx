@@ -19,8 +19,8 @@ const MenuDash = () => {
 
   async function getMenu({ filter }) {
     const response = await api_call("get", `products/establishments/${id}/${filter}`, null, atob(sessionStorage.getItem("token")));
-    console.log(response);
-    setMenu(response);
+    console.log(response.data);
+    setMenu(response.data);
   }
 
   function showFilter() {

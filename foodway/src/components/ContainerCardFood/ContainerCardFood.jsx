@@ -47,8 +47,6 @@ const ContainerCardFood = ({ categories }) => {
     };
   }, []);
 
-  
-
   return (
     <>
       <div className="carrossel-typefood">

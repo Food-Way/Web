@@ -95,8 +95,8 @@ function PerformanceDash() {
 
     async function getDashData() {
         const response = await api_call("get", `/comments/dashboard/${id}`, null, atob(sessionStorage.getItem("token")));
-        console.log(response);
-        setDashData(response);
+        console.log(response.data);
+        setDashData(response.data);
     }
 
     const rate = [

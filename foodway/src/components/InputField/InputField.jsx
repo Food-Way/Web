@@ -1,6 +1,51 @@
 import "./InputField.css";
-import React from "react"; // Certifique-se de importar o React
 import InputMask from "react-input-mask";
+
+const TextAreaFieldComment = ({
+  id,
+  type = "text", 
+  placeholder,
+  label,
+  value,
+  onChange,  
+  onClick,
+  rows = 1,
+  className = "input-field-comment",
+  classNameGeral = "form-group",
+  onMouseLeave = () => {}, 
+  autoComplete = "off", 
+  mask, 
+  maxLength = 3000,
+}) => {
+  
+  const adjustHeight = (e) => {
+    e.target.style.height = 'inherit'; 
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
+  return (
+    <div className={classNameGeral}>
+      {label && <label htmlFor={id}>{label}</label>}
+      <textarea
+        style={{ resize: "none", overflowY: 'hidden' }} 
+        rows={rows}
+        className={className}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onClick={onClick} 
+        onChange={onChange} // Use the onChange prop directly
+        onInput={adjustHeight}
+        onMouseLeave={onMouseLeave} 
+        autoComplete={autoComplete}
+        maxLength={maxLength}
+      />
+    </div>
+  );
+};
+
+
 const InputField = ({
   id,
   type,
@@ -86,4 +131,4 @@ const TextAreaField = ({
 };
 
 export default InputField;
-export { InputField, TextAreaField };
+export { InputField, TextAreaField ,TextAreaFieldComment};
