@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import arquivo from "../Report/leo.txt";
 import api_call from "../../services/apiImpl";
 import { useParams } from "react-router-dom";
 import * as XLSX from "xlsx";

@@ -122,11 +122,11 @@ const MenuDash = () => {
                     menu.length === 0 ? (
                       <span>Nenhum produto</span>
                     ) : (
-                      menu.map((item) => (
+                      menu.map((item, index) => (
                         <>
                           <Product
+                            key={index}
                             editIsAble={true}
-                            key={item.idProduct}
                             idProduct={item.idProduct}
                             name={item.name}
                             price={item.price}
@@ -139,29 +139,29 @@ const MenuDash = () => {
               </div>
             </section>
             <div className="side-infos">
-                            <div className="side-qr-code">
-                                <span className="title">QrCode</span>
-                                <div className="qr-code-box">
-                                    <QRCode className="qr-code" value="samuel" />
-                                </div>
-                            </div>
-                            <div className="side-report">
-                                <span className="title">Relatórios</span>
-                                <div className="report-side-container">
-                                    <div className="report-side-box">
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                        <Report />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              <div className="side-qr-code">
+                <span className="title">QrCode</span>
+                <div className="qr-code-box">
+                  <QRCode className="qr-code" value="samuel" />
+                </div>
+              </div>
+              <div className="side-report">
+                <span className="title">Relatórios</span>
+                <div className="report-side-container">
+                  <div className="report-side-box">
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                    <Report />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
