@@ -1,7 +1,6 @@
 import { api, api_maps } from "./api";
 const apiKey = "AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE";
 
-
 async function api_call(methodParam, urlParam, dataParam, authorizationParam = "", idSessionParam = "") {
   try {
     const response = await api({

@@ -70,7 +70,7 @@ const CommentInsert = ({establishmentId, onCommentAdded}) => {
       </span>
       <div className="actions-section">
         <div className="container_button-comment">
-          <ButtonPrimary text="Cancelarr" className="comment-cancel" onclick={clearCommentText} />
+          <ButtonPrimary text="Cancelar" className="comment-cancel" onclick={clearCommentText} />
           <ButtonPrimary text="Adicionar" className="comment-add"  onclick={() => {
             handleSendComment(commentText)
           }}/>

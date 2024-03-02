@@ -3,7 +3,7 @@ import "./SignIn.css";
 import { ButtonPrimary } from "../../components/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
@@ -64,17 +64,16 @@ const SignIn = () => {
           if (response.data.typeUser === "CLIENT") {
             setTimeout(() => {
               console.log("Redirecting to /perfil...");
-              navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
-              location.reload();
+              navigate(`/user/profile/${atob(sessionStorage.getItem("idUser"))}`, { state: { idUser: sessionStorage.getItem("idUser") } });
+              // location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (response.data.typeUser === "ESTABLISHMENT") {
             setTimeout(() => {
               console.log("Redirecting to /establishment/performance...");
               navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
-              location.reload();
+              // location.reload();
             }, 2000);
-
           }
         } else {
           console.log("Login failed with status code:", response.status);
@@ -105,6 +104,14 @@ const SignIn = () => {
       }
     }
   };
+
+  useEffect(() => {
+    atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT" ? (
+      navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`)
+    ) : atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "CLIENT" ? (
+      navigate(`/user/profile/${atob(sessionStorage.getItem("idUser"))}`)
+    ) : navigate(`/sign-in`)
+  }, [])
 
   return (
     <main className="main-signin">

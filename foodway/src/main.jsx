@@ -7,7 +7,5 @@ import "./assets/css/style.css";
 import App from "./app";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App className="app" />
-  </React.StrictMode>
+  <App className="app" />
 );

@@ -84,15 +84,15 @@ const MenuEstablishment = (props) => {
       // console.log("OLD PATH: " + oldPath);
       // console.log("NEW PATH: " + className);
 
-      if (profile.classList.contains("item-active") && className != ".profile-item") {
-        profile.classList.remove("item-active");
-      }
+      // if (profile.classList.contains("item-active") && className != ".profile-item") {
+      //   profile.classList.remove("item-active");
+      // }
 
-      if (atob(sessionStorage.getItem("typeUser")) !== "ESTABLISHMENT") {
-        if (search.classList.contains("item-active") && className != ".search-item") {
-          search.classList.remove("item-active");
-        }
-      }
+      // if (atob(sessionStorage.getItem("typeUser")) !== "ESTABLISHMENT") {
+      //   if (search.classList.contains("item-active") && className != ".search-item") {
+      //     search.classList.remove("item-active");
+      //   }
+      // }
 
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
         // if (establishment.classList.contains("item-active") && className != ".establishment-item") {
@@ -170,15 +170,15 @@ const MenuEstablishment = (props) => {
     item.classList.toggle("item-active");
   }
 
-  function navigateColor(className) {
-    var profile = document.querySelector(className);
+  // function navigateColor(className) {
+  //   var profile = document.querySelector(className);
 
-    if (oldPath == "") {
-      setColor(className);
-      setOldPath(className);
-      profile.classList.add("item-active");
-    }
-  }
+  //   if (oldPath == "") {
+  //     setColor(className);
+  //     setOldPath(className);
+  //     profile.classList.add("item-active");
+  //   }
+  // }
 
   function pathForNavigationColor() {
     var path = "";
@@ -215,7 +215,7 @@ const MenuEstablishment = (props) => {
   }
 
   useEffect(() => {
-    navigateColor(pathForNavigationColor());
+    // navigateColor(pathForNavigationColor());
   }, []);
 
   return (
@@ -446,7 +446,7 @@ const MenuEstablishment = (props) => {
           </Sidebar>
         </>
       ) : (
-        ""
+        "" 
       )
       }
     </>

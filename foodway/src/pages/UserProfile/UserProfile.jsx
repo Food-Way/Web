@@ -4,14 +4,13 @@ import HomeCardEstablishment from "../../components/HomeCardEstablishment/HomeCa
 import RateCard from "../../components/RateCard/RateCard";
 import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
+import { useLocation } from "react-router-dom";
 
 import "./UserProfile.css";
-import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
-  const params = useParams();
-  const id = params.id;
+  const location = useLocation();
   const [user, setUser] = useState([]);
   const profileDescriptionRef = useRef(null);
   const [comments, setComments] = useState([]);
@@ -89,8 +88,7 @@ const UserProfile = () => {
   )
 
   async function getUser() {
-    const idUser = id;
-    const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
+    const response = await api_call("get", `customers/profile/${atob(location.state.idUser)}`, null, atob(sessionStorage.getItem("token")))
     console.log(response.data)
     setUser(response.data);
     setComments(response.data.comments);
