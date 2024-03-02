@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
-import { Modal } from "@mui/material";
+import parseJWT from "../../util/parseJWT";
 
 const SignIn = () => {
   const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
@@ -53,25 +53,24 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          sessionStorage.setItem("name", btoa(response.data.name));
-          sessionStorage.setItem("email", btoa(response.data.email));
-          sessionStorage.setItem("idUser", btoa(response.data.idUser));
+          console.log(response.data.token)
           sessionStorage.setItem("token", btoa(response.data.token));
           sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
-          sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
+          sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           toast.success("Login realizado com sucesso!");
-          if (response.data.typeUser === "CLIENT") {
+          const bodyToken = parseJWT();
+          if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
             setTimeout(() => {
-              console.log("Redirecting to /perfil...");
-              navigate(`/user/profile/${atob(sessionStorage.getItem("idUser"))}`, { state: { idUser: sessionStorage.getItem("idUser") } });
+              // console.log("Redirecting to /perfil...");
+              navigate(`/user/profile/${bodyToken.sub}`);
               // location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
-          } else if (response.data.typeUser === "ESTABLISHMENT") {
+          } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
             setTimeout(() => {
-              console.log("Redirecting to /establishment/performance...");
-              navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
+              // console.log("Redirecting to /establishment/performance...");
+              navigate(`/establishment/info/${bodyToken.sub}`);
               // location.reload();
             }, 2000);
           }
@@ -104,6 +103,7 @@ const SignIn = () => {
       }
     }
   };
+
 
   useEffect(() => {
     atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT" ? (

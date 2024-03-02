@@ -15,7 +15,6 @@ import MenuDash from "./pages/MenuDash/MenuDash";
 import Relevance from "./pages/Relevance/Relevance";
 import EstablishmentPage from "./pages/EstablishmentPage/EstablishmentPage";
 import EstablishmentEditPersonal from "./pages/EstablishmentEditPersonal/EstablishmentEditPersonal";
-import MenuUser from "./pages/MenuUser/MenuUser";
 import CostumerEdit from "./pages/CostumerEdit/CostumerEdit";
 import CustomerEditPersonal from "./pages/CustomerEditPersonal/CustomerEditPersonal";
 import UserRender from "./components/UserRender/UserRender";

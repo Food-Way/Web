@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Comment } from "../../components/Comment/Comment";
-import { useParams } from "react-router-dom";
 import api_call from "../../services/apiImpl";
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
 import "./CommentDash.css";
+import parseJWT from "../../util/parseJWT";
 
 const CommentDash = () => {
-    const routeParams = useParams();
     const [comments, setComments] = useState([]);
+    const bodyToken = parseJWT();
 
     const CommentLoader = () => (
         <ContentLoader
@@ -28,9 +28,8 @@ const CommentDash = () => {
     )
 
     async function getComments() {
-        const id = routeParams.id;
-        const response = await api_call("get", `/establishments/${id}/comments`, null, atob(sessionStorage.getItem("token")));
-        console.log(response.data);
+        const response = await api_call("get", `/establishments/${bodyToken.sub}/comments`, null, atob(sessionStorage.getItem("token")));
+        // console.log(response.data);
         setComments(response.data);
     }
 
@@ -45,7 +44,7 @@ const CommentDash = () => {
                     <span className="title">Comentários</span>
                     <section>
                         <div className="comment-dash-container">
-                            <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader": ""}`}>
+                            <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader" : ""}`}>
                                 {comments.length === 0 ? (
                                     <div>
                                         <CommentLoader />
@@ -69,8 +68,6 @@ const CommentDash = () => {
                     </section>
                 </div>
             </div>
-
-
         </>
     );
 }

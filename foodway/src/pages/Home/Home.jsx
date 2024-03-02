@@ -176,14 +176,13 @@ const Home = () => {
   }
 
   useEffect(() => {
-    // Função para carregar todos os dados necessários
     async () => {
       await Promise.all([
         listCategory(),
         greaterRate(),
         greaterComments(),
       ]);
-      setIsLoading(false); // Define o carregamento como falso após todas as chamadas de API serem concluídas
+      setIsLoading(false);
     }
   })
 
@@ -191,8 +190,6 @@ const Home = () => {
     <main>
       <Auth />
       <MainBanner />
-
-
       <div style={styleDiv}>
         {isLoading ? (
           <>

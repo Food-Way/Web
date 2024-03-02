@@ -4,15 +4,15 @@ import { Comment } from "../../components/Comment/Comment";
 import SentimentCard from "../../components/SentimentCard/SentimentCard";
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
 import TagDashCard from "../../components/TagDashCard/TagDashCard";
-import { useParams } from "react-router-dom";
 import api_call from "../../services/apiImpl";
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
+import parseJWT from "../../util/parseJWT";
+
 
 import "./PerformanceDash.css";
 
 function PerformanceDash() {
-    const params = useParams();
-    const id = params.id;
+    const bodyToken = parseJWT();
     const [dashData, setDashData] = useState([]);
 
     const CardLoader = () => {
@@ -94,7 +94,7 @@ function PerformanceDash() {
     )
 
     async function getDashData() {
-        const response = await api_call("get", `/comments/dashboard/${id}`, null, atob(sessionStorage.getItem("token")));
+        const response = await api_call("get", `/comments/dashboard/${bodyToken.sub}`, null, atob(sessionStorage.getItem("token")));
         console.log(response.data);
         setDashData(response.data);
     }

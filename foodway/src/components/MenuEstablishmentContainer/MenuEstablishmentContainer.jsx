@@ -2,28 +2,17 @@ import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
-import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 import "./MenuEstablishmentContainer.css";
 
 const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
   const [searchFilter, setSearchFilter] = useState("");
 
-  const getEstablishmentMenu = ({ filter }) => {
-    api
-      .get(`products/establishments/${id}/${filter}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          setMenu(response.data);
-          console.log("Menu: ", menu);
-        }
-      })
-      .catch((erro) => console.log(erro));
-  };
+  async function getEstablishmentMenu({ filter }) {
+    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, token);
+    console.log("Menu: ", menu);
+    setMenu(response.data);
+  }
 
   function showFilter() {
     var filter = document.querySelector(".filter-box");
@@ -109,8 +98,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
             </div>
           </div>
           <div className="menu-dash-box">
-            {console.log("Menu: ", menu)}
-            {/* {menu.length == 0 ? ( */}
+            {menu.length == 0 ? (
               <>
                 {menu.map((item, index) => (
                   <Product
@@ -122,8 +110,7 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
                   />
                 ))}
               </>
-
-            {/* ) : "Nenhum produto cadastrado"} */}
+            ) : "Nenhum produto cadastrado"}
           </div>
         </div>
       </section>
