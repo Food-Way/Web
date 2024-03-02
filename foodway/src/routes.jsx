@@ -36,7 +36,7 @@ const Rotas = () => {
           <Route path="/sign-up-customer" element={<SignupCostumer />} />
           <Route path="/sign-up-establishment" element={<SignupCostumerEstablishment />} />
           {/* <Route path="/establishment/info/:id" element={<EstablishmentPage />} /> */}
-          <Route path="/establishment-menu/:id" element={<MenuUser />} />
+          {/* <Route path="/establishment-menu/:id" element={<MenuUser />} /> */}
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/search-user" element={<SearchUser />} />
