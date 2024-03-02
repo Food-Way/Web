@@ -13,6 +13,7 @@ import {
 } from "../../components/Comment/Comment.jsx";
 import "./EstablishmentPage.css";
 import CommentInsert from "../../components/CommentInsert/CommentInsert.jsx";
+import { ButtonSecondaryLink } from "../../components/Button/Button.jsx";
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
@@ -64,9 +65,9 @@ const EstablishmentPage = () => {
   const CommentLoader = () => (
     <ContentLoader
       speed={2}
-      width={"40vw"}
+      width={"40"}
       height={422}
-      viewBox="0 0 40vw 422"
+      viewBox="0 0 40 422"
       backgroundColor="#ffffff"
       foregroundColor="#c4c4c4"
     >

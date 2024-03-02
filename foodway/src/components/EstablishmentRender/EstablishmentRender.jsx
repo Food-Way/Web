@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const EstablishmentRender = () => {
     return (
         <>
-            <MenuEstablishment/>
+            <MenuEstablishment height="88.8rem"/>
             <Outlet />
         </>
     )

@@ -1,10 +1,10 @@
-import Rotas from "./routes";
+import Routes from "./routes";
 import VLibras from '@djpfs/react-vlibras'
 const App = () => {
   return (
     <>
       <VLibras forceOnload={true} />
-      <Rotas />
+      <Routes />
     </>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "../Header/HeaderGeneral";
 import { Outlet } from "react-router-dom";
+import MenuEstablishment from "../MenuEstablishment/MenuEstablishment";
 
 const UserRender = () => {
     return (
         <>
-            <Header />
+            <MenuEstablishment height="170rem"/>
             <Outlet />
         </>
     )

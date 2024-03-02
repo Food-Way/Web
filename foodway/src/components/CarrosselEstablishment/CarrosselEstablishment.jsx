@@ -30,9 +30,9 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
           slidesPerView={4}
           navigation
         >
-          {establishment.map((item) => {
+          {establishment.map((item, index) => {
             return (
-              <SwiperSlide className="slider-card">
+              <SwiperSlide className="slider-card" key={index}>
                 <HomeCardEstablishment
                   establishment={item.establishmentName}
                   category={item.culinary[0].name}
@@ -45,9 +45,9 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
               </SwiperSlide>
             );
           })}
-          {establishment.map((item) => {
+          {establishment.map((item, index) => {
             return (
-              <SwiperSlide className="slider-card">
+              <SwiperSlide className="slider-card" key={index}>
                 <HomeCardEstablishment
                   establishment={item.establishmentName}
                   category={item.culinary[0].name}
