@@ -10,15 +10,15 @@ import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader'
 import { useParams } from "react-router-dom";
 
+
 import "./MenuDash.css";
 
 const MenuDash = () => {
-  const routeParams = useParams();
-  const id = routeParams.id;
+  const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
 
   async function getMenu({ filter }) {
-    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, atob(sessionStorage.getItem("token")));
+    const response = await api_call("get", `products/establishments/${bodyToken.sub}/${filter}`, null, atob(sessionStorage.getItem("token")));
     console.log(response.data);
     setMenu(response.data);
   }

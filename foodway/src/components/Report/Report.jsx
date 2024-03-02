@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import api_call from "../../services/apiImpl";
-import { useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 
 import "./Report.css";
 
 const Report = () => {
-  const routeParams = useParams();
-  const id = routeParams.id;
+  const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
 
   async function getMenu({ filter }) {
-    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, atob(sessionStorage.getItem("token")));
+    const response = await api_call("get", `products/establishments/${bodyToken.sub}/${filter}`, null, atob(sessionStorage.getItem("token")));
     console.log(response);
     setMenu(response);
   }

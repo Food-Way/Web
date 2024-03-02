@@ -4,8 +4,9 @@ const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
 const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
 const Report = "https://foodway.blob.core.windows.net/public/report.png";
 import { useEffect, useState } from "react";
-import { api_call, api_maps_call } from "../../services/apiImpl";
-import { Link, useParams } from "react-router-dom";
+import { api_call } from "../../services/apiImpl";
+import parseJWT from "../../util/parseJWT";
+import { Link } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
 import {
   CommentIndividual,
@@ -17,9 +18,7 @@ import { ButtonSecondaryLink } from "../../components/Button/Button.jsx";
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
-  const params = useParams();
-  const idEstablishment = params.id;
-  const [url, setUrl] = useState("");
+  const bodyToken = parseJWT();
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
 
@@ -80,7 +79,7 @@ const EstablishmentPage = () => {
   };
 
   async function getEstablishmentProfileData() {
-    const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
+    const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
     setProfile(response.data);
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/view?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&center=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
@@ -103,7 +102,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.name}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -126,7 +125,7 @@ const EstablishmentPage = () => {
               <div
                 className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
                 <div className="establishment-addcomment-box">
-                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={idEstablishment} onCommentAdded={addCommentToState} /> : null}
+                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={bodyToken.sub} onCommentAdded={addCommentToState} /> : null}
                 </div>
                 {comments.length === 0 ? <CommentLoader /> : comments.map((commentParent, index) => (
                   <div className="establishment-comments-box-more" key={index}>
@@ -138,7 +137,7 @@ const EstablishmentPage = () => {
                       comment={commentParent.comment}
                       upvotes={commentParent.upvotes}
                       idComment={commentParent.idComment}
-                      idEstablishment={idEstablishment}
+                      idEstablishment={bodyToken.sub}
                       userPhoto={commentParent.userPhoto}
                     />
                     {commentParent.childComments && commentParent.childComments.length > 0 && (
@@ -153,7 +152,7 @@ const EstablishmentPage = () => {
                             upvotes={commentReply.upvotes}
                             comment={commentReply.comment}
                             idComment={commentReply.idComment}
-                            idEstablishment={idEstablishment}
+                            idEstablishment={bodyToken.sub}
                             userPhoto={commentReply.userPhoto}
                           />
                         ))}
@@ -197,7 +196,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-btns-box">
                   <Link
-                    to={`/establishment-menu/${idEstablishment}`}
+                    to={`/establishment-menu/${bodyToken.sub}`}
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">
@@ -215,24 +214,19 @@ const EstablishmentPage = () => {
                     Localização
                   </span>
                   <div className="establishment-map-box">
-
                     {url_maps.length === 0 ? (
                       <MapsLoader />
                     ) : (
                       <iframe
-                      
                         style={{ 
                           border: 0,
                           width: "100%",
-                        
                         }} 
                         loading="lazy"
-                        
                         referrerPolicy="no-referrer-when-downgrade" 
                         src={url_maps}
                         allowFullScreen 
                       ></iframe>
-
                     )}
                   </div>
                 </div>
@@ -243,14 +237,10 @@ const EstablishmentPage = () => {
               </div>
             </div>
           </div>
-
         </section>
       </div>
     </>
   );
-
-
-
 };
 
 export default EstablishmentPage;

@@ -4,8 +4,9 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
 import { api_call, api_maps_call } from "../../services/apiImpl";
-import api from "../../services/api";
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
+import parseJWT from "../../util/parseJWT";
+
 
 import './SearchUser.css';
 
@@ -33,9 +34,10 @@ function SearchUser() {
     const [viewDetails, setViewDetails] = useState(false);
     const [showMap, setShowMap] = useState(false);
     const [url, setUrl] = useState(null);
+    const bodyToken = parseJWT();
 
     async function getSearchEstab ({filter}) {
-        const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), atob(sessionStorage.getItem("idUser")));
+        const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), bodyToken.sub);
         console.log(response.data)
         setSearchEstab(response.data);
     }

@@ -6,6 +6,7 @@ import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import { useLocation } from "react-router-dom";
+import parseJWT from "../../util/parseJWT";
 
 import "./UserProfile.css";
 
@@ -15,6 +16,7 @@ const UserProfile = () => {
   const profileDescriptionRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
+  const bodyToken = parseJWT();
 
   const ProfileHeaderLoader = () => (
     <ContentLoader
@@ -88,8 +90,8 @@ const UserProfile = () => {
   )
 
   async function getUser() {
-    const response = await api_call("get", `customers/profile/${atob(location.state.idUser)}`, null, atob(sessionStorage.getItem("token")))
-    console.log(response.data)
+    const response = await api_call("get", `customers/profile/${bodyToken.sub}`, null, atob(sessionStorage.getItem("token")))
+    // console.log(response.data)
     setUser(response.data);
     setComments(response.data.comments);
     firstAndEnd(response.data.name);
@@ -98,7 +100,7 @@ const UserProfile = () => {
 
 
   function firstAndEnd(nameUser) {
-    console.log(nameUser);
+    // console.log(nameUser);
     var nameUserDiv = document.querySelector(".profile-username");
     let words = nameUser.split(' ');
     let firstWord = words[0];
@@ -171,7 +173,7 @@ const UserProfile = () => {
                   )}
                   <span className="profile-username"></span>
                   {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(atob(sessionStorage.getItem("idUser"))) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"}  width={"11vw"} /> : ""}
+                  {location.pathname.endsWith(parseJWT.sub) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"}  width={"11vw"} /> : ""}
                 </div>
                 {user.length === 0 ? (
                   <ProfileStatusLoader />
