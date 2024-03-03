@@ -175,16 +175,7 @@ const Home = () => {
     setGreaterEstab(response.data);
   }
 
-  useEffect(() => {
-    async () => {
-      await Promise.all([
-        listCategory(),
-        greaterRate(),
-        greaterComments(),
-      ]);
-      setIsLoading(false);
-    }
-  })
+
 
   return (
     <main>
@@ -245,7 +236,7 @@ const Home = () => {
           <div className="android-section">
             <div className="android-section-text">
               <div className="android-container">
-                <span>EM BREVE</span> <span>Disponível para</span>{" "}
+                <span>Disponível para</span>{" "}
                 <span>Android</span>
               </div>
               <img src={androidI} alt="android" />
