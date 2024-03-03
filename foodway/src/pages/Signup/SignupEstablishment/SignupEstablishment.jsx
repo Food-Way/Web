@@ -303,7 +303,7 @@ const SignupEstablishment = () => {
                   />
                   <div className="button-div">
                     <div>
-                      
+
                       <ButtonSecondary
                         text="<"
                         onclick={handleClose}
@@ -315,7 +315,7 @@ const SignupEstablishment = () => {
                         className="button-primary-v2"
                         text="Criar >"
                         onclick={handleRegisterEstablishment}
-                        
+
                       />
                     </div>
                   </div>
@@ -324,20 +324,7 @@ const SignupEstablishment = () => {
             </Modal>
             <form>
               <span className="action-sec">
-                {step === 1 && (
-                  <ButtonStep
-                    className="step-position"
-                    step="1"
-                    onclick={handleSteps}
-                  />
-                )}
-                {step === 2 && (
-                  <ButtonStep
-                    className="step-position"
-                    step="2"
-                    onclick={handleSteps}
-                  />
-                )}
+
                 <h1 className="title">Cadastro de Estabelecimento</h1>
               </span>
               {step === 1 && (

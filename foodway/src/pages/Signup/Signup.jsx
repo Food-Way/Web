@@ -13,7 +13,7 @@ const Signup = () => {
             <img src={costumer} alt="" />
 
             <ButtonPrimaryLink
-              url="/sign-up-costumer"
+              url="/sign-up-customer"
               className="buttonCostumerEstablishment"
               text="Sou um Cliente!"
               width={"70%"}
