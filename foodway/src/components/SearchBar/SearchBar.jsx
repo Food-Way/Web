@@ -54,8 +54,6 @@ function SearchBar(props) {
         setSearched([...responseOne.data, ...responseTwo.data]);
     }
 
-    
-
     function setSize() {
         var searchBar = document.querySelector('.search-bar');
         searchBar.style.width = props.width;

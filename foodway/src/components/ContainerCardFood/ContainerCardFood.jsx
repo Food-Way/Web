@@ -7,14 +7,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import api from "../../services/api";
-import { SmsOutlined } from "@material-ui/icons";
-
-import ContentLoader from "react-content-loader";
 
 const ContainerCardFood = ({ categories }) => {
-
-
 
   const [tamanhoDoElemento, setTamanhoDoElemento] = useState(0);
 

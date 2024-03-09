@@ -14,6 +14,7 @@ import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
 import { toast } from "react-toastify";
 import axios from "axios";
 import api from "../../../services/api";
+import loginIMG from "../../../../public/cadastroEstablishment.png";
 
 const SignupEstablishment = () => {
   const navigate = useNavigate();
@@ -51,8 +52,6 @@ const SignupEstablishment = () => {
   const [step, setStep] = useState(1);
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedCulinaries, setSelectedCulinaries] = useState([]);
-  const loginIMG =
-    "https://foodway.blob.core.windows.net/public/cadastroEstablishment.png";
 
   const [formData, setFormData] = useState({
     nameFantasy: "",

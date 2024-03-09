@@ -1,12 +1,12 @@
 import React from "react";
-const PositiveImage = "https://foodway.blob.core.windows.net/public/positive.svg";
-const NegativeImage = "https://foodway.blob.core.windows.net/public/negative.svg";
-const NeutralImage = "https://foodway.blob.core.windows.net/public/neutral.svg";
-const EqualsImage = "https://foodway.blob.core.windows.net/public/Equals_black.svg";
-const PercentPositiveImage = "https://foodway.blob.core.windows.net/public/arrow-positive.svg";
-const PercentNeutralImage = "https://foodway.blob.core.windows.net/public/arrow-neutral.svg";
-const PercentNegativeImage = "https://foodway.blob.core.windows.net/public/arrow-negative.svg";
-const PercentEqualsImage = "https://foodway.blob.core.windows.net/public/Equals_white.svg";
+import PositiveImage from "../../../public/positive.svg";
+import NegativeImage from "../../../public/negative.svg";
+import NeutralImage from "../../../public/neutral.svg";
+import EqualsImage from "../../../public/Equals_black.svg";
+import PercentPositiveImage from "../../../public/arrow-positive.svg";
+import PercentNeutralImage from "../../../public/arrow-neutral.svg";
+import PercentNegativeImage from "../../../public/arrow-negative.svg";
+import PercentEqualsImage from "../../../public/Equals_white.svg";
 import "./SentimentCard.css";
 
 function SentimentCard(props) {

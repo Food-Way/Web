@@ -1,10 +1,8 @@
 import React from "react";
 
 import ReactStars from "react-rating-stars-component";
-const starWhite = "https://foodway.blob.core.windows.net/public/star-white.svg";
-const starBlack = "https://foodway.blob.core.windows.net/public/star-black.svg";
-
-
+import starWhite from "../../../public/star-white.svg";
+import starBlack from "../../../public/star-black.svg";
 import "./RateNumberStar.css";
 
 const RateNumberStar = (props) => {
@@ -18,8 +16,8 @@ const RateNumberStar = (props) => {
                     size={24}
                     value={1}
                     isHalf={false}
-                    emptyIcon={ props.color == "branco" ? <img src={starWhite} /> : <img src={starBlack} />}
-                    filledIcon={ props.color == "branco" ? <img src={starWhite} /> : <img src={starBlack} />}
+                    emptyIcon={ props.color == "white" ? <img src={starWhite} /> : <img src={starBlack} />}
+                    filledIcon={ props.color == "white" ? <img src={starWhite} /> : <img src={starBlack} />}
                 />
             </div>
         </>

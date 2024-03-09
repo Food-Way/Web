@@ -5,11 +5,11 @@ import api_call from '../../services/apiImpl';
 function SelectLocation() {
     const [location, setLocation] = useState([]);
 
-    // async function getLocations() {
-    //     const response = await api_call("get", "/states", null, null);
-    //     console.log(response);
-    //     setLocation(response);
-    // }
+    async function getLocations() {
+        const response = await api_call("get", "/states", null, null);
+        console.log(response);
+        setLocation(response);
+    }
 
     function showOptions() {
         var options = document.querySelector('.options-location');
@@ -22,9 +22,9 @@ function SelectLocation() {
         }
     }
 
-    // useEffect(() => {
-    //     getLocations();
-    // })
+    useEffect(() => {
+        getLocations();
+    }, [])
 
     return (
         <>

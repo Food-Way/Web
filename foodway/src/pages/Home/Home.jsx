@@ -6,17 +6,14 @@ import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
-
+import establishmentIMG from "../../../public/establishment.png";
+import customerIMG from "../../../public/customer.png";
+import card from "../../../public/Card.png";
+import androidI from "../../../public/android.svg";
+import androidBg from "../../../public/emBreve.png";
 import ContentLoader from "react-content-loader";
 
 const Home = () => {
-  const establishmentIMG =
-    "https://foodway.blob.core.windows.net/public/establishment.png";
-  const customerIMG =
-    "https://foodway.blob.core.windows.net/public/customer.png";
-  const card = "https://foodway.blob.core.windows.net/public/Card.png";
-  const androidI = "https://foodway.blob.core.windows.net/public/android.svg";
-  const androidBg = "https://foodway.blob.core.windows.net/public/emBreve.png";
   const [isLoading, setIsLoading] = useState(true);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,

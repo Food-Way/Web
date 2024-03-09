@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-const Adicionar = "https://foodway.blob.core.windows.net/public/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
+import Adicionar from "../../../public/adicionar.svg";
+import ImageFilter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader'
-import { useParams } from "react-router-dom";
-
-
 import "./MenuDash.css";
 
 const MenuDash = () => {

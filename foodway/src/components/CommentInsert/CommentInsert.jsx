@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { api_call } from "../../services/apiImpl";
 import { ButtonPrimary } from '../Button/Button';
 import { TextAreaFieldComment } from '../InputField/InputField';
-import './CommentInsert.css'; // Assuming your CSS is in this file
+import './CommentInsert.css';
 
 import { toast } from 'react-toastify';
 

@@ -1,5 +1,4 @@
 import "./SignIn.css";
-
 import { ButtonPrimary } from "../../components/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
@@ -8,9 +7,9 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
 import parseJWT from "../../util/parseJWT";
+import loginIMG from "../../../public/loginImg.png";
 
 const SignIn = () => {
-  const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +52,7 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          console.log(response.data.token)
+          // console.log(response.data.token)
           sessionStorage.setItem("token", btoa(response.data.token));
           sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));

@@ -5,8 +5,11 @@ import SelectLocation from '../SelectionLocation/SelectionLocation';
 import { Link } from "react-router-dom";
 import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
+import LogoFoodway from "../../../public/FoodWayLogo.png";
+import parseJWT from "../../util/parseJWT";
 
 const Header = (props) => {
+    const bodyToken = parseJWT();
     const handleLogoff = () => {
         sessionStorage.clear();
         toast.success("Logout realizado com sucesso!");
@@ -21,7 +24,6 @@ const Header = (props) => {
         window.location.href = "/"
     }
 
-    const LogoFoodway = "https://foodway.blob.core.windows.net/public/FoodWayLogo.png"
     return (
         <>
             <header>
@@ -32,7 +34,7 @@ const Header = (props) => {
                         {
                             atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
                                 <>
-                                    <span className='establishment-title-user-profile'>| Estabelecimento: {atob(sessionStorage.getItem("name"))}</span>
+                                    <span className='establishment-title-user-profile'>| Estabelecimento: {bodyToken.username}</span>
                                 </>
                                 : ""
                         }
@@ -40,7 +42,7 @@ const Header = (props) => {
                     {sessionStorage.getItem("token") ?
                         <>
                             <div className="header-geral-token">
-                                <span>Olá {atob(sessionStorage.getItem("name"))}</span>
+                                <span>Olá, {bodyToken.username}</span>
                                 <img src={atob(sessionStorage.getItem("profile-photo")) ? atob(sessionStorage.getItem("profile-photo")) : DefaultImage} alt="" />
                             </div>
                         </>

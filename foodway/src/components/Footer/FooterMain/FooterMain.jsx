@@ -1,14 +1,13 @@
 import React from "react";
-
 import "./FooterMain.css";
 import { Link } from "react-router-dom";
+import logoIcon from "../../../public/logo.png";
+import insta from "../../../public/insta.svg";
+import face from "../../../public/face.svg";
+import twitter from "../../../public/twitter.svg";
+import github from "../../../public/github.svg";
 
 const FooterMain = () => {
-  const logoIcon = "https://foodway.blob.core.windows.net/public/logo.png";
-  const insta = "https://foodway.blob.core.windows.net/public/insta.svg";
-  const face = "https://foodway.blob.core.windows.net/public/face.svg";
-  const twitter = "https://foodway.blob.core.windows.net/public/twitter.svg";
-  const github = "https://foodway.blob.core.windows.net/public/github.svg";
   return (
     <>
       <div className="container-footer">

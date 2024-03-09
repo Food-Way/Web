@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HandleModalDelete, HandleFormModal } from "../Modal/Modal";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const ProductImage = "https://foodway.blob.core.windows.net/public/product.png"
+import ProductImage from "../../../public/product.png";
 import "./Product.css";
 
 const Product = (props) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
 import SearchBar from "../../components/SearchBar/SearchBar";
-const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
+import ImageFilter from "../../../public/filter.svg";
 import api_call from "../../services/apiImpl";
 import "./MenuEstablishmentContainer.css";
 

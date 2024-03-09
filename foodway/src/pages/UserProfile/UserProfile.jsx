@@ -91,7 +91,6 @@ const UserProfile = () => {
 
   async function getUser() {
     const response = await api_call("get", `customers/profile/${bodyToken.sub}`, null, atob(sessionStorage.getItem("token")))
-    // console.log(response.data)
     setUser(response.data);
     setComments(response.data.comments);
     firstAndEnd(response.data.name);
@@ -105,7 +104,7 @@ const UserProfile = () => {
     let words = nameUser.split(' ');
     let firstWord = words[0];
     let endWord = words[words.length - 1];
-    console.log([firstWord + " " + endWord]);
+    // console.log([firstWord + " " + endWord]);
     nameUserDiv.innerHTML = `${[firstWord + " " + endWord]}`;
   }
 

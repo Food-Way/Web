@@ -13,6 +13,7 @@ import { Auth } from "../../../components/Auth/Auth";
 import "./SignupCostumer.css";
 import { Button, Modal } from "@mui/material";
 import api from "../../../services/api";
+import loginIMG from "../../../../public/loginImg.png";
 
 const SignUpCostumer = () => {
   const [step, setStep] = useState(1);
@@ -29,8 +30,6 @@ const SignUpCostumer = () => {
     confirmPassword: "",
     culinary: "",
   });
-
-  const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
 
   const handleNext = () => {
     if (step < 2) {

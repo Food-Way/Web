@@ -1,5 +1,5 @@
 import React from "react";
-const UpvoteIcon = "https://foodway.blob.core.windows.net/public/upvotes.svg";
+import UpvoteIcon from "../../../public/upvotes.svg";
 import "./Upvotes.css";
 import api_call from "../../services/apiImpl";
 
@@ -19,7 +19,7 @@ const Upvotes = (props) => {
 
     return (
         <>
-            <div className="upvotes" onClick={location.pathname.startsWith("/establishment/info/") ? ()=>{handleUpvotes(props.idComment, props.idEstablishment, props.idCustomer)} : ""}>
+            <div className="upvotes" onClick={location.pathname.startsWith("/establishment/info/") ? ()=>{handleUpvotes(props.idComment, props.idEstablishment, props.idCustomer)} : null}>
                 <img src={UpvoteIcon} alt="" />
                 <span>{props.upvotes ? props.upvotes : 0}</span>
             </div>

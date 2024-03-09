@@ -1,6 +1,6 @@
 import "./MainBanner.css";
+import image from "../../../public/header.png";
 const MainBanner = () => {
-  const image = "https://foodway.blob.core.windows.net/public/header.png";
   const styleCard = {
     background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${image}) lightgray 50% / cover  no-repeat`,
   };

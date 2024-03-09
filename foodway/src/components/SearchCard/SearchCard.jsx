@@ -55,7 +55,7 @@ const SearchCard = (props) => {
                                         favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment)
                                         setIsFavorite(!isFavorite)
                                     }} />
-                                ) : ""}
+                                ) : null}
                             </div>
                         </div>
                     </div>

@@ -5,8 +5,6 @@ import api_call from "../../services/apiImpl";
 import "./Relevance.css";
 import ContentLoader from 'react-content-loader'
 
-
-
 const Relevance = () => {
     const [relevance, setRelevance] = useState([]);
     const [top3, setTop3] = useState([]);
