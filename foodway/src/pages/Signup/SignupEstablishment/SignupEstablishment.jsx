@@ -209,15 +209,13 @@ const SignupEstablishment = () => {
   });
   const handleCEP = async () => {
     const { cep, number_address } = addressData; // Destructuring cep and number_address directly
-    const cepFormated = cep.replace("-", "");
+    const cepFormated = cep.replace(/-/g, "").replace(/_/g, "");
 
     if (cepFormated.length === 8) {
       try {
         const cepResponse = await axios.get(
           `https://viacep.com.br/ws/${cepFormated}/json/`
         );
-
-        // Destructure the response and map it to addressData
         const { logradouro, bairro, localidade, uf } = cepResponse.data;
 
         setAddressData({
@@ -258,23 +256,21 @@ const SignupEstablishment = () => {
       setFindCep(false);
       setMessageCEP("CEP inválido");
     }
-    console.log(addressData);
+
   };
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
     setFormData({ ...formData, [id]: value });
-    console.log(formData);
+
   };
 
   const handleInputAddress = (event) => {
     const { id, value } = event.target;
-    let cepFormated = value.replace("-", "");
-    cepFormated = cepFormated.replace("_", "");
-    if (cepFormated.length === 9) {
-    } else {
-      setAddressData({ ...addressData, [id]: value });
-      console.log(addressData);
+    let cepFormated = value.replace(/-/g, "").replace(/_/g, "");
+    setAddressData({ ...addressData, [id]: value });
+    if (cepFormated.length === 8) {
+      handleCEP();
     }
   };
 

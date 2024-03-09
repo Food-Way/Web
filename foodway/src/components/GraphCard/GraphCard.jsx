@@ -34,22 +34,22 @@ const GraphCard = () => {
     ];
     return (
         <BarChart
-          width={600}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 50,
-            left: 0,
-            bottom: 5,
-          }}
+            width={600}
+            height={300}
+            data={data}
+            margin={{
+                top: 5,
+                right: 50,
+                left: 0,
+                bottom: 5,
+            }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          {/* <Legend /> */}
-          <Bar dataKey="quantidade" fill="var(--primary)" activeBar={<Rectangle fill="#8B0000" stroke="var(--primary)" />} />
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+
+            <Bar dataKey="quantidade" fill="var(--primary)" activeBar={<Rectangle fill="#8B0000" stroke="var(--primary)" />} />
         </BarChart>
     );
 };

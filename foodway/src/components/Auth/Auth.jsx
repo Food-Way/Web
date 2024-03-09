@@ -9,7 +9,7 @@ export function Auth() {
         const response = await api_call("get", "users", null, token);
         console.log("Response status:", response.status);
       } catch (error) {
-        // Tratar o erro de forma silenciosa, sem imprimir no console
+        console.error("Error fetching data:", error);
       }
     };
 

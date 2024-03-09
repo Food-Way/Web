@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { api_call } from "../../services/apiImpl";
 import { ButtonPrimary } from '../Button/Button';
 import { TextAreaFieldComment } from '../InputField/InputField';
-import './CommentInsert.css'; // Assuming your CSS is in this file
+import './CommentInsert.css';
 
 import { toast } from 'react-toastify';
 
-const CommentInsert = ({establishmentId, onCommentAdded}) => {
+const CommentInsert = ({ establishmentId, onCommentAdded }) => {
   const profilePhoto = sessionStorage.getItem("profile-photo") ? atob(sessionStorage.getItem("profile-photo")) : "";
   const [commentText, setCommentText] = useState('');
 
@@ -25,15 +25,14 @@ const CommentInsert = ({establishmentId, onCommentAdded}) => {
       toast.error('Comentário não pode ter menos de 10 caracteres');
       return false;
     }
-  
+
     return true;
   };
-  
+
   const handleSendComment = async (comment) => {
-    // Verifica se a mensagem é válida antes de tentar enviar
-    if (validaMessagem(comment)) { // Aqui foi corrigido para continuar se a mensagem for válida
+    if (validaMessagem(comment)) {
       const commentObj = {
-        idCustomer: atob(sessionStorage.getItem("idUser")), // Corrigido para getItem para corrigir o acesso ao sessionStorage
+        idCustomer: atob(sessionStorage.getItem("idUser")),
         idEstablishment: establishmentId,
         comment: comment,
         images: []
@@ -50,7 +49,7 @@ const CommentInsert = ({establishmentId, onCommentAdded}) => {
       }
     }
   };
-  
+
   const clearCommentText = () => {
     console.log('clearCommentText');
     setCommentText('');
@@ -64,16 +63,16 @@ const CommentInsert = ({establishmentId, onCommentAdded}) => {
           maxLength={532}
           placeholder="Adicione uma avaliação"
           value={commentText}
-          onChange={handleCommentChange}  
+          onChange={handleCommentChange}
           classNameGeral="form-group-comment"
         />
       </span>
       <div className="actions-section">
         <div className="container_button-comment">
           <ButtonPrimary text="Cancelar" className="comment-cancel" onclick={clearCommentText} />
-          <ButtonPrimary text="Adicionar" className="comment-add"  onclick={() => {
+          <ButtonPrimary text="Adicionar" className="comment-add" onclick={() => {
             handleSendComment(commentText)
-          }}/>
+          }} />
         </div>
       </div>
     </div>

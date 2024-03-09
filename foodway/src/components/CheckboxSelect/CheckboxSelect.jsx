@@ -10,12 +10,12 @@ const CheckboxSelect = ({
 }) => {
   const [categories, setCategories] = useState([]);
 
-  async function getCulinaries () {
-    const response = await api_call("get", "culinaries", null, null); 
+  async function getCulinaries() {
+    const response = await api_call("get", "culinaries", null, null);
     setCategories(response.data);
     setSelectedCulinaries(response.data);
   }
-  
+
   useEffect(() => {
     getCulinaries();
   }, []);
@@ -26,10 +26,8 @@ const CheckboxSelect = ({
     let updatedSelectedValues;
 
     if (selectedValues.includes(value)) {
-      // If the value is already in the selectedValues, remove it
       updatedSelectedValues = selectedValues.filter((val) => val !== value);
     } else {
-      // If the value is not in the selectedValues, add it
       updatedSelectedValues = [...selectedValues, value];
     }
 

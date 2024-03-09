@@ -3,23 +3,23 @@ import InputMask from "react-input-mask";
 
 const TextAreaFieldComment = ({
   id,
-  type = "text", 
+  type = "text",
   placeholder,
   label,
   value,
-  onChange,  
+  onChange,
   onClick,
   rows = 1,
   className = "input-field-comment",
   classNameGeral = "form-group",
-  onMouseLeave = () => {}, 
-  autoComplete = "off", 
-  mask, 
+  onMouseLeave = () => { },
+  autoComplete = "off",
+  mask,
   maxLength = 3000,
 }) => {
-  
+
   const adjustHeight = (e) => {
-    e.target.style.height = 'inherit'; 
+    e.target.style.height = 'inherit';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
@@ -27,17 +27,17 @@ const TextAreaFieldComment = ({
     <div className={classNameGeral}>
       {label && <label htmlFor={id}>{label}</label>}
       <textarea
-        style={{ resize: "none", overflowY: 'hidden' }} 
+        style={{ resize: "none", overflowY: 'hidden' }}
         rows={rows}
         className={className}
         type={type}
         id={id}
         placeholder={placeholder}
         value={value}
-        onClick={onClick} 
-        onChange={onChange} // Use the onChange prop directly
+        onClick={onClick}
+        onChange={onChange}
         onInput={adjustHeight}
-        onMouseLeave={onMouseLeave} 
+        onMouseLeave={onMouseLeave}
         autoComplete={autoComplete}
         maxLength={maxLength}
       />
@@ -55,7 +55,7 @@ const InputField = ({
   onChange,
   className = "input-field-default",
   classNameGeral = "form-group",
-  onMouseLeave = () => {},
+  onMouseLeave = () => { },
   autocomplete,
   mask,
   maxLength = 3000,
@@ -105,7 +105,7 @@ const TextAreaField = ({
   rows = 5,
   className = "input-field-default",
   classNameGeral = "form-group",
-  onMouseLeave = () => {},
+  onMouseLeave = () => { },
   autocomplete,
   mask,
   maxLength = 3000,
@@ -131,4 +131,4 @@ const TextAreaField = ({
 };
 
 export default InputField;
-export { InputField, TextAreaField ,TextAreaFieldComment};
+export { InputField, TextAreaField, TextAreaFieldComment };

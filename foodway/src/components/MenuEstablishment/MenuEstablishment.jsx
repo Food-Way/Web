@@ -60,48 +60,17 @@ const MenuEstablishment = (props) => {
 
     var profile = document.querySelector(".profile-item");
     var search = document.querySelector(".search-item");
-    // var establishment = document.querySelector(".establishment-item");
-    // var users = document.querySelector(".users-item");
     var performance = document.querySelector(".performance-item");
     var menuReal = document.querySelector(".menuReal-item");
     var comments = document.querySelector(".comments-item");
     var relevance = document.querySelector(".relevance-item");
     var out = document.querySelector(".out-item");
 
-    // console.log("PROFILE: " + profile);
-    // console.log("SEARCH: " + search);
-    // console.log("ESTABLISHMENT: " + establishment);
-    // console.log("USERS: " + users);
-    // console.log("PERFORMANCE: " + performance);
-    // console.log("MENU REAL: " + menuReal);
-    // console.log("COMMENTS: " + comments);
-    // console.log("RELEVANCE: " + relevance);
-    // console.log("OUT: " + out);
-
     if (oldPath != className) {
       setColor(className);
       setOldPath(className);
-      // console.log("OLD PATH: " + oldPath);
-      // console.log("NEW PATH: " + className);
-
-      // if (profile.classList.contains("item-active") && className != ".profile-item") {
-      //   profile.classList.remove("item-active");
-      // }
-
-      // if (atob(sessionStorage.getItem("typeUser")) !== "ESTABLISHMENT") {
-      //   if (search.classList.contains("item-active") && className != ".search-item") {
-      //     search.classList.remove("item-active");
-      //   }
-      // }
 
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-        // if (establishment.classList.contains("item-active") && className != ".establishment-item") {
-        //   establishment.classList.remove("item-active");
-        // }
-
-        // if (users.classList.contains("item-active") && className != ".users-item") {
-        //   users.classList.remove("item-active");
-        // }
 
         if (performance.classList.contains("item-active") && className != ".performance-item") {
           performance.classList.remove("item-active");
@@ -170,23 +139,14 @@ const MenuEstablishment = (props) => {
     item.classList.toggle("item-active");
   }
 
-  // function navigateColor(className) {
-  //   var profile = document.querySelector(className);
-
-  //   if (oldPath == "") {
-  //     setColor(className);
-  //     setOldPath(className);
-  //     profile.classList.add("item-active");
-  //   }
-  // }
 
   function pathForNavigationColor() {
     var path = "";
-    
+
     if (location.pathname.startsWith("/user-profile")) {
-      path = ".profile-item"; 
+      path = ".profile-item";
     }
-    
+
     if (location.pathname.startsWith("/establishment/info/")) {
       path = ".profile-item";
     }
@@ -196,7 +156,7 @@ const MenuEstablishment = (props) => {
     }
 
     if (location.pathname.startsWith("/establishment/performance/insights")) {
-      path = ".performance-item"; 
+      path = ".performance-item";
     }
 
     if (location.pathname.startsWith("/establishment/performance/menu")) {
@@ -207,16 +167,14 @@ const MenuEstablishment = (props) => {
       path = ".comments-item";
     }
 
-    if (location.pathname == "/establishment/performance/relevance" ) {
+    if (location.pathname == "/establishment/performance/relevance") {
       path = ".relevance-item";
     }
 
     return path;
   }
 
-  useEffect(() => {
-    // navigateColor(pathForNavigationColor());
-  }, []);
+
 
   return (
     <>
@@ -231,15 +189,6 @@ const MenuEstablishment = (props) => {
               var btn = document.querySelector(".btn-menu-switch");
               var headerContainer = document.querySelector(".container-header");
 
-              // if (location.pathname.startsWith("/user-profile")) {
-              //   if (location.pathname.startsWith("/user-profile-edit")) {
-              //     var profileContainer = document.querySelector(".costumer");
-              //     profileContainer.classList.toggle("costumer-switch");
-              //   } else {
-              //     var profileContainer = document.querySelector(".profile-container");
-              //     profileContainer.classList.toggle("profile-container-switch");
-              //   }
-              // }
 
               if (location.pathname.startsWith("/search-user")) {
                 var profileContainer = document.querySelector(".search-user-container");
@@ -267,16 +216,6 @@ const MenuEstablishment = (props) => {
                 profileContainer.classList.toggle("relevance-container-switch");
               }
 
-              // if (location.pathname.startsWith("/establishment/performance") && !location.pathname.endsWith("/comments") && !location.pathname.endsWith("/relevance")) {
-              //   if (location.pathname.startsWith("/establishment/performance/menu")) {
-              //     var profileContainer = document.querySelector(".menu-dashboard-container");
-              //     profileContainer.classList.toggle("menu-dashboard-container-switch");
-              //   } else {
-              //     var profileContainer = document.querySelector(".performance-dash-container");
-              //     profileContainer.classList.toggle("performance-dash-container-switch");
-              //   }
-              // }
-
               btnImage.classList.toggle("btn-menu-rotate");
               btn.classList.toggle("btn-menu-animate");
               headerContainer.classList.toggle("container-switch-header");
@@ -293,7 +232,7 @@ const MenuEstablishment = (props) => {
                 justifyContent: "space-between",
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
-                paddingLeft: openMenu ? "0" : "3rem", // Adicione essa linha para definir a margem à esquerda quando a barra lateral estiver expandida
+                paddingLeft: openMenu ? "0" : "3rem",
                 paddingBottom: "3rem",
                 transition: "all 0.3s",
                 position: "absolute",
@@ -310,7 +249,6 @@ const MenuEstablishment = (props) => {
                 <span className="profile-item">Perfil</span>
               </MenuItem>
 
-              {/* Utilizar parseJWT */}
               {atob(typeUser) == "ESTABLISHMENT" ? (
                 <>
                   <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} size="lg"
@@ -368,62 +306,7 @@ const MenuEstablishment = (props) => {
                   </MenuItem>
                 </>
 
-                //     <SubMenu
-                //       icon={
-                //         <FontAwesomeIcon
-                //           icon={faStore}
-                //           size="lg"
-                //           className="establishment-item"
-                //         />
-                //       }
-                //       label={"Estabelecimento " + "(" + establishment.length + ")"}
-                //       onClick={() => {
-                //         setNavigate(".establishment-item");
-                //       }}
-                //     >
-                //       {establishment.map((item) => {
-                //         return (
-                //           <MenuItem
-                //             key={item.id}
-                //             onClick={() => setCheck("e" + item.id)}
-                //           >
-                //             <div className="menu-item">
-                //               <div className="pretty p-icon p-round p-smooth check-culinary">
-                //                 <input
-                //                   type="checkbox"
-                //                   onClick={() => setCheck("e" + item.id)}
-                //                   id={"e" + item.id}
-                //                 />
-                //                 <div className="state">
-                //                   <DoneIcon className="icon check" />
-                //                   <label>{item.nome}</label>
-                //                 </div>
-                //               </div>
-                //             </div>
-                //           </MenuItem>
-                //         );
-                //       })}
-                //     </SubMenu>
-                //     {sessionStorage.getItem("token") !== null ? (
-                //       <MenuItem
-                //         className="users-item"
-                //         icon={
-                //           <FontAwesomeIcon
-                //             icon={faUserLarge}
-                //             size="lg"
-                //             onClick={() => {
-                //               setNavigate(".users-item");
-                //             }}
-                //           />
-                //         }
-                //       >
-                //         <span>Usuários ({users.length})</span>
-                //       </MenuItem>
-                //     ) : (
-                //       ""
-                //     )}
-                //   </SubMenu>
-                // </>
+
               )}
               {!clickLogout ? (
                 <MenuItem
@@ -446,7 +329,7 @@ const MenuEstablishment = (props) => {
           </Sidebar>
         </>
       ) : (
-        "" 
+        ""
       )
       }
     </>
