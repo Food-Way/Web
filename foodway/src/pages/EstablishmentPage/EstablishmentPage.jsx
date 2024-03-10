@@ -82,7 +82,7 @@ const EstablishmentPage = () => {
     const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
     setProfile(response.data);
     setComments(response.data.comments);
-    setUrlMaps(`https://www.google.com/maps/embed/v1/view?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&center=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
+    setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
 
   useEffect(() => {
