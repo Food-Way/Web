@@ -7,10 +7,8 @@ import UserProfile from "../../pages/UserProfile/UserProfile";
 import DoneIcon from '@material-ui/icons/Done';
 import { toast } from "react-toastify";
 import './MenuEstablishment.css';
-import parseJWT from "../../util/parseJWT";
 
 const MenuEstablishment = (props) => {
-  const bodyToken = parseJWT();
   const navigate = useNavigate();
   const [oldPath, setOldPath] = useState("");
   const [openMenu, setOpenMenu] = useState(true);
@@ -136,9 +134,9 @@ const MenuEstablishment = (props) => {
 
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-        navigate(`/establishment/info/${bodyToken.sub}`);
+        navigate(`/establishment/info`);
       } else {
-        navigate(`/user/profile/${bodyToken.sub}`);
+        navigate(`/user/profile`);
         window.location.reload();
       }
 
@@ -146,16 +144,16 @@ const MenuEstablishment = (props) => {
       navigate("/users");
 
     } else if (className == ".search-item") {
-      navigate("/search-user");
+      navigate("/user/search");
       window.location.reload();
     } else if (className == ".performance-item") {
-      navigate(`/establishment/performance/insights/${bodyToken.sub}`);
+      navigate(`/establishment/performance/insights`);
 
     } else if (className == ".menuReal-item") {
-      navigate(`/establishment/performance/menu/${bodyToken.sub}`);
+      navigate(`/establishment/performance/menu`);
 
     } else if (className == ".comments-item") {
-      navigate(`/establishment/performance/comments/${bodyToken.sub}`);
+      navigate(`/establishment/performance/comments`);
 
     } else if (className == ".relevance-item") {
       navigate("/establishment/performance/relevance");
@@ -192,7 +190,7 @@ const MenuEstablishment = (props) => {
       path = ".profile-item";
     }
 
-    if (location.pathname == "/search-user") {
+    if (location.pathname == "/user/search") {
       path = ".search-item";
     }
 
@@ -242,7 +240,7 @@ const MenuEstablishment = (props) => {
               //   }
               // }
 
-              if (location.pathname.startsWith("/search-user")) {
+              if (location.pathname.startsWith("/user/search")) {
                 var profileContainer = document.querySelector(".search-user-container");
                 profileContainer.classList.toggle("search-user-container-switch");
               }

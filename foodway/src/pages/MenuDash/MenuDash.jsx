@@ -7,7 +7,8 @@ import Adicionar from "../../../public/adicionar.svg";
 import ImageFilter from "../../../public/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
-import ContentLoader from 'react-content-loader'
+import ContentLoader from 'react-content-loader';
+import parseJWT from "../../util/parseJWT";
 import "./MenuDash.css";
 
 const MenuDash = () => {

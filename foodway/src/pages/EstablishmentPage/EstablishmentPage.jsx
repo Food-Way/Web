@@ -102,7 +102,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.name}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment-edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -198,7 +198,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-btns-box">
                   <Link
-                    to={`/establishment-menu/${bodyToken.sub}`}
+                    to={`/establishment-menu/`}
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">

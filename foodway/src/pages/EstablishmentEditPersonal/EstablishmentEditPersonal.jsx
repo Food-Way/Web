@@ -10,9 +10,12 @@ import { Box, Input, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import parseJWT from "../../util/parseJWT";
+
 const EstablismentEditPersonal = () => {
+  const bodyToken = parseJWT();
   const token = atob(sessionStorage.getItem("token"));
-  const id = atob(sessionStorage.getItem("idUser"));
+  const id = bodyToken.sub;
   const [formData, setFormData] = useState({});
   const [selectedFileCover, setSelectedFileCover] = useState(null);
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);

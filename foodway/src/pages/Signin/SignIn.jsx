@@ -58,18 +58,17 @@ const SignIn = () => {
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           toast.success("Login realizado com sucesso!");
-          const bodyToken = parseJWT();
           if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
             setTimeout(() => {
               // console.log("Redirecting to /perfil...");
-              navigate(`/user/profile/${bodyToken.sub}`);
+              navigate(`/user/profile`);
               // location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
             setTimeout(() => {
               // console.log("Redirecting to /establishment/performance...");
-              navigate(`/establishment/info/${bodyToken.sub}`);
+              navigate(`/establishment/info`);
               // location.reload();
             }, 2000);
           }
@@ -106,9 +105,9 @@ const SignIn = () => {
 
   useEffect(() => {
     atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT" ? (
-      navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`)
+      navigate(`/establishment/info`)
     ) : atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "CLIENT" ? (
-      navigate(`/user/profile/${atob(sessionStorage.getItem("idUser"))}`)
+      navigate(`/user/profile`)
     ) : navigate(`/sign-in`)
   }, [])
 

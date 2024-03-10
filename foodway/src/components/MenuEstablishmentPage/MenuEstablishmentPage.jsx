@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Product from "../../components/Product/Product";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import Product from "../Product/Product";
+import SearchBar from "../SearchBar/SearchBar";
 import ImageFilter from "../../../public/filter.svg";
 import api_call from "../../services/apiImpl";
-import "./MenuEstablishmentContainer.css";
+import "./MenuEstablishmentPage.css";
 
-const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
+const MenuEstablishmentPage = ({ menu, setMenu, id, token }) => {
   const [searchFilter, setSearchFilter] = useState("");
 
   async function getEstablishmentMenu({ filter }) {
-    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, token);
+    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, token, null)
     console.log("Menu: ", menu);
     setMenu(response.data);
   }
@@ -118,4 +118,4 @@ const MenuEstablishmentContainer = ({ menu, setMenu, id, token }) => {
   );
 };
 
-export default MenuEstablishmentContainer;
+export default MenuEstablishmentPage;
