@@ -138,7 +138,7 @@ const SignIn = () => {
                 autocomplete="current-password"
                 onChange={handleChangeSenha}
               />
-              <span className="">
+              <span className="no-account">
                 Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
               <ButtonPrimary text="Entrar" onclick={handleLogin} width={"50%"} />

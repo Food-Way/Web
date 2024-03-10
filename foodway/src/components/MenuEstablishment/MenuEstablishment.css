@@ -33,13 +33,42 @@
     padding-left: 1rem;
 }
 
+.profile-item {
+    font-size: 1.7rem;
+}
+
+.performance-item {
+    font-size: 1.7rem;
+}
+
+.menuReal-item {
+    font-size: 1.7rem;
+}
+
+.comments-item {
+    font-size: 1.7rem;
+}
+
+.relevance-item {
+    font-size: 1.7rem;
+}
+
+.search-item {
+    font-size: 1.7rem;
+}
+
+.out-item {
+    font-size: 1.7rem;
+}
+
 .box-copyright {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.box-copyright span{
+.box-copyright span, b{
+    font-size: 1.3rem;
     transition: all 0.3s;
 }
 

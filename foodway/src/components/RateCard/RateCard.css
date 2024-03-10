@@ -89,5 +89,6 @@
 .amount-number {
   display: flex;
   width: 4rem;
+  font-size: 1.7rem;
   font-weight: 700;
 }

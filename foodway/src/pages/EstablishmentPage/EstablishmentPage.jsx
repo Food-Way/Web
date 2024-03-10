@@ -102,7 +102,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.name}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink url="/establishment-edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment-edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -122,44 +122,46 @@ const EstablishmentPage = () => {
         <section>
           <div className="establishment-global-container">
             <div className="establishment-comments-info-container">
-              <div
-                className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
+              <div className="establishment-add-comment-list-comments">
                 <div className="establishment-addcomment-box">
                   {sessionStorage.getItem("token") ? <CommentInsert establishmentId={bodyToken.sub} onCommentAdded={addCommentToState} /> : null}
                 </div>
-                {comments.length === 0 ? <CommentLoader /> : comments.map((commentParent, index) => (
-                  <div className="establishment-comments-box-more" key={index}>
-                    <CommentIndividual
-                      key={commentParent.idComment}
-                      establishmentName={commentParent.establishmentName}
-                      rate={commentParent.commentRate}
-                      title={commentParent.title}
-                      comment={commentParent.comment}
-                      upvotes={commentParent.upvotes}
-                      idComment={commentParent.idComment}
-                      idEstablishment={bodyToken.sub}
-                      userPhoto={commentParent.userPhoto}
-                    />
-                    {commentParent.childComments && commentParent.childComments.length > 0 && (
-                      <div
-                        className={commentParent.childComments.length > 1 ? "scroll-comments" : "establishment-more-box"}>
-                        {commentParent.childComments.map((commentReply, index) => (
-                          <CommentReply
-                            key={index}
-                            establishmentName={commentReply.establishmentName}
-                            rate={commentReply.commentRate}
-                            title={commentReply.title}
-                            upvotes={commentReply.upvotes}
-                            comment={commentReply.comment}
-                            idComment={commentReply.idComment}
-                            idEstablishment={bodyToken.sub}
-                            userPhoto={commentReply.userPhoto}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                <div
+                  className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
+                  {comments.length === 0 ? <CommentLoader /> : comments.map((commentParent, index) => (
+                    <div className="establishment-comments-box-more" key={index}>
+                      <CommentIndividual
+                        key={commentParent.idComment}
+                        establishmentName={commentParent.establishmentName}
+                        rate={commentParent.commentRate}
+                        title={commentParent.title}
+                        comment={commentParent.comment}
+                        upvotes={commentParent.upvotes}
+                        idComment={commentParent.idComment}
+                        idEstablishment={bodyToken.sub}
+                        userPhoto={commentParent.userPhoto}
+                      />
+                      {commentParent.childComments && commentParent.childComments.length > 0 && (
+                        <div
+                          className={commentParent.childComments.length > 1 ? "scroll-comments" : "establishment-more-box"}>
+                          {commentParent.childComments.map((commentReply, index) => (
+                            <CommentReply
+                              key={index}
+                              establishmentName={commentReply.establishmentName}
+                              rate={commentReply.commentRate}
+                              title={commentReply.title}
+                              upvotes={commentReply.upvotes}
+                              comment={commentReply.comment}
+                              idComment={commentReply.idComment}
+                              idEstablishment={bodyToken.sub}
+                              userPhoto={commentReply.userPhoto}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="establishment-side-box">
                 <div className="establishment-general-box">
@@ -218,14 +220,14 @@ const EstablishmentPage = () => {
                       <MapsLoader />
                     ) : (
                       <iframe
-                        style={{ 
+                        style={{
                           border: 0,
                           width: "100%",
-                        }} 
+                        }}
                         loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade" 
+                        referrerPolicy="no-referrer-when-downgrade"
                         src={url_maps}
-                        allowFullScreen 
+                        allowFullScreen
                       ></iframe>
                     )}
                   </div>

@@ -38,7 +38,6 @@ const Rotas = () => {
           {/* <Route path="/establishment-menu/:id" element={<MenuUser />} /> */}
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoutes />}>
-            <Route path="/search-user" element={<SearchUser />} />
             <Route path="/establishment" element={<EstablishmentRender />}>
               <Route path="info/:id" element={<EstablishmentPage />} />
               <Route path="edit" element={<EstablishmentEditPersonal />} />
@@ -53,6 +52,7 @@ const Rotas = () => {
               <Route path="profile/:id" element={<UserProfile />} />
               <Route path="edit-personal" element={<CustomerEditPersonal />} />
               <Route path="profile-edit" element={<CostumerEdit />} />
+              <Route path="search" element={<SearchUser />} />
             </Route>
           </Route>
         </Route>

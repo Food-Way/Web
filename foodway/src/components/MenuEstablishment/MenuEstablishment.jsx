@@ -308,7 +308,7 @@ const MenuEstablishment = (props) => {
                   setNavigate(".profile-item");
                 }}
               >
-                <span className="profile-item">Perfil</span>
+                <span className="profile-item item-menu-box">Perfil</span>
               </MenuItem>
 
               {/* Utilizar parseJWT */}
@@ -321,7 +321,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".performance-item");
                     }}>
                     {" "}
-                    Desempenho{" "}
+                    <span className="performance-item">Desempenho</span>{" "}
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
                     className="menuReal-item"
@@ -330,7 +330,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".menuReal-item");
                     }}>
                     {" "}
-                    Cardápio{" "}
+                    <span className="menuReal-item">Cardápio{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
                     className="comments-item"
@@ -339,7 +339,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".comments-item");
                     }}>
                     {" "}
-                    Comentários{" "}
+                    <span className="comments-item">Comentários{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
                     className="relevance-item"
@@ -348,7 +348,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".relevance-item");
                     }}>
                     {" "}
-                    Relevância{" "}
+                    <span className="relevance-item">Relevância{" "}</span>
                   </MenuItem>
                 </>
               ) : (

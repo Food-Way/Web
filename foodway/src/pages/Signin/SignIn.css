@@ -41,6 +41,10 @@
   font-size: 3.4rem;
   margin: 20px 0px;
 }
+.no-account {
+  font-size: 1.6rem;
+  margin: 20px 0px;
+}
 .img-login {
   width: 80%;
   height: auto;
