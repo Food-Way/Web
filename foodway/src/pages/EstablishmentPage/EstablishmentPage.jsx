@@ -1,8 +1,8 @@
 
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
-const Phone = "https://foodway.blob.core.windows.net/public/phone.png";
-const BookMenu = "https://foodway.blob.core.windows.net/public/book-menu.png";
-const Report = "https://foodway.blob.core.windows.net/public/report.png";
+const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
+const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
+const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
 import { useEffect, useState } from "react";
 import { api_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";

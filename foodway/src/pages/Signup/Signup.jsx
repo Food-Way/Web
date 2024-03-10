@@ -3,8 +3,8 @@ import "./Signup.css";
 import { ButtonPrimaryLink } from "../../components/Button/Button";
 
 const Signup = () => {
-  const costumer = "https://foodway.blob.core.windows.net/public/c.png";
-  const establishment = "https://foodway.blob.core.windows.net/public/e.png";
+  const costumer = "https://foodway-public-s3.s3.amazonaws.com/website-images/c.png";
+  const establishment = "https://foodway-public-s3.s3.amazonaws.com/website-images/e.png";
   return (
     <>
       <div className="mainSignin">

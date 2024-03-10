@@ -1,8 +1,8 @@
 import React from "react";
 
 import ReactStars from "react-rating-stars-component";
-const starWhite = "https://foodway.blob.core.windows.net/public/star-white.svg";
-const starBlack = "https://foodway.blob.core.windows.net/public/star-black.svg";
+const starWhite = "https://foodway-public-s3.s3.amazonaws.com/website-images/star-white.svg";
+const starBlack = "https://foodway-public-s3.s3.amazonaws.com/website-images/star-black.svg";
 
 
 import "./RateNumberStar.css";

@@ -1,7 +1,7 @@
 import React from "react";
-const PositiveFace = "https://foodway.blob.core.windows.net/public/positive.svg";
-const NegativeFace = "https://foodway.blob.core.windows.net/public/negative.svg";
-const NeutralFace = "https://foodway.blob.core.windows.net/public/neutral.svg";
+const PositiveFace = "https://foodway-public-s3.s3.amazonaws.com/website-images/positive.svg";
+const NegativeFace = "https://foodway-public-s3.s3.amazonaws.com/website-images/negative.svg";
+const NeutralFace = "https://foodway-public-s3.s3.amazonaws.com/website-images/neutral.svg";
 import "./SentimentTag.css";
 
 const Positive = () => {

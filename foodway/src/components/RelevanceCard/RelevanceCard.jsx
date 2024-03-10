@@ -1,6 +1,6 @@
 import React from "react";
 import RateNumberStar from "../RateNumberStar/RateNumberStar";
-const BronzeMedal = "https://foodway.blob.core.windows.net/public/bronze-medal.svg";
+const BronzeMedal = "https://foodway-public-s3.s3.amazonaws.com/website-images/bronze-medal.svg";
 
 import "./RelevanceCard.css";
 

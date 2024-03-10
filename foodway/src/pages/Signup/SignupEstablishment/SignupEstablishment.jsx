@@ -52,7 +52,7 @@ const SignupEstablishment = () => {
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const loginIMG =
-    "https://foodway.blob.core.windows.net/public/cadastroEstablishment.png";
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/signup-establishment.png";
 
   const [formData, setFormData] = useState({
     nameFantasy: "",

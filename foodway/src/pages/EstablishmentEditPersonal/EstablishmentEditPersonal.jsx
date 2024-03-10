@@ -40,7 +40,7 @@ const EstablismentEditPersonal = () => {
         emailActual: atob(sessionStorage.getItem("email")),
         passwordActual: formData.passwordpasswordConfirmacaoEditPhoto,
         profilePhoto:
-          "https://foodway.blob.core.windows.net/public/default-user-image.png",
+          "https://foodway-public-s3.s3.amazonaws.com/website-images/default-user-image.png",
         profileHeaderImg: "",
       };
     }
@@ -50,7 +50,7 @@ const EstablismentEditPersonal = () => {
         passwordActual: formData.passwordpasswordConfirmacaoEditPhoto,
         profilePhoto: "",
         profileHeaderImg:
-          "https://foodway.blob.core.windows.net/public/default-banner.png",
+          "https://foodway-public-s3.s3.amazonaws.com/website-images/default-banner.png",
       };
     }
     console.log("Data");

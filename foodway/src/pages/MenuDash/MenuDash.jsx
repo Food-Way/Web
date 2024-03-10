@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-const Adicionar = "https://foodway.blob.core.windows.net/public/adicionar.svg";
+const Adicionar = "https://foodway-public-s3.s3.amazonaws.com/website-images/adicionar.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
-const ImageFilter = "https://foodway.blob.core.windows.net/public/filter.svg";
+const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader'

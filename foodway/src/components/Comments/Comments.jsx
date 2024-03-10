@@ -1,5 +1,5 @@
 import React from "react";
-const CommentIcon = "https://foodway.blob.core.windows.net/public/comment-icon.png";
+const CommentIcon = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
 import "./Comments.css";
 
 const Comments = (props) => {
