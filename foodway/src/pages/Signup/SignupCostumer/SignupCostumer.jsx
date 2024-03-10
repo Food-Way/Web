@@ -30,7 +30,7 @@ const SignUpCostumer = () => {
     culinary: "",
   });
 
-  const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
+  const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
 
   const handleNext = () => {
     if (step < 2) {
@@ -161,34 +161,21 @@ const SignUpCostumer = () => {
                     setSelectedCulinaries={setSelectedCulinaries}
                   />
                   <div className="button-div">
-                     
-                      <ButtonSecondary text="<" onclick={handleClose} />{" "}
-                     
-                      <ButtonPrimary 
-                        text="Criar >"
-                        onclick={handleRegisterCostumer}
-                      />
-                     
+
+                    <ButtonSecondary text="<" onclick={handleClose} />{" "}
+
+                    <ButtonPrimary
+                      text="Criar >"
+                      onclick={handleRegisterCostumer}
+                    />
+
                   </div>
                 </div>
               </div>
             </Modal>
             <form>
               <span className="action-sec">
-                {step === 1 && (
-                  <ButtonStep
-                    className="step-position"
-                    step="1"
-                    onclick={handleSteps}
-                  />
-                )}
-                {step === 2 && (
-                  <ButtonStep
-                    className="step-position"
-                    step="2"
-                    onclick={handleBack}
-                  />
-                )}
+
                 <h1 className="title">Cadastro de Usuário</h1>
               </span>
               {step === 1 && (

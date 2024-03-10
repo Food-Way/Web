@@ -3,21 +3,22 @@
 .container-footer {
   display: flex;
   justify-content: center;
-  /* Fixa o rodapé na parte inferior da página */
-  /* Coloca o rodapé na parte inferior da página */
   z-index: 100;
   padding: 20px 0px;
 }
+
 .footer {
   width: 85%;
   display: flex;
   justify-content: center;
   padding: 0px;
 }
+
 span {
   color: var(--preto);
   font-size: 1.6rem;
 }
+
 .black {
   font-weight: 800;
 }

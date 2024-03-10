@@ -1,4 +1,5 @@
 @import url(../../assets/css/style.css);
+
 .card-establishment {
   display: flex;
   justify-content: flex-end;
@@ -29,6 +30,7 @@
   font-weight: 700;
   line-height: normal;
 }
+
 .card-establishment p:nth-child(2) {
   color: #f6f6f6;
   font-family: Quicksand;
@@ -45,16 +47,11 @@
   align-items: center;
   margin: 20px;
 }
+
 .star-svg {
   margin: 0px 4px;
 }
 
-/* @media (max-width: 1420px) {
-  .card-establishment {
-    min-width: 250px;
-    height: 250px;
-  }
-} */
 @media (max-width: 768px) {
   .card-establishment {
     height: 200px;

@@ -58,12 +58,6 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
             );
           })}
         </Swiper>
-
-        {/* {establishment.map((item) => {
-                category={item.culinary[0].name}
-                image={item.profilePhoto}
-                rattingNumber={item.generalRate}
-          })} */}
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 import React from "react";
-const PositiveImage = "https://foodway.blob.core.windows.net/public/positive.svg";
-const NegativeImage = "https://foodway.blob.core.windows.net/public/negative.svg";
-const NeutralImage = "https://foodway.blob.core.windows.net/public/neutral.svg";
-const EqualsImage = "https://foodway.blob.core.windows.net/public/Equals_black.svg";
-const PercentPositiveImage = "https://foodway.blob.core.windows.net/public/arrow-positive.svg";
-const PercentNeutralImage = "https://foodway.blob.core.windows.net/public/arrow-neutral.svg";
-const PercentNegativeImage = "https://foodway.blob.core.windows.net/public/arrow-negative.svg";
-const PercentEqualsImage = "https://foodway.blob.core.windows.net/public/Equals_white.svg";
+const PositiveImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/positive.svg";
+const NegativeImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/negative.svg";
+const NeutralImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/neutral.svg";
+const EqualsImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/Equals_black.svg";
+const PercentPositiveImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow-positive.svg";
+const PercentNeutralImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow-neutral.svg";
+const PercentNegativeImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow-negative.svg";
+const PercentEqualsImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/Equals_white.svg";
 import "./SentimentCard.css";
 
 function SentimentCard(props) {

@@ -6,10 +6,12 @@ import { ButtonPrimary } from "../../components/Button/Button";
 import { useState, useEffect } from "react";
 import "./EstablishmentEditPersonal.css";
 import api from "../../services/api";
+import api_call from "../../services/apiImpl";
 import { Box, Input, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import bodyToken from "../../util/parseJWT";
 const EstablismentEditPersonal = () => {
   const token = atob(sessionStorage.getItem("token"));
   const id = atob(sessionStorage.getItem("idUser"));
@@ -21,22 +23,13 @@ const EstablismentEditPersonal = () => {
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
   const [profileImageName, setProfileImageName] = useState();
 
-  const getEstablishment = () => {
-    console.log("Token " + token);
-    console.log("Id " + id);
-    api
-      .get(`establishments/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        setFormData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async function getEstablishment() {
+
+    console.log("Id " + bodyToken.sub);
+    api_call("get", `establishments/${id}`, null, token).then((response) => { });
+    const response = await api_call(`'get',establishments/${id}`, null, token);
+    console.log("Response: " + response.data);
+    setFormData(response.data);
   };
 
   const deleteEstablishmentImages = (tipo) => {
@@ -47,7 +40,7 @@ const EstablismentEditPersonal = () => {
         emailActual: atob(sessionStorage.getItem("email")),
         passwordActual: formData.passwordpasswordConfirmacaoEditPhoto,
         profilePhoto:
-          "https://foodway.blob.core.windows.net/public/default-user-image.png",
+          "https://foodway-public-s3.s3.amazonaws.com/website-images/default-user-image.png",
         profileHeaderImg: "",
       };
     }
@@ -57,7 +50,7 @@ const EstablismentEditPersonal = () => {
         passwordActual: formData.passwordpasswordConfirmacaoEditPhoto,
         profilePhoto: "",
         profileHeaderImg:
-          "https://foodway.blob.core.windows.net/public/default-banner.png",
+          "https://foodway-public-s3.s3.amazonaws.com/website-images/default-banner.png",
       };
     }
     console.log("Data");

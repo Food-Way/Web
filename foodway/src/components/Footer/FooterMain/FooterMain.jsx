@@ -4,11 +4,11 @@ import "./FooterMain.css";
 import { Link } from "react-router-dom";
 
 const FooterMain = () => {
-  const logoIcon = "https://foodway.blob.core.windows.net/public/logo.png";
-  const insta = "https://foodway.blob.core.windows.net/public/insta.svg";
-  const face = "https://foodway.blob.core.windows.net/public/face.svg";
-  const twitter = "https://foodway.blob.core.windows.net/public/twitter.svg";
-  const github = "https://foodway.blob.core.windows.net/public/github.svg";
+  const logoIcon = "https://foodway-public-s3.s3.amazonaws.com/website-images/logo.png";
+  const insta = "https://foodway-public-s3.s3.amazonaws.com/website-images/insta.svg";
+  const face = "https://foodway-public-s3.s3.amazonaws.com/website-images/face.svg";
+  const twitter = "https://foodway-public-s3.s3.amazonaws.com/website-images/twitter.svg";
+  const github = "https://foodway-public-s3.s3.amazonaws.com/website-images/github.svg";
   return (
     <>
       <div className="container-footer">

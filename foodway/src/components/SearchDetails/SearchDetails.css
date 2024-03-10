@@ -24,7 +24,6 @@
 .search-detail-header {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
     align-items: flex-start;
 }
 
@@ -75,7 +74,7 @@
     height: 8rem;
 }
 
-.search-detail-body span{
+.search-detail-body span {
     font-size: 1.5rem;
     font-weight: 500;
 }

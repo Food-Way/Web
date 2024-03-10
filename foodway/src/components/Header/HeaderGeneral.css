@@ -58,7 +58,7 @@ header div div.left {
   justify-content: space-around;
 }
 
-.header-geral-token span{
+.header-geral-token span {
   font-size: 1.5 rem;
   font-weight: 700;
 }
@@ -104,17 +104,7 @@ header nav ul li:hover {
   border-bottom: 1px solid var(--primary);
   transition: all 0.3s;
 }
-/* 
-header nav ul li:hover {
-    width: 6vw;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: var(--borda);
-    border-radius: var(--arredondamento);
-    transition: all .3s;
-} */
+
 
 header nav ul li.active {
   background-color: var(--primary);

@@ -12,7 +12,7 @@ const HomeCardEstablishment = ({
 }) => {
   const ratingOptions = {
     size: "20px",
-    initialValue: rattingNumber, // Certifique-se de que rattingNumber esteja definido antes desta linha
+    initialValue: rattingNumber,
     readonly: true,
     allowFraction: true,
     fillColor: "white",

@@ -10,7 +10,7 @@ import { Auth } from "../../components/Auth/Auth";
 import parseJWT from "../../util/parseJWT";
 
 const SignIn = () => {
-  const loginIMG = "https://foodway.blob.core.windows.net/public/loginImg.png";
+  const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

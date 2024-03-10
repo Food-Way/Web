@@ -22,16 +22,12 @@ import React, { useState, useEffect } from "react";
 
 const ButtonStep = ({ step, onclick }) => {
   const firstStepImage =
-    "https://foodway.blob.core.windows.net/public/arrow_front.png";
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow_front.png";
   const secondStepImage =
-    "https://foodway.blob.core.windows.net/public/arrow_back.png";
-
-  // Define the initial state based on the 'step' prop
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow_back.png";
   const [buttonImage, setButtonImage] = useState(
     parseInt(step) === 1 ? firstStepImage : secondStepImage
   );
-
-  // Use useEffect to update the state when 'step' changes
   useEffect(() => {
     if (parseInt(step) === 1) {
       setButtonImage(firstStepImage);
@@ -54,7 +50,7 @@ const ButtonPrimaryLink = ({ text, url }) => {
   );
 };
 
-const ButtonSecondary = ({  width, height, text, onclick, className = "button-secondary" }) => {
+const ButtonSecondary = ({ width, height, text, onclick, className = "button-secondary" }) => {
   return (
     <button className={className} onClick={onclick} type="button" style={{ width: width, height: height }}>
       {text}

@@ -11,12 +11,12 @@ import ContentLoader from "react-content-loader";
 
 const Home = () => {
   const establishmentIMG =
-    "https://foodway.blob.core.windows.net/public/establishment.png";
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/establishment.png";
   const customerIMG =
-    "https://foodway.blob.core.windows.net/public/customer.png";
-  const card = "https://foodway.blob.core.windows.net/public/Card.png";
-  const androidI = "https://foodway.blob.core.windows.net/public/android.svg";
-  const androidBg = "https://foodway.blob.core.windows.net/public/emBreve.png";
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/customer.png";
+  const card = "https://foodway-public-s3.s3.amazonaws.com/website-images/card.png";
+  const androidI = "https://foodway-public-s3.s3.amazonaws.com/website-images/android.svg";
+  const androidBg = "https://foodway-public-s3.s3.amazonaws.com/website-images/coming-soon.png";
   const [isLoading, setIsLoading] = useState(true);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
@@ -175,16 +175,7 @@ const Home = () => {
     setGreaterEstab(response.data);
   }
 
-  useEffect(() => {
-    async () => {
-      await Promise.all([
-        listCategory(),
-        greaterRate(),
-        greaterComments(),
-      ]);
-      setIsLoading(false);
-    }
-  })
+
 
   return (
     <main>
@@ -245,7 +236,7 @@ const Home = () => {
           <div className="android-section">
             <div className="android-section-text">
               <div className="android-container">
-                <span>EM BREVE</span> <span>Disponível para</span>{" "}
+                <span>Disponível para</span>{" "}
                 <span>Android</span>
               </div>
               <img src={androidI} alt="android" />

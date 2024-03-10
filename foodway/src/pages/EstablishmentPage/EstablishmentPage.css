@@ -1,6 +1,6 @@
 @import url(../../assets/css/style.css);
 
-.profile_icon{
+.profile_icon {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -14,7 +14,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-image: url(../../../public/bannerEstablishment.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -83,33 +82,31 @@
     display: flex;
 }
 
-/* Updated style for the container holding the profile icon and text area */
 .comment-section {
     display: flex;
     align-items: start;
 
     flex-direction: row;
     width: 40vw;
-  }
-  /* Button to cancel the comment action */
+}
+
 .comment-cancel {
     border: none;
     padding: 10px 20px;
-    background-color: var(--preto); /* Light grey background */
-    color: #ffffff; /* Dark text color */
+    background-color: var(--preto);
+    color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 4px;
-  }
-  
-  .comment-cancel:hover {
-    background-color: rgb(43, 43, 43); /* Slightly darker grey on hover */
-  }
-  
-  /* Button to add a comment */
-  .comment-add {
-    background-color: var(--primary); /* Green background */
-    color: #fff; /* White text color */
+}
+
+.comment-cancel:hover {
+    background-color: rgb(43, 43, 43);
+}
+
+.comment-add {
+    background-color: var(--primary);
+    color: #fff;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -118,32 +115,33 @@
     align-items: center;
     transition: background-color 0.3s ease;
     border: none;
-  }
-  
-  .comment-add:hover {
-    background-color: rgb(253, 43, 43) /* Darker green on hover */
-  }
-  
-  /* Icon within the add comment button */
-  .comment-add-icon {
-    margin-right: 8px; /* Space between icon and text */
-  }
-  /* Updated style for the container holding the buttons */
-  .actions-section {
+}
+
+.comment-add:hover {
+    background-color: rgb(253, 43, 43)
+}
+
+.comment-add-icon {
+    margin-right: 8px;
+
+}
+
+.actions-section {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
-  .container_button-comment{
+
+.container_button-comment {
     display: flex;
     justify-content: space-between;
     min-width: fit-content;
     width: 100%;
     max-width: 200px;
     margin-top: 5px;
-  }
-  
-  
+}
+
+
 
 .establishment-avaliation-box {
     width: 12vw;
@@ -206,7 +204,6 @@
 
 .establishment-comments-box-more {
     width: 40vw;
-    /* height: 56.5rem; */
     background-color: var(--branco);
     border: var(--borda);
     border-radius: var(--arrendondamento);
