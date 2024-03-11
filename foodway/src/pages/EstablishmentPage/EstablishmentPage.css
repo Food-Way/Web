@@ -10,7 +10,7 @@
 
 .establishment-banner-box {
     width: 100vw;
-    height: 17rem;
+    height: 23rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 8vw;
+    margin-left: 5vw;
 }
 
 .title-establishment {
@@ -47,11 +47,16 @@
     color: var(--branco);
 }
 
+.establishment-avaliation-principal {
+    height: 17rem;  
+}
+
 .establishment-avaliation-value {
     width: 9vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .establishment-avaliation-value span:first-child {
@@ -176,6 +181,7 @@
 }
 
 .establishment-add-comment-list-comments {
+    width: 45vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -215,7 +221,7 @@
     /* height: 56.5rem; */
     background-color: var(--branco);
     border: var(--borda);
-    border-radius: var(--arrendondamento);
+    border-radius: 6px;
     padding: 1rem 0 1rem 0;
 }
 
@@ -307,7 +313,7 @@
 }
 
 .establishment-side-box {
-    height: 52rem;
+    height: 60rem;
     display: flex;
     flex-direction: column;
     align-items: center;

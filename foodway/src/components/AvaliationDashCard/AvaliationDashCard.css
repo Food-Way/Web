@@ -12,9 +12,13 @@
     justify-content: space-between;
 }
 
+.avaliation-general-box span:first-child {
+    font-size: 1.8rem;
+}
+
 .avaliation-general-box span:last-child {
     width: 7vw;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-left: 1rem;
 }
 

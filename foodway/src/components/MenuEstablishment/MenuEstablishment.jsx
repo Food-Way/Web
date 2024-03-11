@@ -306,7 +306,7 @@ const MenuEstablishment = (props) => {
                   setNavigate(".profile-item");
                 }}
               >
-                <span className="profile-item item-menu-box">Perfil</span>
+                <span className="profile-item text-item">Perfil</span>
               </MenuItem>
 
               {/* Utilizar parseJWT */}
@@ -319,7 +319,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".performance-item");
                     }}>
                     {" "}
-                    <span className="performance-item">Desempenho</span>{" "}
+                    <span className="performance-item text-item">Desempenho</span>{" "}
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
                     className="menuReal-item"
@@ -328,7 +328,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".menuReal-item");
                     }}>
                     {" "}
-                    <span className="menuReal-item">Cardápio{" "}</span>
+                    <span className="menuReal-item text-item">Cardápio{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
                     className="comments-item"
@@ -337,7 +337,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".comments-item");
                     }}>
                     {" "}
-                    <span className="comments-item">Comentários{" "}</span>
+                    <span className="comments-item text-item">Comentários{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
                     className="relevance-item"
@@ -346,7 +346,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".relevance-item");
                     }}>
                     {" "}
-                    <span className="relevance-item">Relevância{" "}</span>
+                    <span className="relevance-item text-item">Relevância{" "}</span>
                   </MenuItem>
                 </>
               ) : (
@@ -363,7 +363,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".search-item");
                     }}
                   >
-                    <span className="search-item">Busca</span>
+                    <span className="search-item text-item">Busca</span>
                   </MenuItem>
                 </>
 
@@ -432,7 +432,7 @@ const MenuEstablishment = (props) => {
                     setNavigate(".out-item");
                   }}
                 >
-                  Sair
+                  <span className="out-item text-item">Sair</span>
                 </MenuItem>
               ) : (
                 ""

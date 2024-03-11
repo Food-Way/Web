@@ -33,31 +33,10 @@
     padding-left: 1rem;
 }
 
-.profile-item {
-    font-size: 1.7rem;
-}
-
-.performance-item {
-    font-size: 1.7rem;
-}
-
-.menuReal-item {
-    font-size: 1.7rem;
-}
-
-.comments-item {
-    font-size: 1.7rem;
-}
-
-.relevance-item {
-    font-size: 1.7rem;
-}
-
-.search-item {
-    font-size: 1.7rem;
-}
-
-.out-item {
+.text-item, .profile-item, 
+.performance-item, .menuReal-item,
+.comments-item, .relevance-item, 
+.search-item, .out-item {
     font-size: 1.7rem;
 }
 

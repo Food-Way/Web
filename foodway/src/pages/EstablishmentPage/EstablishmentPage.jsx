@@ -74,6 +74,16 @@ const EstablishmentPage = () => {
     </ContentLoader>
   )
 
+  const handleClick = () => {
+    const toFoodway = encodeURIComponent('help@foodway.com');
+    const cc = encodeURIComponent(profile.email);
+    const subject = encodeURIComponent('Reportar Problema no Estabelecimento');
+    const body = encodeURIComponent('Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente\n\nDescrição do problema:');
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${toFoodway}&cc=${cc}&su=${subject}&body=${body}`;
+
+    window.open(gmailLink, '_blank');
+  };
+
   const addCommentToState = (newComment) => {
     setComments(prevComments => [...prevComments, newComment]);
   };
@@ -82,6 +92,7 @@ const EstablishmentPage = () => {
     const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
     setProfile(response.data);
     setComments(response.data.comments);
+    console.log(response.data);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
 
@@ -223,6 +234,9 @@ const EstablishmentPage = () => {
                         style={{
                           border: 0,
                           width: "100%",
+                          borderRadius: "0.5rem",
+                          border: "1px solid #c4c4c4",
+                          marginTop: "1rem",
                         }}
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
@@ -234,7 +248,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-report-box">
                   <img src={Report} alt="" />
-                  <span>Reportar</span>
+                  <span onClick={handleClick}>Reportar</span>
                 </div>
               </div>
             </div>

@@ -45,8 +45,8 @@
 }
 
 .search-results {
-    width: 5vw;
-    font-size: 1.5rem;
+    width: 6vw;
+    font-size: 1.7rem;
     font-weight: 700;
     border-bottom: 2px solid var(--primary);
 }
