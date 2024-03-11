@@ -1,5 +1,5 @@
 import React from "react";
-import UpvoteIcon from "../../../public/upvotes.svg";
+const UpvoteIcon = "https://foodway-public-s3.s3.amazonaws.com/website-images/upvotes.svg";
 import "./Upvotes.css";
 import api_call from "../../services/apiImpl";
 

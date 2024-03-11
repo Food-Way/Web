@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://foodway.blob.core.windows.net/public/FoodWayLogo.png" alt="Logo do FoodWay">
+  <img src="https://foodway-public-s3.s3.amazonaws.com/website-images/foodway-logo.png" alt="Logo do FoodWay">
 </div>
 
 ---

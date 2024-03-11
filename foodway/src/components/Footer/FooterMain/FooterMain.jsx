@@ -8,6 +8,11 @@ import twitter from "../../../public/twitter.svg";
 import github from "../../../public/github.svg";
 
 const FooterMain = () => {
+  const logoIcon = "https://foodway-public-s3.s3.amazonaws.com/website-images/logo.png";
+  const insta = "https://foodway-public-s3.s3.amazonaws.com/website-images/insta.svg";
+  const face = "https://foodway-public-s3.s3.amazonaws.com/website-images/face.svg";
+  const twitter = "https://foodway-public-s3.s3.amazonaws.com/website-images/twitter.svg";
+  const github = "https://foodway-public-s3.s3.amazonaws.com/website-images/github.svg";
   return (
     <>
       <div className="container-footer">

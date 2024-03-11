@@ -10,6 +10,7 @@ import parseJWT from "../../util/parseJWT";
 import loginIMG from "../../../public/loginImg.png";
 
 const SignIn = () => {
+  const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

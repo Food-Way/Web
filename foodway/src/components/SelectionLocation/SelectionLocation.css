@@ -8,12 +8,10 @@
     position: relative;
     padding: 0.3rem 0.3rem 0.3rem 0.8rem;
     border-radius: var(--arredondamento);
-    /* border: var(--borda); */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../../public/seta.svg") 100% 50% no-repeat;
-    /* border: none; */
+    background: url("https://foodway-public-s3.s3.amazonaws.com/website-images/seta.svg") 100% 50% no-repeat;
     cursor: pointer;
 }
 

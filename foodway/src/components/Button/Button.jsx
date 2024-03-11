@@ -23,10 +23,13 @@ const ButtonPrimary = ({
 };
 
 const ButtonStep = ({ step, onclick }) => {
+  const firstStepImage =
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow_front.png";
+  const secondStepImage =
+    "https://foodway-public-s3.s3.amazonaws.com/website-images/arrow_back.png";
   const [buttonImage, setButtonImage] = useState(
     parseInt(step) === 1 ? firstStepImage : secondStepImage
   );
-
   useEffect(() => {
     if (parseInt(step) === 1) {
       setButtonImage(firstStepImage);
@@ -49,7 +52,7 @@ const ButtonPrimaryLink = ({ text, url }) => {
   );
 };
 
-const ButtonSecondary = ({  width, height, text, onclick, className = "button-secondary" }) => {
+const ButtonSecondary = ({ width, height, text, onclick, className = "button-secondary" }) => {
   return (
     <button className={className} onClick={onclick} type="button" style={{ width: width, height: height }}>
       {text}

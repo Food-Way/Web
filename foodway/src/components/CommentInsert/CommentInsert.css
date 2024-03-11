@@ -7,7 +7,6 @@
   margin-right: 1rem;
 }
 
-/* Comment Section Styles */
 .comment-section {
   display: flex;
   align-items: start;
@@ -15,7 +14,6 @@
   width: 40vw;
 }
 
-/* Action Section Styles */
 .actions-section {
   width: 100%;
   display: flex;
@@ -31,8 +29,8 @@
   margin-top: 5px;
 }
 
-/* Button Styles */
-.comment-cancel, .comment-add {
+.comment-cancel,
+.comment-add {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -61,6 +59,3 @@
 .comment-add-icon {
   margin-right: 8px;
 }
-
-/* Additional Styles for Establishment Components */
-/* Include other classes as needed, following the pattern above. */

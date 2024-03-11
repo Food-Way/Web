@@ -2,7 +2,8 @@ import { React, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Upvotes from "../../components/Upvotes/Upvotes";
 import "./Comment.css";
-import ImageComment from "../../../public/comment-icon.png";
+
+const ImageComment = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
 
 const Comment = (props) => {
     const [updateText, setUpdateText] = useState(false);

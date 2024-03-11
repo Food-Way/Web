@@ -171,8 +171,7 @@ const UserProfile = () => {
                     <img className="profile-photo" src={user.profilePhoto} alt="" />
                   )}
                   <span className="profile-username"></span>
-                  {/* {(() => showDescription(user.bio))()}  */}
-                  {location.pathname.endsWith(parseJWT.sub) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"}  width={"11vw"} /> : ""}
+                  {location.pathname.endsWith(parseJWT.sub) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
                 </div>
                 {user.length === 0 ? (
                   <ProfileStatusLoader />

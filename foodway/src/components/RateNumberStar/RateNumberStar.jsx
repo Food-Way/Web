@@ -1,8 +1,10 @@
 import React from "react";
 
 import ReactStars from "react-rating-stars-component";
-import starWhite from "../../../public/star-white.svg";
-import starBlack from "../../../public/star-black.svg";
+const starWhite = "https://foodway-public-s3.s3.amazonaws.com/website-images/star-white.svg";
+const starBlack = "https://foodway-public-s3.s3.amazonaws.com/website-images/star-black.svg";
+
+
 import "./RateNumberStar.css";
 
 const RateNumberStar = (props) => {

@@ -24,6 +24,7 @@ const Header = (props) => {
         window.location.href = "/"
     }
 
+    const LogoFoodway = "https://foodway-public-s3.s3.amazonaws.com/website-images/foodway-logo.png"
     return (
         <>
             <header>

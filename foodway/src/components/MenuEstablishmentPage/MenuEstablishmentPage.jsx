@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Product from "../Product/Product";
-import SearchBar from "../SearchBar/SearchBar";
-import ImageFilter from "../../../public/filter.svg";
+import Product from "../../components/Product/Product";
+import SearchBar from "../../components/SearchBar/SearchBar";
+const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import api_call from "../../services/apiImpl";
 import "./MenuEstablishmentPage.css";
 

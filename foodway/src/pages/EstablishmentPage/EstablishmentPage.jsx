@@ -1,8 +1,8 @@
 
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
-import Phone from "../../../public/phone.png";
-import BookMenu from "../../../public/book-menu.png";
-import Report from "../../../public/report.png";
+const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
+const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
+const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
 import { useEffect, useState } from "react";
 import { api_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
@@ -92,7 +92,6 @@ const EstablishmentPage = () => {
     const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
     setProfile(response.data);
     setComments(response.data.comments);
-    console.log(response.data);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
 
