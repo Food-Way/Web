@@ -13,8 +13,9 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import bodyToken from "../../util/parseJWT";
 const EstablismentEditPersonal = () => {
+  const bodyToken = parseJWT();
   const token = atob(sessionStorage.getItem("token"));
-  const id = atob(sessionStorage.getItem("idUser"));
+  const id = bodyToken.sub;
   const [formData, setFormData] = useState({});
   const [selectedFileCover, setSelectedFileCover] = useState(null);
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);

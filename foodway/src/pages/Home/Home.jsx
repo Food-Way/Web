@@ -6,7 +6,11 @@ import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
-
+import establishmentIMG from "../../../public/establishment.png";
+import customerIMG from "../../../public/customer.png";
+import card from "../../../public/Card.png";
+import androidI from "../../../public/android.svg";
+import androidBg from "../../../public/emBreve.png";
 import ContentLoader from "react-content-loader";
 
 const Home = () => {

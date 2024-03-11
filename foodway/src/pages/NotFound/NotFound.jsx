@@ -1,5 +1,5 @@
 import "./NotFound.css";
-import NotFoundCat from "../../../public/not-found-cat.png"
+import NotFoundCat from "../../../public/not-found-cat.png";
 
 const NotFound = () => {
   return (

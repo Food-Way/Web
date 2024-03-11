@@ -103,9 +103,9 @@ const MenuEstablishment = (props) => {
 
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-        navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`);
+        navigate(`/establishment/info`);
       } else {
-        navigate(`/user-profile/${atob(sessionStorage.getItem("idUser"))}`);
+        navigate(`/user/profile`);
         window.location.reload();
       }
 
@@ -113,17 +113,16 @@ const MenuEstablishment = (props) => {
       navigate("/users");
 
     } else if (className == ".search-item") {
-      navigate("/search-user");
+      navigate("/user/search");
       window.location.reload();
-
     } else if (className == ".performance-item") {
-      navigate(`/establishment/performance/insights/${atob(sessionStorage.getItem("idUser"))}`);
+      navigate(`/establishment/performance/insights`);
 
     } else if (className == ".menuReal-item") {
-      navigate(`/establishment/performance/menu/${atob(sessionStorage.getItem("idUser"))}`);
+      navigate(`/establishment/performance/menu`);
 
     } else if (className == ".comments-item") {
-      navigate(`/establishment/performance/comments/${atob(sessionStorage.getItem("idUser"))}`);
+      navigate(`/establishment/performance/comments`);
 
     } else if (className == ".relevance-item") {
       navigate("/establishment/performance/relevance");
@@ -151,7 +150,7 @@ const MenuEstablishment = (props) => {
       path = ".profile-item";
     }
 
-    if (location.pathname == "/search-user") {
+    if (location.pathname == "/user/search") {
       path = ".search-item";
     }
 
@@ -190,7 +189,7 @@ const MenuEstablishment = (props) => {
               var headerContainer = document.querySelector(".container-header");
 
 
-              if (location.pathname.startsWith("/search-user")) {
+              if (location.pathname.startsWith("/user/search")) {
                 var profileContainer = document.querySelector(".search-user-container");
                 profileContainer.classList.toggle("search-user-container-switch");
               }
@@ -246,7 +245,7 @@ const MenuEstablishment = (props) => {
                   setNavigate(".profile-item");
                 }}
               >
-                <span className="profile-item">Perfil</span>
+                <span className="profile-item text-item">Perfil</span>
               </MenuItem>
 
               {atob(typeUser) == "ESTABLISHMENT" ? (
@@ -258,7 +257,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".performance-item");
                     }}>
                     {" "}
-                    Desempenho{" "}
+                    <span className="performance-item text-item">Desempenho</span>{" "}
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faBookOpen} size="lg"
                     className="menuReal-item"
@@ -267,7 +266,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".menuReal-item");
                     }}>
                     {" "}
-                    Cardápio{" "}
+                    <span className="menuReal-item text-item">Cardápio{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faComments} size="lg"
                     className="comments-item"
@@ -276,7 +275,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".comments-item");
                     }}>
                     {" "}
-                    Comentários{" "}
+                    <span className="comments-item text-item">Comentários{" "}</span>
                   </MenuItem>
                   <MenuItem icon={<FontAwesomeIcon icon={faRankingStar} size="lg"
                     className="relevance-item"
@@ -285,7 +284,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".relevance-item");
                     }}>
                     {" "}
-                    Relevância{" "}
+                    <span className="relevance-item text-item">Relevância{" "}</span>
                   </MenuItem>
                 </>
               ) : (
@@ -302,7 +301,7 @@ const MenuEstablishment = (props) => {
                       setNavigate(".search-item");
                     }}
                   >
-                    <span className="search-item">Busca</span>
+                    <span className="search-item text-item">Busca</span>
                   </MenuItem>
                 </>
 
@@ -316,7 +315,7 @@ const MenuEstablishment = (props) => {
                     setNavigate(".out-item");
                   }}
                 >
-                  Sair
+                  <span className="out-item text-item">Sair</span>
                 </MenuItem>
               ) : (
                 ""

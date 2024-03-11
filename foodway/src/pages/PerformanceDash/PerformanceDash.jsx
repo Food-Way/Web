@@ -8,7 +8,6 @@ import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import parseJWT from "../../util/parseJWT";
 
-
 import "./PerformanceDash.css";
 
 function PerformanceDash() {

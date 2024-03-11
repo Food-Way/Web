@@ -3,6 +3,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import api_call from "../../services/apiImpl";
 import * as XLSX from "xlsx";
+import parseJWT from "../../util/parseJWT";
 
 import "./Report.css";
 

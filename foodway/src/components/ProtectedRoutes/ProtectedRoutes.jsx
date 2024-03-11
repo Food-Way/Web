@@ -12,7 +12,6 @@ const ProtectedRoutes = () => {
 
     return (
         <>
-            <MenuEstablishment />
             <Outlet />
         </>
     )

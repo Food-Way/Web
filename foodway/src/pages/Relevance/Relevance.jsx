@@ -5,8 +5,6 @@ import api_call from "../../services/apiImpl";
 import "./Relevance.css";
 import ContentLoader from 'react-content-loader'
 
-
-
 const Relevance = () => {
     const [relevance, setRelevance] = useState([]);
     const [top3, setTop3] = useState([]);
@@ -72,8 +70,9 @@ const Relevance = () => {
                                 {top3.length === 0 ? (
                                     <CardLoader />
                                 ) : (
-                                    top3.map((item) => (
+                                    top3.map((item, index) => (
                                         <RelevanceCard
+                                            key={index}
                                             profilePhoto={item.profilePhoto}
                                             establishmentName={item.establishmentName}
                                             qtdRate={item.qtdRate}

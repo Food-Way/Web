@@ -1,7 +1,11 @@
 import React from "react";
-
 import "./FooterMain.css";
 import { Link } from "react-router-dom";
+import logoIcon from "../../../public/logo.png";
+import insta from "../../../public/insta.svg";
+import face from "../../../public/face.svg";
+import twitter from "../../../public/twitter.svg";
+import github from "../../../public/github.svg";
 
 const FooterMain = () => {
   const logoIcon = "https://foodway-public-s3.s3.amazonaws.com/website-images/logo.png";

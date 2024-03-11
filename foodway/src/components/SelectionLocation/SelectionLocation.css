@@ -3,9 +3,9 @@
 .select-location {
     width: 15rem;
     height: 2rem;
-    font-size: 1rem;
     display: flex;
     align-items: center;
+    position: relative;
     padding: 0.3rem 0.3rem 0.3rem 0.8rem;
     border-radius: var(--arredondamento);
     -webkit-appearance: none;
@@ -20,17 +20,16 @@
 }
 
 .options-location {
-    width: 16rem;
+    width: 18rem;
     height: 16vh;
     display: flex;
     flex-direction: column;
     position: absolute;
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     backdrop-filter: blur(10px);
     padding: 1rem;
     top: 0vh;
-    left: 56vw;
     transition: all 0.3s;
     overflow-y: scroll;
 }
@@ -69,11 +68,11 @@
 }
 
 .animation-in {
-    top: 5.5vh;
+    top: 3.5vh;
+    right: 1%;
     transition: all 0.3s;
     overflow-x: hidden;
     color: var(--branco);
-    margin-left: 1.8vw;
 }
 
 .animation-out {

@@ -9,7 +9,7 @@ const RankLine = (props) => {
             <li className="rank-line">
                 <span className="estab-rank-text">{props.id}° {props.name}</span>
                 <span>Avaliações: {props.rate}</span>
-                <RateNumberStar color="branco" />
+                <RateNumberStar color="white" />
             </li>
         </>
 

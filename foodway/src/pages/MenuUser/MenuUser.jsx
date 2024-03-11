@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import parseJWT from "../../util/parseJWT";
-import MenuEstablishmentContainer from "../../components/MenuEstablishmentContainer/MenuEstablishmentContainer";
+import MenuEstablishmentContainer from "../../components/MenuEstablishmentPage/MenuEstablishmentPage";
 
 const MenuUser = (props) => {
   const bodyToken = parseJWT();

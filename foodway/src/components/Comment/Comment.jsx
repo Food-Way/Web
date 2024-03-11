@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-import { Neutral, Positive, Negative } from "../../components/SentimentTag/SentimentTag";
 import ReactStars from "react-rating-stars-component";
 import Upvotes from "../../components/Upvotes/Upvotes";
 import "./Comment.css";

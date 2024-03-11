@@ -19,7 +19,7 @@ const Upvotes = (props) => {
 
     return (
         <>
-            <div className="upvotes" onClick={location.pathname.startsWith("/establishment/info/") ? ()=>{handleUpvotes(props.idComment, props.idEstablishment, props.idCustomer)} : ""}>
+            <div className="upvotes" onClick={location.pathname.startsWith("/establishment/info/") ? ()=>{handleUpvotes(props.idComment, props.idEstablishment, props.idCustomer)} : null}>
                 <img src={UpvoteIcon} alt="" />
                 <span>{props.upvotes ? props.upvotes : 0}</span>
             </div>

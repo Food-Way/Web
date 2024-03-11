@@ -3,10 +3,9 @@ import SearchCard from "../../components/SearchCard/SearchCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
-import { api_call, api_maps_call } from "../../services/apiImpl";
+import { api_call } from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import parseJWT from "../../util/parseJWT";
-
 
 import './SearchUser.css';
 
@@ -36,12 +35,12 @@ function SearchUser() {
     const [url, setUrl] = useState(null);
     const bodyToken = parseJWT();
 
-    async function getSearchEstab ({filter}) {
+    async function getSearchEstab({ filter }) {
         const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), bodyToken.sub);
         console.log(response.data)
         setSearchEstab(response.data);
     }
-    
+
     async function getSearchCustomer() {
         const response = await api_call("get", `/customers/search`, null, atob(sessionStorage.getItem("token")));
         console.log(response.data);
@@ -49,10 +48,8 @@ function SearchUser() {
     }
 
     async function getMaps(lat, lng) {
-        const response = await api_maps_call(lat, lng);
-        console.log(response.data);
         setShowMap(true);
-        setUrl(response.data);
+        setUrl(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${lat},${lng}&zoom=18&maptype=roadmap`);
     }
 
     function selectFilter(id) {
@@ -172,7 +169,16 @@ function SearchUser() {
                             {selectedCardType === "ESTABLISHMENT" && showMap && url && viewDetails && (
                                 <div className="maps-box">
                                     <span className="title">Localização</span>
-                                    <img src={url} alt="Mapa" />
+                                    <iframe
+                                        style={{
+                                            border: 0,
+                                            width: "100%",
+                                        }}
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                        src={url}
+                                        allowFullScreen
+                                    ></iframe>
                                 </div>
                             )}
                         </div>

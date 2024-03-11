@@ -1,5 +1,8 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import firstStepImage from "../../../public/arrow_front.png";
+import secondStepImage from "../../../public/arrow_back.png";
 const ButtonPrimary = ({
   text,
   onclick,
@@ -18,7 +21,6 @@ const ButtonPrimary = ({
     </button>
   );
 };
-import React, { useState, useEffect } from "react";
 
 const ButtonStep = ({ step, onclick }) => {
   const firstStepImage =
@@ -65,7 +67,5 @@ const ButtonSecondaryLink = ({ width, height, text, url }) => {
     </Link>
   );
 };
-
-
 
 export { ButtonPrimary, ButtonSecondary, ButtonPrimaryLink, ButtonStep, ButtonSecondaryLink };

@@ -1,4 +1,5 @@
 import "./MainBanner.css";
+import image from "../../../public/header.png";
 const MainBanner = () => {
   const image = "https://foodway-public-s3.s3.amazonaws.com/website-images/header.png";
   const styleCard = {

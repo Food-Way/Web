@@ -1,5 +1,4 @@
 import "./SignIn.css";
-
 import { ButtonPrimary } from "../../components/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
@@ -8,6 +7,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
 import parseJWT from "../../util/parseJWT";
+import loginIMG from "../../../public/loginImg.png";
 
 const SignIn = () => {
   const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
@@ -53,24 +53,23 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          console.log(response.data.token)
+          // console.log(response.data.token)
           sessionStorage.setItem("token", btoa(response.data.token));
           sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
           toast.success("Login realizado com sucesso!");
-          const bodyToken = parseJWT();
           if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
             setTimeout(() => {
               // console.log("Redirecting to /perfil...");
-              navigate(`/user/profile/${bodyToken.sub}`);
+              navigate(`/user/profile`);
               // location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
             setTimeout(() => {
               // console.log("Redirecting to /establishment/performance...");
-              navigate(`/establishment/info/${bodyToken.sub}`);
+              navigate(`/establishment/info`);
               // location.reload();
             }, 2000);
           }
@@ -107,9 +106,9 @@ const SignIn = () => {
 
   useEffect(() => {
     atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT" ? (
-      navigate(`/establishment/info/${atob(sessionStorage.getItem("idUser"))}`)
+      navigate(`/establishment/info`)
     ) : atob(sessionStorage.getItem("token")) && atob(sessionStorage.getItem("typeUser")) === "CLIENT" ? (
-      navigate(`/user/profile/${atob(sessionStorage.getItem("idUser"))}`)
+      navigate(`/user/profile`)
     ) : navigate(`/sign-in`)
   }, [])
 
@@ -139,7 +138,7 @@ const SignIn = () => {
                 autocomplete="current-password"
                 onChange={handleChangeSenha}
               />
-              <span className="">
+              <span className="no-account">
                 Não possui uma conta? <Link to="/sign-up">Cadastre-se</Link>
               </span>
               <ButtonPrimary text="Entrar" onclick={handleLogin} width={"50%"} />

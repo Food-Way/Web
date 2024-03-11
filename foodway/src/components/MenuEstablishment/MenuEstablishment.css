@@ -33,13 +33,21 @@
     padding-left: 1rem;
 }
 
+.text-item, .profile-item, 
+.performance-item, .menuReal-item,
+.comments-item, .relevance-item, 
+.search-item, .out-item {
+    font-size: 1.7rem;
+}
+
 .box-copyright {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.box-copyright span{
+.box-copyright span, b{
+    font-size: 1.3rem;
     transition: all 0.3s;
 }
 

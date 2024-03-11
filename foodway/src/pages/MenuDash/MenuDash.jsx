@@ -7,10 +7,8 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
-import ContentLoader from 'react-content-loader'
-import { useParams } from "react-router-dom";
-
-
+import ContentLoader from 'react-content-loader';
+import parseJWT from "../../util/parseJWT";
 import "./MenuDash.css";
 
 const MenuDash = () => {
