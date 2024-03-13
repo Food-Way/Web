@@ -5,7 +5,6 @@ import SelectLocation from '../SelectionLocation/SelectionLocation';
 import { Link } from "react-router-dom";
 import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
-import LogoFoodway from "../../../public/FoodWayLogo.png";
 import parseJWT from "../../util/parseJWT";
 
 const Header = (props) => {

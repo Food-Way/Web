@@ -4,7 +4,7 @@ const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.p
 const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
 const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
 import { useEffect, useState } from "react";
-import { api_call } from "../../services/apiImpl";
+import { api_call, nifi_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
 import { Link } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
@@ -14,13 +14,20 @@ import {
 } from "../../components/Comment/Comment.jsx";
 import "./EstablishmentPage.css";
 import CommentInsert from "../../components/CommentInsert/CommentInsert.jsx";
-import { ButtonSecondaryLink } from "../../components/Button/Button.jsx";
+import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
+import GenericModal from "../../components/GenericModel/GenericModel.jsx";
+import { InputField, TextAreaField } from "../../components/InputField/InputField";
+import { ButtonPrimary } from "../../components/Button/Button.jsx";
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
   const bodyToken = parseJWT();
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
+  const [messageData, setMessageData] = useState([]);
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
@@ -91,13 +98,27 @@ const EstablishmentPage = () => {
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
     setProfile(response.data);
+    console.log(response.data)
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  async function handleSendEmail() {
+    const response = await nifi_call("post", "/report", {
+      email: bodyToken.email,
+      establishmentEmail: profile.email,
+      subject: "Reportar Problema no Estabelecimento",
+      message: messageData
+    });
+  }
+
+
   useEffect(() => {
     getEstablishmentProfileData();
-
   }, []);
 
   return (
@@ -231,7 +252,6 @@ const EstablishmentPage = () => {
                     ) : (
                       <iframe
                         style={{
-                          border: 0,
                           width: "100%",
                           borderRadius: "0.5rem",
                           border: "1px solid #c4c4c4",
@@ -247,7 +267,45 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-report-box">
                   <img src={Report} alt="" />
-                  <span onClick={handleClick}>Reportar</span>
+                  <span onClick={handleOpenModal}>Reportar</span>
+                  <GenericModal open={openModal} handleClose={handleCloseModal}>
+                    <div className="email-modal-container">
+                      <form onSubmit={handleSubmit}>
+                          <InputField
+                            type="email"
+                            label="Email"
+                            placeholder="Email do estabelecimento"
+                            id="email"
+                            value={profile.email}
+                            disabled="true"
+                            autocomplete="establishment-email"
+                          />
+                          <InputField
+                            type="subject"
+                            label="Assunto"
+                            placeholder="Assunto"
+                            id="subject"
+                            value={"Reportar Problema no Estabelecimento"}
+                            disabled="true"
+                            autocomplete="subject"
+                          />
+                        <TextAreaField
+                          label="Mensagem"
+                          placeholder="Mensagem"
+                          id="message"
+                          value={`
+                                  Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: ${bodyToken.username}\n\nDescrição do problema:
+                               `}
+                          onChange={setMessageData}
+                        />
+
+                      </form>
+                      <div className="button-modal-container">
+                        <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"50%"} />
+                        <ButtonSecondary text="Cancelar" onclick={handleCloseModal} width={"50%"} />
+                      </div>
+                    </div>
+                  </GenericModal>
                 </div>
               </div>
             </div>

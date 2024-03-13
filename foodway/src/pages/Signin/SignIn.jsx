@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
-import parseJWT from "../../util/parseJWT";
-import loginIMG from "../../../public/loginImg.png";
 
 const SignIn = () => {
   const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";

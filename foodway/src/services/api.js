@@ -11,7 +11,6 @@ const api = axios.create({
   },
 });
 
-
 const api_mock = axios.create({
   baseURL: "https://6514aa4fdc3282a6a3cd5f35.mockapi.io/",
   headers: {
@@ -19,6 +18,14 @@ const api_mock = axios.create({
   },
 });
 
+const nifi_url = axios.create({
+  baseURL: "http://localhost:80",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+
 
 export default api;
-export { api_mock, api };
+export { api_mock, api, nifi_url };
