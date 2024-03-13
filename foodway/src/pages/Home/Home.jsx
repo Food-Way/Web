@@ -6,11 +6,6 @@ import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
-import establishmentIMG from "../../../public/establishment.png";
-import customerIMG from "../../../public/customer.png";
-import card from "../../../public/Card.png";
-import androidI from "../../../public/android.svg";
-import androidBg from "../../../public/emBreve.png";
 import ContentLoader from "react-content-loader";
 
 const Home = () => {
@@ -34,7 +29,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Definindo a função assíncrona dentro do useEffect
     async function fetchData() {
       sessionStorage.setItem('category', btoa(999));
       await Promise.all([
@@ -42,14 +36,11 @@ const Home = () => {
         greaterRate(),
         greaterComments(),
       ]);
-      setIsLoading(false); // Isso será executado depois que todas as chamadas acima estiverem completas
+      setIsLoading(false);
     }
 
-    // Invocando a função fetchData
     fetchData();
-  }, []); // O array vazio indica que este efeito não depende de nenhuma prop ou estado, então ele roda apenas uma vez após o componente montar.
-
-
+  }, []); 
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
   const [category, setCategory] = useState([]);
@@ -178,8 +169,6 @@ const Home = () => {
     console.log(response.data);
     setGreaterEstab(response.data);
   }
-
-
 
   return (
     <main>

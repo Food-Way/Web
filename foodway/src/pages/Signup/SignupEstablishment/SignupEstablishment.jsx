@@ -14,7 +14,6 @@ import CheckboxSelect from "../../../components/CheckboxSelect/CheckboxSelect";
 import { toast } from "react-toastify";
 import axios from "axios";
 import api from "../../../services/api";
-import loginIMG from "../../../../public/cadastroEstablishment.png";
 
 const SignupEstablishment = () => {
   const navigate = useNavigate();

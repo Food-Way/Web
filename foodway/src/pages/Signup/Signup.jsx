@@ -1,8 +1,6 @@
 import "./Signup.css";
 
 import { ButtonPrimaryLink } from "../../components/Button/Button";
-import costumer from "../../../public/c.png";
-import establishment from "../../../public/e.png";
 
 const Signup = () => {
   const costumer = "https://foodway-public-s3.s3.amazonaws.com/website-images/c.png";
