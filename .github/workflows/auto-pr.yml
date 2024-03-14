@@ -1,0 +1,27 @@
+on: 
+  push:
+    branches:
+      - "feature*"
+      - "feat*"
+      - "fix*"
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check branch name
+        run: |
+          if ! [[ "${{ github.ref }}" =~ ^refs/heads/(feature-|feature/|feat/) ]]; then
+            echo "Branch name does not start with 'feature-', 'feature/' or 'feat/'."
+            exit 1
+          fi
+      - name: pull-request
+        uses: diillson/auto-pull-request@v1.0.1
+        with:
+          source_branch: ${{ github.ref_name }} 
+          destination_branch: "dev"                      
+          pr_title: "Pulling ${{ github.ref_name }} into dev"
+          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"                            
+          pr_label: "auto-pr,feature"                               
+          github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
