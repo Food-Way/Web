@@ -39,7 +39,8 @@ const CarrosselEstablishment = ({ headerText, establishment }) => {
                   image={item.culinary[0].photo}
                   rattingNumber={item.generalRate}
                   onclick={() => {
-                    navigate(`/establishment/info/${item.idUser}`);
+                    navigate(`/establishment/info/${item.idUser}`, { state: { userId: item.idUser } });
+
                   }}
                 />
               </SwiperSlide>

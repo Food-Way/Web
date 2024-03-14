@@ -40,7 +40,7 @@ const Rotas = () => {
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/establishment" element={<EstablishmentRender />}>
-              <Route path="info" element={<EstablishmentPage />} />
+              <Route path="info/:id" element={<EstablishmentPage /> } />
               <Route path="edit" element={<EstablishmentEditPersonal />} />
               <Route path="performance" element={<PerformanceRender />} >
                 <Route path="comments" element={<CommentDash />} />

@@ -6,7 +6,7 @@ const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report
 import { useEffect, useState } from "react";
 import { api_call, nifi_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
-import { Link } from "react-router-dom";
+import { Link ,useLocation } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
 import {
   CommentIndividual,
@@ -28,6 +28,8 @@ const EstablishmentPage = () => {
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
   const [messageData, setMessageData] = useState([]);
+  const location = useLocation();
+  const userId = location.state.userId;
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
@@ -96,7 +98,7 @@ const EstablishmentPage = () => {
   };
 
   async function getEstablishmentProfileData() {
-    const response = await api_call("get", `/establishments/profile/${bodyToken.sub}`, null, null);
+    const response = await api_call("get", `/establishments/profile/${userId == null ? bodyToken.sub : userId}`, null, null);
     setProfile(response.data);
     console.log(response.data)
     setComments(response.data.comments);
@@ -118,7 +120,7 @@ const EstablishmentPage = () => {
 
 
   useEffect(() => {
-    getEstablishmentProfileData();
+     getEstablishmentProfileData()  ;
   }, []);
 
   return (
@@ -294,7 +296,7 @@ const EstablishmentPage = () => {
                           placeholder="Mensagem"
                           id="message"
                           value={`
-                                  Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: ${bodyToken.username}\n\nDescrição do problema:
+                                 <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
                                `}
                           onChange={setMessageData}
                         />
