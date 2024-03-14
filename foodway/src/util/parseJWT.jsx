@@ -8,6 +8,6 @@ function parseJWT () {
     }
 }
 
-//test6
+//test7
 
 export default parseJWT;
