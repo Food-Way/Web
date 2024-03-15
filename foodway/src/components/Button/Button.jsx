@@ -1,8 +1,6 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import firstStepImage from "../../../public/arrow_front.png";
-import secondStepImage from "../../../public/arrow_back.png";
 const ButtonPrimary = ({
   text,
   onclick,

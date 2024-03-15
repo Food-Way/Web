@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import parseJWT from "../../util/parseJWT";
 import MenuEstablishmentContainer from "../../components/MenuEstablishmentPage/MenuEstablishmentPage";
+import { useParams } from "react-router-dom";
 
 const MenuUser = (props) => {
-  const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
+  const params = useParams();
+  const idUser = params.id;
 
   useEffect(() => {
-    console.log(bodyToken.sub);
-  }, [bodyToken.sub]);
+    console.log(idUser);
+  }, [idUser]);
 
   return (
     <div className="menu-user-container" >
       <MenuEstablishmentContainer
         menu={menu}
         setMenu={setMenu}
-        id={bodyToken.sub}
+        id={idUser}
         token={atob(sessionStorage.getItem("token"))}
       />
     </div>

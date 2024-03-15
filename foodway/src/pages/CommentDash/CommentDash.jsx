@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Comment } from "../../components/Comment/Comment";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
+import { useParams } from "react-router-dom";
 import "./CommentDash.css";
-import parseJWT from "../../util/parseJWT";
 
 const CommentDash = () => {
     const [comments, setComments] = useState([]);
-    const bodyToken = parseJWT();
+    const params = useParams();
+    const idUser = params.id;
 
     const CommentLoader = () => (
         <ContentLoader
@@ -28,7 +29,7 @@ const CommentDash = () => {
     )
 
     async function getComments() {
-        const response = await api_call("get", `/establishments/${bodyToken.sub}/comments`, null, atob(sessionStorage.getItem("token")));
+        const response = await api_call("get", `/establishments/${idUser}/comments`, null, atob(sessionStorage.getItem("token")));
         // console.log(response.data);
         setComments(response.data);
     }
