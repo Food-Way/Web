@@ -6,7 +6,7 @@ const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report
 import { useEffect, useState } from "react";
 import { api_call, nifi_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
-import { Link ,useLocation } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
 import {
   CommentIndividual,
@@ -28,8 +28,8 @@ const EstablishmentPage = () => {
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
   const [messageData, setMessageData] = useState([]);
-  const location = useLocation();
-  const userId = location.state.userId;
+  const params = useParams();
+  const idUser = params.id;
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
@@ -98,7 +98,8 @@ const EstablishmentPage = () => {
   };
 
   async function getEstablishmentProfileData() {
-    const response = await api_call("get", `/establishments/profile/${userId == null ? bodyToken.sub : userId}`, null, null);
+    console.log(idUser)
+    const response = await api_call("get", `/establishments/profile/${idUser}`, null, null);
     setProfile(response.data);
     console.log(response.data)
     setComments(response.data.comments);
@@ -135,7 +136,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.name}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(bodyToken.sub) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
+                  {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -157,7 +158,7 @@ const EstablishmentPage = () => {
             <div className="establishment-comments-info-container">
               <div className="establishment-add-comment-list-comments">
                 <div className="establishment-addcomment-box">
-                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={bodyToken.sub} onCommentAdded={addCommentToState} /> : null}
+                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={idUser} onCommentAdded={addCommentToState} /> : null}
                 </div>
                 <div
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
@@ -171,7 +172,7 @@ const EstablishmentPage = () => {
                         comment={commentParent.comment}
                         upvotes={commentParent.upvotes}
                         idComment={commentParent.idComment}
-                        idEstablishment={bodyToken.sub}
+                        idEstablishment={idUser}
                         userPhoto={commentParent.userPhoto}
                       />
                       {commentParent.childComments && commentParent.childComments.length > 0 && (
@@ -186,7 +187,7 @@ const EstablishmentPage = () => {
                               upvotes={commentReply.upvotes}
                               comment={commentReply.comment}
                               idComment={commentReply.idComment}
-                              idEstablishment={bodyToken.sub}
+                              idEstablishment={idUser}
                               userPhoto={commentReply.userPhoto}
                             />
                           ))}
@@ -231,7 +232,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-btns-box">
                   <Link
-                    to={`/establishment-menu/`}
+                    to={`/establishment-menu/${idUser}`}
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">
@@ -295,9 +296,9 @@ const EstablishmentPage = () => {
                           label="Mensagem"
                           placeholder="Mensagem"
                           id="message"
-                          value={`
-                                 <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
-                               `}
+                          // value={`
+                          //        <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
+                          //      `}
                           onChange={setMessageData}
                         />
 

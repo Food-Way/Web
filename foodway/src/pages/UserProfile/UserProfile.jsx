@@ -5,18 +5,17 @@ import RateCard from "../../components/RateCard/RateCard";
 import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
-import { useLocation } from "react-router-dom";
-import parseJWT from "../../util/parseJWT";
+import { useParams } from "react-router-dom";
 
 import "./UserProfile.css";
 
 const UserProfile = () => {
-  const location = useLocation();
   const [user, setUser] = useState([]);
   const profileDescriptionRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [establishments, setEstablishments] = useState([]);
-  const bodyToken = parseJWT();
+  const params = useParams();
+  const idUser = params.id;
 
   const ProfileHeaderLoader = () => (
     <ContentLoader
@@ -90,7 +89,7 @@ const UserProfile = () => {
   )
 
   async function getUser() {
-    const response = await api_call("get", `customers/profile/${bodyToken.sub}`, null, atob(sessionStorage.getItem("token")))
+    const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
     setUser(response.data);
     setComments(response.data.comments);
     firstAndEnd(response.data.name);
@@ -171,7 +170,7 @@ const UserProfile = () => {
                     <img className="profile-photo" src={user.profilePhoto} alt="" />
                   )}
                   <span className="profile-username"></span>
-                  {location.pathname.endsWith(parseJWT.sub) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
+                  {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
                 </div>
                 {user.length === 0 ? (
                   <ProfileStatusLoader />

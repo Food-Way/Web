@@ -36,21 +36,21 @@ const Rotas = () => {
           <Route path="/sign-up-customer" element={<SignupCostumer />} />
           <Route path="/sign-up-establishment" element={<SignupCostumerEstablishment />} />
           {/* <Route path="/establishment/info" element={<EstablishmentPage />} /> */}
-          <Route path="/establishment-menu" element={<MenuUser />} />
+          <Route path="/establishment-menu/:id" element={<MenuUser />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/establishment" element={<EstablishmentRender />}>
               <Route path="info/:id" element={<EstablishmentPage /> } />
               <Route path="edit" element={<EstablishmentEditPersonal />} />
               <Route path="performance" element={<PerformanceRender />} >
-                <Route path="comments" element={<CommentDash />} />
-                <Route path="menu" element={<MenuDash />} />
+                <Route path="comments/:id" element={<CommentDash />} />
+                <Route path="menu/:id" element={<MenuDash />} />
                 <Route path="insights" element={<PerformanceDash />} />
                 <Route path="relevance" element={<Relevance />} />
               </Route>
             </Route>
             <Route path="/user" element={<UserRender />}>
-              <Route path="profile" element={<UserProfile />} />
+              <Route path="profile/:id" element={<UserProfile />} />
               <Route path="edit-personal" element={<CustomerEditPersonal />} />
               <Route path="profile-edit" element={<CostumerEdit />} />
               <Route path="search" element={<SearchUser />} />
