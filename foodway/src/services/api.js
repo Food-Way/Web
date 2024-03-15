@@ -1,11 +1,11 @@
 import axios from "axios";
 
-let ambiente = "desenvolvimento";
-let urlProducao = "https://lobster-app-ompes.ondigitalocean.app/";
-let urlDesenvolvimento = "http://localhost:8080/";
+let environment = "prod";
+let urlProd = "http://10.0.0.243:8080/";
+let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: ambiente == "producao" ? urlProducao : urlDesenvolvimento,
+  baseURL: environment == "prod" ? urlProd : urlDev,
   headers: {
     "Content-Type": "application/json",
   },
