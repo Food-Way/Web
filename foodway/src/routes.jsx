@@ -45,7 +45,7 @@ const Rotas = () => {
               <Route path="performance" element={<PerformanceRender />} >
                 <Route path="comments/:id" element={<CommentDash />} />
                 <Route path="menu/:id" element={<MenuDash />} />
-                <Route path="insights" element={<PerformanceDash />} />
+                <Route path="insights/:id" element={<PerformanceDash />} />
                 <Route path="relevance" element={<Relevance />} />
               </Route>
             </Route>
