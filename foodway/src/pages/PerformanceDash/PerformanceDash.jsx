@@ -56,20 +56,20 @@ function PerformanceDash() {
     const RateLoader = () => (
         <ContentLoader
             speed={2}
-            width={360}
+            width={350}
             height={150}
-            viewBox="0 0 360 150"
+            viewBox="0 0 350 150"
             backgroundColor="#ffffff"
             foregroundColor="#c4c4c4"
         >
-            <rect x="0" y="0" rx="0" ry="0" width="360" height="150" />
+            <rect x="-50" y="0" rx="0" ry="0" width="350" height="150" />
         </ContentLoader>
     )
 
     const GraphLoader = () => (
         <ContentLoader
             speed={2}
-            width={730}
+            width={680}
             height={350}
             viewBox="0 0 730 350"
             backgroundColor="#ffffff"

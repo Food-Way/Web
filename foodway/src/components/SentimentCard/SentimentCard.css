@@ -58,5 +58,6 @@
 }
 
 .percent-value-box span {
+    font-size: 1.7rem;
     color: var(--branco);
 }

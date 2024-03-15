@@ -14,26 +14,6 @@ const MenuEstablishment = (props) => {
   const [openMenu, setOpenMenu] = useState(true);
   const [clickLogout, setClickLogout] = useState(false);
 
-  const [establishment, setEstablishment] = useState([
-    { "id": 1, "nome": "Restaurante Italiano" },
-    { "id": 2, "nome": "Churrascaria" },
-    { "id": 3, "nome": "Comida Mexicana" },
-    { "id": 4, "nome": "Sushi Bar" },
-    { "id": 5, "nome": "Cafeteria" },
-    { "id": 6, "nome": "Pizzaria" },
-    { "id": 7, "nome": "Restaurante Vegetariano" },
-    { "id": 8, "nome": "Comida Indiana" },
-    { "id": 9, "nome": "Restaurante de Frutos do Mar" }
-  ]);
-
-  const [users, setUsers] = useState([
-    { "id": 1, "nome": "Alice" },
-    { "id": 2, "nome": "Bob" },
-    { "id": 3, "nome": "Charlie" },
-    { "id": 4, "nome": "David" },
-    { "id": 5, "nome": "Eva" }
-  ]);
-
   const typeUser = sessionStorage.getItem("typeUser");
 
   const handleLogoff = () => {
@@ -72,6 +52,10 @@ const MenuEstablishment = (props) => {
 
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
 
+        if (profile.classList.contains("item-active") && className != ".profile-item") {
+          profile.classList.remove("item-active");
+        }
+
         if (performance.classList.contains("item-active") && className != ".performance-item") {
           performance.classList.remove("item-active");
         }
@@ -97,24 +81,18 @@ const MenuEstablishment = (props) => {
     console.log(className);
     if (className == "") {
       navigate("/*");
-
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
-
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
         navigate(`/establishment/info`);
       } else {
         navigate(`/user/profile`);
-        window.location.reload();
       }
-
     } else if (className == ".users-item") {
       navigate("/users");
-
     } else if (className == ".search-item") {
       navigate("/user/search");
-      window.location.reload();
     } else if (className == ".performance-item") {
       navigate(`/establishment/performance/insights`);
 
@@ -146,7 +124,7 @@ const MenuEstablishment = (props) => {
       path = ".profile-item";
     }
 
-    if (location.pathname.startsWith("/establishment/info/")) {
+    if (location.pathname == "/establishment/info") {
       path = ".profile-item";
     }
 
@@ -173,7 +151,10 @@ const MenuEstablishment = (props) => {
     return path;
   }
 
-
+  useEffect(() => {
+    var item = pathForNavigationColor();
+    setColor(item);
+  }, []);
 
   return (
     <>
@@ -224,7 +205,7 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: props.height,
+                height: "100vh",
                 width: openMenu ? "75px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
@@ -232,9 +213,9 @@ const MenuEstablishment = (props) => {
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
                 paddingLeft: openMenu ? "0" : "3rem",
-                paddingBottom: "3rem",
+                paddingBottom: "10rem",
                 transition: "all 0.3s",
-                position: "absolute",
+                // position: "absolute",
               },
             }}
           >

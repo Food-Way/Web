@@ -77,6 +77,7 @@ const Relevance = () => {
                                             establishmentName={item.establishmentName}
                                             qtdRate={item.qtdRate}
                                             generalRate={item.generalRate}
+                                            rank={index + 1}
                                         />
                                     ))
                                 )}
