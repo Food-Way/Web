@@ -7,10 +7,15 @@ import TagDashCard from "../../components/TagDashCard/TagDashCard";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import parseJWT from "../../util/parseJWT";
+import { useParams } from "react-router-dom";
+
 
 import "./PerformanceDash.css";
 
 function PerformanceDash() {
+    const params = useParams();
+    const idUser = params.id;
+
     const bodyToken = parseJWT();
     const [dashData, setDashData] = useState([]);
 
@@ -93,7 +98,7 @@ function PerformanceDash() {
     )
 
     async function getDashData() {
-        const response = await api_call("get", `/comments/dashboard/${bodyToken.sub}`, null, atob(sessionStorage.getItem("token")));
+        const response = await api_call("get", `/dashboard/${idUser}`, null, atob(sessionStorage.getItem("token")));
         console.log(response.data);
         setDashData(response.data);
     }
@@ -163,15 +168,17 @@ function PerformanceDash() {
                                     <div className="avaliation-dash-values">
                                         <div className="rate-dash-value">
                                             <span>Avaliação</span>
-                                            <span>{dashData.evaluationEstablishment.toFixed(2)}</span>
+                                            <span>{dashData.establishment.generalRate.toFixed(2)}</span>
                                         </div>
                                         <div className="avaliation-dash-card">
-                                            {rate.length === 0 ? (
+                                            {dashData.establishment.length === 0 ? (
                                                 <span className="no-content">Nenhuma avaliação recebida</span>
                                             ) : (
-                                                rate.map((item, index) => (
-                                                    <AvaliationDashCard rate={item.score} category={item.category} key={index} />
-                                                ))
+                                                <>
+                                                    <AvaliationDashCard rate={dashData.establishment.ambientRate} category={"Ambiente"} />
+                                                    <AvaliationDashCard rate={dashData.establishment.foodRate} category={"Comida"} />
+                                                    <AvaliationDashCard rate={dashData.establishment.serviceRate} category={"Atendimento"} />
+                                                </>
                                             )}
                                         </div>
                                     </div>
@@ -192,8 +199,7 @@ function PerformanceDash() {
                             {dashData.length === 0 ? (
                                 <GraphLoader />
                             ) : (
-                                // dashData.weekly.length === 0 
-                                dashData.length === 0 ? (
+                                dashData.qtdEvaluationDaysForWeek.length === 0 ? (
                                     <span className="no-content">Nenhuma avaliação na última semana</span>
                                 ) : (
                                     <div className="graph-dash-box">
@@ -211,10 +217,10 @@ function PerformanceDash() {
                                 {dashData.length === 0 ? (
                                     <CommentLoader />
                                 ) : (
-                                    dashData.comment.length === 0 ? (
+                                    dashData.comments.length === 0 ? (
                                         <span>Nenhum Comentário</span>
                                     ) : (
-                                        dashData.comment.map((item, index) => (
+                                        dashData.comments.map((item, index) => (
                                             <Comment
                                                 key={index}
                                                 establishmentName={item.establishmentName}

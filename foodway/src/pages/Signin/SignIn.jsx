@@ -51,7 +51,7 @@ const SignIn = () => {
         if (response.status === 200) {
           console.log("Login successful!");
           console.log("Response data:", response.data);
-          // console.log(response.data.token)
+          console.log(response.data)
           sessionStorage.setItem("token", btoa(response.data.token));
           sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
           sessionStorage.setItem("culinary", btoa(response.data.culinary));
@@ -60,14 +60,14 @@ const SignIn = () => {
           if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
             setTimeout(() => {
               // console.log("Redirecting to /perfil...");
-              navigate(`/user/profile`);
+              navigate(`/user/profile/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
               // location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
             setTimeout(() => {
               // console.log("Redirecting to /establishment/performance...");
-              navigate(`/establishment/info`);
+              navigate(`/establishment/info/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
               // location.reload();
             }, 2000);
           }
