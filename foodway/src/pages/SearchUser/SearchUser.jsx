@@ -36,7 +36,7 @@ function SearchUser() {
     const bodyToken = parseJWT();
 
     async function getSearchEstab({ filter }) {
-        const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), bodyToken.sub);
+        const response = await api_call("get", filter ? `/establishments/search?searchFilter=${filter}` : `/establishments/search`, null, atob(sessionStorage.getItem("token")), bodyToken.idUser);
         console.log(response.data)
         setSearchEstab(response.data);
     }

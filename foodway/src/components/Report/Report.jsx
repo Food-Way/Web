@@ -12,7 +12,7 @@ const Report = () => {
   const [menu, setMenu] = useState([]);
 
   async function getMenu({ filter }) {
-    const response = await api_call("get", `products/establishments/${bodyToken.sub}/${filter}`, null, atob(sessionStorage.getItem("token")));
+    const response = await api_call("get", `products/establishments/${bodyToken.idUser}/${filter}`, null, atob(sessionStorage.getItem("token")));
     console.log(response);
     setMenu(response);
   }

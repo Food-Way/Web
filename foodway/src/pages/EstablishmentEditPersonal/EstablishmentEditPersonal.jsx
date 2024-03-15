@@ -15,7 +15,7 @@ import bodyToken from "../../util/parseJWT";
 const EstablismentEditPersonal = () => {
   const bodyToken = parseJWT();
   const token = atob(sessionStorage.getItem("token"));
-  const id = bodyToken.sub;
+  const id = bodyToken.idUser;
   const [formData, setFormData] = useState({});
   const [selectedFileCover, setSelectedFileCover] = useState(null);
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);
@@ -26,7 +26,7 @@ const EstablismentEditPersonal = () => {
 
   async function getEstablishment() {
 
-    console.log("Id " + bodyToken.sub);
+    console.log("Id " + bodyToken.idUser);
     api_call("get", `establishments/${id}`, null, token).then((response) => { });
     const response = await api_call(`'get',establishments/${id}`, null, token);
     console.log("Response: " + response.data);
