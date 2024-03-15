@@ -7,8 +7,10 @@ import UserProfile from "../../pages/UserProfile/UserProfile";
 import DoneIcon from '@material-ui/icons/Done';
 import { toast } from "react-toastify";
 import './MenuEstablishment.css';
+import parseJWT from "../../util/parseJWT";
 
 const MenuEstablishment = (props) => {
+  const bodyToken = parseJWT();
   const navigate = useNavigate();
   const [oldPath, setOldPath] = useState("");
   const [openMenu, setOpenMenu] = useState(true);
@@ -103,9 +105,9 @@ const MenuEstablishment = (props) => {
 
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-        navigate(`/establishment/info`);
+        navigate(`/establishment/info/${bodyToken.idUser}`);
       } else {
-        navigate(`/user/profile`);
+        navigate(`/user/profile/${bodyToken.idUser}`);
         window.location.reload();
       }
 
@@ -116,13 +118,13 @@ const MenuEstablishment = (props) => {
       navigate("/user/search");
       window.location.reload();
     } else if (className == ".performance-item") {
-      navigate(`/establishment/performance/insights`);
+      navigate(`/establishment/performance/insights/${bodyToken.idUser}`);
 
     } else if (className == ".menuReal-item") {
-      navigate(`/establishment/performance/menu`);
+      navigate(`/establishment/performance/menu/${bodyToken.idUser}`);
 
     } else if (className == ".comments-item") {
-      navigate(`/establishment/performance/comments`);
+      navigate(`/establishment/performance/comments/${bodyToken.idUser}`);
 
     } else if (className == ".relevance-item") {
       navigate("/establishment/performance/relevance");
