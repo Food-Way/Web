@@ -21,14 +21,19 @@
 }
 
 .sentiment-img-box {
-    width: 1vw;
-    height: .5rem;
+    width: 2.2vw;
+    height: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--brancoGelo);
     border-radius: var(--arredondamento);
-    padding: 1.7rem;
+    padding: 1.9rem;
+}
+
+.sentiment-img-box img {
+    width: 2.2rem;
+    height: 2.2rem;
 }
 
 .title-value-box {

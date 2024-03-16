@@ -1,7 +1,7 @@
 @import url(../../assets/css/style.css);
 
 .performance-dash-container {
-    width: calc(122vw - 15vw);
+    width: calc(108vw - 15vw);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,7 @@
 }
 
 .performance-dash-container-switch {
-    width: calc(130vw - 15vw);
+    width: calc(50vw - 15vw);
 }
 
 .sentiment-banner {

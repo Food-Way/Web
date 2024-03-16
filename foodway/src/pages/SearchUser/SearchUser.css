@@ -1,8 +1,8 @@
 @import url('../../assets/css/style.css');
 
 .search-user-container {
-    width: calc(109vw - 15vw);
-    height: 88.9rem;
+    width: calc(90vw - 15vw);
+    height: 85.9rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
 }
 
 .search-user-container-switch {
-    width: calc(70vw + 15vw);
+    width: calc(100vw + 15vw);
     transition: all 0.3s;
 }
 

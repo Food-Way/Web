@@ -62,43 +62,37 @@ const Relevance = () => {
     return (
         <>
             <div className="relevance-container">
-                <div className="relevance">
-                    <section>
-                        <div className="best-relevance-box">
-                            <span className="relevance-title">Relevância - {atob(sessionStorage.getItem("culinary"))}</span>
-                            <div className="best-relevance">
-                                {top3.length === 0 ? (
-                                    <CardLoader />
-                                ) : (
-                                    top3.map((item, index) => (
-                                        <RelevanceCard
-                                            key={index}
-                                            profilePhoto={item.profilePhoto}
-                                            establishmentName={item.establishmentName}
-                                            qtdRate={item.qtdRate}
-                                            generalRate={item.generalRate}
-                                            rank={index + 1}
-                                        />
-                                    ))
-                                )}
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <div className="relevance-rank-container">
-                            <div className="relevance-rank-box">
-                                <ul className="establishment-rank">
-                                    {relevance.map((item, index) => (
-                                        <RankLine
-                                            id={index}
-                                            name={item.establishmentName}
-                                            rate={item.qtdRate}
-                                        />
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
+                <div className="best-relevance-box">
+                    <span className="relevance-title">Relevância - {atob(sessionStorage.getItem("culinary"))}</span>
+                    <div className="best-relevance">
+                        {top3.length === 0 ? (
+                            <CardLoader />
+                        ) : (
+                            top3.map((item, index) => (
+                                <RelevanceCard
+                                    key={index}
+                                    profilePhoto={item.profilePhoto}
+                                    establishmentName={item.establishmentName}
+                                    qtdRate={item.qtdRate}
+                                    generalRate={item.generalRate}
+                                    rank={index + 1}
+                                />
+                            ))
+                        )}
+                    </div>
+                </div>
+                <div className="relevance-rank-container">
+                    <div className="relevance-rank-box">
+                        <ul className="establishment-rank">
+                            {relevance.map((item, index) => (
+                                <RankLine
+                                    id={index}
+                                    name={item.establishmentName}
+                                    rate={item.qtdRate}
+                                />
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>

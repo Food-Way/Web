@@ -10,7 +10,7 @@ import './MenuEstablishment.css';
 
 const MenuEstablishment = (props) => {
   const navigate = useNavigate();
-  const [oldPath, setOldPath] = useState("");
+  const [oldPath, setOldPath] = useState();
   const [openMenu, setOpenMenu] = useState(true);
   const [clickLogout, setClickLogout] = useState(false);
 
@@ -26,56 +26,11 @@ const MenuEstablishment = (props) => {
     }, 2000);
   };
 
-  function setCheck(id) {
-    var check = document.getElementById(id);
-    if (check.checked) {
-      check.checked = false;
-    } else {
-      check.checked = true;
-    }
-  }
-
   function setNavigate(className) {
     className = className || <UserProfile />;
 
-    var profile = document.querySelector(".profile-item");
-    var search = document.querySelector(".search-item");
-    var performance = document.querySelector(".performance-item");
-    var menuReal = document.querySelector(".menuReal-item");
-    var comments = document.querySelector(".comments-item");
-    var relevance = document.querySelector(".relevance-item");
-    var out = document.querySelector(".out-item");
-
     if (oldPath != className) {
       setColor(className);
-      setOldPath(className);
-
-      if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-
-        if (profile.classList.contains("item-active") && className != ".profile-item") {
-          profile.classList.remove("item-active");
-        }
-
-        if (performance.classList.contains("item-active") && className != ".performance-item") {
-          performance.classList.remove("item-active");
-        }
-
-        if (menuReal.classList.contains("item-active") && className != ".menuReal-item") {
-          menuReal.classList.remove("item-active");
-        }
-
-        if (comments.classList.contains("item-active") && className != ".comments-item") {
-          comments.classList.remove("item-active");
-        }
-
-        if (relevance.classList.contains("item-active") && className != ".relevance-item") {
-          relevance.classList.remove("item-active");
-        }
-      }
-
-      if (out.classList.contains("item-active") && className != ".out-item") {
-        out.classList.remove("item-active");
-      }
     }
 
     console.log(className);
@@ -112,15 +67,26 @@ const MenuEstablishment = (props) => {
   }
 
   function setColor(className) {
+    if (className == "") {
+      className = ".profile-item";
+    }
+
     var item = document.querySelector(className);
-    item.classList.toggle("item-active");
+    var oldItem = document.querySelector(oldPath);
+
+    item.classList.add("item-active");
+    if (oldItem) {
+      oldItem.classList.remove("item-active");
+    }
+    
+    setOldPath(className);
   }
 
 
   function pathForNavigationColor() {
     var path = "";
 
-    if (location.pathname.startsWith("/user-profile")) {
+    if (location.pathname == ("/user/profile")) {
       path = ".profile-item";
     }
 
@@ -153,6 +119,7 @@ const MenuEstablishment = (props) => {
 
   useEffect(() => {
     var item = pathForNavigationColor();
+    setOldPath(item);
     setColor(item);
   }, []);
 
@@ -168,7 +135,6 @@ const MenuEstablishment = (props) => {
               var btnImage = event.currentTarget;
               var btn = document.querySelector(".btn-menu-switch");
               var headerContainer = document.querySelector(".container-header");
-
 
               if (location.pathname.startsWith("/user/search")) {
                 var profileContainer = document.querySelector(".search-user-container");
@@ -188,7 +154,6 @@ const MenuEstablishment = (props) => {
               if (location.pathname.endsWith("/comments")) {
                 var profileContainer = document.querySelector(".comment-dashboard-container");
                 profileContainer.classList.toggle("comment-dashboard-container-switch");
-
               }
 
               if (location.pathname.endsWith("/relevance")) {
@@ -205,16 +170,19 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: "100vh",
-                width: openMenu ? "75px" : "17vw",
+                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
+                  "91.5vh" :
+                  location.pathname == "/user/search" ? "91.5vh" : null,
+                width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
                 paddingLeft: openMenu ? "0" : "3rem",
-                paddingBottom: "10rem",
+                paddingBottom: "3rem",
                 transition: "all 0.3s",
+                border: "none",
                 // position: "absolute",
               },
             }}
