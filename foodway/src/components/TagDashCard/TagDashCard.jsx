@@ -97,10 +97,10 @@ function TagDashCard(props) {
                             </div>
                             <div className="tag-modal-available">
                                 <span>Tags Disponíveis</span>
-                                {allTags.length === 0 ? (
+                                {establishmentTags.length === 0 ? (
                                     <span className="no-content">Nenhuma tag disponível</span>
                                 ) : (
-                                    allTags.map((item, index) => (
+                                    establishmentTags.map((item, index) => (
                                         <div className="tag-dash-item" key={index}>
                                             <span>{item.nome}</span>
                                         </div>

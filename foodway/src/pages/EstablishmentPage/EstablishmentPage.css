@@ -470,3 +470,13 @@
     font-weight: 700;
     padding-left: .5rem;
 }
+
+.email-modal-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-modal-container {
+    display: flex;
+    flex-direction: row;
+}
