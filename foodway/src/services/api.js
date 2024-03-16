@@ -25,7 +25,5 @@ const nifi_url = axios.create({
   },
 });
 
-
-
 export default api;
 export { api_mock, api, nifi_url };

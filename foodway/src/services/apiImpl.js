@@ -2,6 +2,11 @@ import { api, nifi_url } from "./api";
 const apiKey = "AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE";
 
 async function api_call(methodParam, urlParam, dataParam, authorizationParam = "", idSessionParam = "") {
+  console.log("metodo:" + methodParam);
+  console.log("url:" + urlParam);
+  console.log("data:" + dataParam);
+  console.log("authorization:" + authorizationParam);
+  console.log("idSession:" + idSessionParam);
   try {
     const response = await api({
       method: methodParam,
