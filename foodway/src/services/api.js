@@ -6,7 +6,7 @@ import axios from "axios";
 // let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: "https://10.0.0.243:8080/",
+  baseURL: "http://10.0.0.243:8080/",
   headers: {
     "Content-Type": "application/json",
   },
