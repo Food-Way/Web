@@ -12,29 +12,9 @@ import parseJWT from "../../util/parseJWT";
 const MenuEstablishment = (props) => {
   const bodyToken = parseJWT();
   const navigate = useNavigate();
-  const [oldPath, setOldPath] = useState("");
+  const [oldPath, setOldPath] = useState();
   const [openMenu, setOpenMenu] = useState(true);
   const [clickLogout, setClickLogout] = useState(false);
-
-  const [establishment, setEstablishment] = useState([
-    { "id": 1, "nome": "Restaurante Italiano" },
-    { "id": 2, "nome": "Churrascaria" },
-    { "id": 3, "nome": "Comida Mexicana" },
-    { "id": 4, "nome": "Sushi Bar" },
-    { "id": 5, "nome": "Cafeteria" },
-    { "id": 6, "nome": "Pizzaria" },
-    { "id": 7, "nome": "Restaurante Vegetariano" },
-    { "id": 8, "nome": "Comida Indiana" },
-    { "id": 9, "nome": "Restaurante de Frutos do Mar" }
-  ]);
-
-  const [users, setUsers] = useState([
-    { "id": 1, "nome": "Alice" },
-    { "id": 2, "nome": "Bob" },
-    { "id": 3, "nome": "Charlie" },
-    { "id": 4, "nome": "David" },
-    { "id": 5, "nome": "Eva" }
-  ]);
 
   const typeUser = sessionStorage.getItem("typeUser");
 
@@ -48,75 +28,28 @@ const MenuEstablishment = (props) => {
     }, 2000);
   };
 
-  function setCheck(id) {
-    var check = document.getElementById(id);
-    if (check.checked) {
-      check.checked = false;
-    } else {
-      check.checked = true;
-    }
-  }
-
   function setNavigate(className) {
     className = className || <UserProfile />;
 
-    var profile = document.querySelector(".profile-item");
-    var search = document.querySelector(".search-item");
-    var performance = document.querySelector(".performance-item");
-    var menuReal = document.querySelector(".menuReal-item");
-    var comments = document.querySelector(".comments-item");
-    var relevance = document.querySelector(".relevance-item");
-    var out = document.querySelector(".out-item");
-
     if (oldPath != className) {
       setColor(className);
-      setOldPath(className);
-
-      if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-
-        if (performance.classList.contains("item-active") && className != ".performance-item") {
-          performance.classList.remove("item-active");
-        }
-
-        if (menuReal.classList.contains("item-active") && className != ".menuReal-item") {
-          menuReal.classList.remove("item-active");
-        }
-
-        if (comments.classList.contains("item-active") && className != ".comments-item") {
-          comments.classList.remove("item-active");
-        }
-
-        if (relevance.classList.contains("item-active") && className != ".relevance-item") {
-          relevance.classList.remove("item-active");
-        }
-      }
-
-      if (out.classList.contains("item-active") && className != ".out-item") {
-        out.classList.remove("item-active");
-      }
     }
 
     console.log(className);
     if (className == "") {
       navigate("/*");
-
     } else if (className == ".establishment-item") {
       navigate("/establishment/search");
-
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
         navigate(`/establishment/info/${bodyToken.idUser}`);
       } else {
         navigate(`/user/profile/${bodyToken.idUser}`);
-        window.location.reload();
       }
-
     } else if (className == ".users-item") {
       navigate("/users");
-
     } else if (className == ".search-item") {
       navigate("/user/search");
-      window.location.reload();
     } else if (className == ".performance-item") {
       navigate(`/establishment/performance/insights/${bodyToken.idUser}`);
 
@@ -136,19 +69,30 @@ const MenuEstablishment = (props) => {
   }
 
   function setColor(className) {
+    if (className == "") {
+      className = ".profile-item";
+    }
+
     var item = document.querySelector(className);
-    item.classList.toggle("item-active");
+    var oldItem = document.querySelector(oldPath);
+
+    item.classList.add("item-active");
+    if (oldItem) {
+      oldItem.classList.remove("item-active");
+    }
+    
+    setOldPath(className);
   }
 
 
   function pathForNavigationColor() {
     var path = "";
 
-    if (location.pathname.startsWith("/user-profile")) {
+    if (location.pathname == ("/user/profile")) {
       path = ".profile-item";
     }
 
-    if (location.pathname.startsWith("/establishment/info/")) {
+    if (location.pathname == "/establishment/info") {
       path = ".profile-item";
     }
 
@@ -175,7 +119,11 @@ const MenuEstablishment = (props) => {
     return path;
   }
 
-
+  useEffect(() => {
+    var item = pathForNavigationColor();
+    setOldPath(item);
+    setColor(item);
+  }, []);
 
   return (
     <>
@@ -189,7 +137,6 @@ const MenuEstablishment = (props) => {
               var btnImage = event.currentTarget;
               var btn = document.querySelector(".btn-menu-switch");
               var headerContainer = document.querySelector(".container-header");
-
 
               if (location.pathname.startsWith("/user/search")) {
                 var profileContainer = document.querySelector(".search-user-container");
@@ -209,7 +156,6 @@ const MenuEstablishment = (props) => {
               if (location.pathname.endsWith("/comments")) {
                 var profileContainer = document.querySelector(".comment-dashboard-container");
                 profileContainer.classList.toggle("comment-dashboard-container-switch");
-
               }
 
               if (location.pathname.endsWith("/relevance")) {
@@ -226,8 +172,10 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: props.height,
-                width: openMenu ? "75px" : "17vw",
+                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
+                  "91.5vh" :
+                  location.pathname == "/user/search" ? "91.5vh" : null,
+                width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -236,7 +184,8 @@ const MenuEstablishment = (props) => {
                 paddingLeft: openMenu ? "0" : "3rem",
                 paddingBottom: "3rem",
                 transition: "all 0.3s",
-                position: "absolute",
+                border: "none",
+                // position: "absolute",
               },
             }}
           >

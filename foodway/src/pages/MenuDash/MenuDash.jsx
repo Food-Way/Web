@@ -30,17 +30,17 @@ const MenuDash = () => {
     <ContentLoader
       speed={2}
       width={880}
-      height={450}
-      viewBox="0 0 880 450"
+      height={550}
+      viewBox="0 0 880 550"
       backgroundColor="#ffffff"
       foregroundColor="#c4c4c4"
     >
-      <rect x="10" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="270" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="530" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="10" y="220" rx="0" ry="0" width="250" height="200" />
-      <rect x="270" y="220" rx="0" ry="0" width="250" height="200" />
-      <rect x="530" y="220" rx="0" ry="0" width="250" height="200" />
+      <rect x="10" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="10" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="250" rx="0" ry="0" width="275" height="225" />
     </ContentLoader>
   )
 
