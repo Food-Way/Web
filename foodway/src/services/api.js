@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let environment = "prod";
-let urlProd = "http://10.0.0.243:8080/";
+let urlProd = "https://10.0.0.243:8080/";
 // let urlProd2 = "http://ip-10-0-0-243.ec2.internal:8080/";
 let urlDev = "http://localhost:8080/";
 

@@ -10,5 +10,5 @@ export default defineConfig({
     // Especifica a porta, opcionalmente, se você quiser forçar uma porta diferente de 5173
     port: 5173,
     // Configurações adicionais do servidor podem ser adicionadas aqui
-  },
+  }
 })
