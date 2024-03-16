@@ -7,7 +7,7 @@ let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
   baseURL: environment == "prod" ? urlProd : urlDev,
-  timeout: 10000,
+  timeout: 10000000,
   headers: {
     "Content-Type": "application/json",
   },
