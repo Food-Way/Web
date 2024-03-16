@@ -1,13 +1,12 @@
 import axios from "axios";
 
-let environment = "prod";
-let urlProd = "https://10.0.0.243:8080/";
-// let urlProd2 = "http://ip-10-0-0-243.ec2.internal:8080/";
-let urlDev = "http://localhost:8080/";
+// let environment = "prod";
+// let urlProd = "https://10.0.0.243:8080/";
+// // let urlProd2 = "http://ip-10-0-0-243.ec2.internal:8080/";
+// let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: environment == "prod" ? urlProd : urlDev,
-  timeout: 30000,
+  baseURL: "https://10.0.0.243:8080/",
   headers: {
     "Content-Type": "application/json",
   },
