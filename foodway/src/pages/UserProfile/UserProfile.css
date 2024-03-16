@@ -50,8 +50,10 @@
 }
 
 .profile-photo {
-    width: 250px;
-    border-radius: 150px;
+    width: 25rem;
+    height: 25rem;
+    background-color: var(--brancoGelo);
+    border-radius: 20rem;
     position: absolute;
     top: 18rem;
     border: 0.5rem solid var(--cinza);
@@ -64,6 +66,8 @@
 
 .user-info-left span.profile-username {
     width: 20rem;
+    display: flex;
+    justify-content: center;
     text-transform: capitalize;
     font-size: 3rem;
     font-weight: 600;
