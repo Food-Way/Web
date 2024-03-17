@@ -77,7 +77,7 @@ const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
           <div className="menu-dash-header">
             <SearchBar placeholder="Buscar produto" />
             <div className="menu-filter-box">
-              <img src={ImageFilter} className="filter" alt="" />
+              <img src={ImageFilter} className="filter" alt="Ícone de filtro" />
               <div className="item-filter-box">
                 <span
                   className="item-filter"

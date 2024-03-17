@@ -108,7 +108,7 @@ function SearchBar(props) {
                     <div className='empty-results'>
                         <div className='box-empty-results'>Nenhum resultado
                         </div>
-                        <img className='img-sadCat' src={sadCat} alt="" />
+                        <img className='img-sadCat' src={sadCat} alt="Imagem de gato triste" />
                     </div> : ''}
 
                 {filtred.map(item => (

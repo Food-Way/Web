@@ -42,9 +42,9 @@ const ButtonStep = ({ step, onclick }) => {
     </button>
   );
 };
-const ButtonPrimaryLink = ({ text, url }) => {
+const ButtonPrimaryLink = ({ text, url, width, height}) => {
   return (
-    <Link className="button-primary" to={url}>
+    <Link className="button-primary" to={url} style={{width: width, height: height}}>
       {text}
     </Link>
   );

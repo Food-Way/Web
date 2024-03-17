@@ -42,7 +42,7 @@ const CommentDash = () => {
         <>
             <div className="comment-dashboard-container">
                 <div className="comment-dashboard-box">
-                    <span className="title">Comentários</span>
+                    <span className="title">Comentários ({comments.length})</span>
                     <section>
                         <div className="comment-dash-container">
                             <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader" : ""}`}>
