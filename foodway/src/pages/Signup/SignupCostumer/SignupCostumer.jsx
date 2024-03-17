@@ -145,7 +145,7 @@ const SignUpCostumer = () => {
 
   return (
     <main className="main-signup-costumer">
-      <Auth />
+      {/* <Auth /> */}
 
       <div className="container">
         <div className="form-costumer">

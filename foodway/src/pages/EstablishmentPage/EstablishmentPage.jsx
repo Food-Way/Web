@@ -6,7 +6,7 @@ const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report
 import { useEffect, useState } from "react";
 import { api_call, nifi_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
-import { Link , useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
 import {
   CommentIndividual,
@@ -18,18 +18,30 @@ import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Bu
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { InputField, TextAreaField } from "../../components/InputField/InputField";
 import { ButtonPrimary } from "../../components/Button/Button.jsx";
+import { toast } from 'react-toastify';
+
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
   const bodyToken = parseJWT();
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+  const [openReportModal, setOpenReportModal] = useState(false);
+  const handleCloseReportModal = () => setOpenReportModal(false);
+  const [openContactModal, setOpenContactModal] = useState(false);
+  const handleOpenContactModal = () => setOpenContactModal(true);
+  const handleCloseContactModal = () => setOpenContactModal(false);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
   const [messageData, setMessageData] = useState([]);
   const params = useParams();
   const idUser = params.id;
+
+  function handleOpenReportModal () {
+    if (sessionStorage.getItem("token")) {
+      setOpenReportModal(true);
+    } else {
+      toast.error('Realize o login primeiro!');
+    }
+  }
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
@@ -121,7 +133,7 @@ const EstablishmentPage = () => {
 
 
   useEffect(() => {
-     getEstablishmentProfileData()  ;
+    getEstablishmentProfileData();
   }, []);
 
   return (
@@ -242,7 +254,30 @@ const EstablishmentPage = () => {
                   </Link>
                   <div className="establishment-contact-btn">
                     <img src={Phone} alt="Phone" />
-                    <span>Contato</span>
+                    <span onClick={handleOpenContactModal}>Contato</span>
+                    <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
+                      <div className="contact-modal-container">
+                        <h1 className="establishment-contact-title">Contato - {profile.name}</h1>
+                        <div className="contact-modal-box">
+                          <span className="contact-item">Email para contato: {profile.email}</span>
+                          <span className="contact-item">Telefone: {profile.phone == null ? "Não adicionado" : profile.phone}</span>
+                        </div>
+                          <span className="establishment-location-title establishment-contact-title">Localização</span>
+                        <iframe
+                          style={{
+                            width: "100%",
+                            height: "300px",
+                            borderRadius: "0.5rem",
+                            border: "1px solid #c4c4c4",
+                            marginTop: "1rem",
+                          }}
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                          src={url_maps}
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </GenericModal>
                   </div>
                 </div>
                 <div className="establishment-location-box">
@@ -270,28 +305,28 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-report-box">
                   <img src={Report} alt="" />
-                  <span onClick={handleOpenModal}>Reportar</span>
-                  <GenericModal open={openModal} handleClose={handleCloseModal}>
+                  <span onClick={handleOpenReportModal}>Reportar</span>
+                  <GenericModal open={openReportModal} handleClose={handleCloseReportModal}>
                     <div className="email-modal-container">
                       <form onSubmit={handleSubmit}>
-                          <InputField
-                            type="email"
-                            label="Email"
-                            placeholder="Email do estabelecimento"
-                            id="email"
-                            value={profile.email}
-                            disabled="true"
-                            autocomplete="establishment-email"
-                          />
-                          <InputField
-                            type="subject"
-                            label="Assunto"
-                            placeholder="Assunto"
-                            id="subject"
-                            value={"Reportar Problema no Estabelecimento"}
-                            disabled="true"
-                            autocomplete="subject"
-                          />
+                        <InputField
+                          type="email"
+                          label="Email"
+                          placeholder="Email do estabelecimento"
+                          id="email"
+                          value={profile.email}
+                          disabled={true}
+                          autocomplete="establishment-email"
+                        />
+                        <InputField
+                          type="subject"
+                          label="Assunto"
+                          placeholder="Assunto"
+                          id="subject"
+                          value={"Reportar Problema no Estabelecimento"}
+                          disabled={true}
+                          autocomplete="subject"
+                        />
                         <TextAreaField
                           label="Mensagem"
                           placeholder="Mensagem"
@@ -305,7 +340,7 @@ const EstablishmentPage = () => {
                       </form>
                       <div className="button-modal-container">
                         <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"50%"} />
-                        <ButtonSecondary text="Cancelar" onclick={handleCloseModal} width={"50%"} />
+                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"50%"} />
                       </div>
                     </div>
                   </GenericModal>

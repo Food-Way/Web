@@ -8,7 +8,7 @@ function SelectLocation() {
     async function getLocations() {
         const response = await api_call("get", "/states", null, null);
         console.log(response);
-        setLocation(response);
+        setLocation(response.data);
     }
 
     function showOptions() {
@@ -33,7 +33,7 @@ function SelectLocation() {
                     <span id='location-text'>Localização</span>
                     <div className='options-location hide'>
                             {location.length === 0 ? (
-                                <span>Nenhum resultado</span>
+                                <span className='no-content'>Nenhum resultado</span>
                             ) : (
                                 location.map((item) => {
                                     return (

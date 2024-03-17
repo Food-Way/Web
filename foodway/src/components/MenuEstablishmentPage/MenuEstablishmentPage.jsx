@@ -3,15 +3,36 @@ import Product from "../../components/Product/Product";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import api_call from "../../services/apiImpl";
+import ContentLoader from 'react-content-loader';
 import "./MenuEstablishmentPage.css";
 
-const MenuEstablishmentPage = ({ menu, setMenu, id, token }) => {
+const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
   const [searchFilter, setSearchFilter] = useState("");
 
+  
+  const MenuLoader = () => (
+    <ContentLoader
+      speed={2}
+      width={880}
+      height={550}
+      viewBox="0 0 880 550"
+      backgroundColor="#ffffff"
+      foregroundColor="#c4c4c4"
+    >
+      <rect x="10" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="10" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="250" rx="0" ry="0" width="275" height="225" />
+    </ContentLoader>
+  )
+
   async function getEstablishmentMenu({ filter }) {
-    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, token, null)
+    const response = await api_call("get", `products/establishments/${id}/${filter}`, null, null, null)
     console.log("Menu: ", menu);
     setMenu(response.data);
+    console.log(menu.length)
   }
 
   function showFilter() {
@@ -98,9 +119,14 @@ const MenuEstablishmentPage = ({ menu, setMenu, id, token }) => {
             </div>
           </div>
           <div className="menu-dash-box">
-            {menu.length == 0 ? (
-              <>
-                {menu.map((item, index) => (
+            {menu.length === 0 ? (
+              <MenuLoader />
+            ) : (
+              menu.length === 0 ? (
+                <span className="no-content">Nenhum produto</span>
+              ) : (
+                menu.map((item, index) => (
+                  <>
                   <Product
                     editIsAble={false}
                     key={index}
@@ -108,9 +134,10 @@ const MenuEstablishmentPage = ({ menu, setMenu, id, token }) => {
                     name={item.name}
                     price={item.price}
                   />
-                ))}
-              </>
-            ) : "Nenhum produto cadastrado"}
+                  </>
+                ))
+              )
+            )}
           </div>
         </div>
       </section>

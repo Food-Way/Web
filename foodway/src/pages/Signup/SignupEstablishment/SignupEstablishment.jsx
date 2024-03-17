@@ -283,7 +283,7 @@ const SignupEstablishment = () => {
 
   return (
     <main className="main-signup-establishment">
-      <Auth />
+      {/* <Auth /> */}
       <div className="container">
         <div className="form-establishment">
           <div className="form-container-establishment">

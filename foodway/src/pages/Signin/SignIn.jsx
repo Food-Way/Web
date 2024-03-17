@@ -112,7 +112,7 @@ const SignIn = () => {
 
   return (
     <main className="main-signin">
-      <Auth />
+      {/* <Auth /> */}
       <div className="container">
         <div className="form-signin">
           <div className="form-container-signin">
