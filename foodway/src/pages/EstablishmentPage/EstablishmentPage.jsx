@@ -9,11 +9,10 @@ import parseJWT from "../../util/parseJWT";
 import { Link, useParams } from "react-router-dom";
 import ContentLoader from 'react-content-loader'
 import {
-  CommentIndividual,
-  CommentReply,
+  CommentIndividual
 } from "../../components/Comment/Comment.jsx";
 import "./EstablishmentPage.css";
-import CommentInsert from "../../components/CommentInsert/CommentInsert.jsx";
+import { CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
 import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { InputField, TextAreaField } from "../../components/InputField/InputField";
@@ -33,15 +32,16 @@ const EstablishmentPage = () => {
   const [comments, setComments] = useState([]);
   const [messageData, setMessageData] = useState([]);
   const params = useParams();
-  const idUser = params.id;
+  const idEstablishment = params.id;
 
-  function handleOpenReportModal () {
+  function handleOpenReportModal() {
     if (sessionStorage.getItem("token")) {
       setOpenReportModal(true);
     } else {
       toast.error('Realize o login primeiro!');
     }
   }
+
 
   const ProfileHeaderLoader = () => (
     <ContentLoader className="establishment-banner-box"
@@ -110,10 +110,8 @@ const EstablishmentPage = () => {
   };
 
   async function getEstablishmentProfileData() {
-    console.log(idUser)
-    const response = await api_call("get", `/establishments/profile/${idUser}`, null, null);
+    const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
-    console.log(response.data)
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
@@ -148,7 +146,6 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.name}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -170,41 +167,24 @@ const EstablishmentPage = () => {
             <div className="establishment-comments-info-container">
               <div className="establishment-add-comment-list-comments">
                 <div className="establishment-addcomment-box">
-                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={idUser} onCommentAdded={addCommentToState} /> : null}
+                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={idEstablishment} onCommentAdded={addCommentToState} /> : null}
                 </div>
                 <div
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
                   {comments.length === 0 ? <CommentLoader /> : comments.map((commentParent, index) => (
                     <div className="establishment-comments-box-more" key={index}>
                       <CommentIndividual
-                        key={commentParent.idComment}
+                        size={30}
                         establishmentName={commentParent.establishmentName}
                         rate={commentParent.commentRate}
                         title={commentParent.title}
                         comment={commentParent.comment}
                         upvotes={commentParent.upvotes}
-                        idComment={commentParent.idComment}
-                        idEstablishment={idUser}
+                        idComment={commentParent.idPost}
+                        idEstablishment={idEstablishment}
                         userPhoto={commentParent.userPhoto}
+                        replies={commentParent.replies}
                       />
-                      {commentParent.childComments && commentParent.childComments.length > 0 && (
-                        <div
-                          className={commentParent.childComments.length > 1 ? "scroll-comments" : "establishment-more-box"}>
-                          {commentParent.childComments.map((commentReply, index) => (
-                            <CommentReply
-                              key={index}
-                              establishmentName={commentReply.establishmentName}
-                              rate={commentReply.commentRate}
-                              title={commentReply.title}
-                              upvotes={commentReply.upvotes}
-                              comment={commentReply.comment}
-                              idComment={commentReply.idComment}
-                              idEstablishment={idUser}
-                              userPhoto={commentReply.userPhoto}
-                            />
-                          ))}
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
@@ -244,7 +224,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-btns-box">
                   <Link
-                    to={`/establishment-menu/${idUser}`}
+                    to={`/establishment-menu/${idEstablishment}`}
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">
@@ -262,7 +242,7 @@ const EstablishmentPage = () => {
                           <span className="contact-item">Email para contato: {profile.email}</span>
                           <span className="contact-item">Telefone: {profile.phone == null ? "Não adicionado" : profile.phone}</span>
                         </div>
-                          <span className="establishment-location-title establishment-contact-title">Localização</span>
+                        <span className="establishment-location-title establishment-contact-title">Localização</span>
                         <iframe
                           style={{
                             width: "100%",
@@ -315,7 +295,7 @@ const EstablishmentPage = () => {
                           placeholder="Email do estabelecimento"
                           id="email"
                           value={profile.email}
-                          disabled={true}
+                          disabled="true"
                           autocomplete="establishment-email"
                         />
                         <InputField
@@ -324,7 +304,7 @@ const EstablishmentPage = () => {
                           placeholder="Assunto"
                           id="subject"
                           value={"Reportar Problema no Estabelecimento"}
-                          disabled={true}
+                          disabled="true"
                           autocomplete="subject"
                         />
                         <TextAreaField
