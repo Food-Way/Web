@@ -14,7 +14,7 @@ const RelevanceCard = (props) => {
                 <div className="relevance-card-box">
                     <div className="relevance-card-back">
                         <div className="relevance-card-body">
-                            {props.rank == 1 ? <img src={GoldMedal} alt="medal" /> : (props.rank == 2 ? <img src={SilverMedal} alt="medal" /> : <img src={BronzeMedal} alt="medal" />)}
+                            {props.rank == 1 ? <img src={GoldMedal} alt="Medalha de Ouro" /> : (props.rank == 2 ? <img src={SilverMedal} alt="Medalha de Prata" /> : <img src={BronzeMedal} alt="Medalha de Bronze" />)}
                             <span className="best-card-name">{props.establishmentName}</span>
                             <RateNumberStar color="black" generalRate={props.generalRate == undefined || null ? 0 : props.generalRate} />
                             <span>Avaliações: {props.qtdRates == undefined || null ? 0 : props.qtdRates}</span>

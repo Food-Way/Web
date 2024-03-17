@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-const Adicionar = "https://foodway-public-s3.s3.amazonaws.com/website-images/adicionar.svg";
+const Plus = "https://foodway-public-s3.s3.amazonaws.com/website-images/plus.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import Report from "../../components/Report/Report";
@@ -82,7 +82,7 @@ const MenuDash = () => {
           <span className="title">Cardápio</span>
           <div className="add-item">
             <div className="add-item-box">
-              <img src={Adicionar} alt="" />
+              <img src={Plus} alt="Ícone de adicionar" />
               <HandleFormModal
                 confirmText="Criar"
                 cancelText="Cancelar"
@@ -104,7 +104,7 @@ const MenuDash = () => {
                 <div className="menu-dash-header">
                   <SearchBar placeholder="Buscar produto" />
                   <div className="menu-filter-box">
-                    <img src={ImageFilter} className="filter" alt="" />
+                    <img src={ImageFilter} className="filter" alt="Ícone de filtro" />
                     <div className="item-filter-box">
                       <span className="item-filter" id="1" onClick={() => { selectFilter("1") }}>Preço -</span>
                       <span className="item-filter" id="2" onClick={() => { selectFilter("2") }}>Preço +</span>

@@ -53,9 +53,10 @@ const SignIn = () => {
           console.log("Response data:", response.data);
           console.log(response.data)
           sessionStorage.setItem("token", btoa(response.data.token));
-          sessionStorage.setItem("profile-photo", btoa(response.data.profilePhoto));
-          sessionStorage.setItem("culinary", btoa(response.data.culinary));
+          sessionStorage.setItem("profilePhoto", btoa(response.data.profilePhoto));
           sessionStorage.setItem("typeUser", btoa(response.data.typeUser));
+          sessionStorage.setItem("culinary", btoa(response.data.culinary));
+          sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
           toast.success("Login realizado com sucesso!");
           if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
             setTimeout(() => {
@@ -144,7 +145,7 @@ const SignIn = () => {
           </div>
         </div>
         <div className="imgContainer">
-          <img src={loginIMG} className="img-login" />
+          <img src={loginIMG} className="img-login" alt="Imagem de login" />
         </div>
       </div>
     </main>

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
-import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
+import { ButtonPrimary, ButtonPrimaryLink, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
 import "./Home.css";
@@ -209,8 +209,8 @@ const Home = () => {
                 </span>
               </div>
 
-              <img src={establishmentIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
+              <img src={establishmentIMG} alt="Saiba mais estabelecimento" />
+              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url="/sign-up-establishment"  />
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">
@@ -220,8 +220,8 @@ const Home = () => {
                 </span>
               </div>
 
-              <img src={customerIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
+              <img src={customerIMG} alt="Saiba mais cliente" />
+              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url={"/sign-up-customer"} />
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@ const Home = () => {
                 <span>Disponível para</span>{" "}
                 <span>Android</span>
               </div>
-              <img src={androidI} alt="android" />
+              <img src={androidI} alt="Imagem do Android" />
               <ButtonSecondary text="Veja" width={"50%"} />
             </div>
           </div>

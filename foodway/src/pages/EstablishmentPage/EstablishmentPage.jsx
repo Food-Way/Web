@@ -248,12 +248,12 @@ const EstablishmentPage = () => {
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">
-                      <img src={BookMenu} alt="Book" />
+                      <img src={BookMenu} alt="Ícone de livro" />
                       <span>Cardápio</span>
                     </div>
                   </Link>
                   <div className="establishment-contact-btn">
-                    <img src={Phone} alt="Phone" />
+                    <img src={Phone} alt="Ícone de telefone" />
                     <span onClick={handleOpenContactModal}>Contato</span>
                     <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
                       <div className="contact-modal-container">
@@ -304,7 +304,7 @@ const EstablishmentPage = () => {
                   </div>
                 </div>
                 <div className="establishment-report-box">
-                  <img src={Report} alt="" />
+                  <img src={Report} alt="Ícone de perigo" />
                   <span onClick={handleOpenReportModal}>Reportar</span>
                   <GenericModal open={openReportModal} handleClose={handleCloseReportModal}>
                     <div className="email-modal-container">
