@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let environment = "prod";
+let environment = "dev";
 let urlProd = "/api";
 let urlDev = "http://localhost:8080/";
 
