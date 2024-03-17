@@ -1,12 +1,11 @@
 import axios from "axios";
 
-// let environment = "prod";
-// let urlProd = "https://10.0.0.243:8080/";
-// // let urlProd2 = "http://ip-10-0-0-243.ec2.internal:8080/";
-// let urlDev = "http://localhost:8080/";
+let environment = "prod";
+let urlProd = "/api";
+let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: "http://10.0.0.243:8080/",
+  baseURL: environment == prod ? urlProd : urlDev,
   headers: {
     "Content-Type": "application/json",
   },
