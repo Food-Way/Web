@@ -7,7 +7,7 @@ import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
 import parseJWT from "../../util/parseJWT";
 
-const Header = (props) => {
+const Header = () => {
     const bodyToken = parseJWT();
     const handleLogoff = () => {
         sessionStorage.clear();

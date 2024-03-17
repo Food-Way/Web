@@ -143,7 +143,7 @@ const Home = () => {
 
   async function listCategory() {
     const response = await api_call("get", "/culinaries", null, null);
-    console.log(response.data);
+    // console.log(response.data);
     setCategory(response.data);
   }
 
@@ -154,7 +154,7 @@ const Home = () => {
       null,
       null
     );
-    console.log(response.data);
+    // console.log(response.data);
     setGreaterRateEstab(response.data.vetor);
   }
 
@@ -166,13 +166,13 @@ const Home = () => {
       null,
       null
     );
-    console.log(response.data);
+    // console.log(response.data);
     setGreaterEstab(response.data);
   }
 
   return (
     <main>
-      <Auth />
+      {/* <Auth /> */}
       <MainBanner />
       <div style={styleDiv}>
         {isLoading ? (
