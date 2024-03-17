@@ -34,6 +34,10 @@
     align-items: center;
 }
 
+.relevance-card-body:last-child {
+    font-size: 1.5rem;
+}
+
 .medal {
     position: absolute;
     left: 1.3vw;

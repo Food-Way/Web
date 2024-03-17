@@ -23,6 +23,7 @@
 
 .card-image {
     width: 7vw;
+    height: 13vh;
     background-color: var(--brancoGelo);
     border-radius: .6rem;
     object-fit: cover;

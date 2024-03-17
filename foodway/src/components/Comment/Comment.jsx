@@ -139,7 +139,7 @@ const CommentIndividual = (props) => {
         <>
             <div className="establishment-comments-box">
                 <div className="user-content-comment">
-                    <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
+                    <img className="establishment-user-icon" src={props.userPhoto} alt="Foto de Perfil" />
                     <div className="user-content-values">
                         <ReactStars
                             size={24}
@@ -155,7 +155,7 @@ const CommentIndividual = (props) => {
                                     idCustomer={atob(sessionStorage.getItem("idUser"))}
                                     idEstablishment={props.idEstablishment}
                                 />
-                                <img src={ImageComment} alt="Image comment" />
+                                <img src={ImageComment} alt="Ícone de comentário" />
                             </div>
                             {props.comment.length > 100 ?
                                 <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
@@ -203,7 +203,7 @@ const CommentReply = (props) => {
         <>
             <div className="user-content-comment">
                 <div className="establishment-bar" />
-                <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
+                <img className="establishment-user-icon" src={props.userPhoto} alt="Foto de Perfil" />
                 <div className="user-content-values">
                     <ReactStars
                         size={24}
@@ -219,7 +219,7 @@ const CommentReply = (props) => {
                                 idCustomer={atob(sessionStorage.getItem("idUser"))}
                                 idEstablishment={props.idEstablishment}
                             />
-                            <img src={ImageComment} alt="Image comment" />
+                            <img src={ImageComment} alt="Ícone de comentário" />
                         </div>
                         {props.comment.length > 100 ?
                             <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>

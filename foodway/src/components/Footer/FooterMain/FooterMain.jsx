@@ -24,7 +24,7 @@ const FooterMain = () => {
             </ul>
           </div>
           <div className="centerIcon">
-            <img src={logoIcon} alt="logo" />
+            <img src={logoIcon} alt="Logo Foodway" />
             <div className="sub-footer">
               <ul>
                 <li>
@@ -53,16 +53,16 @@ const FooterMain = () => {
           <div className="list-social-media">
             <ul>
               <li>
-                <img src={insta} className="socialIcon" alt="instagram" />
+                <img src={insta} className="socialIcon" alt="Logo instagram" />
               </li>
               <li>
-                <img src={face} className="socialIcon" alt="facebook" />
+                <img src={face} className="socialIcon" alt="Logo facebook" />
               </li>
               <li>
-                <img src={twitter} className="socialIcon" alt="twitter" />
+                <img src={twitter} className="socialIcon" alt="Logo twitter" />
               </li>
               <li>
-                <img src={github} className="socialIcon" alt="github" />
+                <img src={github} className="socialIcon" alt="Logo github" />
               </li>
             </ul>
           </div>

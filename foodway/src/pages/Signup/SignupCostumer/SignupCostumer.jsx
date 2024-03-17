@@ -145,7 +145,7 @@ const SignUpCostumer = () => {
 
   return (
     <main className="main-signup-costumer">
-      <Auth />
+      {/* <Auth /> */}
 
       <div className="container">
         <div className="form-costumer">
@@ -258,7 +258,7 @@ const SignUpCostumer = () => {
           </div>
         </div>
         <div className="imgContainer">
-          <img className="img-login" src={loginIMG} alt="Login" />
+          <img className="img-login" src={loginIMG} alt="Imagem de login de cliente" />
         </div>
       </div>
     </main>

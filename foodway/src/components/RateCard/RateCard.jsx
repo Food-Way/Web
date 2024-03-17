@@ -10,23 +10,22 @@ const RateCard = (props) => {
                 <div className="rate-box-user">
                     <div className="rate-left">
                         <div className="experience-info">
-                            <span className="profile-level">NÍVEL: {props.level}</span>
+                            <span className="profile-level">NÍVEL: {props.level == null ? 0 : props.level}</span>
                             {
-                                sessionStorage.getItem("my-profile") == atob(true) ? (
+                                atob(sessionStorage.getItem("my-profile")) == "true" ? (
                                     <>
                                         <div className="experience">
-                                            <span>EXP</span>
+                                            <span className="profile-level">EXP</span>
                                             <progress value={props.xp} max="100"></progress>
                                         </div>
                                     </>
                                 ) : (
-                                    ""
+                                    null
                                 )
                             }
                         </div>
                         <div className="profile-rate">
-                            <span>{props.profileRate}</span>
-
+                            <span>{props.profileRate == null ? "0.0" : props.profileRate}</span>
                             <ReactStars
                                 count={5}
                                 edit={false}

@@ -25,7 +25,13 @@ function SearchBar(props) {
                 setSearched([]);
                 callGet(uriPath);
                 break;
-            case '/search-user':
+            case document.location.pathname.startsWith('/establishment-menu/'):
+                uriPath = `/products/establishments/${id}/null`;
+                setPassed(true);
+                setSearched([]);
+                callGet(uriPath);
+                break;
+            case document.location.pathname.startsWith('/search-user'):
                 var uriPathEstb = `/establishments`;
                 var uriPathCust = `/customers`;
                 setPassed(true);
@@ -38,7 +44,6 @@ function SearchBar(props) {
                 callGet(uriPath);
                 break;
         }
-
     }
 
     async function callGet(uriPath) {
@@ -71,7 +76,7 @@ function SearchBar(props) {
 
         setFiltred(searched.filter(item =>
             item.typeUser === 'ESTABLISHMENT' ? item.establishmentName.toUpperCase().includes(value) :
-            item.name.toUpperCase().includes(value)
+                item.name.toUpperCase().includes(value)
         ));
         var dropdown = document.getElementById('dropdownList');
 
@@ -91,7 +96,7 @@ function SearchBar(props) {
                 placeholder={props.placeholder}
                 className='search-bar'
                 onKeyUp={filterName}
-                onFocus={() =>{
+                onFocus={() => {
                     listSearched();
                 }}
             />
@@ -103,7 +108,7 @@ function SearchBar(props) {
                     <div className='empty-results'>
                         <div className='box-empty-results'>Nenhum resultado
                         </div>
-                        <img className='img-sadCat' src={sadCat} alt="" />
+                        <img className='img-sadCat' src={sadCat} alt="Imagem de gato triste" />
                     </div> : ''}
 
                 {filtred.map(item => (

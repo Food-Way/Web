@@ -6,12 +6,12 @@
 }
 
 .relevance-container-switch {
-    width: calc(155vw + 15vw);
+    width: calc(75vw + 15vw);
     transition: all 0.3s;
 }
 
 .best-relevance-box {
-    width: 100vw;
+    /* width: 100vw; */
     height: 35vh;
     background-image: url("../../../public/banner-relevance.png");
     background-repeat: no-repeat;
@@ -46,9 +46,9 @@
 }
 
 .relevance-rank-container {
-    width: 100vw;
     display: flex;
     justify-content: center;
+    margin-left: 4rem;
 }
 
 .relevance-rank-box {

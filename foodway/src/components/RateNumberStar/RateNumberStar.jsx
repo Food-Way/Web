@@ -18,8 +18,8 @@ const RateNumberStar = (props) => {
                     size={24}
                     value={1}
                     isHalf={false}
-                    emptyIcon={ props.color == "white" ? <img src={starWhite} /> : <img src={starBlack} />}
-                    filledIcon={ props.color == "white" ? <img src={starWhite} /> : <img src={starBlack} />}
+                    emptyIcon={ props.color == "white" ? <img src={starWhite} alt="Ícone de estrela branca"/> : <img src={starBlack} alt="Ícone de estrela negra"/>}
+                    filledIcon={ props.color == "white" ? <img src={starWhite} alt="Ícone de estrela branca"/> : <img src={starBlack} alt="Ícone de estrela negra"/>}
                 />
             </div>
         </>

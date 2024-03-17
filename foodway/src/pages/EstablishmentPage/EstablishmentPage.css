@@ -1,5 +1,14 @@
 @import url(../../assets/css/style.css);
 
+.establishment-content-container {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
 .profile_icon {
     width: 4rem;
     height: 4rem;
@@ -470,4 +479,25 @@
 .button-modal-container {
     display: flex;
     flex-direction: row;
+}
+
+.contact-modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.establishment-contact-title {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.contact-modal-box {
+    display: flex;
+    flex-direction: column;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
-const Adicionar = "https://foodway-public-s3.s3.amazonaws.com/website-images/adicionar.svg";
+const Plus = "https://foodway-public-s3.s3.amazonaws.com/website-images/plus.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import Report from "../../components/Report/Report";
@@ -30,17 +30,17 @@ const MenuDash = () => {
     <ContentLoader
       speed={2}
       width={880}
-      height={450}
-      viewBox="0 0 880 450"
+      height={550}
+      viewBox="0 0 880 550"
       backgroundColor="#ffffff"
       foregroundColor="#c4c4c4"
     >
-      <rect x="10" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="270" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="530" y="10" rx="0" ry="0" width="250" height="200" />
-      <rect x="10" y="220" rx="0" ry="0" width="250" height="200" />
-      <rect x="270" y="220" rx="0" ry="0" width="250" height="200" />
-      <rect x="530" y="220" rx="0" ry="0" width="250" height="200" />
+      <rect x="10" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="10" rx="0" ry="0" width="275" height="225" />
+      <rect x="10" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="300" y="250" rx="0" ry="0" width="275" height="225" />
+      <rect x="590" y="250" rx="0" ry="0" width="275" height="225" />
     </ContentLoader>
   )
 
@@ -82,7 +82,7 @@ const MenuDash = () => {
           <span className="title">Cardápio</span>
           <div className="add-item">
             <div className="add-item-box">
-              <img src={Adicionar} alt="" />
+              <img src={Plus} alt="Ícone de adicionar" />
               <HandleFormModal
                 confirmText="Criar"
                 cancelText="Cancelar"
@@ -104,7 +104,7 @@ const MenuDash = () => {
                 <div className="menu-dash-header">
                   <SearchBar placeholder="Buscar produto" />
                   <div className="menu-filter-box">
-                    <img src={ImageFilter} className="filter" alt="" />
+                    <img src={ImageFilter} className="filter" alt="Ícone de filtro" />
                     <div className="item-filter-box">
                       <span className="item-filter" id="1" onClick={() => { selectFilter("1") }}>Preço -</span>
                       <span className="item-filter" id="2" onClick={() => { selectFilter("2") }}>Preço +</span>

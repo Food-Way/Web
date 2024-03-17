@@ -19,6 +19,26 @@
     gap: 2rem;
 }
 
+.report-box button {
+    width: 13.5vw;
+    height: 5.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: var(--branco);
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    text-decoration: none;
+    color: black;
+    transition: all 0.3s;
+}
+
+.report-box button:hover {
+    transition: all 0.3s;
+    background-color: var(--cinzaClaro);
+}
+
 .report-box a {
     width: 13.5vw;
     height: 5.5rem;

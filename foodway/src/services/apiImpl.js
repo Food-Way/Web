@@ -13,7 +13,7 @@ async function api_call(methodParam, urlParam, dataParam, authorizationParam = "
       url: urlParam,
       data: dataParam ? JSON.stringify(dataParam) : undefined,
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json; charset=utf-8",
         Authorization: authorizationParam ? `Bearer ${authorizationParam}` : null,
         ID_SESSION: idSessionParam ? idSessionParam : null,
       },

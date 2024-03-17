@@ -90,6 +90,7 @@ const UserProfile = () => {
 
   async function getUser() {
     const response = await api_call("get", `customers/profile/${idUser}`, null, atob(sessionStorage.getItem("token")))
+    console.log(response.data)
     setUser(response.data);
     setComments(response.data.comments);
     firstAndEnd(response.data.name);
@@ -159,7 +160,7 @@ const UserProfile = () => {
             {user.length === 0 ? (
               <ProfileHeaderLoader />
             ) : (
-              <img className="user-banner" src={user.profileHeaderImg} alt="" />
+              <img className="user-banner" src={user.profileHeaderImg} alt="Foto de capa" />
             )}
             <div className="user-info-container">
               <div className="user-info-box">
@@ -167,7 +168,7 @@ const UserProfile = () => {
                   {user.length === 0 ? (
                     <ProfilePhotoLoader />
                   ) : (
-                    <img className="profile-photo" src={user.profilePhoto} alt="" />
+                    <img className="profile-photo" src={user.profilePhoto} alt="Foto de perfil" />
                   )}
                   <span className="profile-username"></span>
                   {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}

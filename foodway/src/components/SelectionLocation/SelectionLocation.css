@@ -11,7 +11,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("https://foodway-public-s3.s3.amazonaws.com/website-images/seta.svg") 100% 50% no-repeat;
+    background: url("https://foodway-public-s3.s3.amazonaws.com/website-images/down-arrow.svg") 100% 50% no-repeat;
     cursor: pointer;
 }
 

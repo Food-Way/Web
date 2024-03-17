@@ -7,7 +7,7 @@ import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
 import parseJWT from "../../util/parseJWT";
 
-const Header = (props) => {
+const Header = () => {
     const bodyToken = parseJWT();
     const handleLogoff = () => {
         sessionStorage.clear();
@@ -34,7 +34,7 @@ const Header = (props) => {
                         {
                             atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
                                 <>
-                                    <span className='establishment-title-user-profile'>| Estabelecimento: {bodyToken.username}</span>
+                                    <span className='establishment-title-user-profile'>| Estabelecimento: {atob(sessionStorage.getItem("establishmentName"))}</span>
                                 </>
                                 : ""
                         }
@@ -43,7 +43,7 @@ const Header = (props) => {
                         <>
                             <div className="header-geral-token">
                                 <span>Olá, {bodyToken.username}</span>
-                                <img src={atob(sessionStorage.getItem("profile-photo")) ? atob(sessionStorage.getItem("profile-photo")) : DefaultImage} alt="" />
+                                <img src={atob(sessionStorage.getItem("profilePhoto")) ? atob(sessionStorage.getItem("profilePhoto")) : DefaultImage} alt="Foto de Perfil" />
                             </div>
                         </>
                         : <>

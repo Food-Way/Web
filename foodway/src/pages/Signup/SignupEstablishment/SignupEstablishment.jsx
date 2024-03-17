@@ -283,7 +283,7 @@ const SignupEstablishment = () => {
 
   return (
     <main className="main-signup-establishment">
-      <Auth />
+      {/* <Auth /> */}
       <div className="container">
         <div className="form-establishment">
           <div className="form-container-establishment">
@@ -455,7 +455,7 @@ const SignupEstablishment = () => {
           </div>
         </div>
         <div className="imgContainer">
-          <img className="img-login" src={loginIMG} />
+          <img className="img-login" src={loginIMG} alt="Imagem de login de estabelecimento"/>
         </div>
       </div>
     </main>

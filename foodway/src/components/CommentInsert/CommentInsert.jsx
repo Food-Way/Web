@@ -7,7 +7,7 @@ import './CommentInsert.css';
 import { toast } from 'react-toastify';
 
 const CommentInsert = ({ establishmentId, onCommentAdded }) => {
-  const profilePhoto = sessionStorage.getItem("profile-photo") ? atob(sessionStorage.getItem("profile-photo")) : "";
+  const profilePhoto = sessionStorage.getItem("profilePhoto") ? atob(sessionStorage.getItem("profilePhoto")) : "";
   const [commentText, setCommentText] = useState('');
 
   const handleCommentChange = (event) => {
@@ -58,7 +58,7 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
   return (
     <div className="comment_insert">
       <span className="comment-section">
-        <img className="profile_icon" src={profilePhoto} alt="Profile" />
+        <img className="profile_icon" src={profilePhoto} alt="Foto de perfil" />
         <TextAreaFieldComment
           maxLength={532}
           placeholder="Adicione uma avaliação"
