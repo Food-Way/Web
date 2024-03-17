@@ -9,16 +9,38 @@ import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import parseJWT from "../../util/parseJWT";
+import GenericModal from "../../components/GenericModel/GenericModel.jsx";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
+import { toast } from 'react-toastify';
 import "./MenuDash.css";
+
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
+  const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
+  const handleOpenCreateProductModal = () => setOpenCreateProductModal(true);
+  const handleCloseCreateProductModal = () => setOpenCreateProductModal(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   async function getMenu({ filter }) {
     const response = await api_call("get", `products/establishments/${bodyToken.idUser}/${filter}`, null, atob(sessionStorage.getItem("token")));
     console.log(response.data);
     setMenu(response.data);
+  }
+  
+  function postProduct(productName, productPrice, idUser) {
+    console.log(productName, productPrice, idUser)
+    const response = api_call("post", "products", {
+      name: productName,
+      price: productPrice,
+      idEstablishment: idUser
+    }, atob(sessionStorage.getItem("token")), null);
+    console.log(response);
+    toast.error('Produto criado com sucesso!');
   }
 
   function showFilter() {
@@ -81,9 +103,10 @@ const MenuDash = () => {
         <div className="menu-dashboard-box">
           <span className="title">Cardápio</span>
           <div className="add-item">
-            <div className="add-item-box">
+            <div className="add-item-box" onClick={handleOpenCreateProductModal}>
               <img src={Plus} alt="Ícone de adicionar" />
-              <HandleFormModal
+              <span>Criar produto</span>
+              {/* <HandleFormModal
                 confirmText="Criar"
                 cancelText="Cancelar"
                 lblCampo1="Nome"
@@ -95,7 +118,27 @@ const MenuDash = () => {
                 status={201}
                 method="post"
                 uri="products"
-              />
+              /> */}
+              <GenericModal open={openCreateProductModal} handleClose={handleCloseCreateProductModal}>
+                <form onSubmit={handleSubmit}>
+                  <div className="modal-container-product">
+                    <div className="modal-box-product">
+                      <div className="modal-input-box">
+                        <label htmlFor="productName">Nome do produto</label>
+                        <input type="text" id="productName" />
+                      </div>
+                      <div className="modal-input-box">
+                        <label htmlFor="productPrice">Preço do produto</label>
+                        <input type="text" id="productPrice" />
+                      </div>
+                    </div>
+                    <div className="button-modal-box">
+                      <ButtonPrimary text="Enviar" width={"50%"} onclick={postProduct(bodyToken.idUser)}/>
+                      <ButtonSecondary text="Cancelar" onclick={handleCloseCreateProductModal} width={"50%"} />
+                    </div>
+                  </div>
+                </form>
+              </GenericModal>
             </div>
           </div>
           <div className="dash-container">

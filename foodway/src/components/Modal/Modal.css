@@ -15,37 +15,6 @@
     height: 30vh;
 }
 
-.modal-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20rem;
-}
-
-.modal-input-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.modal-input-box label {
-    text-align: start;
-    font-size: 2rem;
-    font-weight: 600;
-}
-
-.modal-input-box input {
-    width: 93%;
-    height: 4rem;
-    border: var(--borda);
-    border-radius: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
 .swal2-confirm {
     width: 6vw;
     font-size: 1.5rem !important;
