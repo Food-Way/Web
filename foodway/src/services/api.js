@@ -5,7 +5,7 @@ let urlProd = "/api";
 let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: environment == prod ? urlProd : urlDev,
+  baseURL: environment == "prod" ? urlProd : urlDev,
   headers: {
     "Content-Type": "application/json",
   },
