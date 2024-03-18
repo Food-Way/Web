@@ -19,7 +19,7 @@ const api_mock = axios.create({
 });
 
 const nifi_url = axios.create({
-  baseURL: "http://localhost:80",
+  baseURL: "http://localhost:80/",
   headers: {
     "Content-Type": "application/json", 
   },

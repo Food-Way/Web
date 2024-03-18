@@ -122,13 +122,21 @@ const EstablishmentPage = () => {
     e.preventDefault();
   };
 
-  async function handleSendEmail() {
-    const response = await nifi_call("post", "/report", {
-      email: bodyToken.email,
-      establishmentEmail: profile.email,
-      subject: "Reportar Problema no Estabelecimento",
-      message: messageData
-    });
+  const handleSendEmail = async () => {
+    try {
+      const response = await nifi_call("post", "/report", {
+        complainantEmail: bodyToken.email,
+        complainantName: bodyToken.username,
+        emailMessage: messageData,
+        emailSubject: "Reportar Problema no Estabelecimento",
+        establishmentEmail: "leonardo.oliveira@sptech.school",
+        establishmentName: profile.establishmentName,
+        ownerName: profile.name
+      },null, null);
+      console.log(response);
+    }catch (error) {
+      console.log(error);
+    }
   }
 
 
