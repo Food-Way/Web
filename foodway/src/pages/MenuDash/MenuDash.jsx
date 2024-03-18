@@ -18,6 +18,8 @@ import "./MenuDash.css";
 const MenuDash = () => {
   const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
   const handleOpenCreateProductModal = () => setOpenCreateProductModal(true);
   const handleCloseCreateProductModal = () => setOpenCreateProductModal(false);
@@ -26,21 +28,48 @@ const MenuDash = () => {
     e.preventDefault();
   };
 
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleChangePrice = (e) => {
+    setPrice(e.target.value);
+  };
+
   async function getMenu({ filter }) {
     const response = await api_call("get", `products/establishments/${bodyToken.idUser}/${filter}`, null, atob(sessionStorage.getItem("token")));
     console.log(response.data);
     setMenu(response.data);
   }
-  
-  function postProduct(productName, productPrice, idUser) {
-    console.log(productName, productPrice, idUser)
-    const response = api_call("post", "products", {
-      name: productName,
-      price: productPrice,
-      idEstablishment: idUser
-    }, atob(sessionStorage.getItem("token")), null);
-    console.log(response);
-    toast.error('Produto criado com sucesso!');
+
+  const handlePostProduct = async () => {
+    if (name === "" || price === "") {
+      toast.error('Preencha todos os campos');
+      return;
+    } else if (price < 0 || isNaN(price)) {
+      toast.error('Preço inválido');
+      return;
+    } else if (Number(name)) {
+      toast.error('Nome inválido');
+    } else {
+      try {
+        const response = await api_call("post", "products", {
+          name: name,
+          price: price,
+          idEstablishment: bodyToken.idUser
+        }, atob(sessionStorage.getItem("token")), null);
+        if (response.status === 201) {
+          toast.success('Produto criado com sucesso!');
+          setTimeout(() => {
+            handleCloseCreateProductModal();
+            location.reload();
+          }, 2000);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error('Erro ao criar produto');
+      }
+    }
   }
 
   function showFilter() {
@@ -106,40 +135,28 @@ const MenuDash = () => {
             <div className="add-item-box" onClick={handleOpenCreateProductModal}>
               <img src={Plus} alt="Ícone de adicionar" />
               <span>Criar produto</span>
-              {/* <HandleFormModal
-                confirmText="Criar"
-                cancelText="Cancelar"
-                lblCampo1="Nome"
-                lblCampo2="Preço"
-                iptCampo2="productPrice"
-                iptCampo1="productName"
-                successTitle="Produto Criado!"
-                content="Criar Produto"
-                status={201}
-                method="post"
-                uri="products"
-              /> */}
-              <GenericModal open={openCreateProductModal} handleClose={handleCloseCreateProductModal}>
-                <form onSubmit={handleSubmit}>
-                  <div className="modal-container-product">
-                    <div className="modal-box-product">
-                      <div className="modal-input-box">
-                        <label htmlFor="productName">Nome do produto</label>
-                        <input type="text" id="productName" />
-                      </div>
-                      <div className="modal-input-box">
-                        <label htmlFor="productPrice">Preço do produto</label>
-                        <input type="text" id="productPrice" />
-                      </div>
+            </div>
+            <GenericModal open={openCreateProductModal} handleClose={handleCloseCreateProductModal}>
+              <form onSubmit={handleSubmit}>
+                <div className="modal-container-product">
+                  <span>Criação de produto</span>
+                  <div className="modal-box-product">
+                    <div className="modal-input-box">
+                      <label htmlFor="productName">Nome do produto</label>
+                      <input type="text" id="productName" onChange={handleChangeName} />
                     </div>
-                    <div className="button-modal-box">
-                      <ButtonPrimary text="Enviar" width={"50%"} onclick={postProduct(bodyToken.idUser)}/>
-                      <ButtonSecondary text="Cancelar" onclick={handleCloseCreateProductModal} width={"50%"} />
+                    <div className="modal-input-box">
+                      <label htmlFor="productPrice">Preço do produto</label>
+                      <input type="text" id="productPrice" onChange={handleChangePrice} />
                     </div>
                   </div>
-                </form>
-              </GenericModal>
-            </div>
+                  <div className="button-modal-box">
+                    <ButtonPrimary text="Enviar" width={"50%"} onclick={handlePostProduct} />
+                    <ButtonSecondary text="Cancelar" onclick={handleCloseCreateProductModal} width={"50%"} />
+                  </div>
+                </div>
+              </form>
+            </GenericModal>
           </div>
           <div className="dash-container">
             <section>
