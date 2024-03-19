@@ -1,11 +1,11 @@
 import axios from "axios";
 
-let ambiente = "desenvolvimento";
-let urlProducao = "https://lobster-app-ompes.ondigitalocean.app/";
-let urlDesenvolvimento = "http://localhost:8080/";
+let environment = "dev";
+let urlProd = "/api";
+let urlDev = "http://localhost:8080/";
 
 const api = axios.create({
-  baseURL: ambiente == "producao" ? urlProducao : urlDesenvolvimento,
+  baseURL: environment == "prod" ? urlProd : urlDev,
   headers: {
     "Content-Type": "application/json",
   },
@@ -19,13 +19,11 @@ const api_mock = axios.create({
 });
 
 const nifi_url = axios.create({
-  baseURL: "http://localhost:80",
+  baseURL: "http://localhost:80/",
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json", 
   },
 });
-
-
 
 export default api;
 export { api_mock, api, nifi_url };

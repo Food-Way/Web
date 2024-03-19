@@ -91,6 +91,8 @@ function SearchUser() {
     }, [searchCustomer, searchEstab]);
 
     useEffect(() => {
+        var html = document.querySelector('html');
+        html.style.overflowY = 'hidden';
         getSearchEstab({ filter: "RELEVANCE" });
         getSearchCustomer({ filter: "RELEVANCE" });
     }, []);
@@ -106,7 +108,7 @@ function SearchUser() {
                                     <span className="search-results">{search.length} resultados</span>
                                     <SearchBar placeholder="Pesquisar" />
                                     <div className="menu-filter-box">
-                                        <img src={ImageFilter} className="filter" alt="" />
+                                        <img src={ImageFilter} className="filter" alt="Ícone de filtro" />
                                         <div className="item-filter-box">
                                             <span className="item-filter-user" id="1" >Filtros</span>
                                             <span className="item-filter-user" id="2" onClick={() => { selectFilter("2") }}>Comentário</span>
@@ -116,7 +118,7 @@ function SearchUser() {
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    {search.length === 0 && (
+                                    {search === undefined || search.length === 0 && (
                                         <MyLoader />
                                     )}
                                     {search && search.map((item, index) => (

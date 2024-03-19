@@ -8,7 +8,7 @@ const Positive = () => {
     return (
         <>
             <div className="sentiment-tag positive">
-                <img src={PositiveFace} alt="" />
+                <img src={PositiveFace} alt="Ícone de cara feliz" />
                 <span className="sentiment-label">
                     Muito bom!!
                 </span>
@@ -21,7 +21,7 @@ const Neutral = () => {
     return (
         <>
             <div className="sentiment-tag neutral">
-                <img src={NeutralFace} alt="" />
+                <img src={NeutralFace} alt="Ícone de cara neutra" />
                 <span className="sentiment-label">
                     Interessante
                 </span>
@@ -34,7 +34,7 @@ const Negative = () => {
     return (
         <>
             <div className="sentiment-tag negative">
-                <img src={NegativeFace} alt="" />
+                <img src={NegativeFace} alt="Ícone de cara negativa" />
                 <span className="sentiment-label">
                     Muito ruim
                 </span>

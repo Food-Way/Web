@@ -1,12 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
-import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
+import { ButtonPrimary, ButtonPrimaryLink, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
-import "./Home.css";
+import ScrollReveal from 'scrollreveal';
 import ContentLoader from "react-content-loader";
+import "./Home.css";
 
 const Home = () => {
   const establishmentIMG =
@@ -17,6 +18,9 @@ const Home = () => {
   const androidI = "https://foodway-public-s3.s3.amazonaws.com/website-images/android.svg";
   const androidBg = "https://foodway-public-s3.s3.amazonaws.com/website-images/coming-soon.png";
   const [isLoading, setIsLoading] = useState(true);
+  const [greaterRateEstab, setGreaterRateEstab] = useState([]);
+  const [greaterCommentsEstab, setGreaterEstab] = useState([]);
+  const [category, setCategory] = useState([]);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
   };
@@ -29,6 +33,8 @@ const Home = () => {
   };
 
   useEffect(() => {
+    var html = document.querySelector('html');
+    html.style.overflowY = 'auto';
     async function fetchData() {
       sessionStorage.setItem('category', btoa(999));
       await Promise.all([
@@ -40,10 +46,30 @@ const Home = () => {
     }
 
     fetchData();
-  }, []); 
-  const [greaterRateEstab, setGreaterRateEstab] = useState([]);
-  const [greaterCommentsEstab, setGreaterEstab] = useState([]);
-  const [category, setCategory] = useState([]);
+
+    const config = {
+      delay: 500,
+      distance: '50px',
+      duration: 500,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+    };
+
+    const elementsToReveal = [
+      '.loader-container-home-category',
+      '.card-avalie-restaurantes',
+      '.cto-container',
+      'cta-saiba-mais',
+      '.android-section-container',
+    ];
+
+    elementsToReveal.forEach((element) => {
+      if (element) {
+        ScrollReveal().reveal(element, config);
+      }
+    });
+
+  }, []);
 
   const CategoryLoader = () => (
     <ContentLoader
@@ -209,8 +235,8 @@ const Home = () => {
                 </span>
               </div>
 
-              <img src={establishmentIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
+              <img src={establishmentIMG} alt="Saiba mais estabelecimento" />
+              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url="/sign-up-establishment" />
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">
@@ -220,8 +246,8 @@ const Home = () => {
                 </span>
               </div>
 
-              <img src={customerIMG} alt="saiba-mais" />
-              <ButtonPrimary text="Saiba Mais!" width={"50%"} />
+              <img src={customerIMG} alt="Saiba mais cliente" />
+              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url={"/sign-up-customer"} />
             </div>
           </div>
         </div>
@@ -232,7 +258,7 @@ const Home = () => {
                 <span>Disponível para</span>{" "}
                 <span>Android</span>
               </div>
-              <img src={androidI} alt="android" />
+              <img src={androidI} alt="Imagem do Android" />
               <ButtonSecondary text="Veja" width={"50%"} />
             </div>
           </div>

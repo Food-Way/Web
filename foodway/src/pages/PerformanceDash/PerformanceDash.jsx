@@ -99,24 +99,9 @@ function PerformanceDash() {
 
     async function getDashData() {
         const response = await api_call("get", `/dashboard/${idUser}`, null, atob(sessionStorage.getItem("token")));
-        console.log(response.data);
+        // console.log(response.data);
         setDashData(response.data);
     }
-
-    const rate = [
-        {
-            category: "Comida",
-            score: 4,
-        },
-        {
-            category: "Serviço",
-            score: 2,
-        },
-        {
-            category: "Atendimento",
-            score: 3.5,
-        }
-    ];
 
     const reviews = [
         {
@@ -148,7 +133,7 @@ function PerformanceDash() {
                 <section>
                     <div className="sentiment-banner">
                         <div className="sentiment-dash-box">
-                            {reviews.length === 0 ? (
+                            {reviews === undefined || reviews.length === 0 ? (
                                 <CardLoader />
                             ) : (
                                 reviews.map((item, index) => (
@@ -162,49 +147,42 @@ function PerformanceDash() {
                     <section>
                         <div className="avaliation-dash-container">
                             <div className="avaliation-dash-box">
-                                {dashData.length === 0 ? (
+                                {dashData === undefined || dashData.length === 0 ? (
                                     <RateLoader />
                                 ) : (
                                     <div className="avaliation-dash-values">
                                         <div className="rate-dash-value">
                                             <span>Avaliação</span>
-                                            <span>{dashData.establishment.generalRate.toFixed(2)}</span>
+                                            <span>{dashData.generalRate.toFixed(2)}</span>
                                         </div>
                                         <div className="avaliation-dash-card">
-                                            {dashData.establishment.length === 0 ? (
+                                            {dashData.establishmentRate == undefined || dashData.establishmentRate.length === 0 ? (
                                                 <span className="no-content">Nenhuma avaliação recebida</span>
                                             ) : (
-                                                <>
-                                                    <AvaliationDashCard rate={dashData.establishment.ambientRate} category={"Ambiente"} />
-                                                    <AvaliationDashCard rate={dashData.establishment.foodRate} category={"Comida"} />
-                                                    <AvaliationDashCard rate={dashData.establishment.serviceRate} category={"Atendimento"} />
-                                                </>
+                                                dashData.establishmentRate.map((item, index) => (
+                                                    <AvaliationDashCard rate={item.score} category={item.category} key={index} />
+                                                ))
                                             )}
                                         </div>
                                     </div>
                                 )}
-                                {dashData.length === 0 ? (
-                                    <RateLoader />
-                                ) : (
-                                    // dashdata.tags.length === 0 
-                                    dashData.length === 0 ? (
-                                        <span className="no-content">Nenhuma Tag</span>
+                                <div className="tag-dash-box">
+                                    {dashData === undefined || dashData.length === 0 ? (
+                                        <RateLoader />
                                     ) : (
-                                        <div className="tag-dash-box">
-                                            <TagDashCard />
-                                        </div>
-                                    )
-                                )}
+                                        <TagDashCard tags={dashData.tags} />
+                                    )}
+                                </div>
                             </div>
-                            {dashData.length === 0 ? (
+                            {dashData === undefined || dashData.length === 0 ? (
                                 <GraphLoader />
                             ) : (
-                                dashData.qtdEvaluationDaysForWeek.length === 0 ? (
+                                dashData.qtdEvaluationDaysForWeek === undefined || dashData.qtdEvaluationDaysForWeek.length === 0 ? (
                                     <span className="no-content">Nenhuma avaliação na última semana</span>
                                 ) : (
                                     <div className="graph-dash-box">
                                         <span>Avaliação Recebidas</span>
-                                        <GraphCard />
+                                        <GraphCard dashData={dashData.qtdEvaluationDaysForWeek} />
                                     </div>
                                 )
                             )}
@@ -214,10 +192,10 @@ function PerformanceDash() {
                         <div className="comment-relevant-container">
                             <span className="title-comment-relevant">Comentários mais relevantes</span>
                             <div className="comment-relevant-box">
-                                {dashData.length === 0 ? (
+                                {dashData === undefined || dashData.length === 0 ? (
                                     <CommentLoader />
                                 ) : (
-                                    dashData.comments.length === 0 ? (
+                                    dashData.comments === undefined || dashData.comments.length === 0 ? (
                                         <span>Nenhum Comentário</span>
                                     ) : (
                                         dashData.comments.map((item, index) => (

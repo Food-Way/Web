@@ -76,7 +76,7 @@ const MenuEstablishment = (props) => {
     var item = document.querySelector(className);
     var oldItem = document.querySelector(oldPath);
 
-    // item.classList.add("item-active");
+    item.classList.add("item-active");  
     if (oldItem) {
       oldItem.classList.remove("item-active");
     }
@@ -172,9 +172,7 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ?
-                  "91.5vh" :
-                  location.pathname == "/user/search" ? "91.5vh" : null,
+                height: "100vh",
                 width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
@@ -182,7 +180,7 @@ const MenuEstablishment = (props) => {
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
                 paddingLeft: openMenu ? "0" : "3rem",
-                paddingBottom: "3rem",
+                paddingBottom: "12vh",
                 transition: "all 0.3s",
                 border: "none",
                 // position: "absolute",

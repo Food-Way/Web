@@ -1,12 +1,18 @@
 @import url(../../assets/css/style.css);
 
 .establishment-content-container {
-    width: 90vw;
+    width: 95vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-self: center;
+    transition: all .3s;
+}
+
+.establishment-content-container-switch {
+    width: 89vw;
+    transition: all .3s;
 }
 
 .profile_icon {
@@ -18,8 +24,8 @@
 }
 
 .establishment-banner-box {
-    width: 100vw;
-    height: 23rem;
+    width: 100%;
+    height: 15rem;
     display: flex;
     justify-content: center;
     align-items: center;

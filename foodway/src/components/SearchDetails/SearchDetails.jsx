@@ -46,7 +46,7 @@ const SearchDetails = (props) => {
                 <div className="search-details-box">
                     <div className="search-detail-header">
                         <div className="left-header-side">
-                            <img src={props.photo} alt="" />
+                            <img src={props.photo} alt="Foto de Perfil" />
                             <CulinaryTag 
                                 culinary={props.culinary}
                             />
@@ -61,8 +61,8 @@ const SearchDetails = (props) => {
                                     size={24}
                                     value={1}
                                     isHalf={false}
-                                    // emptyIcon={ <img src={starBlack} />}
-                                    // filledIcon={ <img src={starBlack} />}
+                                    // emptyIcon={ <img src={starBlack} alt="Ícone vazio"/>}
+                                    // filledIcon={ <img src={starBlack} alt="Ícone cheio"/>}
                                     activeColor="222"
                                 />
                             </div>

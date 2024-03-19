@@ -30,7 +30,7 @@ const EstablishmentPage = () => {
   const handleCloseContactModal = () => setOpenContactModal(false);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const [messageData, setMessageData] = useState([]);
+  const [messageData, setMessageData] = useState("");
   const params = useParams();
   const idEstablishment = params.id;
 
@@ -120,13 +120,25 @@ const EstablishmentPage = () => {
     e.preventDefault();
   };
 
-  async function handleSendEmail() {
-    const response = await nifi_call("post", "/report", {
-      email: bodyToken.email,
-      establishmentEmail: profile.email,
-      subject: "Reportar Problema no Estabelecimento",
-      message: messageData
-    });
+  const handleChangeMessageData = (e) => {
+    setMessageData(e.target.value); 
+  };
+
+  const handleSendEmail = async () => {
+    try {
+      const response = await nifi_call("post", "/report", {
+        complainantEmail: bodyToken.email,
+        complainantName: bodyToken.username,
+        emailMessage: messageData,
+        emailSubject: "Reportar Problema no Estabelecimento",
+        establishmentEmail: "leonardo.oliveira@sptech.school",
+        establishmentName: profile.establishmentName,
+        ownerName: profile.name
+      },null, null);
+      console.log(response);
+    }catch (error) {
+      console.log(error);
+    }
   }
 
 
@@ -144,7 +156,7 @@ const EstablishmentPage = () => {
               style={{ backgroundImage: `url(${profile.profileHeaderImg})` }}>
               <div className="establishment-content-banner-box">
                 <div className="establishment-title-box">
-                  <h1 className="title-establishment">{profile.name}</h1>
+                  <h1 className="title-establishment">{profile.establishmentName}</h1>
                   <span>{profile.culinary}</span>
                 </div>
                 <div className="establishment-avaliation-principal">
@@ -191,7 +203,7 @@ const EstablishmentPage = () => {
               </div>
               <div className="establishment-side-box">
                 <div className="establishment-general-box">
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -201,7 +213,7 @@ const EstablishmentPage = () => {
                       <span>Comentários</span>
                     </div>
                   )}
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -211,7 +223,7 @@ const EstablishmentPage = () => {
                       <span>UpVotes</span>
                     </div>
                   )}
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -228,12 +240,12 @@ const EstablishmentPage = () => {
                     className="linkItem"
                   >
                     <div className="establishment-menu-btn">
-                      <img src={BookMenu} alt="Book" />
+                      <img src={BookMenu} alt="Ícone de livro" />
                       <span>Cardápio</span>
                     </div>
                   </Link>
                   <div className="establishment-contact-btn">
-                    <img src={Phone} alt="Phone" />
+                    <img src={Phone} alt="Ícone de telefone" />
                     <span onClick={handleOpenContactModal}>Contato</span>
                     <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
                       <div className="contact-modal-container">
@@ -265,7 +277,7 @@ const EstablishmentPage = () => {
                     Localização
                   </span>
                   <div className="establishment-map-box">
-                    {url_maps.length === 0 ? (
+                    {url_maps === undefined || url_maps.length === 0 ? (
                       <MapsLoader />
                     ) : (
                       <iframe
@@ -284,7 +296,7 @@ const EstablishmentPage = () => {
                   </div>
                 </div>
                 <div className="establishment-report-box">
-                  <img src={Report} alt="" />
+                  <img src={Report} alt="Ícone de perigo" />
                   <span onClick={handleOpenReportModal}>Reportar</span>
                   <GenericModal open={openReportModal} handleClose={handleCloseReportModal}>
                     <div className="email-modal-container">
@@ -314,7 +326,7 @@ const EstablishmentPage = () => {
                           // value={`
                           //        <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
                           //      `}
-                          onChange={setMessageData}
+                          onChange={handleChangeMessageData}
                         />
 
                       </form>

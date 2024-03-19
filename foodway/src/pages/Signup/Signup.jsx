@@ -10,7 +10,7 @@ const Signup = () => {
       <div className="mainSignin">
         <div className="mainSiginContainer">
           <div className="cardCostumerEstablishment">
-            <img src={costumer} alt="" />
+            <img src={costumer} alt="Imagem de cliente" />
 
             <ButtonPrimaryLink
               url="/sign-up-customer"
@@ -20,7 +20,7 @@ const Signup = () => {
             />
           </div>
           <div className="cardCostumerEstablishment">
-            <img src={establishment} alt="" />
+            <img src={establishment} alt="Imagem de estabelecimento" />
             <ButtonPrimaryLink
               url="/sign-up-establishment"
               className="buttonCostumerEstablishment"

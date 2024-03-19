@@ -39,6 +39,12 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border: none;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .menu-dash-container {
@@ -142,7 +148,7 @@
 
 .qr-code-box {
     width: 15vw;
-    height: 20vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,16 +159,36 @@
     margin-top: 1rem;
 }
 
-.qr-code {
-    width: 15vw;
+/* .qr-code {
+    width: 1vw;
     height: 15vh;
+} */
+
+.btn-qr-code {
+    width: 10vw;
+    height: 4.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    font-size: 1.5rem;
+    color: var(--branco);
+    border-radius: var(--arredondamento);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    margin-top: 2rem;
 }
 
+.btn-qr-code:hover {
+    background-color: var(--preto);
+}
 
 .report-side-container {
-    height: 31.6rem;
+    height: 12rem;
     flex-direction: column;
     display: flex;
+    justify-content: center;
     margin-top: 1rem;
     gap: 1rem;
     padding: 1rem;
@@ -170,11 +196,51 @@
     border-radius: var(--arredondamento);
     box-shadow: var(--sombra);
     border: var(--borda);
-    overflow-y: scroll;
 }
 
 .report-side-box {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+
+.modal-popup-class {
+    height: 30vh;
+}
+
+/* .modal-box-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20rem;
+} */
+
+/* .modal-input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+} */
+
+.modal-input-box label {
+    text-align: start;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.modal-input-box input {
+    width: 93%;
+    height: 4rem;
+    border: var(--borda);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.button-modal-box {
+    display: flex;
+    flex-direction: row;
 }

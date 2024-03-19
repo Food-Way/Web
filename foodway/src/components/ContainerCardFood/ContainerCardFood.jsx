@@ -3,6 +3,8 @@ import "./ContainerCardFood.css";
 import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import ScrollReveal from 'scrollreveal';
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -25,6 +27,24 @@ const ContainerCardFood = ({ categories }) => {
   const slidesPorVisualizacao = calcularSlidesPorVisualizacao(tamanhoDoElemento);
 
   useEffect(() => {
+    const config = {
+      delay: 500,
+      distance: '50px',
+      duration: 500,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+    };
+
+    const elementsToReveal = [
+      '.carrossel-typefood'
+    ];
+
+    elementsToReveal.forEach((element) => {
+      if (element) {
+        ScrollReveal().reveal(element, config);
+      }
+    });
+    
     const calcularTamanhoDoElemento = () => {
       const elementoAlvo = document.getElementById("carrosselId");
       if (elementoAlvo) {
