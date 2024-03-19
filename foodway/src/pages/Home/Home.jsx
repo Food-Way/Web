@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContainerCardFood from "../../components/ContainerCardFood/ContainerCardFood";
 import MainBanner from "../../components/MainBanner/MainBanner";
 import CarrosselEstablishment from "../../components/CarrosselEstablishment/CarrosselEstablishment";
@@ -21,8 +21,6 @@ const Home = () => {
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
   const [category, setCategory] = useState([]);
-  const containerCardFoodRef = useRef(null);
-  const carrosselEstablishmentRef = useRef(null);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
   };
@@ -58,8 +56,6 @@ const Home = () => {
     };
 
     const elementsToReveal = [
-      containerCardFoodRef.current,
-      carrosselEstablishmentRef.current,
       '.loader-container-home-category',
       '.card-avalie-restaurantes',
       '.cto-container',

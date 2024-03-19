@@ -1,7 +1,7 @@
 import HomeCardEstablishment from "../HomeCardEstablishment/HomeCardEstablishment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-
+import ScrollReveal from 'scrollreveal';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,6 +14,24 @@ import { useNavigate } from "react-router-dom";
 const CarrosselEstablishment = ({ headerText, establishment }) => {
   const navigate = useNavigate();
   useEffect(() => {
+
+    const config = {
+      delay: 500,
+      distance: '50px',
+      duration: 500,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+    };
+
+    const elementsToReveal = [
+      '.carrossel-establishment-container'
+    ];
+
+    elementsToReveal.forEach((element) => {
+      if (element) {
+        ScrollReveal().reveal(element, config);
+      }
+    });
 
   }, [establishment]);
 
