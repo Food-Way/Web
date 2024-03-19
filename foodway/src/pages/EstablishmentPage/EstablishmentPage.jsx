@@ -31,7 +31,7 @@ const EstablishmentPage = () => {
   const handleCloseContactModal = () => setOpenContactModal(false);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const [messageData, setMessageData] = useState([]);
+  const [messageData, setMessageData] = useState("");
   const params = useParams();
   const idUser = params.id;
 
@@ -120,6 +120,10 @@ const EstablishmentPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleChangeMessageData = (e) => {
+    setMessageData(e.target.value); 
   };
 
   const handleSendEmail = async () => {
@@ -342,7 +346,7 @@ const EstablishmentPage = () => {
                           // value={`
                           //        <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
                           //      `}
-                          onChange={setMessageData}
+                          onChange={handleChangeMessageData}
                         />
 
                       </form>
