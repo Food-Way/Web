@@ -13,12 +13,14 @@
   background-size: contain;
   transition: 0.5s;
 }
+
 .main-banner-container h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 90%;
 }
+
 .main-banner-container h1 span {
   color: var(--cinza);
   text-align: center;
@@ -44,6 +46,7 @@
     font-size: 50%;
   }
 }
+
 @media (max-width: 850px) {
   .main-banner-container {
     font-size: 30%;

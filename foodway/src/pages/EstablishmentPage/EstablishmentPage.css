@@ -265,6 +265,7 @@
     justify-content: center;
     flex-direction: row;
     align-items: start;
+    margin-top: 20px;
 }
 
 .user-content-comment-reply {

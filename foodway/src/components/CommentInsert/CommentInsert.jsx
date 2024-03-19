@@ -5,6 +5,7 @@ import { TextAreaFieldComment } from '../InputField/InputField';
 import parseJWT from "../../util/parseJWT";
 import './CommentInsert.css';
 import { toast } from 'react-toastify';
+import { StarEstablishment } from '../StarEstablishment/StarEstablishment';
 const CommentInsert = ({ establishmentId, onCommentAdded }) => {
   const profilePhoto = sessionStorage.getItem("profile-photo") ? atob(sessionStorage.getItem("profile-photo")) : "";
   const [commentText, setCommentText] = useState('');
@@ -12,7 +13,26 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
   const handleCommentChange = (event) => {
     setCommentText(event.target.value);
   };
+
+  const [ratings, setRatings] = useState({
+    AMBIENT: 0,
+    SERVICE: 0,
+    FOOD: 0
+  });
+
+  const handleChange = (type, newValue) => {
+    setRatings(prevRatings => ({
+
+      ...prevRatings,
+      [type.toUpperCase()]: newValue,
+    }
+
+    ));
+    console.log(ratings);
+  };
+
   const validaMessagem = (message) => {
+
     if (message === '') {
       toast.error('Comentário não pode ser vazio');
       return false;
@@ -24,10 +44,14 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
       toast.error('Comentário não pode ter menos de 10 caracteres');
       return false;
     }
-
+    if ((ratings.FOOD == 0) && (ratings.SERVICE == 0) && (ratings.AMBIENT == 0)) {
+      toast.error('Preencha a avaliação');
+      return false;
+    }
     return true;
   };
   const handleSendComment = async (comment) => {
+    var listRateStatus = [];
     if (validaMessagem(comment)) {
       const commentObj = {
         idCustomer: bodyToken.idUser,
@@ -36,6 +60,36 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
         comment: comment,
         images: []
       }
+
+      const typeOfRate = [
+        { tipo: "AMBIENT", valor: ratings.AMBIENT },
+        { tipo: "FOOD", valor: ratings.FOOD },
+        { tipo: "SERVICE", valor: ratings.SERVICE }
+      ];
+
+      for (const rate of typeOfRate) {
+        const rateObj = {
+          "idCustomer": bodyToken.idUser,
+          "idEstablishment": establishmentId,
+          "ratePoint": rate.valor,
+          "typeRate": rate.tipo
+        };
+
+        console.log(rateObj)
+        console.log(rateObj.idCustomer)
+        console.log(rateObj.idEstablishment)
+        console.log(rateObj.ratePoint)
+        console.log(rateObj.typeRate)
+        const responseRate = await api_call("post", "/rates", rateObj, atob(sessionStorage.getItem("token")));
+        console.log(responseRate);
+        // console.log("responseRate: " + responseRate)
+        // console.log("Passei " + rateObj.typeRate)
+        // listRateStatus.push(responseRate.status);
+      }
+      // console.log(listRateStatus);
+
+
+
       const response = await api_call("post", "/comments", commentObj, atob(sessionStorage.getItem("token")));
       if (response.status === 200) {
         toast.success('Comentário adicionado com sucesso');
@@ -66,7 +120,27 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
           classNameGeral="form-group-comment"
         />
       </span>
-      <div className="actions-section">
+      <div className="actions-section-default">
+        <div>
+
+          <StarEstablishment
+            type="FOOD"
+            value={ratings.FOOD}
+            onChange={(newValue) => handleChange('FOOD', newValue)}
+          />
+          <StarEstablishment
+            type="AMBIENT"
+            value={ratings.AMBIENT}
+            onChange={(newValue) => handleChange('AMBIENT', newValue)}
+          />
+          <StarEstablishment
+            type="SERVICE"
+            value={ratings.SERVICE}
+            onChange={(newValue) => handleChange('SERVICE', newValue)}
+          />
+
+        </div>
+
         <div className="container_button-comment">
           <ButtonPrimary text="Cancelar" className="comment-cancel" onclick={clearCommentText} />
           <ButtonPrimary text="Adicionar" className="comment-add" onclick={() => {
@@ -102,7 +176,8 @@ const CommentInsertReply = ({ establishmentId, onCommentAdded, commentParent }) 
     return true;
   };
 
-  const handleSendComment = async (comment) => {
+
+  const handleSendCommentReply = async (comment) => {
     if (validaMessagem(comment)) {
       const commentObj = {
         idParent: commentParent,
@@ -146,7 +221,7 @@ const CommentInsertReply = ({ establishmentId, onCommentAdded, commentParent }) 
         <div className="container_button-comment">
           <ButtonPrimary text="Cancelar" className="comment-cancel" onclick={clearCommentText} />
           <ButtonPrimary text="Adicionar" className="comment-add" onclick={() => {
-            handleSendComment(commentText)
+            handleSendCommentReply(commentText)
           }} />
         </div>
       </div>

@@ -104,3 +104,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.user-content-values-reply {
+    margin-top: 20px;
+}

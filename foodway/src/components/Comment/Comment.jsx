@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
+
 import Upvotes from "../../components/Upvotes/Upvotes";
 import parseJWT from "../../util/parseJWT";
 import { CommentInsertReply, CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
@@ -94,9 +95,7 @@ const CommentIndividual = (props) => {
     const [updateText, setUpdateText] = useState(false);
     const [showCommentInsert, setShowCommentInsert] = useState(true);
 
-    {/*const addCommentToState = (newComment) => {
-        setComments(prevComments => [...prevComments, newComment]);
-    }; */}
+
     function analysisText(text, category, upText) {
         var newText = "";
         const tamanho = text.length;
@@ -213,12 +212,8 @@ const CommentReply = (props) => {
             <div className="user-content-comment-reply">
                 {/*<div className="establishment-bar" />*/}
                 <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
-                <div className="user-content-values">
-                    <ReactStars
-                        size={24}
-                        activeColor={"var(--primary)"}
-                        edit={false}
-                        value={2} />
+                <div className="user-content-values user-content-values-reply">
+
                     <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                     <div className="establishment-upcomment-box">
                         <div className="establishment-upcomment-values">
