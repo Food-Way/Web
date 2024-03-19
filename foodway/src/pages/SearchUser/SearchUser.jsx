@@ -118,7 +118,7 @@ function SearchUser() {
                                     </div>
                                 </div>
                                 <div className="search-body">
-                                    {search.length === 0 && (
+                                    {search === undefined || search.length === 0 && (
                                         <MyLoader />
                                     )}
                                     {search && search.map((item, index) => (

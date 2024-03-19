@@ -158,7 +158,7 @@ const EstablishmentPage = () => {
               style={{ backgroundImage: `url(${profile.profileHeaderImg})` }}>
               <div className="establishment-content-banner-box">
                 <div className="establishment-title-box">
-                  <h1 className="title-establishment">{profile.name}</h1>
+                  <h1 className="title-establishment">{profile.establishmentName}</h1>
                   <span>{profile.culinary}</span>
                   {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
@@ -223,7 +223,7 @@ const EstablishmentPage = () => {
               </div>
               <div className="establishment-side-box">
                 <div className="establishment-general-box">
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -233,7 +233,7 @@ const EstablishmentPage = () => {
                       <span>Comentários</span>
                     </div>
                   )}
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -243,7 +243,7 @@ const EstablishmentPage = () => {
                       <span>UpVotes</span>
                     </div>
                   )}
-                  {profile.length === 0 ? (
+                  {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
                   ) : (
                     <div className="establishment-value-box">
@@ -297,7 +297,7 @@ const EstablishmentPage = () => {
                     Localização
                   </span>
                   <div className="establishment-map-box">
-                    {url_maps.length === 0 ? (
+                    {url_maps === undefined || url_maps.length === 0 ? (
                       <MapsLoader />
                     ) : (
                       <iframe

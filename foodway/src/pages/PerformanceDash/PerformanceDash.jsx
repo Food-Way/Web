@@ -133,7 +133,7 @@ function PerformanceDash() {
                 <section>
                     <div className="sentiment-banner">
                         <div className="sentiment-dash-box">
-                            {reviews.length === 0 ? (
+                            {reviews === undefined || reviews.length === 0 ? (
                                 <CardLoader />
                             ) : (
                                 reviews.map((item, index) => (
@@ -147,16 +147,16 @@ function PerformanceDash() {
                     <section>
                         <div className="avaliation-dash-container">
                             <div className="avaliation-dash-box">
-                                {dashData.length === 0 ? (
+                                {dashData === undefined || dashData.length === 0 ? (
                                     <RateLoader />
                                 ) : (
                                     <div className="avaliation-dash-values">
                                         <div className="rate-dash-value">
                                             <span>Avaliação</span>
-                                            {/* <span>{dashData.establishment.generalRate.toFixed(2)}</span> */}
+                                            <span>{dashData.generalRate.toFixed(2)}</span>
                                         </div>
                                         <div className="avaliation-dash-card">
-                                            {dashData.establishmentRate.length === 0 ? (
+                                            {dashData.establishmentRate == undefined || dashData.establishmentRate.length === 0 ? (
                                                 <span className="no-content">Nenhuma avaliação recebida</span>
                                             ) : (
                                                 dashData.establishmentRate.map((item, index) => (
@@ -167,17 +167,17 @@ function PerformanceDash() {
                                     </div>
                                 )}
                                 <div className="tag-dash-box">
-                                    {dashData.length === 0 ? (
+                                    {dashData === undefined || dashData.length === 0 ? (
                                         <RateLoader />
                                     ) : (
                                         <TagDashCard tags={dashData.tags} />
                                     )}
                                 </div>
                             </div>
-                            {dashData.length === 0 ? (
+                            {dashData === undefined || dashData.length === 0 ? (
                                 <GraphLoader />
                             ) : (
-                                dashData.qtdEvaluationDaysForWeek.length === 0 ? (
+                                dashData.qtdEvaluationDaysForWeek === undefined || dashData.qtdEvaluationDaysForWeek.length === 0 ? (
                                     <span className="no-content">Nenhuma avaliação na última semana</span>
                                 ) : (
                                     <div className="graph-dash-box">
@@ -192,10 +192,10 @@ function PerformanceDash() {
                         <div className="comment-relevant-container">
                             <span className="title-comment-relevant">Comentários mais relevantes</span>
                             <div className="comment-relevant-box">
-                                {dashData.length === 0 ? (
+                                {dashData === undefined || dashData.length === 0 ? (
                                     <CommentLoader />
                                 ) : (
-                                    dashData.comments.length === 0 ? (
+                                    dashData.comments === undefined || dashData.comments.length === 0 ? (
                                         <span>Nenhum Comentário</span>
                                     ) : (
                                         dashData.comments.map((item, index) => (
