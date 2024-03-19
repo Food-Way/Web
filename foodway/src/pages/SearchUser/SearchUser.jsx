@@ -91,6 +91,8 @@ function SearchUser() {
     }, [searchCustomer, searchEstab]);
 
     useEffect(() => {
+        var html = document.querySelector('html');
+        html.style.overflowY = 'hidden';
         getSearchEstab({ filter: "RELEVANCE" });
         getSearchCustomer({ filter: "RELEVANCE" });
     }, []);

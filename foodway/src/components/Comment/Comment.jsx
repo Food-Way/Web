@@ -31,10 +31,10 @@ const Comment = (props) => {
     }
 
     function setSize(width, height, text) {
-        var minhaDiv = document.querySelectorAll(".comment-container");
+        var boxContent = document.querySelectorAll(".comment-container");
         var textContent = document.querySelectorAll(".comment-content-text");
 
-        minhaDiv.forEach(element => {
+        boxContent.forEach(element => {
             element.style.width = width;
             element.style.height = height;
         });

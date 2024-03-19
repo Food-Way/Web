@@ -35,6 +35,8 @@ const Home = () => {
   };
 
   useEffect(() => {
+    var html = document.querySelector('html');
+    html.style.overflowY = 'auto';
     async function fetchData() {
       sessionStorage.setItem('category', btoa(999));
       await Promise.all([

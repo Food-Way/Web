@@ -67,6 +67,7 @@ const SignIn = () => {
             }, 2000);
           } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
             setTimeout(() => {
+              sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
               // console.log("Redirecting to /establishment/performance...");
               navigate(`/establishment/info/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
               // location.reload();

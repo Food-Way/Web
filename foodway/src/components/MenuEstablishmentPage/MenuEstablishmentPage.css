@@ -139,7 +139,7 @@
   margin-top: 2.1rem;
 }
 
-.qr-code-box {
+/* .qr-code-box {
   width: 15vw;
   height: 20vh;
   display: flex;
@@ -150,14 +150,14 @@
   box-shadow: var(--sombra);
   border: var(--borda);
   margin-top: 1rem;
-}
+} */
 
-.qr-code {
+/* .qr-code {
   width: 15vw;
   height: 15vh;
-}
+} */
 
-.report-side-container {
+/* .report-side-container {
   height: 31.6rem;
   flex-direction: column;
   display: flex;
@@ -168,8 +168,7 @@
   border-radius: var(--arredondamento);
   box-shadow: var(--sombra);
   border: var(--borda);
-  overflow-y: scroll;
-}
+} */
 
 .report-side-box {
   display: flex;
