@@ -157,7 +157,7 @@ const UserProfile = () => {
       <div className="profile-container">
         <div className="profile">
           <section>
-            {user.length === 0 ? (
+            {user === undefined || user.length === 0 ? (
               <ProfileHeaderLoader />
             ) : (
               <img className="user-banner" src={user.profileHeaderImg} alt="Foto de capa" />
@@ -165,7 +165,7 @@ const UserProfile = () => {
             <div className="user-info-container">
               <div className="user-info-box">
                 <div className="user-info-left">
-                  {user.length === 0 ? (
+                  {user === undefined || user.length === 0 ? (
                     <ProfilePhotoLoader />
                   ) : (
                     <img className="profile-photo" src={user.profilePhoto} alt="Foto de perfil" />
@@ -173,7 +173,7 @@ const UserProfile = () => {
                   <span className="profile-username"></span>
                   {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
                 </div>
-                {user.length === 0 ? (
+                {user === undefined || user.length === 0 ? (
                   <ProfileStatusLoader />
                 ) : (
                   <div className="user-info-right">
@@ -193,10 +193,10 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
-                {comments.length === 0 ? (
+                {comments === undefined || comments.length === 0 ? (
                   <CommentLoader />
                 ) : (
-                  comments.length === 0 ? (
+                  comments === undefined || comments.length === 0 ? (
                     <span className="no-content">Nenhuma avaliação</span>
                   ) : (
                     comments.map((item, index) => (
@@ -218,10 +218,10 @@ const UserProfile = () => {
             <div className="fav-estabs-container">
               <span className="profile-title">Restaurantes favoritos</span>
               <div className="fav-estabs-box">
-                {establishments.length === 0 ? (
+                {establishments === undefined || establishments.length === 0 ? (
                   <FavEstablishmentsLoader />
                 ) : (
-                  establishments.length === 0 ? (
+                  establishments === undefined || establishments.length === 0 ? (
                     <span className="no-content">Nenhum restaurante favorito</span>
                   ) : (
                     establishments.map((item, index) => (

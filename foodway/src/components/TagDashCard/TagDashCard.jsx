@@ -55,7 +55,7 @@ function TagDashCard(props) {
                             </div>
                             <div className="tag-modal-available">
                                 <span>Tags Disponíveis</span>
-                                {allTags === undefined || allTags.length === 0  ? (
+                                {allTags === undefined || allTags.length === 0 ? (
                                     <span className="no-content">Nenhuma tag disponível</span>
                                 ) : (
                                     allTags.map((item, index) => (

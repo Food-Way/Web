@@ -65,7 +65,7 @@ const Relevance = () => {
                 <div className="best-relevance-box">
                     <span className="relevance-title">Relevância - {atob(sessionStorage.getItem("culinary"))}</span>
                     <div className="best-relevance">
-                        {top3.length === 0 ? (
+                        {top3 === undefined || top3.length === 0 ? (
                             <CardLoader />
                         ) : (
                             top3.map((item, index) => (

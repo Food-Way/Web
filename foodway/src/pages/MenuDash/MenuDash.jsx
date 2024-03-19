@@ -173,10 +173,10 @@ const MenuDash = () => {
                   </div>
                 </div>
                 <div className="menu-dash-box">
-                  {menu.length === 0 ? (
+                  {menu === undefined || menu.length === 0 ? (
                     <MenuLoader />
                   ) : (
-                    menu.length === 0 ? (
+                    menu === undefined || menu.length === 0 ? (
                       <span>Nenhum produto</span>
                     ) : (
                       menu.map((item, index) => (

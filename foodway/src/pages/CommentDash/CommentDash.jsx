@@ -46,12 +46,12 @@ const CommentDash = () => {
                     <section>
                         <div className="comment-dash-container">
                             <div className={`comment-dash-box ${comments.length === 0 ? "comment-loader" : ""}`}>
-                                {comments.length === 0 ? (
+                                {comments === undefined || comments.length === 0 ? (
                                     <div>
                                         <CommentLoader />
                                     </div>
                                 ) : (
-                                    comments.length === 0 ? (
+                                    comments === undefined || comments.length === 0 ? (
                                         <span>Nenhum comentário</span>
                                     ) : (
                                         comments.map((comment, index) => (
