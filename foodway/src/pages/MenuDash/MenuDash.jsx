@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import QRCode from "react-qr-code";
+// import QRCode from "react-qr-code";
 import Product from "../../components/Product/Product";
-const Plus = "https://foodway-public-s3.s3.amazonaws.com/website-images/plus.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
+const Plus = "https://foodway-public-s3.s3.amazonaws.com/website-images/plus.svg";
 const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
@@ -12,11 +12,15 @@ import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
 import { toast } from 'react-toastify';
 import "./MenuDash.css";
-
+import jsPDF from 'jspdf';
+import fundoPdf from "../../../public/rank-background.png";
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
   const [menu, setMenu] = useState([]);
+
+  var urlDev = "http://localhost:5173/";
+  var urlProd = "";
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
@@ -121,6 +125,64 @@ const MenuDash = () => {
     selectedFilter.classList.toggle("item-filter-active");
   }
 
+  const handleDownloadPDF = async () => {
+    const qrData = `${urlDev}/establishment-menu/004cfdcd-4799-4224-8723-8015f8f85b44`;
+    const qrSize = "200x200";
+    const bgColor = "f7f7f7";
+    const color = "222222";
+    const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}&data=${encodeURIComponent(qrData)}&bgcolor=${bgColor}&color=${color}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const blob = await response.blob();
+
+      const pdf = new jsPDF();
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdfWidth;
+      const imgBackground = fundoPdf;
+
+      const img = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(blob);
+      });
+
+      const title = `${atob(sessionStorage.getItem("establishmentName"))} - Cardápio`;
+      const subTitle = "Leia o QR code abaixo e tenha mais informações dos produtos";
+      const foodway = "Foodway 2024";
+
+      pdf.addImage(imgBackground, 'PNG', -10, 0, 300, 300);
+
+      pdf.setDrawColor(255, 255, 255);
+      pdf.setLineWidth(2);
+      pdf.setFillColor(34, 34, 34);
+      pdf.roundedRect(20, 50, pdfWidth - 40, 170, 5, 5, 'FD');
+
+      pdf.setTextColor(255, 255, 255);
+
+      pdf.setFontSize(20);
+
+      pdf.setFont("helvetica", "bold");
+      pdf.text(title, pdfWidth / 2, 65, { align: 'center' });
+
+      pdf.setFont("helvetica", "normal");
+
+      pdf.setFontSize(14);
+
+      pdf.text(subTitle, pdfWidth / 2, 75, { align: 'center' });
+
+      pdf.addImage(img, 'PNG', pdfWidth / 2 - pdfHeight / 4, 85, pdfHeight / 2, pdfHeight / 2);
+
+      pdf.setFontSize(14);
+
+      pdf.text(foodway, pdfWidth / 2, 205, { align: 'center' });
+
+      pdf.save('qrcode.pdf');
+    } catch (error) {
+      console.error('Error downloading QR Code:', error);
+    }
+  };
+
   useEffect(() => {
     getMenu({ filter: "name" });
   }, []);
@@ -199,21 +261,14 @@ const MenuDash = () => {
               <div className="side-qr-code">
                 <span className="title">QrCode</span>
                 <div className="qr-code-box">
-                  <QRCode className="qr-code" value="samuel" />
+                  <img src={`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:5173/establishment-menu/${bodyToken.idUser}&size=100`} alt="foto" />
+                  <button className="btn-qr-code" onClick={handleDownloadPDF}>Download do QR code</button>
                 </div>
               </div>
               <div className="side-report">
-                <span className="title">Relatórios</span>
+                <span className="title">Relatório</span>
                 <div className="report-side-container">
                   <div className="report-side-box">
-                    <Report />
-                    <Report />
-                    <Report />
-                    <Report />
-                    <Report />
-                    <Report />
-                    <Report />
-                    <Report />
                     <Report />
                   </div>
                 </div>

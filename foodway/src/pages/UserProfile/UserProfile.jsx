@@ -148,6 +148,8 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
+    var html = document.querySelector('html');
+    html.style.overflowY = 'auto';
     getUser();
     scrollToBottomAndBack();
   }, []);

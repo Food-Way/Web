@@ -2,6 +2,7 @@
 
 .performance-dash-container {
     width: calc(108vw - 15vw);
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

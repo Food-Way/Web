@@ -57,13 +57,18 @@
 }
 
 .options-location div span {
-    color: var(--preto);
+    color: var(--branco);
     font-weight: 500;
 }
 
 .options-location div:hover {
     background-color: var(--branco);
     border-radius: var(--arredondamento);
+    transition: all 0.3s;
+}
+
+.options-location div:hover span {
+    color: var(--preto);
     transition: all 0.3s;
 }
 

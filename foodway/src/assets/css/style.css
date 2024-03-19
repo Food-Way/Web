@@ -20,6 +20,7 @@ html {
   background-color: var(--brancoGelo);
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
