@@ -1,37 +1,15 @@
 import React from 'react';
 import { BarChart, Bar, Rectangle, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
-const GraphCard = () => {
-    const data = [
-        {
-            name: 'Segunda',
-            quantidade: 2400,
-        },
-        {
-            name: 'Terça',
-            quantidade: 1398,
-        },
-        {
-            name: 'Quarta',
-            quantidade: 9800,
-        },
-        {
-            name: 'Quinta',
-            quantidade: 3908,
-        },
-        {
-            name: 'Sexta',
-            quantidade: 4800,
-        },
-        {
-            name: 'Sábado',
-            quantidade: 3800,
-        },
-        {
-            name: 'Domingo',
-            quantidade: 4300,
-        },
-    ];
+const GraphCard = (props) => {
+    var data = [];
+    props.dashData.map((item) => {
+        data.push({
+            nome: item.name,
+            quantidade: item.quantity
+        })
+    })
+
     return (
         <BarChart
             width={600}
@@ -45,7 +23,7 @@ const GraphCard = () => {
             }}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="nome" />
             <YAxis />
             <Tooltip />
 
