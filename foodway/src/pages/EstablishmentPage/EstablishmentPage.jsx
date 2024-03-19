@@ -31,7 +31,7 @@ const EstablishmentPage = () => {
   const handleCloseContactModal = () => setOpenContactModal(false);
   const [profile, setProfile] = useState([]);
   const [comments, setComments] = useState([]);
-  const [messageData, setMessageData] = useState([]);
+  const [messageData, setMessageData] = useState("");
   const params = useParams();
   const idUser = params.id;
 
@@ -122,13 +122,25 @@ const EstablishmentPage = () => {
     e.preventDefault();
   };
 
-  async function handleSendEmail() {
-    const response = await nifi_call("post", "/report", {
-      email: bodyToken.email,
-      establishmentEmail: profile.email,
-      subject: "Reportar Problema no Estabelecimento",
-      message: messageData
-    });
+  const handleChangeMessageData = (e) => {
+    setMessageData(e.target.value); 
+  };
+
+  const handleSendEmail = async () => {
+    try {
+      const response = await nifi_call("post", "/report", {
+        complainantEmail: bodyToken.email,
+        complainantName: bodyToken.username,
+        emailMessage: messageData,
+        emailSubject: "Reportar Problema no Estabelecimento",
+        establishmentEmail: "leonardo.oliveira@sptech.school",
+        establishmentName: profile.establishmentName,
+        ownerName: profile.name
+      },null, null);
+      console.log(response);
+    }catch (error) {
+      console.log(error);
+    }
   }
 
 
@@ -334,7 +346,7 @@ const EstablishmentPage = () => {
                           // value={`
                           //        <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
                           //      `}
-                          onChange={setMessageData}
+                          onChange={handleChangeMessageData}
                         />
 
                       </form>

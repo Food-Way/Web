@@ -32,7 +32,7 @@ async function nifi_call(methodParam, urlParam, dataParam) {
     const response = await nifi_url({
       method: methodParam,
       url: urlParam,
-      data: dataParam ? JSON.stringify(dataParam) : undefined,
+      data: dataParam ? dataParam : undefined,
       headers: {
         "Content-Type": "application/json",
       },
