@@ -5,8 +5,9 @@ import CarrosselEstablishment from "../../components/CarrosselEstablishment/Carr
 import { ButtonPrimary, ButtonPrimaryLink, ButtonSecondary } from "../../components/Button/Button";
 import { Auth } from "../../components/Auth/Auth";
 import api_call from "../../services/apiImpl";
-import "./Home.css";
+import ScrollReveal from 'scrollreveal';
 import ContentLoader from "react-content-loader";
+import "./Home.css";
 
 const Home = () => {
   const establishmentIMG =
@@ -17,6 +18,11 @@ const Home = () => {
   const androidI = "https://foodway-public-s3.s3.amazonaws.com/website-images/android.svg";
   const androidBg = "https://foodway-public-s3.s3.amazonaws.com/website-images/coming-soon.png";
   const [isLoading, setIsLoading] = useState(true);
+  const [greaterRateEstab, setGreaterRateEstab] = useState([]);
+  const [greaterCommentsEstab, setGreaterEstab] = useState([]);
+  const [category, setCategory] = useState([]);
+  const containerCardFoodRef = useRef(null);
+  const carrosselEstablishmentRef = useRef(null);
   const androidStyle = {
     backgroundImage: `url(${androidBg})`,
   };
@@ -40,10 +46,32 @@ const Home = () => {
     }
 
     fetchData();
-  }, []); 
-  const [greaterRateEstab, setGreaterRateEstab] = useState([]);
-  const [greaterCommentsEstab, setGreaterEstab] = useState([]);
-  const [category, setCategory] = useState([]);
+
+    const config = {
+      delay: 500,
+      distance: '50px',
+      duration: 500,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+    };
+
+    const elementsToReveal = [
+      containerCardFoodRef.current,
+      carrosselEstablishmentRef.current,
+      '.loader-container-home-category',
+      '.card-avalie-restaurantes',
+      '.cto-container',
+      'cta-saiba-mais',
+      '.android-section-container',
+    ];
+
+    elementsToReveal.forEach((element) => {
+      if (element) {
+        ScrollReveal().reveal(element, config);
+      }
+    });
+
+  }, []);
 
   const CategoryLoader = () => (
     <ContentLoader
@@ -210,7 +238,7 @@ const Home = () => {
               </div>
 
               <img src={establishmentIMG} alt="Saiba mais estabelecimento" />
-              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url="/sign-up-establishment"  />
+              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url="/sign-up-establishment" />
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">
