@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
-import { HandleFormModal } from "../../components/Modal/Modal";
 import Product from "../../components/Product/Product";
 const Plus = "https://foodway-public-s3.s3.amazonaws.com/website-images/plus.svg";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -38,7 +37,7 @@ const MenuDash = () => {
 
   async function getMenu({ filter }) {
     const response = await api_call("get", `products/establishments/${bodyToken.idUser}/${filter}`, null, atob(sessionStorage.getItem("token")));
-    console.log(response.data);
+    // console.log(response.data);
     setMenu(response.data);
   }
 

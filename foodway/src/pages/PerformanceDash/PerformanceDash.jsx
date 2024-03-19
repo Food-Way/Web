@@ -99,24 +99,9 @@ function PerformanceDash() {
 
     async function getDashData() {
         const response = await api_call("get", `/dashboard/${idUser}`, null, atob(sessionStorage.getItem("token")));
-        console.log(response.data);
+        // console.log(response.data);
         setDashData(response.data);
     }
-
-    const rate = [
-        {
-            category: "Comida",
-            score: 4,
-        },
-        {
-            category: "Serviço",
-            score: 2,
-        },
-        {
-            category: "Atendimento",
-            score: 3.5,
-        }
-    ];
 
     const reviews = [
         {
@@ -168,33 +153,26 @@ function PerformanceDash() {
                                     <div className="avaliation-dash-values">
                                         <div className="rate-dash-value">
                                             <span>Avaliação</span>
-                                            <span>{dashData.establishment.generalRate.toFixed(2)}</span>
+                                            {/* <span>{dashData.establishment.generalRate.toFixed(2)}</span> */}
                                         </div>
                                         <div className="avaliation-dash-card">
-                                            {dashData.establishment.length === 0 ? (
+                                            {dashData.establishmentRate.length === 0 ? (
                                                 <span className="no-content">Nenhuma avaliação recebida</span>
                                             ) : (
-                                                <>
-                                                    <AvaliationDashCard rate={dashData.establishment.ambientRate} category={"Ambiente"} />
-                                                    <AvaliationDashCard rate={dashData.establishment.foodRate} category={"Comida"} />
-                                                    <AvaliationDashCard rate={dashData.establishment.serviceRate} category={"Atendimento"} />
-                                                </>
+                                                dashData.establishmentRate.map((item, index) => (
+                                                    <AvaliationDashCard rate={item.score} category={item.category} key={index} />
+                                                ))
                                             )}
                                         </div>
                                     </div>
                                 )}
-                                {dashData.length === 0 ? (
-                                    <RateLoader />
-                                ) : (
-                                    // dashdata.tags.length === 0 
-                                    dashData.length === 0 ? (
-                                        <span className="no-content">Nenhuma Tag</span>
+                                <div className="tag-dash-box">
+                                    {dashData.length === 0 ? (
+                                        <RateLoader />
                                     ) : (
-                                        <div className="tag-dash-box">
-                                            <TagDashCard />
-                                        </div>
-                                    )
-                                )}
+                                        <TagDashCard tags={dashData.tags} />
+                                    )}
+                                </div>
                             </div>
                             {dashData.length === 0 ? (
                                 <GraphLoader />
@@ -204,7 +182,7 @@ function PerformanceDash() {
                                 ) : (
                                     <div className="graph-dash-box">
                                         <span>Avaliação Recebidas</span>
-                                        <GraphCard />
+                                        <GraphCard dashData={dashData.qtdEvaluationDaysForWeek} />
                                     </div>
                                 )
                             )}
