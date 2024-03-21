@@ -56,40 +56,34 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
       const commentObj = {
         idCustomer: bodyToken.idUser,
         idEstablishment: establishmentId,
-        userPhoto: atob(sessionStorage.getItem("profile-photo")),
+        userPhoto: atob(sessionStorage.getItem("profilePhoto")),
         comment: comment,
         images: []
       }
+      console.log(commentObj);
+      const rateObj = {
+        "idCustomer": bodyToken.idUser,
+        "idEstablishment": establishmentId,
+        "rates": [
+          {
+            "name": "AMBIENT",
+            "ratePoint": ratings.AMBIENT
+          },
+          {
+            "name": "FOOD",
+            "ratePoint": ratings.FOOD
+          },
+          {
+            "name": "SERVICE",
+            "ratePoint": ratings.SERVICE
+          }
 
-      const typeOfRate = [
-        { tipo: "AMBIENT", valor: ratings.AMBIENT },
-        { tipo: "FOOD", valor: ratings.FOOD },
-        { tipo: "SERVICE", valor: ratings.SERVICE }
-      ];
+        ]
+      };
 
-      for (const rate of typeOfRate) {
-        const rateObj = {
-          "idCustomer": bodyToken.idUser,
-          "idEstablishment": establishmentId,
-          "ratePoint": rate.valor,
-          "typeRate": rate.tipo
-        };
-
-        console.log(rateObj)
-        console.log(rateObj.idCustomer)
-        console.log(rateObj.idEstablishment)
-        console.log(rateObj.ratePoint)
-        console.log(rateObj.typeRate)
-        const responseRate = await api_call("post", "/rates", rateObj, atob(sessionStorage.getItem("token")));
-        console.log(responseRate);
-        // console.log("responseRate: " + responseRate)
-        // console.log("Passei " + rateObj.typeRate)
-        // listRateStatus.push(responseRate.status);
-      }
-      // console.log(listRateStatus);
-
-
-
+      console.log("RateObj: " + rateObj);
+      const responseRate = await api_call("post", "/rates", rateObj, atob(sessionStorage.getItem("token")));
+      console.log(responseRate);
       const response = await api_call("post", "/comments", commentObj, atob(sessionStorage.getItem("token")));
       if (response.status === 200) {
         toast.success('Comentário adicionado com sucesso');
@@ -125,16 +119,19 @@ const CommentInsert = ({ establishmentId, onCommentAdded }) => {
 
           <StarEstablishment
             type="FOOD"
+            name={"Comida"}
             value={ratings.FOOD}
             onChange={(newValue) => handleChange('FOOD', newValue)}
           />
           <StarEstablishment
             type="AMBIENT"
+            name={"Ambiente"}
             value={ratings.AMBIENT}
             onChange={(newValue) => handleChange('AMBIENT', newValue)}
           />
           <StarEstablishment
             type="SERVICE"
+            name={"Atendimento"}
             value={ratings.SERVICE}
             onChange={(newValue) => handleChange('SERVICE', newValue)}
           />

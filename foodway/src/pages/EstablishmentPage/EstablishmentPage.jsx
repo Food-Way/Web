@@ -34,6 +34,7 @@ const EstablishmentPage = () => {
   const params = useParams();
   const idEstablishment = params.id;
 
+
   function handleOpenReportModal() {
     if (sessionStorage.getItem("token")) {
       setOpenReportModal(true);
@@ -121,7 +122,7 @@ const EstablishmentPage = () => {
   };
 
   const handleChangeMessageData = (e) => {
-    setMessageData(e.target.value); 
+    setMessageData(e.target.value);
   };
 
   const handleSendEmail = async () => {
@@ -134,15 +135,16 @@ const EstablishmentPage = () => {
         establishmentEmail: "leonardo.oliveira@sptech.school",
         establishmentName: profile.establishmentName,
         ownerName: profile.name
-      },null, null);
+      }, null, null);
       console.log(response);
-    }catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }
 
 
   useEffect(() => {
+    console.log("idEstablishment: " + idEstablishment)
     getEstablishmentProfileData();
   }, []);
 

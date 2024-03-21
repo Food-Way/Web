@@ -14,7 +14,7 @@ const ratingTexts = {
     5: 'Excepcional',
 };
 
-const StarEstablishment = ({ type, value, onChange }) => {
+const StarEstablishment = ({ type, value, onChange, name }) => {
     const [ratingText, setRatingText] = useState('');
 
     // Atualiza o texto da avaliação sempre que o valor muda
@@ -24,7 +24,7 @@ const StarEstablishment = ({ type, value, onChange }) => {
 
     return (
         <div className='rate-select'>
-            <p>{type}</p>
+            <p>{name}</p>
             <div className="star-component">
                 <ReactStars
                     count={5}
