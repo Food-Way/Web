@@ -35,12 +35,12 @@ const Rotas = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up-customer" element={<SignupCostumer />} />
           <Route path="/sign-up-establishment" element={<SignupCostumerEstablishment />} />
-          {/* <Route path="/establishment/info" element={<EstablishmentPage />} /> */}
+          <Route path="/establishment/info/:id" element={<EstablishmentPage />} />
           <Route path="/establishment-menu/:id" element={<MenuUser />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/establishment" element={<EstablishmentRender />}>
-              <Route path="info/:id" element={<EstablishmentPage /> } />
+              <Route path="page/info/:id" element={<EstablishmentPage /> } />
               <Route path="edit" element={<EstablishmentEditPersonal />} />
               <Route path="performance" element={<PerformanceRender />} >
                 <Route path="comments/:id" element={<CommentDash />} />

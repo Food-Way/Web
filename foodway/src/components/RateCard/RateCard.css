@@ -1,7 +1,7 @@
 @import url(../../assets/css/style.css);
 
 .rate-container {
-    height: 10rem;
+    height: 15rem;
     display: flex;
     align-items: center;
     background-color: var(--branco);

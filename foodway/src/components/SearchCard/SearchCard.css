@@ -21,10 +21,16 @@
     gap: 1rem;
 }
 
+.card-header {
+    height: 14vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--brancoGelo);
+}
+
 .card-image {
     width: 7vw;
-    height: 13vh;
-    background-color: var(--brancoGelo);
     border-radius: .6rem;
     object-fit: cover;
     object-position: center;
@@ -34,12 +40,6 @@
 .card-body {
     display: flex;
     flex-direction: column;
-}
-
-.card-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .card-footer {

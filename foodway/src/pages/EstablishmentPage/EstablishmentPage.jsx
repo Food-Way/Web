@@ -318,7 +318,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-report-box">
                   <img src={Report} alt="Ícone de perigo" />
                   <span onClick={handleOpenReportModal}>Reportar</span>
-                  <GenericModal open={openReportModal} handleClose={handleCloseReportModal}>
+                  <GenericModal classNameModal={"modal-page-establishment-report"} classNameBox={"box-page-establishment-report"} open={openReportModal} handleClose={handleCloseReportModal}>
                     <div className="email-modal-container">
                       <form onSubmit={handleSubmit}>
                         <InputField
@@ -351,10 +351,10 @@ const EstablishmentPage = () => {
 
                       </form>
                       <div className="button-modal-container">
-                        <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"50%"} />
-                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"50%"} />
+                        <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"7rem"} />
+                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"7rem"}  />
                       </div>
-                    </div>
+                      </div>
                   </GenericModal>
                 </div>
               </div>

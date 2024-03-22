@@ -24,7 +24,7 @@ const SearchCard = (props) => {
             <div className="card-container">
                 <div className="card-box">
                     <div className="card-header">
-                        <img src={props.photo} alt="" className="Foto de Perfil" />
+                        <img src={props.photo} alt="Foto de Perfil" className="card-image" />
                     </div>
                     <div className="card-body">
                         <span className="user-title">{props.name}</span>
