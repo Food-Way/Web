@@ -95,7 +95,7 @@ const Comment = (props) => {
                             </div> : <div className="more-text"></div>} */}
                     </div>
                     <div className="comment-footer">
-                        <Upvotes 
+                        <Upvotes
                             upvotes={props.upvotes}
                         />
                     </div>
@@ -149,12 +149,14 @@ const CommentIndividual = (props) => {
                         <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                         <div className="establishment-upcomment-box">
                             <div className="establishment-upcomment-values">
-                                <Upvotes 
-                                    upvotes={props.upvotes}
-                                    idComment={props.idComment}
-                                    idCustomer={atob(sessionStorage.getItem("idUser"))}
-                                    idEstablishment={props.idEstablishment}
-                                />
+                                {
+                                    <Upvotes
+                                        upvotes={props.upvotes}
+                                        idComment={props.idComment}
+                                        idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CUSTOMER' ? bodyToken.idUser : null}
+                                        idEstablishment={props.idEstablishment}
+                                    />
+                                }
                                 <img src={ImageComment} alt="Ícone de comentário" />
                             </div>
                             {props.comment.length > 100 ?
@@ -213,7 +215,7 @@ const CommentReply = (props) => {
                     <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                     <div className="establishment-upcomment-box">
                         <div className="establishment-upcomment-values">
-                            <Upvotes 
+                            <Upvotes
                                 upvotes={props.upvotes}
                                 idComment={props.idComment}
                                 idCustomer={atob(sessionStorage.getItem("idUser"))}
