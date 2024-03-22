@@ -17,10 +17,13 @@ import fundoPdf from "../../../public/rank-background.png";
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
-  const [menu, setMenu] = useState([]);
 
-  var urlDev = "http://localhost:5173/";
-  var urlProd = "";
+  const [menu, setMenu] = useState([]);
+  let protocol = window.location.protocol;
+  let host = window.location.hostname;
+  let port = window.location.port ? ':' + window.location.port : '';
+  let urlBase = protocol + '//' + host + port + '/';
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
@@ -126,7 +129,7 @@ const MenuDash = () => {
   }
 
   const handleDownloadPDF = async () => {
-    const qrData = `${urlDev}/establishment-menu/004cfdcd-4799-4224-8723-8015f8f85b44`;
+    const qrData = `${urlBase}/establishment-menu/${bodyToken.idUser}`;
     const qrSize = "200x200";
     const bgColor = "f7f7f7";
     const color = "222222";

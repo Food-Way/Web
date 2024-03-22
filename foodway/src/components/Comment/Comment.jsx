@@ -145,6 +145,15 @@ const CommentIndividual = (props) => {
                                 <button className="btn_subcomment" onClick={() => {
                                     setShowCommentInsert(!showCommentInsert);
                                 }}><img src={ImageComment} alt="Image comment" /></button>
+                                {
+                                    <Upvotes
+                                        upvotes={props.upvotes}
+                                        idComment={props.idComment}
+                                        idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CUSTOMER' ? bodyToken.idUser : null}
+                                        idEstablishment={props.idEstablishment}
+                                    />
+                                }
+                                <img src={ImageComment} alt="Ícone de comentário" />
                             </div>
                             {props.comment.length > 100 ?
                                 <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>

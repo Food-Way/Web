@@ -23,10 +23,9 @@ const GraphCard = (props) => {
             }}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="nome" />
+            <XAxis dataKey="nome" tick={{ fontSize: 13 }} />
             <YAxis />
             <Tooltip />
-
             <Bar dataKey="quantidade" fill="var(--primary)" activeBar={<Rectangle fill="#8B0000" stroke="var(--primary)" />} />
         </BarChart>
     );

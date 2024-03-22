@@ -42,7 +42,7 @@ const MenuEstablishment = (props) => {
       navigate("/establishment/search");
     } else if (className == ".profile-item") {
       if (atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT") {
-        navigate(`/establishment/info/${bodyToken.idUser}`);
+        navigate(`/establishment/page/info/${bodyToken.idUser}`);
       } else {
         navigate(`/user/profile/${bodyToken.idUser}`);
       }
@@ -92,7 +92,7 @@ const MenuEstablishment = (props) => {
       path = ".profile-item";
     }
 
-    if (location.pathname == "/establishment/info") {
+    if (location.pathname.startsWith("/establishment/page/info/")) {
       path = ".profile-item";
     }
 
@@ -172,7 +172,8 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: "100vh",
+                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "91.5vh" : 
+                location.pathname.startsWith("/user/search") ? "100vh" : "100%",
                 width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
@@ -180,7 +181,7 @@ const MenuEstablishment = (props) => {
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
                 paddingLeft: openMenu ? "0" : "3rem",
-                paddingBottom: "12vh",
+                paddingBottom: location.pathname.startsWith("/user/search") ? "12vh" : "5rem",
                 transition: "all 0.3s",
                 border: "none",
                 // position: "absolute",
