@@ -84,7 +84,7 @@ const SearchDetails = (props) => {
                             <span> {updateText ? "Ver menos" : "Ver mais"} </span>
                         </div> : <div className="more-text"></div>}
                     <div className="search-detail-footer">
-                        <ButtonPrimaryLink text="Acessar" url={props.typeUser == "ESTABLISHMENT" ? `/establishment/page/info/${props.idUser}` : `/user-profile/${props.idUser}`} />
+                        <ButtonPrimaryLink text="Acessar" url={props.typeUser == "ESTABLISHMENT" ? `/establishment/page/info/${props.idUser}` : `/user/profile/${props.idUser}`} />
                     </div>
                 </div>
             </div>

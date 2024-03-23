@@ -25,7 +25,7 @@ const RateCard = (props) => {
                             }
                         </div>
                         <div className="profile-rate">
-                            <span>{props.profileRate == null ? "0.0" : props.profileRate}</span>
+                            <span>{props.profileRate == null ? "0.0" : props.profileRate.toFixed(2)}</span>
                             <ReactStars
                                 count={5}
                                 edit={false}
