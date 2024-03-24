@@ -44,7 +44,7 @@
 }
 
 .check {
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   color: white;
 }
 
