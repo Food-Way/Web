@@ -204,9 +204,9 @@ const CommentInsertReply = ({ establishmentId, commentParent, setComments }) => 
       console.log("commentObj: " + commentObj)
       const response = await api_call("post", "/comments/child", commentObj, atob(sessionStorage.getItem("token")));
       if (response.status === 200) {
-        toast.success('Comentário adicionado com sucesso');
+        toast.success('Comentá rio adicionado com sucesso');
         clearCommentText();
-        // updateComments(establishmentId);
+        updateComments(establishmentId, setComments)
       } else {
         toast.error('Erro ao adicionar comentário');
       }

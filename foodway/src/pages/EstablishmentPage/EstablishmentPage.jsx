@@ -184,6 +184,7 @@ const EstablishmentPage = () => {
                         idEstablishment={idEstablishment}
                         userPhoto={commentParent.userPhoto}
                         replies={commentParent.replies}
+                        setComments={setComments}
                       />
                     </div>
                   ))}

@@ -160,7 +160,7 @@ const CommentIndividual = (props) => {
                     </div>
                 </div>
                 {showCommentInsert == false ? (<div className="insert-comment-field" >
-                    <CommentInsertReply establishmentId={props.idEstablishment} commentParent={props.idComment} />
+                    <CommentInsertReply establishmentId={props.idEstablishment} commentParent={props.idComment} setComments={props.setComments} />
                 </div>) : <></>}
                 <div className="reply-container" >
                     {props.replies.map((subComment, subIndex) =>
