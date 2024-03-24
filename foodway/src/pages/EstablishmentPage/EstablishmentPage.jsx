@@ -312,12 +312,11 @@ const EstablishmentPage = () => {
                           label="Mensagem"
                           placeholder="Mensagem"
                           id="message"
-                          // value={`
-                          //        <-! Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: {bodyToken.username}\n\nDescrição do problema:-->
-                          //      `}
+                          value={`
+                                 Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: ${bodyToken.username}\n\nDescrição do problema:
+                               `}
                           onChange={handleChangeMessageData}
                         />
-
                       </form>
                       <div className="button-modal-container">
                         <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"7rem"} />

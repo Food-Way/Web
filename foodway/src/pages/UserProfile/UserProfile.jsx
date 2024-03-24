@@ -6,7 +6,7 @@ import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import { useParams } from "react-router-dom";
-
+import parseJwt from "../../util/parseJwt";
 import "./UserProfile.css";
 
 const UserProfile = () => {
@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [establishments, setEstablishments] = useState([]);
   const params = useParams();
   const idUser = params.id;
+  const bodyToken = parseJwt();
 
   const ProfileHeaderLoader = () => (
     <ContentLoader
@@ -99,14 +100,13 @@ const UserProfile = () => {
 
 
   function firstAndEnd(nameUser) {
-    // console.log(nameUser);
     var nameUserDiv = document.querySelector(".profile-username");
-    let words = nameUser.split(' ');
+    let words = nameUser.trim().split(' '); 
     let firstWord = words[0];
-    let endWord = words[words.length - 1];
-    // console.log([firstWord + " " + endWord]);
-    nameUserDiv.innerHTML = `${[firstWord + " " + endWord]}`;
-  }
+    let endWord = words.length > 1 ? words[words.length - 1] : ''; 
+    let displayName = endWord ? firstWord + " " + endWord : firstWord; 
+    nameUserDiv.innerHTML = displayName;
+}
 
   const scrollToBottomAndBack = () => {
     if (profileDescriptionRef.current) {
@@ -173,7 +173,7 @@ const UserProfile = () => {
                     <img className="profile-photo" src={user.profilePhoto} alt="Foto de perfil" />
                   )}
                   <span className="profile-username"></span>
-                  {location.pathname.endsWith(idUser) ? <ButtonSecondaryLink url="/user-profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
+                  {sessionStorage.getItem("token") && location.pathname.endsWith(bodyToken.idUser) ? <ButtonSecondaryLink url="/user/profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
                 </div>
                 {user === undefined || user.length === 0 ? (
                   <ProfileStatusLoader />
@@ -233,6 +233,7 @@ const UserProfile = () => {
                         category={item.culinary[0].name}
                         image={item.photo}
                         rattingNumber={item.establishmentRate}
+                        onclick={() => window.location.href = `/establishment/page/info/${item.idEstablishment}`}
                       />
                     ))
                   )

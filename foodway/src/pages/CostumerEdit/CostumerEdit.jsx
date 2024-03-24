@@ -1,39 +1,32 @@
 import "./CostumerEdit.css";
-import { ButtonPrimary } from "../../components/Button/Button";
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button";
 import InputField from "../../components/InputField/InputField";
 import { TextAreaField } from "../../components/InputField/InputField";
-import { Box, Input, Modal } from "@mui/material";
 import { useState, useEffect } from "react";
-import api from "../../services/api";
 import { toast } from "react-toastify";
+import parseJWT from "../../util/parseJwt";
+import api_call from "../../services/apiImpl";
+import GenericModel from "../../components/GenericModel/GenericModel";
+import api from "../../services/api";
 
 const CostumerEdit = () => {
+  const bodyToken = parseJWT();
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
   const [content, setContent] = useState("");
-  const [selectedFileCover, setSelectedFileCover] = useState(null);
-  const [selectedFileProfile, setSelectedFileProfile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [coverImageUrlLocal, setCoverImageUrlLocal] = useState();
   const [coverImageName, setCoverImageName] = useState();
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
-  const [profileImageName, setProfileImageName] = useState();
   const [formData, setFormData] = useState({
     name: "",
     bio: "",
     password: "",
   });
-  const [user, setUser] = useState({
-    name: "",
-    bio: "",
-  });
 
   async function getUser() {
     try {
-      const idUser = atob(sessionStorage.getItem("idUser"));
-      const response = await api.get(`/customers/profile/${idUser}`, {
-        headers: {
-          Authorization: "Bearer " + atob(sessionStorage.getItem("token")),
-        },
-      });
-
+      const response = await api_call("get", `/customers/profile/${bodyToken.idUser}`, null, atob(sessionStorage.getItem("token"), null))
       if (response.status === 200) {
         // setCoverImageUrlLocal(response.data.profileHeaderImg);
         console.log("Imagem de capa teste: ", response.data.profileHeaderImg);
@@ -47,42 +40,8 @@ const CostumerEdit = () => {
     }
   }
 
-  useEffect(() => {
-    getUser();
-  }, []);
-  const checkPassword = () => {
-    if (formData.password.trim === "") {
-      toast.error("A senha não pode ser vazia");
-      return false;
-    } else {
-      return true;
-    }
-  };
-  const handleInputChange = (event) => {
-    const { id, value } = event.target;
-
-    setFormData({ ...formData, [id]: value });
-    console.log(formData);
-  };
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleOpenEdit = () => {
-    setContent("edit");
-    setOpen(true);
-  };
-  const handleOpenCover = () => {
-    setContent("cover");
-    setOpen(true);
-  };
-  const handleOpenProfile = () => {
-    setContent("profile");
-    setOpen(true);
-  };
-
   const handleUpdateProfileInfo = async () => {
-    
+
     if (!formData.name.trim() || !formData.bio.trim()) {
       toast.error("Preencha todos os campos para prosseguir");
       return;
@@ -91,28 +50,22 @@ const CostumerEdit = () => {
     const profileUpdateData = {
       name: formData.name,
       bio: formData.bio,
-      email: atob(sessionStorage.getItem("email")),
       profilePhoto: "",
       profileHeaderImg: "",
-      password: formData.password,
     };
     try {
-      //atualiza os dados do perfil
-      const updateResponse = await api.patch(
-        `/customers/profile/${atob(sessionStorage.getItem("idUser"))}`,
-        profileUpdateData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
-          },
-        }
-      );
+      const updateResponse = await api_call("patch", `/customers/profile/${bodyToken.idUser}`, profileUpdateData, atob(sessionStorage.getItem("token")), null)
+
       console.log("updateResponse", updateResponse);
 
       if (updateResponse.status === 200) {
         toast.success("Perfil atualizado com sucesso!");
         setCoverImageUrlLocal(updateResponse.data.profileHeaderImg);
+        setTimeout(() => {
+          window.location.reload();
+          sessionStorage.setItem("username", btoa(formData.name));
+        }, 2000);
+
         handleClose();
       }
     } catch (updateError) {
@@ -121,91 +74,228 @@ const CostumerEdit = () => {
     }
   };
 
-  const handleFileChangeCover = async (event) => {
-    const file = event.target.files[0];
-    try {
-      const isValid = await validarImagemCover(file);
-      if (isValid) {
-        setSelectedFileCover(file);
-      } else {
-        // Informar ao usuário que a imagem não atende aos requisitos
-        console.error(
-          "A imagem precisa ter pelo menos 1280 pixels de largura."
-        );
-      }
-    } catch (error) {
-      console.error("Erro de validação:", error);
-    }
+  const handleInputChange = (event) => {
+    const { id, value } = event.target;
+
+    setFormData({ ...formData, [id]: value });
+    console.log(formData);
   };
-  const handleFileChangeProfile = async (event) => {
+
+  const handleOpenModal = (type, event) => {
+    event.preventDefault();
+    setContent(type);
+    setOpen(true);
+  }
+
+  const handleFileChange = async (type, event) => {
     const file = event.target.files[0];
     try {
-      const isValid = await validarImagemProfile(file);
+      const isValid = await validateImage(type, file);
       if (isValid) {
-        setSelectedFileProfile(file);
+        setSelectedFile(file);
       } else {
-        // Informar ao usuário que a imagem não atende aos requisitos
-        console.error(
-          "A imagem precisa ter pelo menos 1280 pixels de largura."
-        );
+        toast.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
+        console.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
       }
     } catch (error) {
       console.error("Erro de validação:", error);
     }
   };
 
-  const validarImagemCover = (file) => {
+  const validateImage = async (type, file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = function (event) {
         const img = new Image();
         img.src = event.target.result;
         img.onload = function () {
-          if (img.width >= 1280) {
-            resolve(true); // A imagem atende ao requisito de largura
+          if (type === "profile") {
+            if (img.width >= 400) {
+              resolve(true);
+            } else {
+              toast.error(
+                "A imagem precisa ter pelo menos 400 pixels de largura."
+              );
+              reject("A imagem precisa ter pelo menos 400 pixels de largura.");
+            }
           } else {
-            toast.error(
-              "A imagem precisa ter pelo menos 1280 pixels de largura."
-            );
-            reject("A imagem precisa ter pelo menos 1280 pixels de largura.");
-          }
-        };
-      };
-
+            if (img.width >= 1280) {
+              resolve(true);
+            } else {
+              toast.error(
+                "A imagem precisa ter pelo menos 1280 pixels de largura."
+              );
+              reject("A imagem precisa ter pelo menos 1280 pixels de largura.");
+            }
+          };
+        }
+      }
       reader.readAsDataURL(file);
     });
   };
-  const validarImagemProfile = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-          if (img.width >= 400) {
-            resolve(true); // A imagem atende ao requisito de largura
-          } else {
-            toast.error(
-              "A imagem precisa ter pelo menos 400 pixels de largura."
-            );
-            reject("A imagem precisa ter pelo menos 400 pixels de largura.");
-          }
-        };
-      };
 
-      reader.readAsDataURL(file);
-    });
+  // const uploadFileToS3 = async (file) => {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("bucketName", "foodway-public-s3");
+  //   formData.append("objectKey", `/user-images/${file.name}`);
+  //   formData.append("tagKey", "fileType");
+  //   formData.append("tagValue", "user");
+
+  //   try {
+  //     const response = await api_call("post", "files/upload", formData, atob(sessionStorage.getItem("token")), null);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Erro ao realizar upload de imagem:", error);
+  //     throw new Error("Falha no upload da imagem.");
+  //   }
+  // };
+
+  async function uploadFileToS3(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("bucketName", "foodway-public-s3");
+    formData.append("objectKey", `/user-images/${file.name}`);
+    formData.append("tagKey", "fileType");
+    formData.append("tagValue", "user");
+  
+    try {
+      const token = atob(sessionStorage.getItem("token"));
+      const response = await api.post("files/upload", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao realizar upload de imagem:", error);
+      throw error;
+    }
+  }
+
+  const handlePostImage = async (type) => {
+    console.log("entrou em handlepostImage")
+    if (!selectedFile) {
+      toast.error("Nenhum arquivo foi selecionado.");
+      return;
+    }
+
+    try {
+      const isCover = type === "cover" ? "cover" : "profile";
+      const resizedFile = await handleResizeImage(selectedFile);
+      const uploadResponse = await uploadFileToS3(resizedFile);
+
+      if (uploadResponse) {
+        const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
+        toast.success(successMessage);
+        const imageUrl = uploadResponse.url;
+
+        if (isCover) {
+          setCoverImageName(imageName);
+          setCoverImageUrlLocal(imageUrl);
+        } else {
+          setProfileImageName(imageName);
+          setProfileImageUrlLocal(imageUrl);
+          sessionStorage.setItem("profilePhoto", btoa(imageUrl));
+        }
+
+        const profileUpdateData = {
+          name: "",
+          profilePhoto: "",
+          email: atob(sessionStorage.getItem("email")),
+          bio: "",
+          password: formData.password,
+          ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+        };
+
+        const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
+          },
+        });
+
+        if (updateResponse.status === 200) {
+          toast.success("Perfil atualizado com sucesso!");
+          handleClose();
+        } else {
+          throw new Error("Atualização de perfil falhou");
+        }
+      } else {
+        toast.error("Falha no upload da imagem.");
+      }
+    } catch (error) {
+      const errorMessage = error.message || "Erro ao processar a solicitação.";
+      toast.error(errorMessage);
+      console.error(errorMessage, error);
+    }
   };
-  const handleGenerateNewImageName = (file) => {
-    const splittedName = file.name.split(".");
-    const extension = splittedName[splittedName.length - 1];
-    const randomString = Math.random().toString(36).substring(2, 7);
-    const timestamp = Date.now();
-    const newName = `${formData.name
-      .replace(/\s+/g, "-")
-      .toLowerCase()}-cover-${randomString}-${timestamp}.${extension}`;
-    return newName;
-  };
+
+
+
+
+  // const handlePostImage = async (type) => {
+  //   console.log("entrou em handlepostImage")
+  //   if (!selectedFile) {
+  //     toast.error("Nenhum arquivo foi selecionado.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const isCover = type === "cover" ? "cover" : "profile";
+  //     const resizedFile = await handleResizeImage(selectedFile);
+  //     const presignedUrl = await getPresignedUrl(resizedFile.name);
+  //     const uploadSuccess = await uploadFileToS3(resizedFile, presignedUrl);
+
+  //     if (!uploadSuccess) {
+  //       toast.error("Falha no upload da imagem.");
+  //       return;
+  //     }
+
+  //     const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
+  //     toast.success(successMessage);
+  //     const imageName = response.data[0];
+  //     const imageUrl = `https://foodway-public-s3.s3.amazonaws.com/user-images/${imageName}`;
+
+  //     if (isCover) {
+  //       setCoverImageName(imageName);
+  //       setCoverImageUrlLocal(imageUrl);
+  //     } else {
+  //       setProfileImageName(imageName);
+  //       setProfileImageUrlLocal(imageUrl);
+  //       sessionStorage.setItem("profilePhoto", btoa(imageUrl));
+  //     }
+
+  //     const profileUpdateData = {
+  //       name: "",
+  //       profilePhoto: "",
+  //       email: atob(sessionStorage.getItem("email")),
+  //       bio: "",
+  //       password: formData.password,
+  //       ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+  //     };
+
+  //     const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
+  //       },
+  //     });
+
+  //     if (updateResponse.status === 200) {
+  //       toast.success("Perfil atualizado com sucesso!");
+  //       handleClose();
+  //     } else {
+  //       throw new Error("Atualização de perfil falhou");
+  //     }
+  //   } catch (error) {
+  //     const errorMessage = error.message || "Erro ao processar a solicitação.";
+  //     toast.error(errorMessage);
+  //     console.error(errorMessage, error);
+  //   }
+  // };
+
   const handleResizeImage = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -216,8 +306,8 @@ const CostumerEdit = () => {
         img.src = event.target.result;
 
         img.onload = function () {
-          const maxWidth = 1280; // Defina a largura máxima desejada
-          const maxHeight = 1280; // Defina a altura máxima desejada
+          const maxWidth = 1280;
+          const maxHeight = 1280;
           let width = img.width;
           let height = img.height;
 
@@ -240,7 +330,7 @@ const CostumerEdit = () => {
           ctx.drawImage(img, 0, 0, width, height);
 
           canvas.toBlob((blob) => {
-            const newName = handleGenerateNewImageName(file); // Gera um novo nome para o arquivo redimensionado
+            const newName = handleGenerateNewImageName(file);
             const resizedFile = new File([blob], newName, {
               type: file.type,
             });
@@ -254,305 +344,93 @@ const CostumerEdit = () => {
       };
     });
   };
-  const handlePostImageCover = async () => {
-    const oldName = coverImageName;
-    if (checkPassword) {
-      if (selectedFileCover) {
-        // Verifica se há um arquivo selecionado
-        try {
-          // Tenta redimensionar a imagem
-          const resizedFile = await handleResizeImage(selectedFileCover); // Redimensiona a imagem
-          const formDataFile = new FormData(); // Cria um objeto FormData
-          formDataFile.append("files", resizedFile); // Adiciona o arquivo redimensionado ao objeto FormData
 
-          try {
-            // Tenta realizar o upload da imagem
-            const response = await api.post(
-              "/files/user-images",
-              formDataFile,
-              {
-                // Envia o arquivo para a API
-                headers: {
-                  "Content-Type": resizedFile.type,
-                  Authorization: `Bearer ${atob(
-                    sessionStorage.getItem("token")
-                  )}`,
-                },
-              }
-            );
-            if (response.status === 200) {
-              //imagem enviada com sucesso para a azure
-              toast.success("Capa atualizada com sucesso!");
-
-              console.log("Capa atualizada com sucesso!" + response.data[0]);
-              const imageName = response.data[0];
-              console.log("ImageName before set", imageName);
-              setCoverImageName(imageName); // this set is not working
-              console.log("coverImageName after set", coverImageName);
-
-              const profileUpdateData = {
-                name: "",
-                profilePhoto: "",
-                email: atob(sessionStorage.getItem("email")),
-                bio: "",
-                profileHeaderImg: `https://foodway.blob.core.windows.net/user-images/${imageName}`,
-                password: formData.password,
-              };
-
-              // Atualiza os dados do perfil
-              console.log("profileUpdateData", profileUpdateData);
-
-              try {
-                //atualiza os dados do perfil
-                const updateResponse = await api.patch(
-                  `/customers/profile/${atob(
-                    sessionStorage.getItem("idUser")
-                  )}`,
-                  profileUpdateData,
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `Bearer ${atob(
-                        sessionStorage.getItem("token")
-                      )}`,
-                    },
-                  }
-                );
-                console.log("updateResponse", updateResponse);
-                console.log(
-                  "updateResponse.data.profileHeaderImg after update",
-                  updateResponse.data.profileHeaderImg
-                );
-                // Atualiza a imagem de capa localmente
-
-                if (updateResponse.status === 200) {
-                  toast.success("Perfil atualizado com sucesso!");
-
-                  setCoverImageUrlLocal(updateResponse.data.profileHeaderImg);
-                  handleClose();
-                }
-              } catch (updateError) {
-                toast.error("Suas credenciais estão incorretas!");
-                console.error(
-                  "Erro ao atualizar os dados do perfil:",
-                  updateError
-                );
-              }
-            }
-            if (response.status === 500) {
-              toast.error("Suas credenciais estão incorretas!");
-            }
-          } catch (error) {
-            console.error("Erro ao realizar o upload da capa:", error);
-          }
-        } catch (error) {
-          console.error("Erro ao redimensionar a imagem:", error);
-        }
-      } else {
-        console.error("Nenhum arquivo selecionado para upload.");
-      }
-    }
+  const handleGenerateNewImageName = (file) => {
+    const splittedName = file.name.split(".");
+    const extension = splittedName[splittedName.length - 1];
+    const randomString = Math.random().toString(36).substring(2, 7);
+    const timestamp = Date.now();
+    const newName = `${formData.name
+      .replace(/\s+/g, "-")
+      .toLowerCase()}-cover-${randomString}-${timestamp}.${extension}`;
+    return newName;
   };
-  const handlePostImageProfile = async () => {
-    const oldName = profileImageName;
-    if (checkPassword) {
-      if (selectedFileProfile) {
-        // Verifica se há um arquivo selecionado
-        try {
-          // Tenta redimensionar a imagem
-          const resizedFile = await handleResizeImage(selectedFileProfile); // Redimensiona a imagem
-          const formDataFile = new FormData(); // Cria um objeto FormData
-          formDataFile.append("files", resizedFile); // Adiciona o arquivo redimensionado ao objeto FormData
 
-          try {
-            // Tenta realizar o upload da imagem
-            const response = await api.post(
-              "/files/user-images",
-              formDataFile,
-              {
-                // Envia o arquivo para a API
-                headers: {
-                  "Content-Type": resizedFile.type,
-                  Authorization: `Bearer ${atob(
-                    sessionStorage.getItem("token")
-                  )}`,
-                },
-              }
-            );
-            if (response.status === 200) {
-              //imagem enviada com sucesso para a azure
-              toast.success("Profile picture atualizada com sucesso!");
-
-              console.log("Profile picture com sucesso!" + response.data[0]);
-              const imageName = response.data[0];
-              console.log("ImageName before set", imageName);
-              setProfileImageName(imageName); // this set is not working
-              console.log("ProfileImageName after set", profileImageName);
-              sessionStorage.setItem("profilePhoto", btoa(`https://foodway.blob.core.windows.net/user-images/${imageName}`));
-
-              const profileUpdateData = {
-                name: " ",
-                profileHeaderImg: "",
-                email: atob(sessionStorage.getItem("email")),
-                bio: "",
-                profilePhoto: `https://foodway.blob.core.windows.net/user-images/${imageName}`,
-                password: formData.password,
-              };
-
-              // Atualiza os dados do perfil
-              console.log("profileUpdateData", profileUpdateData);
-
-              try {
-                //atualiza os dados do perfil
-                const updateResponse = await api.patch(
-                  `/customers/profile/${atob(
-                    sessionStorage.getItem("idUser")
-                  )}`,
-                  profileUpdateData,
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `Bearer ${atob(
-                        sessionStorage.getItem("token")
-                      )}`,
-                    },
-                  }
-                );
-                console.log("updateResponse", updateResponse);
-                console.log(
-                  "updateResponse.data.profileHeaderImg after update",
-                  updateResponse.data.profilePhoto
-                );
-                // Atualiza a imagem de capa localmente
-
-                if (updateResponse.status === 200) {
-                  toast.success("Perfil atualizado com sucesso!");
-
-                  setProfileImageUrlLocal(updateResponse.data.profilePhoto);
-                  handleClose();
-                }
-              } catch (updateError) {
-                toast.error("Suas credenciais estão incorretas!");
-                console.error(
-                  "Erro ao atualizar os dados do perfil:",
-                  updateError
-                );
-              }
-            }
-          } catch (error) {
-            console.error("Erro ao realizar o upload da img perfil:", error);
-          }
-        } catch (error) {
-          console.error("Erro ao redimensionar a imagem:", error);
-        }
-      } else {
-        console.error("Nenhum arquivo selecionado para upload.");
-      }
-    }
-  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="costumer">
       <img className="costumer-cover" src={coverImageUrlLocal} alt="" />
-
-      <Modal
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-        }}
-        open={open}
-        onClose={handleClose}
-      >
-        <Box className="modal-edit-profile">
-          {content === "edit" ? (
+      <GenericModel open={open} handleClose={handleClose}>
+        {content === "cover" ? (
+          <div className="cover-section">
+            <h2>Adicione uma capa de perfil</h2>
+            <img
+              className="cover-img-preview"
+              src={
+                selectedFile === null
+                  ? coverImageUrlLocal
+                  : URL.createObjectURL(selectedFile)
+              }
+              alt=""
+            />
+            <p className="descriptio-warn">Selecione uma image de até 1MB</p>
+            <input
+              className="input-file"
+              type="file"
+              name="cover"
+              id="cover"
+              onChange={(event) => handleFileChange("cover", event)}
+            />
             <div>
-              <h2>Confirme as alterações</h2>
-              <p className="descriptio-warn">
-                Ao confirmar as alterações, seu perfil será atualizado.
-              </p>
-              <InputField
-                type={"password"}
-                className="input-field-profile"
-                label="Senha"
-                id="password"
-                onChange={handleInputChange}
-              />
-              <ButtonPrimary
-                text="Atualizar informações"
-                className="send-cover-btn"
-                onclick={handleUpdateProfileInfo}
-              />
-            </div>
-          ) : null}
-          {content === "cover" ? (
-            <div className="cover-section">
-              <h2>Adicione uma capa de perfil</h2>
-              <img
-                className="cover-img-preview"
-                src={
-                  selectedFileCover === null
-                    ? coverImageUrlLocal
-                    : URL.createObjectURL(selectedFileCover)
-                }
-                alt=""
-              />
-              <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-              <InputField
-                type={"password"}
-                className="input-field-profile"
-                label="Senha"
-                id="password"
-                onChange={handleInputChange}
-              />
-              <input
-                className="input-file"
-                type="file"
-                name="cover"
-                id="cover"
-                onChange={handleFileChangeCover}
-              />
               <ButtonPrimary
                 text="Atualizar capa"
                 className="send-cover-btn"
-                onclick={handlePostImageCover}
+                onclick={() => handlePostImage("cover")}
+              />
+              <ButtonSecondary
+                text={"Cancelar"}
+                onclick={handleClose}
               />
             </div>
-          ) : null}
-          {content === "profile" ? (
-            <div className="picture-section">
-              <h2>Adicione uma foto de perfil</h2>
-              <img
-                className="picture-img-preview"
-                src={
-                  selectedFileProfile === null
-                    ? profileImageUrlLocal
-                    : URL.createObjectURL(selectedFileProfile)
-                }
-                alt=""
-              />
-              <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-              <InputField
-                type={"password"}
-                className="input-field-profile"
-                label="Senha"
-                id="password"
-                onChange={handleInputChange}
-              />
-              <input
-                className="input-file"
-                type="file"
-                name="cover"
-                id="cover"
-                onChange={handleFileChangeProfile}
-              />
+          </div>
+        ) : null}
+        {content === "profile" ? (
+          <div className="picture-section">
+            <h2>Adicione uma foto de perfil</h2>
+            <img
+              className="picture-img-preview"
+              src={
+                selectedFile === null
+                  ? profileImageUrlLocal
+                  : URL.createObjectURL(selectedFile)
+              }
+              alt=""
+            />
+            <p className="descriptio-warn">Selecione uma image de até 1MB</p>
+            <input
+              className="input-file"
+              type="file"
+              name="cover"
+              id="cover"
+              onChange={(event) => handleFileChange("profile", event)}
+            />
+            <div>
               <ButtonPrimary
-                text="Atualizar Imagem Perfil"
+                text="Atualizar Foto de Perfil"
                 className="send-cover-btn"
-                onclick={handlePostImageProfile}
+                onClick={() => handlePostImage("profile")}
+              />
+              <ButtonSecondary
+                text={"Cancelar"}
+                onclick={handleClose}
               />
             </div>
-          ) : null}
-        </Box>
-      </Modal>
+          </div>
+        ) : null}
+      </GenericModel>
       <div className="costumer-container">
         <div className="costumer-section-form">
           <h1 className="title-edit-profile">Editar Perfil</h1>
@@ -562,12 +440,12 @@ const CostumerEdit = () => {
               <ButtonPrimary
                 text="Selecione a foto de Perfil"
                 className="button-edit"
-                onclick={handleOpenProfile}
+                onclick={(event) => handleOpenModal("profile", event)}
               />
               <ButtonPrimary
                 className="button-edit"
                 text="Selecione uma capa"
-                onclick={handleOpenCover}
+                onclick={(event) => handleOpenModal("cover", event)}
               />
             </div>
             <div className="profile-info-section">
@@ -576,7 +454,7 @@ const CostumerEdit = () => {
                   classNameGeral="button-edit-div"
                   className="input-field-profile"
                   label="Nome de perfil"
-                  value={formData.name} // Update the value prop to use formData.name
+                  value={formData.name}
                   type="text"
                   id="name"
                   onChange={handleInputChange}
@@ -584,7 +462,7 @@ const CostumerEdit = () => {
                 <TextAreaField
                   className="input-field-profile"
                   classNameGeral="button-edit-div"
-                  value={formData.bio} // Update the value prop to use formData.bio
+                  value={formData.bio}
                   label="Bio"
                   type="text"
                   id="bio"
@@ -594,7 +472,7 @@ const CostumerEdit = () => {
                   <ButtonPrimary
                     className="button-save"
                     text="Salvar"
-                    onclick={handleOpenEdit}
+                    onclick={handleUpdateProfileInfo}
                   />
                 </div>
               </form>

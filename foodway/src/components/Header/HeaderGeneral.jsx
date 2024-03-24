@@ -5,7 +5,7 @@ import SelectLocation from '../SelectionLocation/SelectionLocation';
 import { Link } from "react-router-dom";
 import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
-import parseJWT from "../../util/parseJWT";
+import parseJWT from '../../util/parseJwt';
 
 const Header = () => {
     const bodyToken = parseJWT();
@@ -42,7 +42,7 @@ const Header = () => {
                     {sessionStorage.getItem("token") ?
                         <>
                             <div className="header-geral-token">
-                                <span>Olá, {bodyToken.username}</span>
+                                <span>Olá, {atob(sessionStorage.getItem("username"))}</span>
                                 <img src={atob(sessionStorage.getItem("profilePhoto")) ? atob(sessionStorage.getItem("profilePhoto")) : DefaultImage} alt="Foto de Perfil" />
                             </div>
                         </>
