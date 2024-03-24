@@ -7,14 +7,14 @@ import { toast } from "react-toastify";
 import parseJWT from "../../util/parseJwt";
 import api_call from "../../services/apiImpl";
 import GenericModel from "../../components/GenericModel/GenericModel";
+import api from "../../services/api";
 
 const CostumerEdit = () => {
   const bodyToken = parseJWT();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const [content, setContent] = useState("");
-  const [selectedFileCover, setSelectedFileCover] = useState(null);
-  const [selectedFileProfile, setSelectedFileProfile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [coverImageUrlLocal, setCoverImageUrlLocal] = useState();
   const [coverImageName, setCoverImageName] = useState();
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
@@ -92,7 +92,7 @@ const CostumerEdit = () => {
     try {
       const isValid = await validateImage(type, file);
       if (isValid) {
-        setSelectedFileProfile(file);
+        setSelectedFile(file);
       } else {
         toast.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
         console.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
@@ -134,7 +134,167 @@ const CostumerEdit = () => {
     });
   };
 
-  // handle post image
+  // const uploadFileToS3 = async (file) => {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("bucketName", "foodway-public-s3");
+  //   formData.append("objectKey", `/user-images/${file.name}`);
+  //   formData.append("tagKey", "fileType");
+  //   formData.append("tagValue", "user");
+
+  //   try {
+  //     const response = await api_call("post", "files/upload", formData, atob(sessionStorage.getItem("token")), null);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Erro ao realizar upload de imagem:", error);
+  //     throw new Error("Falha no upload da imagem.");
+  //   }
+  // };
+
+  async function uploadFileToS3(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("bucketName", "foodway-public-s3");
+    formData.append("objectKey", `/user-images/${file.name}`);
+    formData.append("tagKey", "fileType");
+    formData.append("tagValue", "user");
+  
+    try {
+      const token = atob(sessionStorage.getItem("token"));
+      const response = await api.post("files/upload", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao realizar upload de imagem:", error);
+      throw error;
+    }
+  }
+
+  const handlePostImage = async (type) => {
+    console.log("entrou em handlepostImage")
+    if (!selectedFile) {
+      toast.error("Nenhum arquivo foi selecionado.");
+      return;
+    }
+
+    try {
+      const isCover = type === "cover" ? "cover" : "profile";
+      const resizedFile = await handleResizeImage(selectedFile);
+      const uploadResponse = await uploadFileToS3(resizedFile);
+
+      if (uploadResponse) {
+        const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
+        toast.success(successMessage);
+        const imageUrl = uploadResponse.url;
+
+        if (isCover) {
+          setCoverImageName(imageName);
+          setCoverImageUrlLocal(imageUrl);
+        } else {
+          setProfileImageName(imageName);
+          setProfileImageUrlLocal(imageUrl);
+          sessionStorage.setItem("profilePhoto", btoa(imageUrl));
+        }
+
+        const profileUpdateData = {
+          name: "",
+          profilePhoto: "",
+          email: atob(sessionStorage.getItem("email")),
+          bio: "",
+          password: formData.password,
+          ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+        };
+
+        const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
+          },
+        });
+
+        if (updateResponse.status === 200) {
+          toast.success("Perfil atualizado com sucesso!");
+          handleClose();
+        } else {
+          throw new Error("Atualização de perfil falhou");
+        }
+      } else {
+        toast.error("Falha no upload da imagem.");
+      }
+    } catch (error) {
+      const errorMessage = error.message || "Erro ao processar a solicitação.";
+      toast.error(errorMessage);
+      console.error(errorMessage, error);
+    }
+  };
+
+
+
+
+  // const handlePostImage = async (type) => {
+  //   console.log("entrou em handlepostImage")
+  //   if (!selectedFile) {
+  //     toast.error("Nenhum arquivo foi selecionado.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const isCover = type === "cover" ? "cover" : "profile";
+  //     const resizedFile = await handleResizeImage(selectedFile);
+  //     const presignedUrl = await getPresignedUrl(resizedFile.name);
+  //     const uploadSuccess = await uploadFileToS3(resizedFile, presignedUrl);
+
+  //     if (!uploadSuccess) {
+  //       toast.error("Falha no upload da imagem.");
+  //       return;
+  //     }
+
+  //     const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
+  //     toast.success(successMessage);
+  //     const imageName = response.data[0];
+  //     const imageUrl = `https://foodway-public-s3.s3.amazonaws.com/user-images/${imageName}`;
+
+  //     if (isCover) {
+  //       setCoverImageName(imageName);
+  //       setCoverImageUrlLocal(imageUrl);
+  //     } else {
+  //       setProfileImageName(imageName);
+  //       setProfileImageUrlLocal(imageUrl);
+  //       sessionStorage.setItem("profilePhoto", btoa(imageUrl));
+  //     }
+
+  //     const profileUpdateData = {
+  //       name: "",
+  //       profilePhoto: "",
+  //       email: atob(sessionStorage.getItem("email")),
+  //       bio: "",
+  //       password: formData.password,
+  //       ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+  //     };
+
+  //     const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
+  //       },
+  //     });
+
+  //     if (updateResponse.status === 200) {
+  //       toast.success("Perfil atualizado com sucesso!");
+  //       handleClose();
+  //     } else {
+  //       throw new Error("Atualização de perfil falhou");
+  //     }
+  //   } catch (error) {
+  //     const errorMessage = error.message || "Erro ao processar a solicitação.";
+  //     toast.error(errorMessage);
+  //     console.error(errorMessage, error);
+  //   }
+  // };
 
   const handleResizeImage = (file) => {
     return new Promise((resolve, reject) => {
@@ -210,9 +370,9 @@ const CostumerEdit = () => {
             <img
               className="cover-img-preview"
               src={
-                selectedFileCover === null
+                selectedFile === null
                   ? coverImageUrlLocal
-                  : URL.createObjectURL(selectedFileCover)
+                  : URL.createObjectURL(selectedFile)
               }
               alt=""
             />
@@ -228,7 +388,7 @@ const CostumerEdit = () => {
               <ButtonPrimary
                 text="Atualizar capa"
                 className="send-cover-btn"
-              onclick={() => handlePostImage("cover")}
+                onclick={() => handlePostImage("cover")}
               />
               <ButtonSecondary
                 text={"Cancelar"}
@@ -243,9 +403,9 @@ const CostumerEdit = () => {
             <img
               className="picture-img-preview"
               src={
-                selectedFileProfile === null
+                selectedFile === null
                   ? profileImageUrlLocal
-                  : URL.createObjectURL(selectedFileProfile)
+                  : URL.createObjectURL(selectedFile)
               }
               alt=""
             />
@@ -261,7 +421,7 @@ const CostumerEdit = () => {
               <ButtonPrimary
                 text="Atualizar Foto de Perfil"
                 className="send-cover-btn"
-              onClick={() => handlePostImage("profile")}
+                onClick={() => handlePostImage("profile")}
               />
               <ButtonSecondary
                 text={"Cancelar"}
