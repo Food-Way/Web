@@ -1,0 +1,34 @@
+.rate-select {
+    display: grid;
+    grid-template-columns: auto minmax(auto, max-content) auto;
+    align-items: center;
+    gap: 10px;
+    /* Ajuste o espaço conforme necessário */
+}
+
+.rate-select p:first-child {
+    font-size: 1.4rem;
+    margin: 0;
+    min-width: fit-content;
+    width: 100px;
+    /* Removido para manter o alinhamento */
+    white-space: nowrap;
+    /* Evita a quebra de linha no texto */
+}
+
+.star-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    /* Alinha as estrelas ao centro da coluna */
+}
+
+.star-component p:last-child {
+    font-size: 1.4rem;
+    min-width: fit-content;
+    width: 100px;
+    margin-left: 10px;
+
+    /* Adiciona espaço entre as estrelas e o texto de avaliação */
+}

@@ -1,11 +1,19 @@
 import { React, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
+
 import Upvotes from "../../components/Upvotes/Upvotes";
+import parseJWT from "../../util/parseJWT";
+import { CommentInsertReply, CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
 import "./Comment.css";
+import { hasValidSession } from "../Auth/Auth.jsx"
+import { useNavigate } from "react-router-dom";
+
 
 const ImageComment = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
 
 const Comment = (props) => {
+    const navigate = useNavigate();
+    const bodyToken = parseJWT();
     const [updateText, setUpdateText] = useState(false);
 
     function analysisText(text, category, upText) {
@@ -46,8 +54,6 @@ const Comment = (props) => {
 
     let sentimentAnalysis = 8.0;
 
-    var id = 1;
-
     useEffect(() => {
         setSize(props.width, props.height, props.text)
     }, []);
@@ -58,23 +64,7 @@ const Comment = (props) => {
                 <div className="comment-box">
                     <div className="comment-header">
                         <div className="header-initial">
-                            {/* <span> {analysisText(props.establishmentName, "title", false)} </span> */}
                             <span> {props.establishmentName} </span>
-                            {/* {
-                                document.location.pathname != "/user-profile" ? (
-                                    sentimentAnalysis < 5.0 ? (
-                                        <Negative />
-                                    ) : (
-                                        sentimentAnalysis > 7.0 ? (
-                                            <Positive />
-                                        ) : (
-                                            <Neutral />
-                                        )
-                                    )
-                                ) : (
-                                    ""
-                                )
-                            } */}
                         </div>
                         <ReactStars
                             count={5}
@@ -87,12 +77,7 @@ const Comment = (props) => {
                     </div>
                     <div className="comment-content">
                         <span>{props.title}</span>
-                        {/* <p className="comment-content-text"> {analysisText(props.comment, "text", updateText)} </p> */}
                         <p className="comment-content-text"> {props.comment} </p>
-                        {/* {props.comment.length > 100 ?
-                            <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
-                                <span> {updateText ? "Ver menos" : "Ver mais"} </span>
-                            </div> : <div className="more-text"></div>} */}
                     </div>
                     <div className="comment-footer">
                         <Upvotes
@@ -106,8 +91,11 @@ const Comment = (props) => {
 }
 
 const CommentIndividual = (props) => {
-
+    const navigate = useNavigate();
+    const bodyToken = parseJWT();
     const [updateText, setUpdateText] = useState(false);
+    const [showCommentInsert, setShowCommentInsert] = useState(true);
+
 
     function analysisText(text, category, upText) {
         var newText = "";
@@ -138,8 +126,8 @@ const CommentIndividual = (props) => {
     return (
         <>
             <div className="establishment-comments-box">
-                <div className="user-content-comment">
-                    <img className="establishment-user-icon" src={props.userPhoto} alt="Foto de Perfil" />
+                <div className="user-content-comment-parent">
+                    <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
                     <div className="user-content-values">
                         <ReactStars
                             size={24}
@@ -149,15 +137,20 @@ const CommentIndividual = (props) => {
                         <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                         <div className="establishment-upcomment-box">
                             <div className="establishment-upcomment-values">
-                                {
-                                    <Upvotes
-                                        upvotes={props.upvotes}
-                                        idComment={props.idComment}
-                                        idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CUSTOMER' ? bodyToken.idUser : null}
-                                        idEstablishment={props.idEstablishment}
-                                    />
-                                }
-                                <img src={ImageComment} alt="Ícone de comentário" />
+
+                                <Upvotes
+                                    upvotes={props.upvotes}
+                                    idComment={props.idComment}
+                                    idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CLIENT' ? bodyToken.idUser : null}
+                                    idEstablishment={props.idEstablishment}
+                                />
+                                <button className="btn_subcomment" onClick={() => {
+                                    if (!sessionStorage.getItem("token")) {
+                                        hasValidSession(navigate);
+                                    } else {
+                                        setShowCommentInsert(!showCommentInsert);
+                                    }
+                                }}><img src={ImageComment} alt="Image comment" /></button>
                             </div>
                             {props.comment.length > 100 ?
                                 <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
@@ -166,7 +159,26 @@ const CommentIndividual = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+                {showCommentInsert == false ? (<div className="insert-comment-field" >
+                    <CommentInsertReply establishmentId={props.idEstablishment} commentParent={props.idComment} setComments={props.setComments} />
+                </div>) : <></>}
+                <div className="reply-container" >
+                    {props.replies.map((subComment, subIndex) =>
+                    (
+                        <CommentReply
+                            id={subIndex}
+                            key={subIndex}
+                            establishmentName={subComment.establishmentName}
+                            rate={subComment.commentRate}
+                            comment={subComment.comment}
+                            upvotes={subComment.upvotes}
+                            idComment={subComment.idComment}
+                            idEstablishment={props.idEstablishment}
+                            userPhoto={subComment.userPhoto} />
+                    ))}
+                </div>
+            </div >
+
         </>
     )
 }
@@ -203,15 +215,11 @@ const CommentReply = (props) => {
 
     return (
         <>
-            <div className="user-content-comment">
-                <div className="establishment-bar" />
-                <img className="establishment-user-icon" src={props.userPhoto} alt="Foto de Perfil" />
-                <div className="user-content-values">
-                    <ReactStars
-                        size={24}
-                        activeColor={"var(--primary)"}
-                        edit={false}
-                        value={2} />
+            <div className="user-content-comment-reply">
+                {/*<div className="establishment-bar" />*/}
+                <img className="establishment-user-icon" src={props.userPhoto} alt="User image" />
+                <div className="user-content-values user-content-values-reply">
+
                     <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                     <div className="establishment-upcomment-box">
                         <div className="establishment-upcomment-values">
@@ -221,7 +229,7 @@ const CommentReply = (props) => {
                                 idCustomer={atob(sessionStorage.getItem("idUser"))}
                                 idEstablishment={props.idEstablishment}
                             />
-                            <img src={ImageComment} alt="Ícone de comentário" />
+
                         </div>
                         {props.comment.length > 100 ?
                             <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>

@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import api_call from "../../services/apiImpl";
 
-export function Auth() {
+import { toast } from 'react-toastify';
+
+
+
+function Auth() {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -16,3 +20,17 @@ export function Auth() {
     fetchData();
   }, []);
 }
+
+function hasValidSession(navigate) {
+
+
+  toast.error("Se Logue para realizar essa ação")
+  toast.info("Redirecionado para login")
+  setTimeout(() => {
+    navigate("/sign-in");
+  }, 3000)
+}
+
+
+
+export { Auth, hasValidSession }

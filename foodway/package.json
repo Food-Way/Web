@@ -39,6 +39,7 @@
     "react-input-mask": "^2.0.4",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-qr-code": "^2.0.12",
+    "react-rating": "^2.0.5",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.18.0",
     "react-select": "^5.7.7",

@@ -56,7 +56,7 @@
 }
 
 .establishment-avaliation-principal {
-    height: 17rem;  
+    height: 17rem;
 }
 
 .establishment-avaliation-value {
@@ -99,9 +99,7 @@
 .comment-section {
     display: flex;
     align-items: start;
-
     flex-direction: row;
-    width: 40vw;
 }
 
 .comment-cancel {
@@ -215,11 +213,12 @@
 
 .establishment-comments-box {
     width: 38vw;
-    height: 15rem;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: var(--branco);
+    flex-direction: column;
 }
 
 .establishment-comments-box-more {
@@ -228,10 +227,14 @@
     border: var(--borda);
     border-radius: 6px;
     padding: 1rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .establishment-bar {
-    width: .2rem;
+    width: .1rem;
     height: 8vw;
     background-color: var(--preto);
     margin-left: 7rem;
@@ -239,21 +242,59 @@
 }
 
 .establishment-user-icon {
-    width: 8rem;
+    width: 5rem;
     border-radius: 10rem;
-    margin-bottom: 3rem;
+    margin-right: 20px;
 }
 
 .user-content-comment {
     width: 40vw;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+
+}
+
+.user-content-comment-parent {
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.user-content-comment-reply {
+    width: fit-content;
+    display: flex;
+    align-items: center;
     justify-content: space-evenly;
+}
+
+.user-content-comment-parent p {
+    width: 28.5vw;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: justify;
+    padding-right: 1rem;
 }
 
 .user-content-comment p {
     width: 28.5vw;
-    height: 5.5rem;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: justify;
+    padding-right: 1rem;
+}
+
+.user-content-comment-reply p {
+    width: 28.5vw;
+
     font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;
@@ -264,6 +305,8 @@
     width: 30vw;
     height: 4rem;
     display: flex;
+    margin: 10px 0px;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }

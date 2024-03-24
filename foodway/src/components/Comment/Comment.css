@@ -69,3 +69,42 @@
     color: var(--primary);
     transition: all .3s;
 }
+
+.btn_subcomment {
+    background-color: transparent;
+    border: none;
+    padding: 0px 10px 0px 10px;
+}
+
+.user-content-values {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: fit-content;
+    width: fit-content;
+}
+
+.comment-content-text {
+    height: fit-content;
+}
+
+.reply-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 0px 0px 50px;
+    border-left: 1px solid black;
+    padding: 0px 0px 0px 25px;
+
+}
+
+.insert-comment-field {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-content-values-reply {
+    margin-top: 20px;
+}
