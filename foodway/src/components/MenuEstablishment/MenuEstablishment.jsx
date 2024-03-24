@@ -34,8 +34,6 @@ const MenuEstablishment = (props) => {
     if (oldPath != className) {
       setColor(className);
     }
-
-    console.log(className);
     if (className == "") {
       navigate("/*");
     } else if (className == ".establishment-item") {
@@ -132,7 +130,6 @@ const MenuEstablishment = (props) => {
           <button
             className="btn-menu-switch"
             onClick={(event) => {
-              console.log("clicou");
               setOpenMenu(!openMenu);
               var btnImage = event.currentTarget;
               var btn = document.querySelector(".btn-menu-switch");
@@ -172,8 +169,8 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "91.5vh" : 
-                location.pathname.startsWith("/user/search") ? "100vh" : "100%",
+                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "91.5vh" :
+                  location.pathname.startsWith("/user/search") ? "100vh" : "100%",
                 width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",

@@ -5,11 +5,14 @@ import Upvotes from "../../components/Upvotes/Upvotes";
 import parseJWT from "../../util/parseJWT";
 import { CommentInsertReply, CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
 import "./Comment.css";
+import { hasValidSession } from "../Auth/Auth.jsx"
+import { useNavigate } from "react-router-dom";
 
 
 const ImageComment = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
 
 const Comment = (props) => {
+    const navigate = useNavigate();
     const bodyToken = parseJWT();
     const [updateText, setUpdateText] = useState(false);
 
@@ -78,9 +81,6 @@ const Comment = (props) => {
                     </div>
                     <div className="comment-footer">
                         <Upvotes
-                            idComment={props.idComment}
-                            idCustomer={bodyToken.idUser}
-                            idEstablishment={props.idEstablishment}
                             upvotes={props.upvotes}
                         />
                     </div>
@@ -91,6 +91,7 @@ const Comment = (props) => {
 }
 
 const CommentIndividual = (props) => {
+    const navigate = useNavigate();
     const bodyToken = parseJWT();
     const [updateText, setUpdateText] = useState(false);
     const [showCommentInsert, setShowCommentInsert] = useState(true);
@@ -136,24 +137,20 @@ const CommentIndividual = (props) => {
                         <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                         <div className="establishment-upcomment-box">
                             <div className="establishment-upcomment-values">
+
                                 <Upvotes
                                     upvotes={props.upvotes}
                                     idComment={props.idComment}
-                                    idCustomer={bodyToken.idUser}
+                                    idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CLIENT' ? bodyToken.idUser : null}
                                     idEstablishment={props.idEstablishment}
                                 />
                                 <button className="btn_subcomment" onClick={() => {
-                                    setShowCommentInsert(!showCommentInsert);
+                                    if (!sessionStorage.getItem("token")) {
+                                        hasValidSession(navigate);
+                                    } else {
+                                        setShowCommentInsert(!showCommentInsert);
+                                    }
                                 }}><img src={ImageComment} alt="Image comment" /></button>
-                                {
-                                    <Upvotes
-                                        upvotes={props.upvotes}
-                                        idComment={props.idComment}
-                                        idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CUSTOMER' ? bodyToken.idUser : null}
-                                        idEstablishment={props.idEstablishment}
-                                    />
-                                }
-                                <img src={ImageComment} alt="Ícone de comentário" />
                             </div>
                             {props.comment.length > 100 ?
                                 <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>
@@ -180,7 +177,7 @@ const CommentIndividual = (props) => {
                             userPhoto={subComment.userPhoto} />
                     ))}
                 </div>
-            </div>
+            </div >
 
         </>
     )
@@ -232,7 +229,7 @@ const CommentReply = (props) => {
                                 idCustomer={atob(sessionStorage.getItem("idUser"))}
                                 idEstablishment={props.idEstablishment}
                             />
-                            <img src={ImageComment} alt="Image comment" />
+
                         </div>
                         {props.comment.length > 100 ?
                             <div className={`read-more-${id} more-text`} onClick={() => scrollTextShow(`read-more-${id}`)}>

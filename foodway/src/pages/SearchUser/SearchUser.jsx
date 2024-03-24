@@ -132,7 +132,7 @@ function SearchUser() {
                                             <SearchCard
                                                 key={index}
                                                 name={item.name}
-                                                bio={item.typeUser == "CLIENT" ? item.bio : item.lastComment}
+                                                bio={item.bio != "" ? item.bio : "Sem Descrição"}
                                                 generalRate={item.generalRate}
                                                 lastComment={item.lastComment}
                                                 photo={item.photo}

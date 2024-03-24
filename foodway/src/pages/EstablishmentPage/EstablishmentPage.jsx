@@ -1,16 +1,10 @@
-
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
-const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
-const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
-const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
 import { useEffect, useState } from "react";
 import { api_call, nifi_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
 import { Link, useParams } from "react-router-dom";
-import ContentLoader from 'react-content-loader'
-import {
-  CommentIndividual
-} from "../../components/Comment/Comment.jsx";
+import ContentLoader from 'react-content-loader';
+import { CommentIndividual } from "../../components/Comment/Comment.jsx";
 import "./EstablishmentPage.css";
 import { CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
 import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
@@ -18,6 +12,9 @@ import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { InputField, TextAreaField } from "../../components/InputField/InputField";
 import { ButtonPrimary } from "../../components/Button/Button.jsx";
 import { toast } from 'react-toastify';
+const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
+const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
+const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
 
 
 const EstablishmentPage = () => {
@@ -104,27 +101,20 @@ const EstablishmentPage = () => {
 
     window.open(gmailLink, '_blank');
   };
-
-  const addCommentToState = (newComment) => {
-    setComments(prevComments => [...prevComments, newComment]);
-  };
-
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
-    setComments(response.data.comments);
+    console.log("Comments: ")
     console.log(response.data.comments);
+    setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
   const handleChangeMessageData = (e) => {
     setMessageData(e.target.value);
   };
-
   const handleSendEmail = async () => {
     try {
       const response = await nifi_call("post", "/report", {
@@ -141,13 +131,9 @@ const EstablishmentPage = () => {
       console.log(error);
     }
   }
-
-
   useEffect(() => {
-    console.log("idEstablishment: " + idEstablishment)
     getEstablishmentProfileData();
   }, []);
-
   return (
     <>
       <div className="establishment-content-container">
@@ -181,7 +167,7 @@ const EstablishmentPage = () => {
             <div className="establishment-comments-info-container">
               <div className="establishment-add-comment-list-comments">
                 <div className="establishment-addcomment-box">
-                  {sessionStorage.getItem("token") ? <CommentInsert establishmentId={idEstablishment} onCommentAdded={addCommentToState} /> : null}
+                  <CommentInsert establishmentId={idEstablishment} setComments={setComments} />
                 </div>
                 <div
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
@@ -334,9 +320,9 @@ const EstablishmentPage = () => {
                       </form>
                       <div className="button-modal-container">
                         <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"7rem"} />
-                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"7rem"}  />
+                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"7rem"} />
                       </div>
-                      </div>
+                    </div>
                   </GenericModal>
                 </div>
               </div>
