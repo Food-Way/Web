@@ -535,6 +535,11 @@
     padding-left: 6vw;
 }
 
+.establishment-report-title {
+    font-size: 2.3rem;
+    margin-bottom: 1.5rem;
+}
+
 .button-modal-container {
     display: flex;
     flex-direction: row;

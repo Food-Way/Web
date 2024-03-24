@@ -289,6 +289,7 @@ const EstablishmentPage = () => {
                   <span onClick={handleOpenReportModal}>Reportar</span>
                   <GenericModal classNameModal={"modal-page-establishment-report"} classNameBox={"box-page-establishment-report"} open={openReportModal} handleClose={handleCloseReportModal}>
                     <div className="email-modal-container">
+                      <h1 className="establishment-report-title">Reportar Problema - {profile.establishmentName}</h1>
                       <form onSubmit={handleSubmit}>
                         <InputField
                           type="email"
@@ -319,8 +320,8 @@ const EstablishmentPage = () => {
                         />
                       </form>
                       <div className="button-modal-container">
-                        <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"7rem"} />
-                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"7rem"} />
+                        <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"6rem"} />
+                        <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"6rem"} />
                       </div>
                     </div>
                   </GenericModal>
