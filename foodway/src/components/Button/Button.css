@@ -11,7 +11,7 @@
   background: #ff0007;
   border: none;
   padding: 10px;
-  margin: 5px;
+  /* margin: 5px; */
   transition: 0.3s;
   text-decoration: none;
 }
@@ -42,7 +42,7 @@
   background: #000000;
   border: none;
   padding: 10px;
-  margin: 10px;
+  /* margin: 10px; */
   transition: 0.3s;
   text-decoration: none;
 }

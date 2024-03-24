@@ -10,10 +10,13 @@ import ContentLoader from 'react-content-loader';
 import parseJWT from "../../util/parseJWT";
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
+import { InputField } from "../../components/InputField/InputField";
+
 import { toast } from 'react-toastify';
 import "./MenuDash.css";
+import UploadImage from "../../components/UploadImage/UploadImage.jsx";
 import jsPDF from 'jspdf';
-import fundoPdf from "../../../public/rank-background.png";
+import backgroundPdf from "../../../public/rank-background.png";
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
@@ -142,7 +145,7 @@ const MenuDash = () => {
       const pdf = new jsPDF();
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdfWidth;
-      const imgBackground = fundoPdf;
+      const imgBackground = backgroundPdf;
 
       const img = await new Promise((resolve) => {
         const reader = new FileReader();
@@ -202,21 +205,36 @@ const MenuDash = () => {
             </div>
             <GenericModal open={openCreateProductModal} handleClose={handleCloseCreateProductModal}>
               <form onSubmit={handleSubmit}>
-                <div className="modal-container-product">
-                  <span>Criação de produto</span>
-                  <div className="modal-box-product">
-                    <div className="modal-input-box">
-                      <label htmlFor="productName">Nome do produto</label>
-                      <input type="text" id="productName" onChange={handleChangeName} />
+                <div className="modal-container-product-external">
+                  <div className="modal-container-product">
+                    <span>Criação de produto</span>
+                    <div className="modal-box-product">
+                      <div className="modal-input-box">
+                        <InputField
+                          type="text"
+                          label="Nome"
+                          placeholder="Nome do produto"
+                          id="productName"
+                          onChange={handleChangeName}
+                        />
+                      </div>
+                      <div className="modal-input-box">
+                        <InputField
+                          type="number"
+                          label="Preço"
+                          placeholder="Preço do produto"
+                          id="productPrice"
+                          onChange={handleChangePrice}
+                        />
+                      </div>
+
+                      <UploadImage />
+
                     </div>
-                    <div className="modal-input-box">
-                      <label htmlFor="productPrice">Preço do produto</label>
-                      <input type="text" id="productPrice" onChange={handleChangePrice} />
+                    <div className="button-modal-box">
+                      <ButtonPrimary text="Enviar" width={"45%"} height={"6rem"} onclick={handlePostProduct} />
+                      <ButtonSecondary text="Cancelar" width={"45%"} height={"6rem"} onclick={handleCloseCreateProductModal} />
                     </div>
-                  </div>
-                  <div className="button-modal-box">
-                    <ButtonPrimary text="Enviar" width={"50%"} onclick={handlePostProduct} />
-                    <ButtonSecondary text="Cancelar" onclick={handleCloseCreateProductModal} width={"50%"} />
                   </div>
                 </div>
               </form>
