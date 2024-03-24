@@ -7,17 +7,33 @@
   margin-right: 1rem;
 }
 
+.comment_insert {
+  width: 90%;
+}
+
 .comment-section {
   display: flex;
   align-items: start;
   flex-direction: row;
-  width: 40vw;
 }
 
 .actions-section {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.actions-section-default {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+@media (max-width: 1400px) {
+  .actions-section-default {
+    flex-direction: column;
+  }
 }
 
 .container_button-comment {
