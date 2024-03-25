@@ -74,7 +74,10 @@ const MenuEstablishment = (props) => {
     var item = document.querySelector(className);
     var oldItem = document.querySelector(oldPath);
 
-    item.classList.add("item-active");  
+    if (item) {
+      item.classList.add("item-active");  
+    }
+    
     if (oldItem) {
       oldItem.classList.remove("item-active");
     }

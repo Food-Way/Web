@@ -139,7 +139,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.establishmentName}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(bodyToken.idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
+                  {bodyToken && atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
