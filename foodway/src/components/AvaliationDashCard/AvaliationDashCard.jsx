@@ -1,5 +1,4 @@
-import { React, useEffect, useState } from "react";
-import DoneIcon from '@material-ui/icons/Done';
+import React from "react";
 import "./AvaliationDashCard.css";
 
 function AvaliationDashCard(props) {

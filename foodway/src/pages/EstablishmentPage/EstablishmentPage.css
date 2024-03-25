@@ -540,10 +540,13 @@
     margin-bottom: 1.5rem;
 }
 
-.button-modal-container {
+.button-modal-container-report {
+    width: 80%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .contact-modal-container {

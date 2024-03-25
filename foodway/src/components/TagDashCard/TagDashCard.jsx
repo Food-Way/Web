@@ -151,8 +151,8 @@ function TagDashCard(props) {
                                     )}
                                 </div>
                             </div>
-                            <div className="button-modal-container">
-                                <ButtonPrimary text="Enviar" onclick={handleSendTags} width={"22vw"} height={"6rem"} />
+                            <div className="button-modal-container-tags">
+                                <ButtonPrimary text="Enviar" onclick={() => setOpenModal(false)} width={"22vw"} height={"6rem"} />
                                 <ButtonSecondary text="Cancelar" onclick={handleCloseModal} width={"22vw"} height={"6rem"} />
                             </div>
                         </div>

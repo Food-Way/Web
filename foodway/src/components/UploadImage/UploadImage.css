@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
-/* body {
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 height: 100vh;
-	 font-family: Roboto, sans-serif;
-	 background: #eceffc;
-} */
 .upload {
     --btn-color: var(--cinzaEscuro);
     --progress-color: var(--preto);
@@ -32,12 +24,17 @@
 }
 
 .upload__filename {
+    width: 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
-    padding-left: 8px;
+    margin-left: 1rem;
 }
 
 .upload__button {
-    width: 30vw;
+    width: 40vw;
+    left: -12%;
     position: relative;
     padding: 16px;
     margin: 0;
@@ -53,13 +50,16 @@
 }
 
 .real-file-upload {
-    display: none;
+    height: 75px;
+    top: -20px;
+    left: 0;
     position: absolute;
-    height: 50vh;
     cursor: pointer;
+    opacity: 0;
 }
 
 .upload__button__text {
+    width: 2.6vw;
     font-size: 1.5rem;
 }
 

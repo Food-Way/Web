@@ -160,7 +160,7 @@ function PerformanceDash() {
                                                 <span className="no-content">Nenhuma avaliação recebida</span>
                                             ) : (
                                                 dashData.establishmentRate.map((item, index) => (
-                                                    <AvaliationDashCard rate={item.score} category={item.category} key={index} />
+                                                    <AvaliationDashCard rate={item.score} color={"red"} category={item.category} key={index} />
                                                 ))
                                             )}
                                         </div>
