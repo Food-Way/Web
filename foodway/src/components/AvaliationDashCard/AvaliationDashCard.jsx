@@ -16,7 +16,6 @@ function AvaliationDashCard(props) {
                 </div>
             );
         }
-
         return points;
     }
 

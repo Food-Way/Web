@@ -4,7 +4,7 @@ import InputField from "../../components/InputField/InputField";
 import { TextAreaField } from "../../components/InputField/InputField";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import parseJWT from "../../util/parseJwt";
+import parseJWT from "../../util/parseJWT";
 import api_call from "../../services/apiImpl";
 import GenericModel from "../../components/GenericModel/GenericModel";
 import api from "../../services/api";
@@ -15,6 +15,8 @@ const CostumerEdit = () => {
   const handleClose = () => setOpen(false);
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFileCover, setSelectedFileCover] = useState(null);
+  const [selectedFileProfile, setSelectedFileProfile] = useState(null);
   const [coverImageUrlLocal, setCoverImageUrlLocal] = useState();
   const [coverImageName, setCoverImageName] = useState();
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
@@ -89,16 +91,20 @@ const CostumerEdit = () => {
 
   const handleFileChange = async (type, event) => {
     const file = event.target.files[0];
-    try {
-      const isValid = await validateImage(type, file);
-      if (isValid) {
-        setSelectedFile(file);
+    if (!file) {
+      toast.error("Nenhum arquivo foi selecionado.");
+      return;
+    }
+  
+    const isValid = await validateImage(type, file);
+    if (isValid) {
+      if (type === "cover") {
+        setSelectedFileCover(file);
       } else {
-        toast.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
-        console.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
+        setSelectedFileProfile(file);
       }
-    } catch (error) {
-      console.error("Erro de validação:", error);
+    } else {
+      toast.error("A imagem não atende aos requisitos de tamanho.");
     }
   };
 
@@ -134,23 +140,6 @@ const CostumerEdit = () => {
     });
   };
 
-  // const uploadFileToS3 = async (file) => {
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("bucketName", "foodway-public-s3");
-  //   formData.append("objectKey", `/user-images/${file.name}`);
-  //   formData.append("tagKey", "fileType");
-  //   formData.append("tagValue", "user");
-
-  //   try {
-  //     const response = await api_call("post", "files/upload", formData, atob(sessionStorage.getItem("token")), null);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error("Erro ao realizar upload de imagem:", error);
-  //     throw new Error("Falha no upload da imagem.");
-  //   }
-  // };
-
   async function uploadFileToS3(file) {
     const formData = new FormData();
     formData.append("file", file);
@@ -175,15 +164,16 @@ const CostumerEdit = () => {
   }
 
   const handlePostImage = async (type) => {
-    console.log("entrou em handlepostImage")
-    if (!selectedFile) {
+    const fileToUpload = type === "cover" ? selectedFileCover : selectedFileProfile;
+  
+    if (!fileToUpload) {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-
+  
     try {
       const isCover = type === "cover" ? "cover" : "profile";
-      const resizedFile = await handleResizeImage(selectedFile);
+      const resizedFile = await handleResizeImage(fileToUpload);
       const uploadResponse = await uploadFileToS3(resizedFile);
 
       if (uploadResponse) {
@@ -231,70 +221,6 @@ const CostumerEdit = () => {
       console.error(errorMessage, error);
     }
   };
-
-
-
-
-  // const handlePostImage = async (type) => {
-  //   console.log("entrou em handlepostImage")
-  //   if (!selectedFile) {
-  //     toast.error("Nenhum arquivo foi selecionado.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const isCover = type === "cover" ? "cover" : "profile";
-  //     const resizedFile = await handleResizeImage(selectedFile);
-  //     const presignedUrl = await getPresignedUrl(resizedFile.name);
-  //     const uploadSuccess = await uploadFileToS3(resizedFile, presignedUrl);
-
-  //     if (!uploadSuccess) {
-  //       toast.error("Falha no upload da imagem.");
-  //       return;
-  //     }
-
-  //     const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
-  //     toast.success(successMessage);
-  //     const imageName = response.data[0];
-  //     const imageUrl = `https://foodway-public-s3.s3.amazonaws.com/user-images/${imageName}`;
-
-  //     if (isCover) {
-  //       setCoverImageName(imageName);
-  //       setCoverImageUrlLocal(imageUrl);
-  //     } else {
-  //       setProfileImageName(imageName);
-  //       setProfileImageUrlLocal(imageUrl);
-  //       sessionStorage.setItem("profilePhoto", btoa(imageUrl));
-  //     }
-
-  //     const profileUpdateData = {
-  //       name: "",
-  //       profilePhoto: "",
-  //       email: atob(sessionStorage.getItem("email")),
-  //       bio: "",
-  //       password: formData.password,
-  //       ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
-  //     };
-
-  //     const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
-  //       },
-  //     });
-
-  //     if (updateResponse.status === 200) {
-  //       toast.success("Perfil atualizado com sucesso!");
-  //       handleClose();
-  //     } else {
-  //       throw new Error("Atualização de perfil falhou");
-  //     }
-  //   } catch (error) {
-  //     const errorMessage = error.message || "Erro ao processar a solicitação.";
-  //     toast.error(errorMessage);
-  //     console.error(errorMessage, error);
-  //   }
-  // };
 
   const handleResizeImage = (file) => {
     return new Promise((resolve, reject) => {
@@ -370,9 +296,9 @@ const CostumerEdit = () => {
             <img
               className="cover-img-preview"
               src={
-                selectedFile === null
+                selectedFileCover === null
                   ? coverImageUrlLocal
-                  : URL.createObjectURL(selectedFile)
+                  : URL.createObjectURL(selectedFileCover)
               }
               alt=""
             />
@@ -403,9 +329,9 @@ const CostumerEdit = () => {
             <img
               className="picture-img-preview"
               src={
-                selectedFile === null
+                selectedFileProfile === null
                   ? profileImageUrlLocal
-                  : URL.createObjectURL(selectedFile)
+                  : URL.createObjectURL(selectedFileProfile)
               }
               alt=""
             />

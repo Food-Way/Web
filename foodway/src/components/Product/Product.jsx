@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ProductImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/product.png"
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
-
-import "./Product.css";
+import InputField from "../InputField/InputField.jsx";
 import api_call from "../../services/apiImpl.js";
 import { toast } from "react-toastify";
+import UploadImage from "../../components/UploadImage/UploadImage.jsx";
+import "./Product.css";
 
 const Product = (props) => {
   const [openDeleteProductModal, setOpenDeleteProductModal] = useState(false);
@@ -85,8 +86,8 @@ const Product = (props) => {
             <span>R$ {props.price}</span>
             {props.editIsAble === true ? (
               <div className="operations">
-                <FontAwesomeIcon icon={faTrashCan} onClick={handleOpenDeleteProductModal}/>
-                <FontAwesomeIcon icon={faPenToSquare} onClick={handleOpenEditProductModal}/>
+                <FontAwesomeIcon icon={faTrashCan} onClick={handleOpenDeleteProductModal} />
+                <FontAwesomeIcon icon={faPenToSquare} onClick={handleOpenEditProductModal} />
                 <GenericModal open={openDeleteProductModal} handleClose={handleCloseDeleteProductModal}>
                   <div>
                     <span>Deseja excluir {props.name}?</span>
@@ -96,24 +97,42 @@ const Product = (props) => {
                     </div>
                   </div>
                 </GenericModal>
-
                 <GenericModal open={openEditProductModal} handleClose={handleCloseEditProductModal}>
                   <form onSubmit={handleSubmit}>
-                    <div className="modal-container-product">
-                      <span>Edição de produto - {props.name}</span>
-                      <div className="modal-box-product">
-                        <div className="modal-input-box">
-                          <label htmlFor="productName">Nome do produto</label>
-                          <input type="text" id="productName" onChange={handleChangeName} value={name} />
+                    <div className="modal-container-product-external">
+                      <div className="modal-container-product">
+                        <span>Editar {props.name}</span>
+                        <div className="modal-box-product">
+                          <div className="modal-input-box">
+                            <InputField
+                              type="text"
+                              label="Nome"
+                              placeholder="Nome do produto"
+                              id="productName"
+                              onChange={handleChangeName}
+                              value={name}
+                              editIsAble={true}
+                            />
+                          </div>
+                          <div className="modal-input-box">
+                            <InputField
+                              type="number"
+                              label="Preço"
+                              placeholder="Preço do produto"
+                              id="productPrice"
+                              onChange={handleChangePrice}
+                              value={price}
+                              editIsAble={true}
+                            />
+                          </div>
+
+                          <UploadImage />
+
                         </div>
-                        <div className="modal-input-box">
-                          <label htmlFor="productPrice">Preço do produto</label>
-                          <input type="text" id="productPrice" onChange={handleChangePrice} value={price} />
+                        <div className="button-modal-box">
+                          <ButtonPrimary text="Enviar" width={"45%"} height={"6rem"} onclick={handleEditProduct} />
+                          <ButtonSecondary text="Cancelar" width={"45%"} height={"6rem"} onclick={handleCloseEditProductModal} />
                         </div>
-                      </div>
-                      <div className="button-modal-box">
-                        <ButtonPrimary text="Enviar" width={"50%"} onclick={handleEditProduct} />
-                        <ButtonSecondary text="Cancelar" onclick={handleCloseEditProductModal} width={"50%"} />
                       </div>
                     </div>
                   </form>

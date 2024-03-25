@@ -17,7 +17,6 @@ const ratingTexts = {
 const StarEstablishment = ({ type, value, onChange, name }) => {
     const [ratingText, setRatingText] = useState('');
 
-    // Atualiza o texto da avaliação sempre que o valor muda
     useEffect(() => {
         setRatingText(ratingTexts[value] || '');
     }, [value]);

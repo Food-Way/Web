@@ -6,7 +6,7 @@ import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import { useParams } from "react-router-dom";
-import parseJwt from "../../util/parseJwt";
+import parseJwt from "../../util/parseJWT";
 import "./UserProfile.css";
 
 const UserProfile = () => {
@@ -101,12 +101,12 @@ const UserProfile = () => {
 
   function firstAndEnd(nameUser) {
     var nameUserDiv = document.querySelector(".profile-username");
-    let words = nameUser.trim().split(' '); 
+    let words = nameUser.trim().split(' ');
     let firstWord = words[0];
-    let endWord = words.length > 1 ? words[words.length - 1] : ''; 
-    let displayName = endWord ? firstWord + " " + endWord : firstWord; 
+    let endWord = words.length > 1 ? words[words.length - 1] : '';
+    let displayName = endWord ? firstWord + " " + endWord : firstWord;
     nameUserDiv.innerHTML = displayName;
-}
+  }
 
   const scrollToBottomAndBack = () => {
     if (profileDescriptionRef.current) {
@@ -173,6 +173,11 @@ const UserProfile = () => {
                     <img className="profile-photo" src={user.profilePhoto} alt="Foto de perfil" />
                   )}
                   <span className="profile-username"></span>
+                  {user.bio === undefined || user.bio.length === 0 ? (
+                    ""
+                  ) : (
+                    showDescription(user.bio)
+                  )}
                   {sessionStorage.getItem("token") && location.pathname.endsWith(bodyToken.idUser) ? <ButtonSecondaryLink url="/user/profile-edit" text={"Editar Perfil"} width={"11vw"} /> : ""}
                 </div>
                 {user === undefined || user.length === 0 ? (
@@ -195,11 +200,11 @@ const UserProfile = () => {
             <div className="last-comment-container">
               <span className="profile-title">Últimas avaliações</span>
               <div className="last-comment-box">
-                {comments === undefined || comments.length === 0 ? (
+                {user === undefined || user.length === 0 ? (
                   <CommentLoader />
                 ) : (
                   comments === undefined || comments.length === 0 ? (
-                    <span className="no-content">Nenhuma avaliação</span>
+                    <span className="no-content">Nenhuma avaliação realizada</span>
                   ) : (
                     comments.map((item, index) => (
                       <Comment
@@ -220,7 +225,7 @@ const UserProfile = () => {
             <div className="fav-estabs-container">
               <span className="profile-title">Restaurantes favoritos</span>
               <div className="fav-estabs-box">
-                {establishments === undefined || establishments.length === 0 ? (
+                {user === undefined || user.length === 0 ? (
                   <FavEstablishmentsLoader />
                 ) : (
                   establishments === undefined || establishments.length === 0 ? (

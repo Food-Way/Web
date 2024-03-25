@@ -7,7 +7,6 @@ const BronzeMedal = "https://foodway-public-s3.s3.amazonaws.com/website-images/b
 import "./RelevanceCard.css";
 
 const RelevanceCard = (props) => {
-
     return (
         <>
             <div className="relevance-card-container">
@@ -16,7 +15,7 @@ const RelevanceCard = (props) => {
                         <div className="relevance-card-body">
                             {props.rank == 1 ? <img src={GoldMedal} alt="Medalha de Ouro" /> : (props.rank == 2 ? <img src={SilverMedal} alt="Medalha de Prata" /> : <img src={BronzeMedal} alt="Medalha de Bronze" />)}
                             <span className="best-card-name">{props.establishmentName}</span>
-                            <RateNumberStar color="black" generalRate={props.generalRate == undefined || null ? 0 : props.generalRate} />
+                            <RateNumberStar color="black" generalRate={props.generalRate == undefined || null ? 0 : props.generalRate.toFixed(1)} />
                             <span>Avaliações: {props.qtdRates == undefined || null ? 0 : props.qtdRates}</span>
                         </div>
                     </div>
@@ -25,5 +24,4 @@ const RelevanceCard = (props) => {
         </>
     );
 }
-
 export default RelevanceCard;

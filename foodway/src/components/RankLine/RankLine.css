@@ -1,7 +1,7 @@
 @import url(../../assets/css/style.css);
 
 .rank-line {
-    width: 45vw;
+    width: 100%;
     height: 7vh;
     display: flex;
     flex-direction: row;
@@ -21,7 +21,14 @@
     color: var(--branco);
 }
 
-.estab-rank-text {
+.estab-rank-text, .estab-rate-text, .estab-rank-rate {
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+.estab-rate-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }
