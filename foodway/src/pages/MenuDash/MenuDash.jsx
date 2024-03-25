@@ -227,9 +227,7 @@ const MenuDash = () => {
                           onChange={handleChangePrice}
                         />
                       </div>
-
                       <UploadImage />
-
                     </div>
                     <div className="button-modal-box">
                       <ButtonPrimary text="Enviar" width={"45%"} height={"6rem"} onclick={handlePostProduct} />

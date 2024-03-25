@@ -86,14 +86,14 @@ const Product = (props) => {
             <span>R$ {props.price}</span>
             {props.editIsAble === true ? (
               <div className="operations">
-                <FontAwesomeIcon icon={faTrashCan} onClick={handleOpenDeleteProductModal} />
-                <FontAwesomeIcon icon={faPenToSquare} onClick={handleOpenEditProductModal} />
+                <FontAwesomeIcon icon={faTrashCan} size="2x" onClick={handleOpenDeleteProductModal} />
+                <FontAwesomeIcon icon={faPenToSquare} size="2x" onClick={handleOpenEditProductModal} />
                 <GenericModal open={openDeleteProductModal} handleClose={handleCloseDeleteProductModal}>
-                  <div>
+                  <div className="delete-product-modal">
                     <span>Deseja excluir {props.name}?</span>
                     <div className="button-modal-box">
-                      <ButtonPrimary text="Confirmar" width={"50%"} onclick={handleDeleteProduct} />
-                      <ButtonSecondary text="Cancelar" onclick={handleCloseDeleteProductModal} width={"50%"} />
+                      <ButtonPrimary text="Confirmar" width={"45%"} onclick={handleDeleteProduct} />
+                      <ButtonSecondary text="Cancelar" onclick={handleCloseDeleteProductModal} width={"45%"} />
                     </div>
                   </div>
                 </GenericModal>
@@ -125,9 +125,7 @@ const Product = (props) => {
                               editIsAble={true}
                             />
                           </div>
-
                           <UploadImage />
-
                         </div>
                         <div className="button-modal-box">
                           <ButtonPrimary text="Enviar" width={"45%"} height={"6rem"} onclick={handleEditProduct} />

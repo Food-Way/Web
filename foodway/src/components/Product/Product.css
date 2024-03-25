@@ -38,3 +38,17 @@
   flex-direction: row;
   gap: 0.5rem;
 }
+
+.delete-product-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.delete-product-modal span {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
