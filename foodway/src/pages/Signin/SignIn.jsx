@@ -63,7 +63,7 @@ const SignIn = () => {
             setTimeout(() => {
               // console.log("Redirecting to /perfil...");
               navigate(`/user/profile/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
-              // location.reload();
+              location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
           } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
@@ -71,7 +71,7 @@ const SignIn = () => {
               sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
               // console.log("Redirecting to /establishment/performance...");
               navigate(`/establishment/page/info/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
-              // location.reload();
+              location.reload();
             }, 2000);
           }
         } else {

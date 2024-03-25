@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import parseJWT from "../../util/parseJWT";
 import api_call from "../../services/apiImpl";
 import GenericModel from "../../components/GenericModel/GenericModel";
+import UploadImage from "../../components/UploadImage/UploadImage";
 import api from "../../services/api";
 
 const CostumerEdit = () => {
