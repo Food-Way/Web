@@ -147,9 +147,9 @@ const EstablishmentPage = () => {
                     <span>{profile.generalRate.toFixed(1)}</span>
                   </div>
                   <div className="avaliation-general-points">
-                    <AvaliationDashCard rate={profile.foodRate} color="red" category="Comida" />
-                    <AvaliationDashCard rate={profile.ambientRate} color="red" category="Ambiente" />
-                    <AvaliationDashCard rate={profile.serviceRate} color="red" category="Atendimento" />
+                    <AvaliationDashCard rate={profile.foodRate} color="white" category="Comida" />
+                    <AvaliationDashCard rate={profile.ambientRate} color="white" category="Ambiente" />
+                    <AvaliationDashCard rate={profile.serviceRate} color="white" category="Atendimento" />
                   </div>
                 </div>
               </div>
@@ -292,6 +292,7 @@ const EstablishmentPage = () => {
                       <iframe
                         style={{
                           width: "100%",
+                          height: "120px",
                           borderRadius: "0.5rem",
                           border: "1px solid #c4c4c4",
                           marginTop: "1rem",

@@ -385,7 +385,7 @@
 }
 
 .establishment-tag-content {
-    width: 12vw;
+    width: 16vw;
     display: flex;
     flex-wrap: wrap;
     border: var(--borda);

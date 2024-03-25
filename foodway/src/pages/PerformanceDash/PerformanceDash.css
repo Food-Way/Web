@@ -55,7 +55,7 @@
     width: 18.7vw;
     height: 15rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     border: var(--borda);
     border-radius: var(--arredondamento);
 }
@@ -78,7 +78,7 @@
 }
 
 .avaliation-dash-card {
-    width: 10vw;
+    width: 12vw;
     height: 16vh;
     display: flex;
     flex-direction: column;
