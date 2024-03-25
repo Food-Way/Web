@@ -336,7 +336,7 @@ const EstablishmentPage = () => {
                           onChange={handleChangeMessageData}
                         />
                       </form>
-                      <div className="button-modal-container">
+                      <div className="button-modal-container-report">
                         <ButtonPrimary text="Enviar" onclick={handleSendEmail} width={"39%"} height={"6rem"} />
                         <ButtonSecondary text="Cancelar" onclick={handleCloseReportModal} width={"39%"} height={"6rem"} />
                       </div>
