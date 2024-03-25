@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
-import CheckboxSelect from "../../components/CheckboxSelect/CheckboxSelect";
 import GenericModal from "../GenericModel/GenericModel";
 import api_call from "../../services/apiImpl";
 import { ButtonPrimary } from "../../components/Button/Button.jsx";
-import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
-
+import { ButtonSecondary, } from "../../components/Button/Button.jsx";
+import parseJWT from "../../util/parseJWT.jsx";
 import "./TagDashCard.css";
+import { toast } from "react-toastify";
 
 function TagDashCard(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -13,25 +13,13 @@ function TagDashCard(props) {
     const [propsTags, setPropsAllTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const handleOpenModal = () => setOpenModal(true);
+    const bodyToken = parseJWT();
 
     const handleCloseModal = () => {
         setSelectedTags([]);
         setAllTags([...allTags, ...selectedTags]);
         setOpenModal(false)
     };
-
-    function openTag() {
-        return (
-            <>
-                <CheckboxSelect
-                    selectedValues={""}
-                    setSelectedValues={""}
-                    selectedCulinaries={""}
-                    setSelectedCulinaries={""}
-                />
-            </>
-        )
-    }
 
     async function getTags() {
         const response = await api_call("get", "/tags", null, atob(sessionStorage.getItem("token")));
@@ -52,6 +40,20 @@ function TagDashCard(props) {
             setSelectedTags(selectedTags.filter(tag => tag.id !== id));
             setAllTags([...allTags, unSelectTag]);
         }
+    }
+
+    async function handleSendTags() {
+        console.log(selectedTags);
+        const data = {
+            idEstablishment: bodyToken.idUser,
+            tags: selectedTags.name,
+            enable: true
+        }
+        console.log(data);
+        const response = await api_call("post", "/tags", data, atob(sessionStorage.getItem("token")), null);
+        console.log(response.data);
+        toast.success("Tags cadastradas com sucesso!");
+        handleCloseModal();
     }
 
     useEffect(() => {
@@ -150,7 +152,7 @@ function TagDashCard(props) {
                                 </div>
                             </div>
                             <div className="button-modal-container">
-                                <ButtonPrimary text="Enviar" onclick={() => setOpenModal(false)} width={"22vw"} height={"6rem"} />
+                                <ButtonPrimary text="Enviar" onclick={handleSendTags} width={"22vw"} height={"6rem"} />
                                 <ButtonSecondary text="Cancelar" onclick={handleCloseModal} width={"22vw"} height={"6rem"} />
                             </div>
                         </div>

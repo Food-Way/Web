@@ -7,15 +7,14 @@ import ContentLoader from 'react-content-loader';
 import { CommentIndividual } from "../../components/Comment/Comment.jsx";
 import "./EstablishmentPage.css";
 import { CommentInsert } from "../../components/CommentInsert/CommentInsert.jsx";
-import { ButtonSecondary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
+import { ButtonSecondary } from "../../components/Button/Button.jsx";
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { InputField, TextAreaField } from "../../components/InputField/InputField";
-import { ButtonPrimary } from "../../components/Button/Button.jsx";
+import { ButtonPrimary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
 import { toast } from 'react-toastify';
 const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
 const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
 const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
-
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
@@ -30,7 +29,6 @@ const EstablishmentPage = () => {
   const [messageData, setMessageData] = useState("");
   const params = useParams();
   const idEstablishment = params.id;
-
 
   function handleOpenReportModal() {
     if (sessionStorage.getItem("token")) {
@@ -82,30 +80,21 @@ const EstablishmentPage = () => {
   const CommentLoader = () => (
     <ContentLoader
       speed={2}
-      width={"40"}
+      width={780}
       height={422}
-      viewBox="0 0 40 422"
+      viewBox="0 0 780 422"
       backgroundColor="#ffffff"
       foregroundColor="#c4c4c4"
     >
-      <rect x="0" y="0" rx="0" ry="0" width="768" height="422" />
+      <rect x="0" y="0" rx="0" ry="0" width="780" height="422" />
     </ContentLoader>
   )
 
-  const handleClick = () => {
-    const toFoodway = encodeURIComponent('help@foodway.com');
-    const cc = encodeURIComponent(profile.email);
-    const subject = encodeURIComponent('Reportar Problema no Estabelecimento');
-    const body = encodeURIComponent('Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente\n\nDescrição do problema:');
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${toFoodway}&cc=${cc}&su=${subject}&body=${body}`;
-
-    window.open(gmailLink, '_blank');
-  };
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
-    console.log("Comments: ")
-    console.log(response.data.comments);
+    console.log(response.data)
+    // console.log(response.data.comments);
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
@@ -127,6 +116,10 @@ const EstablishmentPage = () => {
         ownerName: profile.name
       }, null, null);
       console.log(response);
+      if (response.status === 200) {
+        toast.success('Email enviado com sucesso!');
+        handleCloseReportModal();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -146,6 +139,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.establishmentName}</h1>
                   <span>{profile.culinary}</span>
+                  {location.pathname.endsWith(bodyToken.idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -171,26 +165,52 @@ const EstablishmentPage = () => {
                 </div>
                 <div
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
-                  {comments.length === 0 ? <CommentLoader /> : comments.map((commentParent, index) => (
-                    <div className="establishment-comments-box-more" key={index}>
-                      <CommentIndividual
-                        size={30}
-                        establishmentName={commentParent.establishmentName}
-                        rate={commentParent.commentRate}
-                        title={commentParent.title}
-                        comment={commentParent.comment}
-                        upvotes={commentParent.upvotes}
-                        idComment={commentParent.idPost}
-                        idEstablishment={idEstablishment}
-                        userPhoto={commentParent.userPhoto}
-                        replies={commentParent.replies}
-                        setComments={setComments}
-                      />
-                    </div>
-                  ))}
+                  {profile === undefined || profile.length === 0 ? (
+                    <CommentLoader />
+                    ) : (
+                      comments.length === 0 || comments === undefined ? (
+                        <span className="no-content">Nenhum comentário realizado</span>
+                    ) : (
+                      comments.map((commentParent, index) => (
+                        <div className="establishment-comments-box-more" key={index}>
+                          <CommentIndividual
+                            size={30}
+                            establishmentName={commentParent.establishmentName}
+                            rate={commentParent.commentRate}
+                            title={commentParent.title}
+                            comment={commentParent.comment}
+                            upvotes={commentParent.upvotes}
+                            idComment={commentParent.idPost}
+                            idEstablishment={idEstablishment}
+                            userPhoto={commentParent.userPhoto}
+                            replies={commentParent.replies}
+                            setComments={setComments}
+                          />
+                        </div>
+                      ))
+                    )
+                  )}
                 </div>
               </div>
               <div className="establishment-side-box">
+                <div className="establishment-tags-box">
+                  <span className="establishment-tags-title">Tags</span>
+                  <div className="establishment-tag-content">
+                    {profile === undefined || profile.length === 0 ? (
+                      <InfoLoader />
+                    ) : (
+                      profile.tags === undefined || profile.tags.length === 0 ? (
+                        <span className="no-content">Nenhuma Tag selecionada</span>
+                      ) : (
+                        profile.tags.map((item, index) => (
+                          <div className="establishment-tag-box" key={index}>
+                            <span>{item}</span>
+                          </div>
+                        ))
+                      )
+                    )}
+                  </div>
+                </div>
                 <div className="establishment-general-box">
                   {profile === undefined || profile.length === 0 ? (
                     <InfoLoader />
@@ -313,9 +333,6 @@ const EstablishmentPage = () => {
                           label="Mensagem"
                           placeholder="Mensagem"
                           id="message"
-                          value={`
-                                 Olá,\n\nEstou entrando em contato para reportar um problema no estabelecimento.\n\nAtenciosamente,\n\nNome do Cliente: ${bodyToken.username}\n\nDescrição do problema:
-                               `}
                           onChange={handleChangeMessageData}
                         />
                       </form>

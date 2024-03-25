@@ -260,7 +260,7 @@ const MenuDash = () => {
                     <MenuLoader />
                   ) : (
                     menu === undefined || menu.length === 0 ? (
-                      <span>Nenhum produto</span>
+                      <span className="no-content">Nenhum produto</span>
                     ) : (
                       menu.map((item, index) => (
                         <>

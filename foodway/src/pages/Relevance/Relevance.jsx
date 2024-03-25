@@ -12,6 +12,7 @@ const Relevance = () => {
     async function getRelevance() {
         const culinary = atob(sessionStorage.getItem("culinary"));
         const response = await api_call("get", `/establishments/relevance?culinary=${culinary}`, null, atob(sessionStorage.getItem("token")));
+        console.log(response.data);
         setRelevance(response.data.slice(3, 11));
         setTop3(response.data.slice(0, 3));
     }
@@ -73,7 +74,7 @@ const Relevance = () => {
                                     key={index}
                                     profilePhoto={item.profilePhoto}
                                     establishmentName={item.establishmentName}
-                                    qtdRate={item.qtdRate}
+                                    qtdRates={item.qtdRates}
                                     generalRate={item.generalRate}
                                     rank={index + 1}
                                 />
@@ -84,13 +85,19 @@ const Relevance = () => {
                 <div className="relevance-rank-container">
                     <div className="relevance-rank-box">
                         <ul className="establishment-rank">
-                            {relevance.map((item, index) => (
-                                <RankLine
-                                    id={index}
-                                    name={item.establishmentName}
-                                    rate={item.qtdRate}
-                                />
-                            ))}
+                            {relevance === undefined || relevance.length === 0 ? (
+                                <span className="no-content">Nenhum estabelecimento encontrado</span>
+                            ) : (
+                                relevance.map((item, index) => (
+                                    <RankLine
+                                        key={index}
+                                        name={item.establishmentName}
+                                        rate={item.qtdRates}
+                                        generalRate={item.generalRate}
+                                        rank={index + 4}
+                                    />
+                                ))
+                            )}
                         </ul>
                     </div>
                 </div>
