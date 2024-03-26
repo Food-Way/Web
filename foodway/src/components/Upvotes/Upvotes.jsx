@@ -6,6 +6,20 @@ import { hasValidSession } from "../Auth/Auth.jsx"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const updateComments = async (idEstablishment, setComments) => {
+    const response = await api_call("get", `/establishments/${idEstablishment}/comments`, null, atob(sessionStorage.getItem("token")));
+    console.log("Status: " + response.status)
+    console.log(response.data)
+    console.log("idEstablishment: " + idEstablishment)
+    console.log("setComments: " + setComments)
+    console.log(response.data)
+    setComments(response.data);
+    if (response.status === "200") {
+        console.log("Entrei")
+    }
+
+};
+
 const Upvotes = (props) => {
     const navigate = useNavigate();
     async function handleUpvotes(idComment, idEstablishment, idCustomer) {
@@ -17,6 +31,12 @@ const Upvotes = (props) => {
             idEstablishment: `${idEstablishment}`,
             idComment: `${idComment}`,
         }, atob(sessionStorage.getItem("token")));
+        console.log("Status response" + response.status)
+        if (response.status == "201" || response.status == "200") {
+            toast.success("upvote inserido");
+            console.log(props.setComments)
+            updateComments(idEstablishment, props.setComments);
+        }
         console.log("upvotado", response);
     }
 

@@ -30,7 +30,6 @@ const CommentDash = () => {
 
     async function getComments() {
         const response = await api_call("get", `/establishments/${idUser}/comments`, null, atob(sessionStorage.getItem("token")));
-        console.log(response.data);
         setComments(response.data);
     }
 
@@ -62,6 +61,7 @@ const CommentDash = () => {
                                                 commentRate={comment.commentRate}
                                                 establishmentName={comment.establishmentName}
                                                 upvotes={comment.upvotes}
+                                                rate={comment.generalRate}
                                             />
                                         ))))}
                             </div>
