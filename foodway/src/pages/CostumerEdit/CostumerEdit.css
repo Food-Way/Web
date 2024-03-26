@@ -271,6 +271,32 @@
   padding: 10px 0px;
 }
 
+.upload-switch-background, .upload-switch-profile {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}	 
+
+.btn-switch-background-box {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-switch-profile-box {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .picture-section {
   display: flex;
   justify-content: center;

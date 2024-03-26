@@ -96,7 +96,7 @@ const CostumerEdit = () => {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-  
+
     const isValid = await validateImage(type, file);
     if (isValid) {
       if (type === "cover") {
@@ -148,7 +148,7 @@ const CostumerEdit = () => {
     formData.append("objectKey", `/user-images/${file.name}`);
     formData.append("tagKey", "fileType");
     formData.append("tagValue", "user");
-  
+
     try {
       const token = atob(sessionStorage.getItem("token"));
       const response = await api.post("files/upload", formData, {
@@ -166,12 +166,12 @@ const CostumerEdit = () => {
 
   const handlePostImage = async (type) => {
     const fileToUpload = type === "cover" ? selectedFileCover : selectedFileProfile;
-  
+
     if (!fileToUpload) {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-  
+
     try {
       const isCover = type === "cover" ? "cover" : "profile";
       const resizedFile = await handleResizeImage(fileToUpload);
@@ -304,20 +304,27 @@ const CostumerEdit = () => {
               alt=""
             />
             <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-            <input
+            <div className="upload-switch-background">
+              <UploadImage />
+            </div>
+            {/* <input
               className="input-file"
               type="file"
               name="cover"
               id="cover"
               onChange={(event) => handleFileChange("cover", event)}
-            />
-            <div>
+            /> */}
+            <div className="btn-switch-background-box">
               <ButtonPrimary
+                width={"18vw"}
+                height={"6vh"}
                 text="Atualizar capa"
                 className="send-cover-btn"
                 onclick={() => handlePostImage("cover")}
               />
               <ButtonSecondary
+                width={"15.7vw"}
+                height={"6vh"}
                 text={"Cancelar"}
                 onclick={handleClose}
               />
@@ -337,20 +344,27 @@ const CostumerEdit = () => {
               alt=""
             />
             <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-            <input
+            <div className="upload-switch-profile">
+              <UploadImage />
+            </div>
+            {/* <input
               className="input-file"
               type="file"
               name="cover"
               id="cover"
               onChange={(event) => handleFileChange("profile", event)}
-            />
-            <div>
+            /> */}
+            <div className="btn-switch-profile-box">
               <ButtonPrimary
+                width={"18vw"}
+                height={"6vh"}
                 text="Atualizar Foto de Perfil"
                 className="send-cover-btn"
                 onClick={() => handlePostImage("profile")}
               />
               <ButtonSecondary
+                width={"15.7vw"}
+                height={"6vh"}
                 text={"Cancelar"}
                 onclick={handleClose}
               />

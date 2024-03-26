@@ -366,9 +366,9 @@ const EstablismentEditPersonal = () => {
 
   return (
     <div className="establishment-edit">
-      <GenericModal open={open} handleClose={handleClose}>
+      <GenericModal open={open} classNameModal={content == "edit-info" ? "save-edit-establishment-modal" : "update-password-establishment-modal"} handleClose={handleClose}>
         {content === "edit-info" ? (
-          <div className="edit-modal-default ">
+          <div className="edit-modal-confirm">
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
               id="passwordConfirm"
@@ -387,7 +387,7 @@ const EstablismentEditPersonal = () => {
           <></>
         )}
         {content === "edit-password" ? (
-          <div className="edit-modal-default ">
+          <div className="edit-modal-password">
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
               id="passwordConfirm"
@@ -413,10 +413,12 @@ const EstablismentEditPersonal = () => {
               value={formData.passwordNewConfirmation}
               onChange={handleInputChange}
             />
-            <ButtonPrimary
-              text="Confirmar"
-              onclick={() => updateEstablishment("password")}
-            />
+            <div className="btn-box-modal-password">
+              <ButtonPrimary
+                text="Confirmar"
+                onclick={() => updateEstablishment("password")}
+              />
+            </div>
           </div>
         ) : (
           <></>
