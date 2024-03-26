@@ -93,8 +93,6 @@ const EstablishmentPage = () => {
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
-    console.log(response.data)
-    // console.log(response.data.comments);
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
@@ -139,7 +137,7 @@ const EstablishmentPage = () => {
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.establishmentName}</h1>
                   <span>{profile.culinary}</span>
-                  {location.pathname.endsWith(bodyToken.idUser) ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
+                  {bodyToken && atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? <ButtonSecondaryLink width="10vw" height="6vh" url="/establishment/edit" text={"Editar Perfil"} /> : ""}
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
@@ -147,9 +145,9 @@ const EstablishmentPage = () => {
                     <span>{profile.generalRate.toFixed(1)}</span>
                   </div>
                   <div className="avaliation-general-points">
-                    <AvaliationDashCard rate={profile.foodRate} color="red" category="Comida" />
-                    <AvaliationDashCard rate={profile.ambientRate} color="red" category="Ambiente" />
-                    <AvaliationDashCard rate={profile.serviceRate} color="red" category="Atendimento" />
+                    <AvaliationDashCard rate={profile.foodRate} color="white" category="Comida" />
+                    <AvaliationDashCard rate={profile.ambientRate} color="white" category="Ambiente" />
+                    <AvaliationDashCard rate={profile.serviceRate} color="white" category="Atendimento" />
                   </div>
                 </div>
               </div>
@@ -167,16 +165,16 @@ const EstablishmentPage = () => {
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
                   {profile === undefined || profile.length === 0 ? (
                     <CommentLoader />
-                    ) : (
-                      comments.length === 0 || comments === undefined ? (
-                        <span className="no-content">Nenhum comentário realizado</span>
+                  ) : (
+                    comments.length === 0 || comments === undefined ? (
+                      <span className="no-content">Nenhum comentário realizado</span>
                     ) : (
                       comments.map((commentParent, index) => (
                         <div className="establishment-comments-box-more" key={index}>
                           <CommentIndividual
                             size={30}
                             establishmentName={commentParent.establishmentName}
-                            rate={commentParent.commentRate}
+                            rate={commentParent.generalRate}
                             title={commentParent.title}
                             comment={commentParent.comment}
                             upvotes={commentParent.upvotes}
@@ -253,24 +251,24 @@ const EstablishmentPage = () => {
                       <span>Cardápio</span>
                     </div>
                   </Link>
-                  <div className="establishment-contact-btn">
+                  <div className="establishment-contact-btn" onClick={handleOpenContactModal}>
                     <img src={Phone} alt="Ícone de telefone" />
-                    <span onClick={handleOpenContactModal}>Contato</span>
-                    <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
+                    <span>Contato</span>
+                  </div>
+                  <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
                       <div className="contact-modal-container">
                         <h1 className="establishment-contact-title">Contato - {profile.name}</h1>
                         <div className="contact-modal-box">
-                          <span className="contact-item">Email para contato: {profile.email}</span>
-                          <span className="contact-item">Telefone: {profile.phone == null ? "Não adicionado" : profile.phone}</span>
+                          <span className="contact-item"><span className="label-contact-item">Email para contato:</span> {profile.email}</span>
+                          <span className="contact-item"><span className="label-contact-item">Telefone:</span> {profile.phone == null ? "Não adicionado" : profile.phone}</span>
                         </div>
                         <span className="establishment-location-title establishment-contact-title">Localização</span>
                         <iframe
                           style={{
-                            width: "100%",
+                            width: "80%",
                             height: "300px",
                             borderRadius: "0.5rem",
                             border: "1px solid #c4c4c4",
-                            marginTop: "1rem",
                           }}
                           loading="lazy"
                           referrerPolicy="no-referrer-when-downgrade"
@@ -279,7 +277,6 @@ const EstablishmentPage = () => {
                         ></iframe>
                       </div>
                     </GenericModal>
-                  </div>
                 </div>
                 <div className="establishment-location-box">
                   <span className="establishment-location-title">
@@ -292,6 +289,7 @@ const EstablishmentPage = () => {
                       <iframe
                         style={{
                           width: "100%",
+                          height: "120px",
                           borderRadius: "0.5rem",
                           border: "1px solid #c4c4c4",
                           marginTop: "1rem",

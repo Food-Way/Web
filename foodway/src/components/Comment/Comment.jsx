@@ -7,8 +7,6 @@ import { CommentInsertReply, CommentInsert } from "../../components/CommentInser
 import "./Comment.css";
 import { hasValidSession } from "../Auth/Auth.jsx"
 import { useNavigate } from "react-router-dom";
-
-
 const ImageComment = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
 
 const Comment = (props) => {
@@ -133,7 +131,7 @@ const CommentIndividual = (props) => {
                             size={24}
                             activeColor={"var(--primary)"}
                             edit={false}
-                            value={2} />
+                            value={props.rate} />
                         <p className="comment-content-text">{analysisText(props.comment, "text", updateText)}</p>
                         <div className="establishment-upcomment-box">
                             <div className="establishment-upcomment-values">
@@ -143,6 +141,7 @@ const CommentIndividual = (props) => {
                                     idComment={props.idComment}
                                     idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CLIENT' ? bodyToken.idUser : null}
                                     idEstablishment={props.idEstablishment}
+                                    setComments={props.setComments}
                                 />
                                 <button className="btn_subcomment" onClick={() => {
                                     if (!sessionStorage.getItem("token")) {
@@ -172,9 +171,10 @@ const CommentIndividual = (props) => {
                             rate={subComment.commentRate}
                             comment={subComment.comment}
                             upvotes={subComment.upvotes}
-                            idComment={subComment.idComment}
+                            idComment={subComment.idPost}
                             idEstablishment={props.idEstablishment}
-                            userPhoto={subComment.userPhoto} />
+                            userPhoto={subComment.userPhoto}
+                            setComments={props.setComments} />
                     ))}
                 </div>
             </div >
@@ -184,6 +184,7 @@ const CommentIndividual = (props) => {
 }
 
 const CommentReply = (props) => {
+    const bodyToken = parseJWT();
 
     const [updateText, setUpdateText] = useState(false);
 
@@ -226,8 +227,9 @@ const CommentReply = (props) => {
                             <Upvotes
                                 upvotes={props.upvotes}
                                 idComment={props.idComment}
-                                idCustomer={atob(sessionStorage.getItem("idUser"))}
+                                idCustomer={atob(sessionStorage.getItem("typeUser")) == 'CLIENT' ? bodyToken.idUser : null}
                                 idEstablishment={props.idEstablishment}
+                                setComments={props.setComments}
                             />
 
                         </div>

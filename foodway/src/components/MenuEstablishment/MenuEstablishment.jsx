@@ -74,7 +74,10 @@ const MenuEstablishment = (props) => {
     var item = document.querySelector(className);
     var oldItem = document.querySelector(oldPath);
 
-    item.classList.add("item-active");  
+    if (item) {
+      item.classList.add("item-active");  
+    }
+    
     if (oldItem) {
       oldItem.classList.remove("item-active");
     }
@@ -170,7 +173,7 @@ const MenuEstablishment = (props) => {
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
                 height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "91.5vh" :
-                  location.pathname.startsWith("/user/search") ? "100vh" : "100%",
+                  location.pathname.startsWith("/user/search") ? "100vh" : "91.5vh",
                 width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",

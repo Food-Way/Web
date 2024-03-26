@@ -86,7 +86,7 @@ const Relevance = () => {
                     <div className="relevance-rank-box">
                         <ul className="establishment-rank">
                             {relevance === undefined || relevance.length === 0 ? (
-                                <span className="no-content">Nenhum estabelecimento encontrado</span>
+                                <span className="no-content-relevance">Nenhum estabelecimento encontrado</span>
                             ) : (
                                 relevance.map((item, index) => (
                                     <RankLine

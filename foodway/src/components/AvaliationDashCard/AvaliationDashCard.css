@@ -23,7 +23,7 @@
 }
 
 .points-value-box {
-    width: 10vw;
+    width: 5vw;
     height: 1.5rem;
     display: flex;
     align-items: center;
@@ -36,7 +36,11 @@
 }
 
 .check-static {
-    background-color: var(--preto);
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    border: .1rem solid var(--brancoGelo);
+    margin-top: 1.7rem;
 }
 
 .check-static-primary {
@@ -48,11 +52,18 @@
 }
 
 .check-static-disabled {
-    display: block;
-    border: 1px solid var(--preto) !important;
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    border: 1px solid var(--preto);
+    margin-top: 1.7rem;
 }
 
 .check-static-disabled-primary {
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    background-color: var(--brancoGelo);
     display: block;
-    background-color: var(--brancoGelo) !important;
+    margin-top: 1.7rem;
 }

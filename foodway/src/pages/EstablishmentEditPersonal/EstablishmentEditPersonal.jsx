@@ -12,6 +12,7 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import parseJWT from "../../util/parseJWT";
 import GenericModal from "../../components/GenericModel/GenericModel";
+import UploadImage from "../../components/UploadImage/UploadImage.jsx";
 
 const EstablismentEditPersonal = () => {
   const bodyToken = parseJWT();
@@ -36,7 +37,7 @@ const EstablismentEditPersonal = () => {
   async function getEstablishment() {
     const response = await api_call('get', `establishments/${bodyToken.idUser}`, null, token, null);
     setFormData(response.data);
-    console.log("Response: " + response.data);
+    sessionStorage.setItem("establishmentName", (btoa(response.data.establishmentName)))
   };
 
   async function deleteEstablishmentImages(type) {
@@ -81,6 +82,7 @@ const EstablismentEditPersonal = () => {
 
   const validateEstablishmentInformation = (data) => {
     return (
+      !isFieldEmpty(data.establishmentName, "Nome estabelecimento") &&
       !isFieldEmpty(data.name, "Nome") &&
       !isFieldEmpty(data.emailNew, "E-mail") &&
       !isFieldEmpty(data.passwordActual, "Senha")
@@ -99,13 +101,13 @@ const EstablismentEditPersonal = () => {
   async function updateEstablishment(responsibility) {
     const data = {
       name: formData.name,
+      establishmentName: formData.establishmentName,
       emailActual: bodyToken.email,
       emailNew: formData.email,
       passwordActual: formData.passwordConfirm,
       passwordNew: formData.passwordNew,
       phone: formData.phone,
       description: formData.description,
-      establishmentName: formData.establishmentName,
     };
 
     let isValid = false;
@@ -131,7 +133,10 @@ const EstablismentEditPersonal = () => {
     try {
       const response = await api_call("patch", `establishments/personal/${bodyToken.idUser}`, data, token, null);
       if (response.status === 200) {
+
         toast.success("Informações atualizadas com sucesso");
+        console.log(response.data)
+
         setTimeout(() => {
           window.location.reload();
           getEstablishment();
@@ -285,7 +290,7 @@ const EstablismentEditPersonal = () => {
     formData.append("objectKey", `/user-images/${file.name}`);
     formData.append("tagKey", "fileType");
     formData.append("tagValue", "user");
-  
+
     try {
       const token = atob(sessionStorage.getItem("token"));
       const response = await api.post("files/upload", formData, {
@@ -417,12 +422,12 @@ const EstablismentEditPersonal = () => {
           <></>
         )}
         {content === "edit-cover-image" ? (
-          <div className="edit-modal-default ">
+          <div className="edit-modal-default">
             <h3 className="title-edit-profile">Altere a foto de capa</h3>
             <img
               style={{
                 width: "100%",
-                height: "100px",
+                height: "200px",
                 objectFit: "cover",
               }}
               src={
@@ -432,14 +437,17 @@ const EstablismentEditPersonal = () => {
               }
               alt={coverImageUrlLocal}
             />
-            <Input type="file" onChange={(event) => handleFileChange("cover", event)} />
+            <div className="upload-edit-background-box">
+              <UploadImage />
+            </div>
+            {/* <Input type="file" onChange={(event) => handleFileChange("cover", event)} /> */}
             <ButtonPrimary text="Confirmar" onclick={() => handlePostImage("cover")} />
           </div>
         ) : (
           <></>
         )}
         {content === "edit-profile-image" ? (
-          <div className="edit-modal-default ">
+          <div className="edit-modal-default">
             <h3 className="title-edit-profile">Altere a foto de perfil</h3>
             <img
               style={{
@@ -447,6 +455,8 @@ const EstablismentEditPersonal = () => {
                 height: "100px",
                 borderRadius: "50%",
                 objectFit: "cover",
+                border: "1px solid black",
+                marginTop: "5rem",
               }}
               src={
                 selectedFileProfile === null
@@ -455,7 +465,10 @@ const EstablismentEditPersonal = () => {
               }
               alt={coverImageUrlLocal}
             />
-            <Input type="file" onChange={(event) => handleFileChange("profile", event)} />
+            <div className="upload-edit-profile-box">
+              <UploadImage />
+            </div>
+            {/* <Input type="file" onChange={(event) => handleFileChange("profile", event)} /> */}
             <ButtonPrimary
               text="Confirmar"
               onclick={() => handlePostImage("profile")}

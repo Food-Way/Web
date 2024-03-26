@@ -385,7 +385,7 @@
 }
 
 .establishment-tag-content {
-    width: 12vw;
+    width: 16vw;
     display: flex;
     flex-wrap: wrap;
     border: var(--borda);
@@ -551,7 +551,9 @@
 
 .contact-modal-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
     gap: 1.5rem;
 }
 
@@ -560,12 +562,25 @@
     font-weight: 500;
 }
 
+.label-contact-item {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .establishment-contact-title {
-    text-align: center;
+    width: 80%;
     font-size: 2.5rem;
+    margin-top: 2rem;
 }
 
 .contact-modal-box {
+    width: 80%;
+    height: 10vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    /* background-color: aqua; */
+    border: .1rem solid var(--cinzaClaro);
+    border-radius: .5rem;
+    padding: 1rem;
 }
