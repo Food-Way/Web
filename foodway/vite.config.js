@@ -10,7 +10,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
       '/nifi': {
-        target: 'http://localhost:80/',
+        target: 'http://localhost:8443/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/nifi/, ''),
       },
