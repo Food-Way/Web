@@ -6,7 +6,7 @@ import { ButtonSecondaryLink } from "../../components/Button/Button"
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import { useParams } from "react-router-dom";
-import parseJwt from "../../util/parseJWT";
+import parseJWT from "../../util/parseJWT";
 import "./UserProfile.css";
 
 const UserProfile = () => {
@@ -16,7 +16,7 @@ const UserProfile = () => {
   const [establishments, setEstablishments] = useState([]);
   const params = useParams();
   const idUser = params.id;
-  const bodyToken = parseJwt();
+  const bodyToken = parseJWT();
 
   const ProfileHeaderLoader = () => (
     <ContentLoader

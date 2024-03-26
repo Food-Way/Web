@@ -253,24 +253,24 @@ const EstablishmentPage = () => {
                       <span>Cardápio</span>
                     </div>
                   </Link>
-                  <div className="establishment-contact-btn">
+                  <div className="establishment-contact-btn" onClick={handleOpenContactModal}>
                     <img src={Phone} alt="Ícone de telefone" />
-                    <span onClick={handleOpenContactModal}>Contato</span>
-                    <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
+                    <span>Contato</span>
+                  </div>
+                  <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
                       <div className="contact-modal-container">
                         <h1 className="establishment-contact-title">Contato - {profile.name}</h1>
                         <div className="contact-modal-box">
-                          <span className="contact-item">Email para contato: {profile.email}</span>
-                          <span className="contact-item">Telefone: {profile.phone == null ? "Não adicionado" : profile.phone}</span>
+                          <span className="contact-item"><span className="label-contact-item">Email para contato:</span> {profile.email}</span>
+                          <span className="contact-item"><span className="label-contact-item">Telefone:</span> {profile.phone == null ? "Não adicionado" : profile.phone}</span>
                         </div>
                         <span className="establishment-location-title establishment-contact-title">Localização</span>
                         <iframe
                           style={{
-                            width: "100%",
+                            width: "80%",
                             height: "300px",
                             borderRadius: "0.5rem",
                             border: "1px solid #c4c4c4",
-                            marginTop: "1rem",
                           }}
                           loading="lazy"
                           referrerPolicy="no-referrer-when-downgrade"
@@ -279,7 +279,6 @@ const EstablishmentPage = () => {
                         ></iframe>
                       </div>
                     </GenericModal>
-                  </div>
                 </div>
                 <div className="establishment-location-box">
                   <span className="establishment-location-title">
