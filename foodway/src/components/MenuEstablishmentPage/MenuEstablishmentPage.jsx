@@ -119,11 +119,11 @@ const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
             </div>
           </div>
           <div className="menu-dash-box">
-            {menu.length === 0 ? (
-              <MenuLoader />
-            ) : (
-              menu.length === 0 ? (
-                <span className="no-content">Nenhum produto</span>
+            {menu === undefined || menu.length === 0 ? (
+              <span className="no-content">Nenhum produto cadastrado</span>
+              ) : (
+                menu === undefined || menu.length === 0 ? (
+                <MenuLoader />
               ) : (
                 menu.map((item, index) => (
                   <>

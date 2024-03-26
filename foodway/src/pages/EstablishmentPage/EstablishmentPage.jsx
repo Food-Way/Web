@@ -109,7 +109,7 @@ const EstablishmentPage = () => {
         complainantName: bodyToken.username,
         emailMessage: messageData,
         emailSubject: "Reportar Problema no Estabelecimento",
-        establishmentEmail: "leonardo.oliveira@sptech.school",
+        establishmentEmail: profile.email,
         establishmentName: profile.establishmentName,
         ownerName: profile.name
       }, null, null);
