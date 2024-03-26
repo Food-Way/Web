@@ -93,8 +93,6 @@ const EstablishmentPage = () => {
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
-    console.log(response.data)
-    // console.log(response.data.comments);
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
@@ -167,16 +165,16 @@ const EstablishmentPage = () => {
                   className={comments.length > 1 ? "establishment-comments-all-scroll" : "establishment-comments-all"}>
                   {profile === undefined || profile.length === 0 ? (
                     <CommentLoader />
-                    ) : (
-                      comments.length === 0 || comments === undefined ? (
-                        <span className="no-content">Nenhum comentário realizado</span>
+                  ) : (
+                    comments.length === 0 || comments === undefined ? (
+                      <span className="no-content">Nenhum comentário realizado</span>
                     ) : (
                       comments.map((commentParent, index) => (
                         <div className="establishment-comments-box-more" key={index}>
                           <CommentIndividual
                             size={30}
                             establishmentName={commentParent.establishmentName}
-                            rate={commentParent.commentRate}
+                            rate={commentParent.generalRate}
                             title={commentParent.title}
                             comment={commentParent.comment}
                             upvotes={commentParent.upvotes}
