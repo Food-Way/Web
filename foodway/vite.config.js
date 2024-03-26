@@ -10,6 +10,13 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
+    proxy: {
+      '/nifi': {
+        target: 'http://localhost:80/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/nifi/, ''),
+      },
+    },
   },
   plugins: [react()],
   cors: true,
