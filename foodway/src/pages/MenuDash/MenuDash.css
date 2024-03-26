@@ -165,10 +165,9 @@
     margin-top: 1rem;
 }
 
-/* .qr-code {
-    width: 1vw;
-    height: 15vh;
-} */
+.qr-code-box img {
+    width: 80%;
+}
 
 .btn-qr-code {
     width: 10vw;

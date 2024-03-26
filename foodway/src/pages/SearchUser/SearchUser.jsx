@@ -5,7 +5,7 @@ const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/f
 import SearchDetails from "../../components/SearchDetails/SearchDetails";
 import { api_call } from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
-import parseJWT from "../../util/parseJwt";
+import parseJWT from "../../util/parseJWT";
 
 import './SearchUser.css';
 
