@@ -167,7 +167,9 @@ const EstablishmentPage = () => {
                     <CommentLoader />
                   ) : (
                     comments.length === 0 || comments === undefined ? (
-                      <span className="no-content">Nenhum comentário realizado</span>
+                      <div className="no-content-establishment-page-box">
+                        <span className="no-content-establishment-page">Nenhum comentário realizado</span>
+                      </div>
                     ) : (
                       comments.map((commentParent, index) => (
                         <div className="establishment-comments-box-more" key={index}>

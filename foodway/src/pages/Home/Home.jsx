@@ -236,7 +236,7 @@ const Home = () => {
               </div>
 
               <img src={establishmentIMG} alt="Saiba mais estabelecimento" />
-              <ButtonPrimaryLink text="Saiba Mais!" width={"50%"} url="/sign-up-establishment" />
+              <ButtonPrimaryLink mar text="Saiba Mais!" width={"50%"} url="/sign-up-establishment" />
             </div>
             <div className="cta-saiba-mais">
               <div className="textLegend">

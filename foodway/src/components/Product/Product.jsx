@@ -86,9 +86,9 @@ const Product = (props) => {
             <span>R$ {props.price}</span>
             {props.editIsAble === true ? (
               <div className="operations">
-                <FontAwesomeIcon icon={faTrashCan} size="2x" onClick={handleOpenDeleteProductModal} />
-                <FontAwesomeIcon icon={faPenToSquare} size="2x" onClick={handleOpenEditProductModal} />
-                <GenericModal open={openDeleteProductModal} handleClose={handleCloseDeleteProductModal}>
+                <FontAwesomeIcon className="action-product-icon" icon={faTrashCan} size="2x" onClick={handleOpenDeleteProductModal} />
+                <FontAwesomeIcon className="action-product-icon" icon={faPenToSquare} size="2x" onClick={handleOpenEditProductModal} />
+                <GenericModal open={openDeleteProductModal} classNameModal={"delete-product-modal-container"} handleClose={handleCloseDeleteProductModal}>
                   <div className="delete-product-modal">
                     <span>Deseja excluir {props.name}?</span>
                     <div className="button-modal-box">

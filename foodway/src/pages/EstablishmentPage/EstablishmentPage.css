@@ -211,6 +211,21 @@
     margin-right: 10rem;
 }
 
+.no-content-establishment-page-box {
+    height: 44.1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .1rem solid var(--cinzaClaro);
+    border-radius: 1rem;
+    margin-top: 3rem;
+}
+
+.no-content-establishment-page {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
 .establishment-comments-box {
     width: 38vw;
     height: fit-content;
