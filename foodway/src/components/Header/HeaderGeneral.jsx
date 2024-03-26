@@ -5,7 +5,7 @@ import SelectLocation from '../SelectionLocation/SelectionLocation';
 import { Link } from "react-router-dom";
 import DefaultImage from "../../../public/default-user-image.png";
 import './HeaderGeneral.css';
-import parseJWT from '../../util/parseJwt';
+import parseJWT from '../../util/parseJWT';
 
 const Header = () => {
     const bodyToken = parseJWT();

@@ -27,6 +27,11 @@ const MenuDash = () => {
   let port = window.location.port ? ':' + window.location.port : '';
   let urlBase = protocol + '//' + host + port + '/';
 
+  const qrData = `${urlBase}establishment-menu/${bodyToken.idUser}`;
+  const qrSize = "200x200";
+  const bgColor = "f7f7f7";
+  const color = "222222";
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
@@ -132,10 +137,6 @@ const MenuDash = () => {
   }
 
   const handleDownloadPDF = async () => {
-    const qrData = `${urlBase}/establishment-menu/${bodyToken.idUser}`;
-    const qrSize = "200x200";
-    const bgColor = "f7f7f7";
-    const color = "222222";
     const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}&data=${encodeURIComponent(qrData)}&bgcolor=${bgColor}&color=${color}`;
 
     try {
@@ -280,7 +281,7 @@ const MenuDash = () => {
               <div className="side-qr-code">
                 <span className="title">QrCode</span>
                 <div className="qr-code-box">
-                  <img src={`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:5173/establishment-menu/${bodyToken.idUser}&size=100`} alt="foto" />
+                  <img src={`https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}&data=${encodeURIComponent(qrData)}&bgcolor=${bgColor}&color=${color}`} alt="foto" />
                   <button className="btn-qr-code" onClick={handleDownloadPDF}>Download do QR code</button>
                 </div>
               </div>

@@ -369,12 +369,29 @@
   object-fit: cover;
   border-radius: 50%;
   position: absolute;
-  top: 40rem;
-  left: 53vw;
+  top: 37rem;
+  left: 55.5vw;
 }
 
 .edit-modal-default {
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+}
+
+.upload-edit-background-box, .upload-edit-profile-box  {
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-edit-background-box {
+  height: 20vh;
+}
+
+.upload-edit-profile-box {
+  height: 15vh;
 }
