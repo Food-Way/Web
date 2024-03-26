@@ -13,6 +13,7 @@ export default defineConfig({
         target: 'https://54.90.124.165:8443/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/nifi/, ''),
+        secure: false,
       },
     },
   },
