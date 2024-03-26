@@ -172,8 +172,9 @@ const MenuEstablishment = (props) => {
             collapsed={openMenu}
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "91.5vh" :
-                  location.pathname.startsWith("/user/search") ? "100vh" : "91.5vh",
+                height: atob(sessionStorage.getItem("typeUser")) == "ESTABLISHMENT" ? "94vh" :
+                  location.pathname.startsWith("/user/search") || 
+                  location.pathname.startsWith("/establishment/page/info/") ? "94vh" : "155vh",
                 width: openMenu ? "80px" : "17vw",
                 display: "flex",
                 flexDirection: "column",
@@ -181,7 +182,7 @@ const MenuEstablishment = (props) => {
                 backgroundColor: "var(--branco)",
                 paddingTop: "5rem",
                 paddingLeft: openMenu ? "0" : "3rem",
-                paddingBottom: location.pathname.startsWith("/user/search") ? "12vh" : "5rem",
+                paddingBottom: location.pathname.startsWith("/user/search") ? "7rem" : "5rem",
                 transition: "all 0.3s",
                 border: "none",
                 // position: "absolute",

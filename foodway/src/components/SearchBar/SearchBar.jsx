@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import sadCat from "../../../public/sadCat.png";
 import './SearchBar.css';
 import api_call from '../../services/apiImpl';
+import parseJWT from "../../util/parseJWT";
 
 function SearchBar(props) {
     const [searched, setSearched] = useState([]);
@@ -9,6 +10,8 @@ function SearchBar(props) {
     const [filtred, setFiltred] = useState([]);
     const [oldCategory, setOldCategory] = useState(0);
     const [passed, setPassed] = useState(false);
+
+    const bodyToken = parseJWT();
 
     function listSearched() {
         var uriPath;
@@ -19,14 +22,14 @@ function SearchBar(props) {
                 uriPath = `establishments/culinary?idCulinary=${category}`;
                 callGet(uriPath);
                 break;
-            case document.location.pathname.startsWith('/establishment/performance/menu'):
-                uriPath = `/products/establishments/${id}/null`;
+            case `/establishment/performance/menu/${bodyToken.idUser}`:
+                uriPath = `/products/establishments/${bodyToken.idUser}/name`;
                 setPassed(true);
                 setSearched([]);
                 callGet(uriPath);
                 break;
-            case document.location.pathname.startsWith('/establishment-menu/'):
-                uriPath = `/products/establishments/${id}/null`;
+            case `/establishment-menu/${sessionStorage.getItem('idEstablishment')}`:
+                uriPath = `/products/establishments/${bodyToken.idUser}/name`;
                 setPassed(true);
                 setSearched([]);
                 callGet(uriPath);
@@ -39,6 +42,7 @@ function SearchBar(props) {
                 callGetTwo(uriPathEstb, uriPathCust);
                 break;
             default:
+                console.log(document.location.pathname.startsWith(`/establishment/performance/menu/${bodyToken.idUser}`));
                 var category = atob(sessionStorage.getItem('category'));
                 uriPath = `establishments/culinary?idCulinary=${category}`;
                 callGet(uriPath);

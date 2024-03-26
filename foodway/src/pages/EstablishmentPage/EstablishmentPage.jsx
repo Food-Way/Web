@@ -246,7 +246,9 @@ const EstablishmentPage = () => {
                     to={`/establishment-menu/${idEstablishment}`}
                     className="linkItem"
                   >
-                    <div className="establishment-menu-btn">
+                    <div className="establishment-menu-btn" onClick={() => {
+                      sessionStorage.setItem("idEstablishment", idEstablishment);
+                    }}>
                       <img src={BookMenu} alt="Ícone de livro" />
                       <span>Cardápio</span>
                     </div>
@@ -256,27 +258,27 @@ const EstablishmentPage = () => {
                     <span>Contato</span>
                   </div>
                   <GenericModal open={openContactModal} handleClose={handleCloseContactModal}>
-                      <div className="contact-modal-container">
-                        <h1 className="establishment-contact-title">Contato - {profile.name}</h1>
-                        <div className="contact-modal-box">
-                          <span className="contact-item"><span className="label-contact-item">Email para contato:</span> {profile.email}</span>
-                          <span className="contact-item"><span className="label-contact-item">Telefone:</span> {profile.phone == null ? "Não adicionado" : profile.phone}</span>
-                        </div>
-                        <span className="establishment-location-title establishment-contact-title">Localização</span>
-                        <iframe
-                          style={{
-                            width: "80%",
-                            height: "300px",
-                            borderRadius: "0.5rem",
-                            border: "1px solid #c4c4c4",
-                          }}
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                          src={url_maps}
-                          allowFullScreen
-                        ></iframe>
+                    <div className="contact-modal-container">
+                      <h1 className="establishment-contact-title">Contato - {profile.name}</h1>
+                      <div className="contact-modal-box">
+                        <span className="contact-item"><span className="label-contact-item">Email para contato:</span> {profile.email}</span>
+                        <span className="contact-item"><span className="label-contact-item">Telefone:</span> {profile.phone == null ? "Não adicionado" : profile.phone}</span>
                       </div>
-                    </GenericModal>
+                      <span className="establishment-location-title establishment-contact-title">Localização</span>
+                      <iframe
+                        style={{
+                          width: "80%",
+                          height: "300px",
+                          borderRadius: "0.5rem",
+                          border: "1px solid #c4c4c4",
+                        }}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        src={url_maps}
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </GenericModal>
                 </div>
                 <div className="establishment-location-box">
                   <span className="establishment-location-title">
