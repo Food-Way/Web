@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 
 function TagDashCard(props) {
     const [openModal, setOpenModal] = useState(false);
-    const [allTags, setAllTags] = useState([]);
-    const [propsTags, setPropsAllTags] = useState([]);
+    const [allTags, setAllTags] = useState();
     const [selectedTags, setSelectedTags] = useState([]);
     const handleOpenModal = () => setOpenModal(true);
     const bodyToken = parseJWT();
@@ -42,6 +41,12 @@ function TagDashCard(props) {
         }
     }
 
+    async function handleGetTags() {
+        const response = await api_call("get", "tags", null, atob(sessionStorage.getItem("token")), null);
+
+        setAllTags(response.data)
+    }
+
     async function handleSendTags() {
         console.log(selectedTags);
         const data = {
@@ -56,61 +61,12 @@ function TagDashCard(props) {
         handleCloseModal();
     }
 
+
     useEffect(() => {
-        setAllTags([
-            {
-                "id": 1,
-                "name": "Tem bicicletário"
-            },
-            {
-                "id": 2,
-                "name": "Tag2"
-            },
-            {
-                "id": 3,
-                "name": "Tag3"
-            },
-            {
-                "id": 4,
-                "name": "Tag4"
-            },
-            {
-                "id": 5,
-                "name": "Tag5"
-            },
-            {
-                "id": 6,
-                "name": "Tag6"
-            }
-        ])
-        setPropsAllTags([
-            {
-                "id": 7,
-                "name": "Tag7"
-            },
-            {
-                "id": 8,
-                "name": "Tag8"
-            },
-            {
-                "id": 9,
-                "name": "Tag9"
-            },
-            {
-                "id": 10,
-                "name": "Tag10"
-            },
-            {
-                "id": 11,
-                "name": "Tag11"
-            },
-            {
-                "id": 12,
-                "name": "Tag12"
-            }
-        ])
-        console.log(propsTags);
-        // getTags();
+
+        handleGetTags();
+        console.log("Testes")
+        console.log(allTags);
     }, [])
 
     return (
@@ -152,7 +108,10 @@ function TagDashCard(props) {
                                 </div>
                             </div>
                             <div className="button-modal-container-tags">
-                                <ButtonPrimary text="Enviar" onclick={() => setOpenModal(false)} width={"22vw"} height={"6rem"} />
+                                <ButtonPrimary text="Enviar" onclick={() => {
+                                    handleSendTags()
+                                    setOpenModal(false)
+                                }} width={"22vw"} height={"6rem"} />
                                 <ButtonSecondary text="Cancelar" onclick={handleCloseModal} width={"22vw"} height={"6rem"} />
                             </div>
                         </div>
