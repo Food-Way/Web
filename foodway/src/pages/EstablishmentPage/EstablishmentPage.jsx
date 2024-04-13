@@ -205,8 +205,8 @@ const EstablishmentPage = () => {
                         <span className="no-content">Nenhuma Tag selecionada</span>
                       ) : (
                         profile.tags.map((item, index) => (
-                          <div className="establishment-tag-box" key={index}>
-                            <span>{item}</span>
+                          <div className="establishment-tag-box">
+                            <span>{item.name}</span>
                           </div>
                         ))
                       )

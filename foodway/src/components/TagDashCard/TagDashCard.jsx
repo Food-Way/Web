@@ -10,60 +10,61 @@ import { toast } from "react-toastify";
 function TagDashCard(props) {
     const [openModal, setOpenModal] = useState(false);
     const [allTags, setAllTags] = useState();
-    const [selectedTags, setSelectedTags] = useState([]);
-    const handleOpenModal = () => setOpenModal(true);
+    const [selectedTags, setSelectedTags] = useState(props.tags);
+    const handleOpenModal = () => {
+        setOpenModal(true);
+        const selectedTagsSet = new Set(selectedTags);
+        const filteredTags = allTags.filter(tag =>
+            !selectedTags.some(selectedTag => selectedTag.idTag === tag.idTag)
+        );
+        setAllTags(filteredTags);
+    };
     const bodyToken = parseJWT();
 
     const handleCloseModal = () => {
-        setSelectedTags([]);
         setAllTags([...allTags, ...selectedTags]);
-        setOpenModal(false)
+        setOpenModal(false);
     };
 
-    async function getTags() {
-        const response = await api_call("get", "/tags", null, atob(sessionStorage.getItem("token")));
-        setAllTags(response.data);
-    }
+
 
     function selectTag(id) {
-        const selectedTag = allTags.find(tag => tag.id === id);
+        console.log("SelectTag")
+        console.log(id)
+        const selectedTag = allTags.find(tag => tag.idTag === id);
         if (selectedTag) {
-            setAllTags(allTags.filter(tag => tag.id !== id));
+            setAllTags(allTags.filter(tag => tag.idTag !== id));
             setSelectedTags([...selectedTags, selectedTag]);
         }
     }
 
     function unSelectTag(id) {
-        const unSelectTag = selectedTags.find(tag => tag.id === id);
+        const unSelectTag = selectedTags.find(tag => tag.idTag === id);
         if (unSelectTag) {
-            setSelectedTags(selectedTags.filter(tag => tag.id !== id));
+            setSelectedTags(selectedTags.filter(tag => tag.idTag !== id));
             setAllTags([...allTags, unSelectTag]);
         }
     }
 
     async function handleGetTags() {
         const response = await api_call("get", "tags", null, atob(sessionStorage.getItem("token")), null);
-
-        setAllTags(response.data)
+        setAllTags(response.data);
     }
 
     async function handleSendTags() {
+        console.log("SendTags");
         console.log(selectedTags);
         const data = {
-            idEstablishment: bodyToken.idUser,
-            tags: selectedTags.name,
-            enable: true
+            establishment: bodyToken.idUser,
+            tags: selectedTags.map(tag => tag.idTag)
         }
-        console.log(data);
-        const response = await api_call("post", "/tags", data, atob(sessionStorage.getItem("token")), null);
-        console.log(response.data);
+        const response = await api_call("post", "tags/establishment", data, atob(sessionStorage.getItem("token")));
         toast.success("Tags cadastradas com sucesso!");
         handleCloseModal();
     }
 
 
     useEffect(() => {
-
         handleGetTags();
         console.log("Testes")
         console.log(allTags);
@@ -85,7 +86,7 @@ function TagDashCard(props) {
                                     ) : (
                                         <div className="tag-dash-itens-container-selected">
                                             {selectedTags.map((item, index) => (
-                                                <div className="tag-dash-item tag-dash-item-selected" key={index} id={item.id} onClick={() => unSelectTag(item.id)}>
+                                                <div className="tag-dash-item tag-dash-item-selected" key={index} id={item.idTag} onClick={() => unSelectTag(item.idTag)}>
                                                     <span>{item.name}</span>
                                                 </div>
                                             ))}
@@ -99,7 +100,7 @@ function TagDashCard(props) {
                                     ) : (
                                         <div className="tag-dash-itens-container-available">
                                             {allTags.map((item, index) => (
-                                                <div className="tag-dash-item" key={index} id={item.id} onClick={() => selectTag(item.id)}>
+                                                <div className="tag-dash-item" key={index} id={item.idTag} onClick={() => selectTag(item.idTag)}>
                                                     <span>{item.name}</span>
                                                 </div>
                                             ))}
