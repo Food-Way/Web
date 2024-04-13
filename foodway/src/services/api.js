@@ -1,19 +1,7 @@
 import axios from "axios";
 
-let environment = "dev";
-
-const urlProd = {
-  "api": "/api",
-  "nifi": "/nifi",
-}
-
-const urlDev = {
-  "api": "http://localhost:8080/",
-  "nifi": "http://localhost:80/",
-}
-
 const api = axios.create({
-  baseURL: environment == "prod" ? urlProd.api : urlDev.api,
+  baseURL: import.meta.env.VITE_URL_BACKEND,
   headers: {
     "Content-Type": "application/json",
   },
@@ -27,7 +15,7 @@ const api_mock = axios.create({
 });
 
 const nifi_url = axios.create({
-  baseURL: environment == "prod" ? urlProd.nifi : urlDev.nifi,
+  baseURL: import.meta.env.VITE_URL_NIFI,
   headers: {
     "Content-Type": "application/json", 
   },
