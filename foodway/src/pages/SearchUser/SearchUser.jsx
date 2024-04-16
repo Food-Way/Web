@@ -49,7 +49,7 @@ function SearchUser() {
 
     async function getMaps(lat, lng) {
         setShowMap(true);
-        setUrl(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${lat},${lng}&zoom=18&maptype=roadmap`);
+        setUrl(`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GMAPS_API_KEY}&q=${lat},${lng}&zoom=18&maptype=roadmap`);
     }
 
     function selectFilter(id) {

@@ -94,7 +94,7 @@ const EstablishmentPage = () => {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
     setProfile(response.data);
     setComments(response.data.comments);
-    setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
+    setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GMAPS_API_KEY}&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
   const handleSubmit = (e) => {
     e.preventDefault();
