@@ -144,10 +144,10 @@ const CostumerEdit = () => {
   async function uploadFileToS3(file) {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("bucketName", "foodway-public-s3");
-    formData.append("objectKey", `/user-images/${file.name}`);
-    formData.append("tagKey", "fileType");
-    formData.append("tagValue", "user");
+    formData.append("path", "user-images");
+    // formData.append("bucketName", "foodway-public-s3");
+    // formData.append("tagKey", "fileType");
+    // formData.append("tagValue", "user");
 
     try {
       const token = atob(sessionStorage.getItem("token"));
