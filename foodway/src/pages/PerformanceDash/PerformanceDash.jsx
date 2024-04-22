@@ -99,7 +99,8 @@ function PerformanceDash() {
 
     async function getDashData() {
         const response = await api_call("get", `/dashboard/${idUser}`, null, atob(sessionStorage.getItem("token")));
-        // console.log(response.data);
+        console.log("Response");
+        console.log(response.data);
         setDashData(response.data);
     }
 

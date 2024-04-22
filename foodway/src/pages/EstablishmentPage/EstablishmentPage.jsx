@@ -92,6 +92,8 @@ const EstablishmentPage = () => {
 
   async function getEstablishmentProfileData() {
     const response = await api_call("get", `/establishments/profile/${idEstablishment}`, null, null);
+    console.log("Response")
+    console.log(response.data)
     setProfile(response.data);
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GMAPS_API_KEY}&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
@@ -203,8 +205,8 @@ const EstablishmentPage = () => {
                         <span className="no-content">Nenhuma Tag selecionada</span>
                       ) : (
                         profile.tags.map((item, index) => (
-                          <div className="establishment-tag-box" key={index}>
-                            <span>{item}</span>
+                          <div className="establishment-tag-box">
+                            <span>{item.name}</span>
                           </div>
                         ))
                       )
