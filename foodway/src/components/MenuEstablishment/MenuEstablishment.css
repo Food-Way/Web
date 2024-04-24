@@ -10,7 +10,7 @@
     left: 6.7rem;
     border: none;
     background-color: var(--preto);
-    background-image: url('https://foodway-public-s3.s3.amazonaws.com/website-images/hide-menu.png');
+    background-image: url('https://foodway.s3.amazonaws.com/public-images/hide-menu.png');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: var(--arredondamento);
@@ -19,7 +19,7 @@
 }
 
 .btn-menu-animate {
-    background-image: url('https://foodway-public-s3.s3.amazonaws.com/website-images/hide-menu.png');
+    background-image: url('https://foodway.s3.amazonaws.com/public-images/hide-menu.png');
     left: 16.3vw;
     transition: all 0.35s;
 }
@@ -33,10 +33,14 @@
     padding-left: 1rem;
 }
 
-.text-item, .profile-item, 
-.performance-item, .menuReal-item,
-.comments-item, .relevance-item, 
-.search-item, .out-item {
+.text-item,
+.profile-item,
+.performance-item,
+.menuReal-item,
+.comments-item,
+.relevance-item,
+.search-item,
+.out-item {
     font-size: 1.7rem;
 }
 
@@ -46,7 +50,8 @@
     align-items: center;
 }
 
-.box-copyright span, b{
+.box-copyright span,
+b {
     font-size: 1.3rem;
     transition: all 0.3s;
 }

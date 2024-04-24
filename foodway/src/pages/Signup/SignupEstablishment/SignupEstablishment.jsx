@@ -52,7 +52,7 @@ const SignupEstablishment = () => {
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const loginIMG =
-    "https://foodway-public-s3.s3.amazonaws.com/website-images/signup-establishment.png";
+    "https://foodway.s3.amazonaws.com/public-images/signup-establishment.png";
 
   const [formData, setFormData] = useState({
     nameFantasy: "",
@@ -455,7 +455,7 @@ const SignupEstablishment = () => {
           </div>
         </div>
         <div className="imgContainer">
-          <img className="img-login" src={loginIMG} alt="Imagem de login de estabelecimento"/>
+          <img className="img-login" src={loginIMG} alt="Imagem de login de estabelecimento" />
         </div>
       </div>
     </main>

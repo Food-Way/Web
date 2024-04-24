@@ -7,7 +7,7 @@ import { CommentInsertReply, CommentInsert } from "../../components/CommentInser
 import "./Comment.css";
 import { hasValidSession } from "../Auth/Auth.jsx"
 import { useNavigate } from "react-router-dom";
-const ImageComment = "https://foodway-public-s3.s3.amazonaws.com/website-images/comment-icon.png";
+const ImageComment = "https://foodway.s3.amazonaws.com/public-images/comment-icon.png";
 
 const Comment = (props) => {
     const navigate = useNavigate();

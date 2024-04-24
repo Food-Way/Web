@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const ProductImage = "https://foodway-public-s3.s3.amazonaws.com/website-images/product.png"
+const ProductImage = "https://foodway.s3.amazonaws.com/public-images/product.png"
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
 import InputField from "../InputField/InputField.jsx";

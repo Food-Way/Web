@@ -8,7 +8,7 @@ import api from "../../services/api";
 import { Auth } from "../../components/Auth/Auth";
 
 const SignIn = () => {
-  const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
+  const loginIMG = "https://foodway.s3.amazonaws.com/public-images/login-img.png";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,14 +59,14 @@ const SignIn = () => {
           sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
           sessionStorage.setItem("username", btoa(response.data.name));
           toast.success("Login realizado com sucesso!");
-          if (atob(sessionStorage.getItem("typeUser")) === "CLIENT"){
+          if (atob(sessionStorage.getItem("typeUser")) === "CLIENT") {
             setTimeout(() => {
               // console.log("Redirecting to /perfil...");
               navigate(`/user/profile/${response.data.idUser}`, { state: { idUser: response.data.idUser } });
               location.reload();
               sessionStorage.setItem("my-profile", btoa(true));
             }, 2000);
-          } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT"){
+          } else if (atob(sessionStorage.getItem("typeUser")) === "ESTABLISHMENT") {
             setTimeout(() => {
               sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
               // console.log("Redirecting to /establishment/performance...");

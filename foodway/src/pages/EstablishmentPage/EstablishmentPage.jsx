@@ -12,9 +12,9 @@ import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { InputField, TextAreaField } from "../../components/InputField/InputField";
 import { ButtonPrimary, ButtonSecondaryLink } from "../../components/Button/Button.jsx";
 import { toast } from 'react-toastify';
-const Phone = "https://foodway-public-s3.s3.amazonaws.com/website-images/phone.png";
-const BookMenu = "https://foodway-public-s3.s3.amazonaws.com/website-images/book-menu.png";
-const Report = "https://foodway-public-s3.s3.amazonaws.com/website-images/report.png";
+const Phone = "https://foodway.s3.amazonaws.com/public-images/phone.png";
+const BookMenu = "https://foodway.s3.amazonaws.com/public-images/book-menu.png";
+const Report = "https://foodway.s3.amazonaws.com/public-images/report.png";
 
 const EstablishmentPage = () => {
   const [url_maps, setUrlMaps] = useState("");
