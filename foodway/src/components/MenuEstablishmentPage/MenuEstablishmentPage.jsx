@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
 import SearchBar from "../../components/SearchBar/SearchBar";
-const ImageFilter = "https://foodway-public-s3.s3.amazonaws.com/website-images/filter.svg";
+const ImageFilter = "https://foodway.s3.amazonaws.com/public-images/filter.svg";
 import api_call from "../../services/apiImpl";
 import ContentLoader from 'react-content-loader';
 import "./MenuEstablishmentPage.css";
@@ -9,7 +9,7 @@ import "./MenuEstablishmentPage.css";
 const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
   const [searchFilter, setSearchFilter] = useState("");
 
-  
+
   const MenuLoader = () => (
     <ContentLoader
       speed={2}
@@ -121,19 +121,19 @@ const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
           <div className="menu-dash-box">
             {menu === undefined || menu.length === 0 ? (
               <span className="no-content">Nenhum produto cadastrado</span>
-              ) : (
-                menu === undefined || menu.length === 0 ? (
+            ) : (
+              menu === undefined || menu.length === 0 ? (
                 <MenuLoader />
               ) : (
                 menu.map((item, index) => (
                   <>
-                  <Product
-                    editIsAble={false}
-                    key={index}
-                    idProduct={item.idProduct}
-                    name={item.name}
-                    price={item.price}
-                  />
+                    <Product
+                      editIsAble={false}
+                      key={index}
+                      idProduct={item.idProduct}
+                      name={item.name}
+                      price={item.price}
+                    />
                   </>
                 ))
               )

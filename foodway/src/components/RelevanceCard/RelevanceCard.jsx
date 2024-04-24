@@ -1,8 +1,8 @@
 import React from "react";
 import RateNumberStar from "../RateNumberStar/RateNumberStar";
-const GoldMedal = "https://foodway-public-s3.s3.amazonaws.com/website-images/gold-medal.svg";
-const SilverMedal = "https://foodway-public-s3.s3.amazonaws.com/website-images/silver-medal.svg";
-const BronzeMedal = "https://foodway-public-s3.s3.amazonaws.com/website-images/bronze-medal.svg";
+const GoldMedal = "https://foodway.s3.amazonaws.com/public-images/gold-medal.svg";
+const SilverMedal = "https://foodway.s3.amazonaws.com/public-images/silver-medal.svg";
+const BronzeMedal = "https://foodway.s3.amazonaws.com/public-images/bronze-medal.svg";
 
 import "./RelevanceCard.css";
 

@@ -23,7 +23,7 @@ const Header = () => {
         window.location.href = "/"
     }
 
-    const LogoFoodway = "https://foodway-public-s3.s3.amazonaws.com/website-images/foodway-logo.png"
+    const LogoFoodway = "https://foodway.s3.amazonaws.com/public-images/foodway-logo.png"
     return (
         <>
             <header>

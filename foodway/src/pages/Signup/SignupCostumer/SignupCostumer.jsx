@@ -30,7 +30,7 @@ const SignUpCostumer = () => {
     culinary: "",
   });
 
-  const loginIMG = "https://foodway-public-s3.s3.amazonaws.com/website-images/login-img.png";
+  const loginIMG = "https://foodway.s3.amazonaws.com/public-images/login-img.png";
 
   const handleNext = () => {
     if (step < 2) {

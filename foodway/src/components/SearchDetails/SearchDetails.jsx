@@ -4,7 +4,7 @@ import Comments from "../Comments/Comments";
 import Upvotes from "../Upvotes/Upvotes";
 import CulinaryTag from "../CulinaryTag/CulinaryTag";
 import { ButtonPrimaryLink } from "../Button/Button";
-const starBlack = "https://foodway-public-s3.s3.amazonaws.com/website-images/star-black.svg";
+const starBlack = "https://foodway.s3.amazonaws.com/public-images/star-black.svg";
 
 import "./SearchDetails.css";
 
@@ -47,7 +47,7 @@ const SearchDetails = (props) => {
                     <div className="search-detail-header">
                         <div className="left-header-side">
                             <img src={props.photo} alt="Foto de Perfil" />
-                            <CulinaryTag 
+                            <CulinaryTag
                                 culinary={props.culinary}
                             />
                         </div>
@@ -68,10 +68,10 @@ const SearchDetails = (props) => {
                             </div>
                         </div>
                         <div className="right-header-side">
-                            <Upvotes 
+                            <Upvotes
                                 upvotes={props.upvote}
                             />
-                            <Comments 
+                            <Comments
                                 comments={props.qtdComments}
                             />
                         </div>
