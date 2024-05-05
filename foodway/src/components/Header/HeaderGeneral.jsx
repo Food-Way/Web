@@ -7,7 +7,7 @@ import './HeaderGeneral.css';
 import parseJWT from '../../util/parseJWT';
 
 const Header = () => {
-    const DefaultImage ="https://foodway.s3.amazonaws.com/public-images/default-user-image.png";
+    const DefaultImage ="https://foodway.s3.amazonaws.com/public-images/default-user-image.webp";
     const bodyToken = parseJWT();
     const handleLogoff = () => {
         sessionStorage.clear();

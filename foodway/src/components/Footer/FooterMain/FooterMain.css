@@ -23,6 +23,11 @@
   list-style: none;
 }
 
+.category-establishment{
+  width: 20%;
+
+}
+
 .category-establishment h2 {
   color: #000;
   font-family: Quicksand;
@@ -35,10 +40,11 @@
 li {
   color: #000;
   font-family: Quicksand;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin: 2px ;
 }
 .category-establishment li {
   padding: 5px 0px;
@@ -70,7 +76,7 @@ li {
   cursor: pointer;
 }
 .centerIcon {
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,4 +84,13 @@ li {
 }
 .centerIcon img {
   width: 200px;
+}
+.list-social-media{
+  width: 20%;
+}
+.list-social-media ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
 }

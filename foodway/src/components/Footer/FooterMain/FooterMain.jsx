@@ -13,7 +13,7 @@ const FooterMain = () => {
       <div className="container-footer">
         <div className="footer">
           <div className="category-establishment">
-            <h2>Restaurante</h2>
+            <h2>Restaurantes</h2>
             <ul>
               <li>Árabe</li>
               <li>Brasileiro</li>

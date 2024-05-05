@@ -46,7 +46,7 @@
 
 .img-establishment-relevance-card {
     width: 3vw;
-    height: 6vh;
+    object-fit: cover;
     border-radius: 50%;
     margin-bottom: 1rem;
 }

@@ -11,12 +11,12 @@ import "./Home.css";
 
 const Home = () => {
   const establishmentIMG =
-    "https://foodway.s3.amazonaws.com/public-images/establishment.png";
+    "https://foodway.s3.amazonaws.com/public-images/establishment.webp";
   const customerIMG =
-    "https://foodway.s3.amazonaws.com/public-images/customer.png";
-  const card = "https://foodway.s3.amazonaws.com/public-images/card.png";
+    "https://foodway.s3.amazonaws.com/public-images/customer.webp";
+  const card = "https://foodway.s3.amazonaws.com/public-images/card.webp";
   const androidI = "https://foodway.s3.amazonaws.com/public-images/android.svg";
-  const androidBg = "https://foodway.s3.amazonaws.com/public-images/coming-soon.png";
+  const androidBg = "https://foodway.s3.amazonaws.com/public-images/coming-soon.webp";
   const [isLoading, setIsLoading] = useState(true);
   const [greaterRateEstab, setGreaterRateEstab] = useState([]);
   const [greaterCommentsEstab, setGreaterEstab] = useState([]);
