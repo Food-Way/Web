@@ -11,16 +11,15 @@ import parseJWT from "../../util/parseJWT";
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
 import { InputField } from "../../components/InputField/InputField";
-
 import { toast } from 'react-toastify';
 import "./MenuDash.css";
 import UploadImage from "../../components/UploadImage/UploadImage.jsx";
 import jsPDF from 'jspdf';
-import backgroundPdf from "../../../public/rank-background.png";
+ 
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
-
+  const backgroundPdf = "https://foodway.s3.amazonaws.com/public-images/rank-background.png";
   const [menu, setMenu] = useState([]);
   let protocol = window.location.protocol;
   let host = window.location.hostname;

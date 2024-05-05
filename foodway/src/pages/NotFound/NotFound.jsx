@@ -1,7 +1,8 @@
 import "./NotFound.css";
-import NotFoundCat from "../../../public/not-found-cat.png";
+ 
 
 const NotFound = () => {
+  const sadCat = "https://foodway.s3://foodway/public-images/sadCat.png";
   return (
     <>
       <div className="main">

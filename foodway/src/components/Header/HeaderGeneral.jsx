@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import SearchBar from '../SearchBar/SearchBar';
 import SelectLocation from '../SelectionLocation/SelectionLocation';
-import { Link } from "react-router-dom";
-import DefaultImage from "../../../public/default-user-image.png";
+import { Link } from "react-router-dom";  
 import './HeaderGeneral.css';
 import parseJWT from '../../util/parseJWT';
 
 const Header = () => {
+    const DefaultImage ="https://foodway.s3.amazonaws.com/public-images/default-user-image.png";
     const bodyToken = parseJWT();
     const handleLogoff = () => {
         sessionStorage.clear();

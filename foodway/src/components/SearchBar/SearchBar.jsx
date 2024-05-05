@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import sadCat from "../../../public/sadCat.png";
 import './SearchBar.css';
 import api_call from '../../services/apiImpl';
 import parseJWT from "../../util/parseJWT";
 
 function SearchBar(props) {
+    const sadCat = "https://foodway.s3://foodway/public-images/sadCat.png";
     const [searched, setSearched] = useState([]);
     const [filter, setFilter] = useState('');
     const [filtred, setFiltred] = useState([]);
