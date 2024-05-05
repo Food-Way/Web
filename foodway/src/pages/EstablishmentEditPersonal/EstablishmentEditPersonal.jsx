@@ -43,7 +43,7 @@ const EstablismentEditPersonal = () => {
   async function deleteEstablishmentImages(type) {
     const emailActual = bodyToken.email
     const passwordActual = formData.passwordConfirmEditPhoto;
-    const defaultImageUrl = "https://foodway.s3.amazonaws.com/public-images/default-user-image.png";
+    const defaultImageUrl = "https://foodway.s3.amazonaws.com/public-images/default-user-image.webp";
     const defaultBannerUrl = "https://foodway.s3.amazonaws.com/public-images/default-banner.png";
 
     const images = {

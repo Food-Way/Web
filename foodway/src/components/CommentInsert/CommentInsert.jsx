@@ -115,7 +115,7 @@ const CommentInsert = ({ establishmentId, setComments }) => {
   return (
     <div className="comment_insert">
       <span className="comment-section">
-        <img className="profile_icon" src={profilePhoto != null ? "https://foodway.s3.amazonaws.com/public-images/default-user-image.png" : profilePhoto} alt="Foto de perfil" />
+        <img className="profile_icon" src={profilePhoto != null ? "https://foodway.s3.amazonaws.com/public-images/default-user-image.webp" : profilePhoto} alt="Foto de perfil" />
         <TextAreaFieldComment
           maxLength={255}
           placeholder="Adicione uma avaliação"

@@ -19,7 +19,7 @@ import jsPDF from 'jspdf';
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
-  const backgroundPdf = "https://foodway.s3.amazonaws.com/public-images/rank-background.png";
+  const backgroundPdf = "https://foodway.s3.amazonaws.com/public-images/rank-background.webp";
   const [menu, setMenu] = useState([]);
   let protocol = window.location.protocol;
   let host = window.location.hostname;

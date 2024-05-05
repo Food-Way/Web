@@ -20,7 +20,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../../../public/banner-relevance.png");
+    background-image: url("https://foodway.s3.amazonaws.com/public-images/header.webp");
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
     background-size: cover;
 }

@@ -2,7 +2,7 @@ import "./NotFound.css";
  
 
 const NotFound = () => {
-  const sadCat = "https://foodway.s3://foodway/public-images/sadCat.png";
+  const sadCat = "https://foodway.s3.amazonaws.com/public-images/sadCat.png";
   return (
     <>
       <div className="main">

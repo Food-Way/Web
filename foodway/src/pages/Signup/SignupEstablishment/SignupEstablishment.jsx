@@ -52,7 +52,7 @@ const SignupEstablishment = () => {
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedCulinaries, setSelectedCulinaries] = useState([]);
   const loginIMG =
-    "https://foodway.s3.amazonaws.com/public-images/signup-establishment.png";
+    "https://foodway.s3.amazonaws.com/public-images/signup-establishment.webp";
 
   const [formData, setFormData] = useState({
     nameFantasy: "",

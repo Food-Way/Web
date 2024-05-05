@@ -4,7 +4,7 @@ import api_call from '../../services/apiImpl';
 import parseJWT from "../../util/parseJWT";
 
 function SearchBar(props) {
-    const sadCat = "https://foodway.s3://foodway/public-images/sadCat.png";
+    const sadCat = "https://foodway.s3.amazonaws.com/public-images/sadCat.png";
     const [searched, setSearched] = useState([]);
     const [filter, setFilter] = useState('');
     const [filtred, setFiltred] = useState([]);
