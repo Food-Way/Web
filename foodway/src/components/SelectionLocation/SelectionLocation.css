@@ -1,0 +1,98 @@
+@import url('../../assets/css/style.css');
+
+.select-location {
+    width: 15rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+    border-radius: var(--arredondamento);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("https://foodway.s3.amazonaws.com/public-images/down-arrow.svg") 100% 50% no-repeat;
+    cursor: pointer;
+}
+
+.select-location span {
+    user-select: none;
+}
+
+.options-location {
+    width: 18rem;
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    top: 0vh;
+    transition: all 0.3s;
+    overflow-y: scroll;
+}
+
+.options-location::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.options-location::-webkit-scrollbar-thumb {
+    background: var(--branco);
+    border-radius: var(--arredondamento);
+}
+
+.options-location::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border-radius: var(--arredondamento);
+}
+
+.options-location div {
+    padding: 0.6rem;
+    margin: 0.2rem;
+    transition: all 0.3s;
+}
+
+.options-location div span {
+    color: var(--branco);
+    font-weight: 500;
+}
+
+.options-location div:hover {
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    transition: all 0.3s;
+}
+
+.options-location div:hover span {
+    color: var(--preto);
+    transition: all 0.3s;
+}
+
+.animation-in {
+    top: 3.5vh;
+    right: 1%;
+    transition: all 0.3s;
+    overflow-x: hidden;
+    color: var(--branco);
+}
+
+.animation-out {
+    height: 0;
+    padding: 0;
+    transition: all 0.3s;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

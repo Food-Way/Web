@@ -1,0 +1,20 @@
+@import url(../../assets/css/style.css);
+
+.upvotes {
+    width: 4.75rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upvotes img {
+    width: 2.125rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.upvotes span {
+    font-size: 1.7rem;
+    font-weight: 700;
+}

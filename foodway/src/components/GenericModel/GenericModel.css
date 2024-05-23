@@ -1,0 +1,18 @@
+.modal-default{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-box-default:focus {
+    outline: none;
+}
+
+.modal-box-default{
+    background-color: white;
+    width: 50%;
+    height: 60%;
+    border-radius: var(--arredondamento);
+}

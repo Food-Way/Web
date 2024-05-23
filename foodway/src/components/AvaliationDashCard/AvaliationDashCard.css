@@ -1,0 +1,69 @@
+@import url('../../assets/css/style.css');
+@import url('../../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css');
+
+.avaliation-general-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.avaliation-general-box {
+    width: 12vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avaliation-general-box span:first-child {
+    font-size: 1.8rem;
+}
+
+.avaliation-general-box span:last-child {
+    width: 7vw;
+    font-size: 1.8rem;
+    margin-left: 1rem;
+}
+
+.points-value-box {
+    width: 5vw;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 2rem;
+}
+
+.adjust-point-dash {
+    margin-bottom: .8rem;
+}
+
+.check-static {
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    border: .1rem solid var(--brancoGelo);
+    margin-top: 1.7rem;
+}
+
+.check-static-primary {
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    background-color: var(--primary);
+    margin-top: 1.7rem;
+}
+
+.check-static-disabled {
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    border: 1px solid var(--preto);
+    margin-top: 1.7rem;
+}
+
+.check-static-disabled-primary {
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+    background-color: var(--brancoGelo);
+    display: block;
+    margin-top: 1.7rem;
+}

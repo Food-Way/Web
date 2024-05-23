@@ -1,0 +1,5 @@
+services:
+  foodway-web:
+    image: fernandeeess/foodway-web:00.00
+    ports:
+      - "80:80"

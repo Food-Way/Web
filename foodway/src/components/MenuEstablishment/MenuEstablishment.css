@@ -1,0 +1,66 @@
+@import url('../../assets/css/style.css');
+@import url('../../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css');
+
+.btn-menu-switch {
+    width: 2.5rem;
+    height: 10vh;
+    position: absolute;
+    z-index: 4;
+    top: 45%;
+    left: 6.7rem;
+    border: none;
+    background-color: var(--preto);
+    background-image: url('https://foodway.s3.amazonaws.com/public-images/hide-menu.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--arredondamento);
+    transition: all 0.35s;
+    transform: rotate(180deg);
+}
+
+.btn-menu-animate {
+    background-image: url('https://foodway.s3.amazonaws.com/public-images/hide-menu.png');
+    left: 16.3vw;
+    transition: all 0.35s;
+}
+
+.btn-menu-rotate {
+    transform: rotate(0deg);
+}
+
+.menu-item label {
+    user-select: none;
+    padding-left: 1rem;
+}
+
+.text-item,
+.profile-item,
+.performance-item,
+.menuReal-item,
+.comments-item,
+.relevance-item,
+.search-item,
+.out-item {
+    font-size: 1.7rem;
+}
+
+.box-copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-copyright span,
+b {
+    font-size: 1.3rem;
+    transition: all 0.3s;
+}
+
+.item-active {
+    color: var(--primary);
+}
+
+.check {
+    /* background-color: var(--primary); */
+    color: white;
+}

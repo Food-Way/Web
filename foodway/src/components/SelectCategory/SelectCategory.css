@@ -1,0 +1,11 @@
+@import url('../../assets/css/style.css');
+
+.select-category {
+    width: 15rem;
+    font-size: 16px;
+    font-family: var(--fonte);
+}
+
+.css-tj5bde-Svg path {
+    fill: var(--primary);
+}

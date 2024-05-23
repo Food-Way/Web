@@ -1,0 +1,35 @@
+@import url(../../assets/css/style.css);
+
+.sentiment-tag {
+    width: 15vh;
+    height: 3.4vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    gap: 1rem;
+}
+
+.sentiment-tag span.sentiment-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--preto);
+}
+
+.sentiment-tag img {
+    height: 2vh;
+}
+
+.positive {
+    background-color: #98FB98;
+}
+
+.neutral {
+    background-color: #ffd70080;
+}
+
+.negative {
+    background-color: #ff6b6b59;;
+}

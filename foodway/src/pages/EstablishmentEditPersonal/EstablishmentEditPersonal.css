@@ -1,0 +1,460 @@
+.input-files {
+  font-size: 16px;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-files:hover {
+  background-color: #ffffff;
+}
+
+.establishment-edit {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+}
+
+.save-edit-establishment-modal {
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.update-password-establishment-modal {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.establishment-edit-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.establishment-edit-container-form {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 12.15035px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background-color: white;
+}
+
+.establishment-edit-container-form .title {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+}
+
+.establishment-edit-container-form .title h2 {
+  font-size: 36px;
+  color: #000000;
+  margin: 20px 20px 20px 0px;
+  padding: 0px;
+}
+
+.establishment-edit-container-form .title h3 {
+  font-size: 24px;
+  color: #000000;
+  margin: 10px 20px 0px 0px;
+  padding: 0px;
+}
+
+.establishment-edit-container-form form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.input-field-default-establisment-edit {
+  width: 100%;
+  border-radius: var(--arredondamento);
+  border: var(--borda);
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px 0px 10px 10px;
+  margin: 0px 20px;
+  margin: 0px 0px 10px 0px;
+  background-color: #e5e5e5;
+}
+
+.form-group-establisment-edit {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0px 10px 0px 0px;
+  width: 90%;
+}
+
+.input-fields {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0px 0px;
+}
+
+.form-group-establisment-edit input::placeholder {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px;
+}
+
+.form-group-establisment-edit label {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  margin: 10px 0px 10px 0px;
+}
+
+.establishment-edit-sec-btn {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.establishment-edit-sec-delete {
+  margin-left: auto;
+  padding: 10px 0px;
+
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.establishment-edit-sec-add {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0000;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.establishment-edit-sec-add:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.establishment-edit-sec-delete:hover {
+  background: #3c3c3c;
+  color: white;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.button-establishment-editPassword {
+  max-width: fit-content;
+  width: 30%;
+  min-width: 20%;
+  margin: 10px 10px 10px 10px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #000000;
+  border: none;
+  padding: 10px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.button-establishment-editPassword:hover {
+  background: #222222;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.button-establishment-edit {
+  max-width: fit-content;
+  width: 30%;
+  min-width: 20%;
+  margin: 10px 10px 10px 10px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  padding: 10px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.button-establishment-edit:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.form-container-edit-profile {
+  width: 95%;
+  padding: 50px 0px;
+
+  display: flex;
+
+  justify-content: space-around;
+}
+
+.form-group-establisment-edit-fill {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4px 20px 4px 20px;
+  width: 100%;
+}
+
+.form-group-establisment-edit-fill-edit {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4px 0px 4px 0px;
+  width: 100%;
+}
+
+.form-group-establisment-edit-fill label,
+.form-group-establisment-edit-fill-edit label {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  margin: 10px 0px 10px 0px;
+}
+
+.files_input_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+  height: 200px;
+  border: 1px solid #8d8d8d;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
+.files_input_container img {
+  width: 230px;
+  height: 145px;
+  object-fit: cover;
+  margin: 5px;
+}
+
+.files_input_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+}
+
+.files_input_btn input {
+  display: none;
+}
+
+.files_input_btn label {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.files_input_btn label:hover {
+  background: #f7464b;
+  color: var(--Branco-Branco, #fff);
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.btnAdicionarFiles {
+  margin-left: auto;
+  padding: 10px 0px;
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  color: var(--Branco-Branco, #fff);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background: #ff0007;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 10px 0px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.form_1 {
+  width: 50%;
+  height: 500px;
+}
+
+.form_2 {
+  width: 50%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: start;
+  padding: 0px 10px;
+  border-left: 1px solid black;
+}
+
+.section-btn-profile-picture {
+  width: 100%;
+}
+
+.perfil-edit-establishment-preview {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.main-section-btn-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.section-01 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-img-edit-establishment {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.cover-img-edit-establishment-profile {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 37rem;
+  left: 55.5vw;
+}
+
+.edit-modal-confirm {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.edit-modal-password {
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-box-modal-password {
+  margin-top: 2rem;
+}
+
+.edit-modal-default {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.upload-edit-background-box,
+.upload-edit-profile-box {
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-edit-background-box {
+  height: 20vh;
+}
+
+.upload-edit-profile-box {
+  height: 15vh;
+}

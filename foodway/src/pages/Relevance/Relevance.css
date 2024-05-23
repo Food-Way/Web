@@ -1,0 +1,83 @@
+@import url(../../assets/css/style.css);
+
+.relevance-container {
+    width: calc(132vw - 15vw);
+    transition: all 0.3s;
+}
+
+.relevance-container-switch {
+    width: calc(75vw + 15vw);
+    transition: all 0.3s;
+}
+
+.best-relevance-box {
+    /* width: 100vw; */
+    height: 35vh;
+    background-image: url("https://foodway.s3.amazonaws.com/public-images/header.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    gap: 2rem;
+}
+
+.best-relevance {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.relevance-title {
+    width: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--brancoGelo);
+    padding: 1rem;
+    border: var(--borda);
+    border-radius: var(--arredondamento);
+    box-shadow: var(--sombra);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.relevance-rank-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 4rem;
+}
+
+.relevance-rank-box {
+    width: 47%;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-radius: 0.6845rem;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url('https://foodway.s3.amazonaws.com/public-images/rank-background.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 1%;
+}
+
+.establishment-rank {
+   height: 50rem;
+   display: flex;
+   flex-direction: column;
+}
+
+.no-content-relevance {
+    width: 43vw;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    color: var(--brancoGelo);
+}

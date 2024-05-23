@@ -1,0 +1,110 @@
+@import url(../../assets/css/style.css);
+
+.comment-container {
+    width: 100px;
+    height: 25rem;
+    background-color: var(--branco);
+    border-radius: var(--arredondamento);
+    width: 50rem;
+    padding: 15px;
+    box-shadow: var(--sombra);
+}
+
+.comment-container .comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.comment-header span {
+    font-size: 2rem;
+}
+
+.header-initial {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-content {
+    width: 90%;
+    height: 13rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.comment-content p {
+    width: 22.5vw;
+    height: 5.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: justify;
+    padding-right: 1rem;
+}
+
+.comment-content-show-scroll {
+    overflow-y: scroll;
+}
+
+.comment-content span {
+    width: 2vw;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.more-text {
+    width: 10rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.more-text span {
+    font-size: 1.2rem;
+}
+
+.more-text span:hover {
+    color: var(--primary);
+    transition: all .3s;
+}
+
+.btn_subcomment {
+    background-color: transparent;
+    border: none;
+    padding: 0px 10px 0px 10px;
+}
+
+.user-content-values {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: fit-content;
+    width: fit-content;
+}
+
+.comment-content-text {
+    height: fit-content;
+}
+
+.reply-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 0px 0px 50px;
+    border-left: 1px solid black;
+    padding: 0px 0px 0px 25px;
+
+}
+
+.insert-comment-field {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-content-values-reply {
+    margin-top: 20px;
+}

@@ -1,0 +1,55 @@
+.form-group {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4px 0px 4px 0px;
+  width: 80%;
+}
+.input-field-comment{
+  width: 100%;
+  border: none;
+  border-bottom: rgb(37, 37, 37) 1px solid;
+  font-family: var(--defaultFonte);
+  font-size: 1.5rem;
+  padding: 5px;
+  background-color: #e5e5e5;
+}
+.input-field-comment:focus {
+  outline: none;
+}
+.form-group-comment {
+  width: 100%;
+  font-family: var(--defaultFonte);
+  font-size: 1.5rem;
+}
+
+.input-field-default {
+  width: 100%;
+  border-radius: var(--arredondamento);
+  border: var(--borda);
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px 0px 10px 10px;
+  margin: 0px 0px 10px 0px;
+  background-color: #e5e5e5;
+}
+.form-group input::placeholder {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px;
+}
+.form-group label {
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  margin: 10px 0px 10px 0px;
+}
+
+.input-field-green {
+  width: 100%;
+  border-radius: var(--arredondamento);
+  border: 2px solid green;
+  font-family: var(--defaultFonte);
+  font-size: 1.9rem;
+  padding: 10px 0px 10px 10px;
+  margin: 0px 0px 10px 0px;
+}

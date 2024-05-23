@@ -1,0 +1,68 @@
+@import url(../../assets/css/style.css);
+
+.sentiment-data-establishment {
+    width: 12vw;
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    border-radius: var(--arredondamento);
+    border: 1px solid var(--brancoGelo);
+}
+
+.sentiment-item {
+    width: 80%;
+    height: 17vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sentiment-img-box {
+    width: 2.2vw;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--brancoGelo);
+    border-radius: var(--arredondamento);
+    padding: 1.9rem;
+}
+
+.sentiment-img-box img {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.title-value-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-value-box span:first-child {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.title-value-box span:last-child {
+    font-size: 3.5rem;
+    font-weight: 500;
+}
+
+.percent-value-box {
+    width: 5vw;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--preto);
+    border-radius: var(--arredondamento);
+    padding: 1.5rem;
+}
+
+.percent-value-box span {
+    font-size: 1.7rem;
+    color: var(--branco);
+}
