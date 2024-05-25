@@ -18,14 +18,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
+        working-directory: ./foodway
 
       - name: Build frontend
         run: npm run build
-        working-directory: ./frontend
+        working-directory: ./foodway
 
       - name: Archive production artifacts
-        run: tar -czvf frontend.tar.gz -C ./frontend/dist .
+        run: tar -czvf foodway.tar.gz -C ./foodway/dist .
         continue-on-error: true
 
       - name: Deploy to server via SCP
@@ -34,8 +34,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "frontend.tar.gz"
-          target: "/path/to/your/remote/frontend"
+          source: "foodway.tar.gz"
+          target: "/path/to/your/remote/foodway"
 
       - name: Extract files on server
         uses: appleboy/ssh-action@v0.1.3
@@ -44,6 +44,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /path/to/your/remote/frontend
-            tar -xzvf frontend.tar.gz
-            rm frontend.tar.gz
+            cd /path/to/your/remote/foodway
+            tar -xzvf foodway.tar.gz
+            rm foodway.tar.gz
