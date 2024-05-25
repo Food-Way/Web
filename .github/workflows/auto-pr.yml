@@ -1,27 +1,49 @@
-on: 
+name: Build and Deploy Frontend
+
+on:
   push:
-    branches:
-      - "feature*"
-      - "feat*"
-      - "fix*"
+    branches: [ main ]
 
 jobs:
-  pull-request:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Check branch name
-        run: |
-          if ! [[ "${{ github.ref }}" =~ ^refs/heads/(feature-|feature/|feat/) ]]; then
-            echo "Branch name does not start with 'feature-', 'feature/' or 'feat/'."
-            exit 1
-          fi
-      - name: pull-request
-        uses: diillson/auto-pull-request@v1.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          source_branch: ${{ github.ref_name }} 
-          destination_branch: "dev"                      
-          pr_title: "Pulling ${{ github.ref_name }} into dev"
-          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"                            
-          pr_label: "auto-pr,feature"                               
-          github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Archive production artifacts
+        run: tar -czvf frontend.tar.gz -C ./frontend/dist .
+        continue-on-error: true
+
+      - name: Deploy to server via SCP
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "frontend.tar.gz"
+          target: "/path/to/your/remote/frontend"
+
+      - name: Extract files on server
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /path/to/your/remote/frontend
+            tar -xzvf frontend.tar.gz
+            rm frontend.tar.gz
