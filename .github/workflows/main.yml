@@ -28,7 +28,7 @@ jobs:
         run: tar -czvf foodway.tar.gz -C ./foodway/dist .
         continue-on-error: true
 
-      - name: Deploy to server via SCP
+      - name: Deploy to server via SCP - NOW
         uses: appleboy/scp-action@v0.1.1
         with:
           host: ${{ secrets.SERVER_HOST }}
