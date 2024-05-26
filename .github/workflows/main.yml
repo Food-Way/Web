@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "foodway.tar.gz"
-          target: "/path/to/your/remote/foodway"
+          target: "/path/foodway"
 
       - name: Extract files on server
         uses: appleboy/ssh-action@v0.1.3
@@ -44,6 +44,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /path/to/your/remote/foodway
+            cd /path/foodway
             tar -xzvf foodway.tar.gz
             rm foodway.tar.gz
