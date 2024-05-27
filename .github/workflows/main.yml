@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3  # Checkout do código do repositório
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -28,15 +28,38 @@ jobs:
         run: tar -czvf foodway.tar.gz -C ./foodway/dist .
         continue-on-error: true
 
-      - name: Create SSH key file
+      - name: Create SSH key file for webserver-01 EC2
         run: |
           echo "${{ secrets.SERVER_SSH_KEY }}" > server_ssh_key
           chmod 600 server_ssh_key
 
-      - name: Copy code to server via SCP
+      - name: Copy code to webserver-01 EC2 via SCP
         run: |
-          scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
+          scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }}:/home/${{ secrets.SERVER_USER }}/dist
 
-      - name: Cleanup SSH key file
+      - name: Cleanup SSH key file for webserver-01 EC2
         run: rm server_ssh_key
 
+      - name: Create SSH key file for webserver-02 EC2
+        run: |
+          echo "${{ secrets.SERVER_SSH_KEY }}" > second_server_ssh_key
+          chmod 600 second_server_ssh_key
+
+      - name: Copy code to webserver-02 EC2 via SCP
+        run: |
+          scp -o StrictHostKeyChecking=no -i second_server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }}:/home/${{ secrets.SERVER_USER }}/dist
+
+      - name: Cleanup SSH key file for webserver-02 EC2
+        run: rm second_server_ssh_key
+
+      - name: Create SSH key file for reload Nginx
+        run: |
+          echo "${{ secrets.BASTION_SSH_KEY }}" > reload_server_ssh_key
+          chmod 600 reload_server_ssh_key
+
+      - name: Reload Nginx on loadbalancer EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i reload_server_ssh_key ${{ secrets.BASTION_USER }}@${{ secrets.BASTION_HOST }} "sudo systemctl reload nginx"
+
+      - name: Cleanup SSH key file for loadbalancer EC2
+        run: rm reload_server_ssh_key
