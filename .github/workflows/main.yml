@@ -1,4 +1,4 @@
-name: Build and Deploy Frontend
+name: Build and Deploy Frontend FINAL
 
 on:
   push:
@@ -28,30 +28,68 @@ jobs:
         run: tar -czvf foodway.tar.gz -C ./foodway/dist .
         continue-on-error: true
 
+      - name: Install netcat
+        run: sudo apt-get install -y netcat
+
+      # Health check for webserver-01 EC2
+      - name: Health check for webserver-01 EC2
+        run: |
+          if nc -z -w5 ${{ secrets.SERVER_HOST_ONE }} 22; then
+            echo "webserver-01 is up"
+          else
+            echo "webserver-01 is down"
+            exit 1
+          fi
+
+      # Health check for webserver-02 EC2
+      - name: Health check for webserver-02 EC2
+        run: |
+          if nc -z -w5 ${{ secrets.SERVER_HOST_TWO }} 22; then
+            echo "webserver-02 is up"
+          else
+            echo "webserver-02 is down"
+            exit 1
+          fi
+
+      # Health check for loadbalancer EC2
+      - name: Health check for loadbalancer EC2
+        run: |
+          if nc -z -w5 ${{ secrets.BASTION_HOST }} 22; then
+            echo "loadbalancer is up"
+          else
+            echo "loadbalancer is down"
+            exit 1
+          fi
+
+      # First EC2
       - name: Create SSH key file for webserver-01 EC2
         run: |
           echo "${{ secrets.SERVER_SSH_KEY }}" > server_ssh_key
           chmod 600 server_ssh_key
 
-      - name: Copy code to webserver-01 EC2 via SCP
+      - name: Copy and extract code on webserver-01 EC2
         run: |
           scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }}:/home/${{ secrets.SERVER_USER }}/dist
+          ssh -o StrictHostKeyChecking=no -i server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }} "tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
 
       - name: Cleanup SSH key file for webserver-01 EC2
         run: rm server_ssh_key
 
+      # Second EC2
       - name: Create SSH key file for webserver-02 EC2
         run: |
           echo "${{ secrets.SERVER_SSH_KEY }}" > second_server_ssh_key
           chmod 600 second_server_ssh_key
 
-      - name: Copy code to webserver-02 EC2 via SCP
+      - name: Copy and extract code on webserver-02 EC2
         run: |
           scp -o StrictHostKeyChecking=no -i second_server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }}:/home/${{ secrets.SERVER_USER }}/dist
+          ssh -o StrictHostKeyChecking=no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
 
       - name: Cleanup SSH key file for webserver-02 EC2
         run: rm second_server_ssh_key
 
+      # Reload Nginx on loadbalancer EC2
       - name: Create SSH key file for reload Nginx
         run: |
           echo "${{ secrets.BASTION_SSH_KEY }}" > reload_server_ssh_key
