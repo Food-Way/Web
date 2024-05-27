@@ -7,7 +7,15 @@ const MainBanner = () => {
 
   return (
     <>
-
+      <div style={styleCard} className="main-banner-container">
+        <h1>
+          <span>
+            FoodWay: o caminho para{" "}
+            <span id="red">Experiências Gastronômicas</span>
+          </span>
+          <span>autênticas, apoiado por avaliações reais DO MATHEUS FERNANDES🤓</span>
+        </h1>
+      </div>
     </>
   );
 };
