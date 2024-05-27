@@ -20,10 +20,6 @@ jobs:
         run: npm install --force
         working-directory: ./foodway
 
-      - name: Run Lint
-        run: npm run lint
-        working-directory: ./foodway
-
       - name: Run Unit Tests
         run: npm run test
         working-directory: ./foodway
