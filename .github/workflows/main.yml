@@ -20,6 +20,14 @@ jobs:
         run: npm install --force
         working-directory: ./foodway
 
+      - name: Run Lint
+        run: npm run lint
+        working-directory: ./foodway
+
+      - name: Run Unit Tests
+        run: npm run test
+        working-directory: ./foodway
+
       - name: Build frontend
         run: npm run build
         working-directory: ./foodway
@@ -84,7 +92,7 @@ jobs:
       - name: Copy and extract code on webserver-02 EC2
         run: |
           scp -o StrictHostKeyChecking=no -i second_server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }}:/home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz
-          ssh -o StrictHostKeyChecking=no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "find /home/${{ secrets.SERVER_USER }}/dist -mindepth 1 ! -name foodway.tar.gz -delete && tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
+          ssh -o StrictHostKeyChecking-no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "find /home/${{ secrets.SERVER_USER }}/dist -mindepth 1 ! -name foodway.tar.gz -delete && tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
 
       - name: Cleanup SSH key file for webserver-02 EC2
         run: rm second_server_ssh_key
