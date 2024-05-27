@@ -29,4 +29,5 @@ jobs:
         continue-on-error: true
 
       - name: Copy code to server via SCP
-        run: scp -i ${{ secrets.SERVER_SSH_KEY }} foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/ubuntu/dist
+        run: scp -i ${{ secrets.SERVER_SSH_KEY }} foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/***/dist
+
