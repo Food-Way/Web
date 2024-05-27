@@ -28,6 +28,6 @@ jobs:
         run: tar -czvf foodway.tar.gz -C ./foodway/dist .
         continue-on-error: true
 
-      - name: Copy code to server via SCP
+      - name: Copy code to server via SCP FINAL
         run: scp -i ${{ secrets.SERVER_SSH_KEY }} foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
 
