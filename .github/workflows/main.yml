@@ -34,7 +34,8 @@ jobs:
           chmod 600 server_ssh_key
 
       - name: Copy code to server via SCP
-        run: scp -i server_ssh_key foodway.tar.gz foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
+        run: |
+          scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
 
       - name: Cleanup SSH key file
         run: rm server_ssh_key
