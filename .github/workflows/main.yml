@@ -20,16 +20,8 @@ jobs:
         run: npm install --force
         working-directory: ./foodway
 
-      - name: Run Unit Tests
-        run: npm run test
-        working-directory: ./foodway
-
       - name: Run Integration Tests
         run: npm run test:integration
-        working-directory: ./foodway
-
-      - name: Generate Code Coverage Report
-        run: npm run coverage
         working-directory: ./foodway
 
       - name: Generate Code Coverage Report
