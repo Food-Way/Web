@@ -29,5 +29,5 @@ jobs:
         continue-on-error: true
 
       - name: Copy code to server via SCP FINAL
-        run: scp -i ${{ secrets.SERVER_SSH_KEY }} foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
+        run: scp -i ${{ secrets.SERVER_SSH_KEY }} foodway.tar.gz foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/dist
 
