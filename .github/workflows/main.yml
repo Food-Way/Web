@@ -70,7 +70,7 @@ jobs:
       - name: Copy and extract code on webserver-01 EC2
         run: |
           scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }}:/home/${{ secrets.SERVER_USER }}/dist
-          ssh -o StrictHostKeyChecking=no -i server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }} "tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
+          ssh -o StrictHostKeyChecking=no -i server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }} "rm -rf /home/${{ secrets.SERVER_USER }}/dist/* && tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
 
       - name: Cleanup SSH key file for webserver-01 EC2
         run: rm server_ssh_key
@@ -84,7 +84,7 @@ jobs:
       - name: Copy and extract code on webserver-02 EC2
         run: |
           scp -o StrictHostKeyChecking=no -i second_server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }}:/home/${{ secrets.SERVER_USER }}/dist
-          ssh -o StrictHostKeyChecking=no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
+          ssh -o StrictHostKeyChecking=no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "rm -rf /home/${{ secrets.SERVER_USER }}/dist/* && tar -xzvf /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz -C /home/${{ secrets.SERVER_USER }}/dist && rm /home/${{ secrets.SERVER_USER }}/dist/foodway.tar.gz"
 
       - name: Cleanup SSH key file for webserver-02 EC2
         run: rm second_server_ssh_key
