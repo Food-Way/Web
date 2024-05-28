@@ -13,7 +13,7 @@ const MainBanner = () => {
             FoodWay: o caminho para{" "}
             <span id="red">Experiências Gastronômicas</span>
           </span>
-          <span>autênticas, apoiado por avaliações reais</span>
+          <span>autênticas, ATIVIDADE CI/CD</span>
         </h1>
       </div>
     </>
