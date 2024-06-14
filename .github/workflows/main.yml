@@ -52,3 +52,12 @@ jobs:
           git-push: "true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add changes
+        run: git add .
+
+      - name: Commit changes
+        run: git commit -m "Update Terraform docs"
+
+      - name: Push changes
+        run: git push
