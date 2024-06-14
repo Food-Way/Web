@@ -51,7 +51,6 @@
 [![Padrões de commit](https://img.shields.io/badge/Padrões%20de%20commit-blue)](https://github.com/iuricode/padroes-de-commits)
 
 <!-- BEGIN_TF_DOCS -->
-{{ .Content }}
 <!-- END_TF_DOCS -->
 
 ---
