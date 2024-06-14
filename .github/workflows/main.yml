@@ -8,7 +8,7 @@ jobs:
   deploy-to-aws:
     runs-on: ubuntu-latest
 
-     steps:
+    steps:
       - uses: actions/checkout@v3
 
       - name: Setup Terraform
