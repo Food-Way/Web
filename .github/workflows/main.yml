@@ -16,16 +16,6 @@ jobs:
         with:
           terraform_version: 1.2.0
 
-      - name: Install terraform-docs
-        run: |
-          curl -Lo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
-          tar -xzf terraform-docs.tar.gz
-          chmod +x terraform-docs
-          sudo mv terraform-docs /usr/local/bin/terraform-docs
-
-      - name: Verify terraform-docs Installation
-        run: terraform-docs --version
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -33,26 +23,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
-
-      - name: Generate Terraform Documentation
-        run: |
-          sed -i '/## Terraform Documentation/,$d' README.md
-          echo -e "\n## Terraform Documentation\n" >> README.md
-          terraform-docs markdown table ./foodway/src/infra >> README.md
-
-      - name: Configure git
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_GITHUB_TOKEN }}@github.com/Food-Way/Web.git
-
-      - name: Commit and Push changes
-        env:
-          PAT_GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
-        run: |
-          git add README.md
-          git commit -m "Update Terraform documentation"
-          git push origin main
 
       - name: Terraform Init
         run: terraform init
@@ -69,3 +39,13 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: ./foodway/src/infra
+
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: ./foodway/src/infra
+          output-file: ../../README.md
+          output-method: inject
+          git-push: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
