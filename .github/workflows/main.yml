@@ -51,7 +51,7 @@ jobs:
 
       - name: Render terraform docs
         run: |
-          terraform-docs markdown _ > README.md
+          terraform-docs markdown ./foodway/src/infra > README.md
 
       - name: Configure Git
         run: |
