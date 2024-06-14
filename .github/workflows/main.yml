@@ -1,3 +1,5 @@
+yaml
+Copiar código
 name: CI/CD Frontend - Foodway
 
 on:
@@ -18,8 +20,10 @@ jobs:
 
       - name: Install terraform-docs
         run: |
-          curl -Lo /usr/local/bin/terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64
-          chmod +x /usr/local/bin/terraform-docs
+          curl -Lo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz
+          chmod +x terraform-docs
+          sudo mv terraform-docs /usr/local/bin/terraform-docs
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
