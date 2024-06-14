@@ -24,18 +24,26 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
+      - name: Check Current Directory
+        run: pwd
+      - name: Check Current Directory
+        run: pwd
+
+      - name: List Files
+        run: ls -al
+
       - name: Terraform Init
         run: terraform init
-        working-directory: /infra
+        working-directory: ./infra
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: /infra
+        working-directory: ./infra
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: /infra
+        working-directory: ./infra
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        working-directory: /infra
+        working-directory: ./infra
