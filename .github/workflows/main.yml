@@ -26,11 +26,11 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: src/infra
+        working-directory: ./src/infra
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: src/infra
+        working-directory: ./src/infra
 
       - name: Terraform Plan
         run: terraform plan
