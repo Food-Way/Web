@@ -8,6 +8,9 @@ jobs:
   deploy-to-aws:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Garante que o GitHub Actions tem permissões de escrita
+
     steps:
       - uses: actions/checkout@v3
 
