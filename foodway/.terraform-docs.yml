@@ -1,4 +1,6 @@
-formatter: "" # this is required
+yaml
+Copiar código
+formatter: "markdown table"
 
 version: ""
 

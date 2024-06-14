@@ -51,7 +51,7 @@ jobs:
 
       - name: Render terraform docs
         run: |
-          terraform-docs markdown table --config ./foodway/.terraform-docs.yml --output-file README.md --output-mode inject ./foodway/src/infra
+          terraform-docs markdown --config ./foodway/.terraform-docs.yml --output-file README.md --output-mode inject ./foodway/src/infra
 
       - name: Configure Git
         run: |
