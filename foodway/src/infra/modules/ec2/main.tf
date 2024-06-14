@@ -94,10 +94,12 @@ resource "aws_instance" "public_ec2_02" {
   EOF
 }
 
-resource "aws_eip" "eip_01" {
-  instance = aws_instance.public_ec2_01.id
+resource "aws_eip_association" "eip_assoc_01" {
+  instance_id   = aws_instance.public_ec2_01.id
+  allocation_id = "eipalloc-06b74cfd3c8ec27d1" 
 }
 
-resource "aws_eip" "eip_02" {
-  instance = aws_instance.public_ec2_02.id
+resource "aws_eip_association" "eip_assoc_02" {
+  instance_id   = aws_instance.public_ec2_02.id
+  allocation_id = "eipalloc-0c747d40a67e26a0f" 
 }
