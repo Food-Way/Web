@@ -1,103 +1,41 @@
-name: Build and Deploy Frontend FINAL
+name: CI/CD Frontend - Foodway
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy-to-aws:
     runs-on: ubuntu-latest
 
-    steps:
+     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
         with:
-          node-version: '16'
+          terraform_version: 1.2.0
 
-      - name: Install dependencies
-        run: npm install --force
-        working-directory: ./foodway
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
 
-      - name: Build frontend
-        run: npm run build
-        working-directory: ./foodway
+      - name: Terraform Init
+        run: terraform init
+        working-directory: src/infra
 
-      - name: Archive production artifacts
-        run: tar -czvf foodway.tar.gz -C ./foodway/dist .
-        continue-on-error: true
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: src/infra
 
-      - name: Install netcat
-        run: sudo apt-get install -y netcat
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: ./src/infra
 
-      # Health check for webserver-01 EC2
-      - name: Health check for webserver-01 EC2
-        run: |
-          if nc -z -w5 ${{ secrets.SERVER_HOST_ONE }} 22; then
-            echo "webserver-01 is up ✅"
-          else
-            echo "webserver-01 is down ❌"
-            exit 1
-          fi
-
-      # Health check for webserver-02 EC2
-      - name: Health check for webserver-02 EC2
-        run: |
-          if nc -z -w5 ${{ secrets.SERVER_HOST_TWO }} 22; then
-            echo "webserver-02 is up ✅"
-          else
-            echo "webserver-02 is down ❌"
-            exit 1
-          fi
-
-      # Health check for loadbalancer EC2
-      - name: Health check for loadbalancer EC2
-        run: |
-          if nc -z -w5 ${{ secrets.BASTION_HOST }} 22; then
-            echo "loadbalancer is up ✅"
-          else
-            echo "loadbalancer is down ❌"
-            exit 1
-          fi
-
-      # First EC2
-      - name: Create SSH key file for webserver-01 EC2
-        run: |
-          echo "${{ secrets.SERVER_SSH_KEY }}" > server_ssh_key
-          chmod 600 server_ssh_key
-
-      - name: Copy and extract code on webserver-01 EC2
-        run: |
-          scp -o StrictHostKeyChecking=no -i server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }}:/tmp/foodway.tar.gz
-          ssh -o StrictHostKeyChecking=no -i server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_ONE }} "sudo mv /tmp/foodway.tar.gz /var/www/foodway.tar.gz && sudo mkdir -p /var/www/dist && sudo find /var/www/dist -mindepth 1 -delete && sudo tar -xzvf /var/www/foodway.tar.gz -C /var/www/dist && sudo rm /var/www/foodway.tar.gz"
-
-      - name: Cleanup SSH key file for webserver-01 EC2
-        run: rm server_ssh_key
-
-      # Second EC2
-      - name: Create SSH key file for webserver-02 EC2
-        run: |
-          echo "${{ secrets.SERVER_SSH_KEY }}" > second_server_ssh_key
-          chmod 600 second_server_ssh_key
-
-      - name: Copy and extract code on webserver-02 EC2
-        run: |
-          scp -o StrictHostKeyChecking=no -i second_server_ssh_key foodway.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }}:/tmp/foodway.tar.gz
-          ssh -o StrictHostKeyChecking=no -i second_server_ssh_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST_TWO }} "sudo mv /tmp/foodway.tar.gz /var/www/foodway.tar.gz && sudo mkdir -p /var/www/dist && sudo find /var/www/dist -mindepth 1 -delete && sudo tar -xzvf /var/www/foodway.tar.gz -C /var/www/dist && sudo rm /var/www/foodway.tar.gz"
-
-      - name: Cleanup SSH key file for webserver-02 EC2
-        run: rm second_server_ssh_key
-
-      # Reload Nginx on loadbalancer EC2
-      - name: Create SSH key file for reload Nginx
-        run: |
-          echo "${{ secrets.BASTION_SSH_KEY }}" > reload_server_ssh_key
-          chmod 600 reload_server_ssh_key
-
-      - name: Reload Nginx on loadbalancer EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no -i reload_server_ssh_key ${{ secrets.BASTION_USER }}@${{ secrets.BASTION_HOST }} "sudo systemctl reload nginx"
-
-      - name: Cleanup SSH key file for loadbalancer EC2
-        run: rm reload_server_ssh_key
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./src/infra
