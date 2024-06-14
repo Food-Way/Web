@@ -48,7 +48,7 @@ jobs:
           git commit -m "Update Terraform documentation"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Terraform Init
         run: terraform init
