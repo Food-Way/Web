@@ -16,6 +16,11 @@ jobs:
         with:
           terraform_version: 1.2.0
 
+      - name: Install terraform-docs
+        run: |
+          curl -Lo /usr/local/bin/terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64
+          chmod +x /usr/local/bin/terraform-docs
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -24,13 +29,24 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
-      - name: Check Current Directory
-        run: pwd
-      - name: Check Current Directory
-        run: pwd
+      - name: Generate Terraform Documentation
+        run: |
+          sed -i '/## Terraform Documentation/,$d' README.md
+          echo -e "\n## Terraform Documentation\n" >> README.md
+          terraform-docs markdown table ./foodway/src/infra >> README.md
 
-      - name: List Files
-        run: ls -al
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Commit and Push changes
+        run: |
+          git add README.md
+          git commit -m "Update Terraform documentation"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform Init
         run: terraform init
