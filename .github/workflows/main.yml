@@ -45,5 +45,5 @@ jobs:
         working-directory: ./foodway/src/infra
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve
         working-directory: ./foodway/src/infra
