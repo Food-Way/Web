@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Garante que o GitHub Actions tem permissões de escrita
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
 
       - name: Render terraform docs
         run: |
-          terraform-docs markdown ./foodway/src/infra > README.md
+          terraform-docs markdown table --config .terraform-docs.yml --output-file README.md --output-mode inject ./foodway/src/infra
 
       - name: Configure Git
         run: |
