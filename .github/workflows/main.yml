@@ -43,21 +43,26 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./foodway/src/infra
 
-      - name: Render terraform docs and push changes back to PR
-        uses: terraform-docs/gh-actions@main
-        with:
-          working-dir: ./foodway/src/infra
-          output-file: ../../README.md
-          output-method: inject
-          git-push: "true"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Render terraform docs
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: ./foodway/src/infra
+        output-file: ../../README.md
+        output-method: inject
+        git-push: "false" # Disable automatic git push
 
-      - name: Add changes
-        run: git add .
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit changes
-        run: git commit -m "Update Terraform docs"
+    - name: Add changes
+      run: git add ../../README.md
 
-      - name: Push changes
-        run: git push
+    - name: Commit changes
+      run: git commit -m "Update Terraform docs"
+
+    - name: Push changes
+      run: git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
