@@ -6,6 +6,7 @@ import { ButtonPrimary } from "../../components/Button/Button";
 import { useState, useEffect } from "react";
 import "./EstablishmentEditPersonal.css";
 import api_call from "../../services/apiImpl";
+import api from "../../services/api";
 import { Box, Input, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -60,6 +61,7 @@ const EstablismentEditPersonal = () => {
     console.log("Data", data);
 
     try {
+      console.log("patch" )
       const response = await api_call("patch", `establishments/profile/${bodyToken.idUser}`, data, token, null)
       if (response.status === 200) {
         console.log(response.data)
@@ -283,17 +285,17 @@ const EstablismentEditPersonal = () => {
     return newName;
   };
 
-  async function uploadFileToS3(file) {
+  async function uploadFileToS3(file, type) {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("bucketName", "foodway-public-s3");
+    formData.append("idUser", bodyToken.idUser);
+    formData.append("typeUser", atob(sessionStorage.getItem("typeUser")));
     formData.append("objectKey", `/user-images/${file.name}`);
-    formData.append("tagKey", "fileType");
-    formData.append("tagValue", "user");
+    formData.append("path", "user-images");
 
     try {
       const token = atob(sessionStorage.getItem("token"));
-      const response = await api.post("files/upload", formData, {
+      const response = await api.post(type === "cover" ? "files/upload-profile-header" : "files/upload-profile", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -317,7 +319,7 @@ const EstablismentEditPersonal = () => {
 
     try {
       const resizedFile = await handleResizeImage(fileToUpload);
-      const uploadResponse = await uploadFileToS3(resizedFile);
+      const uploadResponse = await uploadFileToS3(resizedFile, type);
 
       if (uploadResponse) {
         const successMessage = type === "cover" ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
@@ -334,12 +336,16 @@ const EstablismentEditPersonal = () => {
         }
 
         const profileUpdateData = {
-          emailActual: atob(sessionStorage.getItem("email")),
+          emailActual: bodyToken.email, 
           passwordActual: formData.password,
           ...(type === "cover" ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
         };
-
-        const updateResponse = await api_call("patch", `establishments/profile/${bodyToken.idUser}`, profileUpdateData, token, null);
+        const updateResponse = await api.patch(`/establishments/profile/${bodyToken.idUser}`, profileUpdateData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
+          },
+        });
         if (updateResponse.status === 200) {
           toast.success("Perfil atualizado com sucesso!");
           handleClose();
@@ -351,6 +357,7 @@ const EstablismentEditPersonal = () => {
       }
     } catch (error) {
       const errorMessage = error.message || "Erro ao processar a solicitação.";
+      console.error("errorMessage, error");
       toast.error(errorMessage);
       console.error(errorMessage, error);
     }
@@ -440,7 +447,13 @@ const EstablismentEditPersonal = () => {
               alt={coverImageUrlLocal}
             />
             <div className="upload-edit-background-box">
-              <UploadImage />
+            <input
+              className="input-file"
+              type="file"
+              name="cover"
+              id="cover"
+              onChange={(event) => handleFileChange("cover", event)}
+            />
             </div>
             {/* <Input type="file" onChange={(event) => handleFileChange("cover", event)} /> */}
             <ButtonPrimary text="Confirmar" onclick={() => handlePostImage("cover")} />
@@ -468,7 +481,13 @@ const EstablismentEditPersonal = () => {
               alt={coverImageUrlLocal}
             />
             <div className="upload-edit-profile-box">
-              <UploadImage />
+            <input
+              className="input-file"
+              type="file"
+              name="profile"
+              id="profile"
+              onChange={(event) => handleFileChange("cover", event)}
+            />
             </div>
             {/* <Input type="file" onChange={(event) => handleFileChange("profile", event)} /> */}
             <ButtonPrimary

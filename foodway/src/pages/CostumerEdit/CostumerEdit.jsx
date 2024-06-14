@@ -96,117 +96,108 @@ const CostumerEdit = () => {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-
+  
     const isValid = await validateImage(type, file);
     if (isValid) {
-      if (type === "cover") {
-        setSelectedFileCover(file);
-      } else {
-        setSelectedFileProfile(file);
-      }
+      type === "cover" ? setSelectedFileCover(file) : setSelectedFileProfile(file);
     } else {
       toast.error("A imagem não atende aos requisitos de tamanho.");
     }
   };
-
-  const validateImage = async (type, file) => {
+  
+  const validateImage = (type, file) => {
+    const minWidth = type === "profile" ? 400 : 1280;
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = (event) => {
         const img = new Image();
         img.src = event.target.result;
-        img.onload = function () {
-          if (type === "profile") {
-            if (img.width >= 400) {
-              resolve(true);
-            } else {
-              toast.error(
-                "A imagem precisa ter pelo menos 400 pixels de largura."
-              );
-              reject("A imagem precisa ter pelo menos 400 pixels de largura.");
-            }
+        img.onload = () => {
+          if (img.width >= minWidth) {
+            resolve(true);
           } else {
-            if (img.width >= 1280) {
-              resolve(true);
-            } else {
-              toast.error(
-                "A imagem precisa ter pelo menos 1280 pixels de largura."
-              );
-              reject("A imagem precisa ter pelo menos 1280 pixels de largura.");
-            }
-          };
-        }
-      }
+            const errorMessage = `A imagem precisa ter pelo menos ${minWidth} pixels de largura.`;
+             
+            reject(errorMessage);
+          }
+        };
+      };
       reader.readAsDataURL(file);
     });
   };
-
-  async function uploadFileToS3(file) {
+  
+  const uploadFileToS3 = async (file, type) => {
+    console.log("uploadFileToS3");
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("idUser", bodyToken.idUser);
+    formData.append("typeUser", atob(sessionStorage.getItem("typeUser")));
+    formData.append("objectKey", `/user-images/${file.name}`);
     formData.append("path", "user-images");
-    // formData.append("bucketName", "foodway-public-s3");
-    // formData.append("tagKey", "fileType");
-    // formData.append("tagValue", "user");
-
+  
     try {
       const token = atob(sessionStorage.getItem("token"));
-      const response = await api.post("files/upload", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await api.post(
+        type === "cover" ? "files/upload-profile-header" : "files/upload-profile",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      sessionStorage.setItem("profilePhoto", btoa(response));
       return response.data;
     } catch (error) {
       console.error("Erro ao realizar upload de imagem:", error);
       throw error;
     }
-  }
-
+  };
+  
   const handlePostImage = async (type) => {
+    console.log("handlePostImage");
     const fileToUpload = type === "cover" ? selectedFileCover : selectedFileProfile;
-
+  
     if (!fileToUpload) {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-
+  
     try {
-      const isCover = type === "cover" ? "cover" : "profile";
       const resizedFile = await handleResizeImage(fileToUpload);
-      const uploadResponse = await uploadFileToS3(resizedFile);
-
+      const uploadResponse = await uploadFileToS3(resizedFile, type);
+  
       if (uploadResponse) {
-        const successMessage = isCover ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
+        const successMessage = type === "cover" ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
         toast.success(successMessage);
         const imageUrl = uploadResponse.url;
-
-        if (isCover) {
-          setCoverImageName(imageName);
+  
+        if (type === "cover") {
           setCoverImageUrlLocal(imageUrl);
         } else {
-          setProfileImageName(imageName);
           setProfileImageUrlLocal(imageUrl);
+          console.log("Imagem de perfil teste: ", imageUrl);
+          ContactSupportOutlined.log("Imagem de perfil teste: ", btoa(imageUrl));
           sessionStorage.setItem("profilePhoto", btoa(imageUrl));
         }
-
+  
         const profileUpdateData = {
           name: "",
-          profilePhoto: "",
+          profilePhoto: type === "cover" ? "" : imageUrl,
           email: atob(sessionStorage.getItem("email")),
           bio: "",
           password: formData.password,
-          ...(isCover ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+          ...(type === "cover" ? { profileHeaderImg: imageUrl } : {}),
         };
-
-        const updateResponse = await api.patch(`/customers/profile/${atob(sessionStorage.getItem("idUser"))}`, profileUpdateData, {
+  
+        const updateResponse = await api.patch(`/customers/profile/${bodyToken.idUser}`, profileUpdateData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
           },
         });
-
+  
         if (updateResponse.status === 200) {
           toast.success("Perfil atualizado com sucesso!");
           handleClose();
@@ -218,26 +209,25 @@ const CostumerEdit = () => {
       }
     } catch (error) {
       const errorMessage = error.message || "Erro ao processar a solicitação.";
-      toast.error(errorMessage);
       console.error(errorMessage, error);
     }
   };
-
+  
   const handleResizeImage = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-
-      reader.onload = function (event) {
+  
+      reader.onload = (event) => {
         const img = new Image();
         img.src = event.target.result;
-
-        img.onload = function () {
+  
+        img.onload = () => {
           const maxWidth = 1280;
           const maxHeight = 1280;
           let width = img.width;
           let height = img.height;
-
+  
           if (width > maxWidth || height > maxHeight) {
             const aspectRatio = width / height;
             if (width > height) {
@@ -248,14 +238,14 @@ const CostumerEdit = () => {
               width = height * aspectRatio;
             }
           }
-
+  
           const canvas = document.createElement("canvas");
           canvas.width = width;
           canvas.height = height;
-
+  
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, width, height);
-
+  
           canvas.toBlob((blob) => {
             const newName = handleGenerateNewImageName(file);
             const resizedFile = new File([blob], newName, {
@@ -265,23 +255,21 @@ const CostumerEdit = () => {
           }, file.type);
         };
       };
-
+  
       reader.onerror = (error) => {
         reject(error);
       };
     });
   };
-
+  
   const handleGenerateNewImageName = (file) => {
-    const splittedName = file.name.split(".");
-    const extension = splittedName[splittedName.length - 1];
+    const extension = file.name.split(".").pop();
     const randomString = Math.random().toString(36).substring(2, 7);
     const timestamp = Date.now();
-    const newName = `${formData.name
-      .replace(/\s+/g, "-")
-      .toLowerCase()}-cover-${randomString}-${timestamp}.${extension}`;
+    const newName = `${formData.name.replace(/\s+/g, "-").toLowerCase()}-cover-${randomString}-${timestamp}.${extension}`;
     return newName;
   };
+  
 
   useEffect(() => {
     getUser();
@@ -289,7 +277,9 @@ const CostumerEdit = () => {
 
   return (
     <div className="costumer">
-      <img className="costumer-cover" src={coverImageUrlLocal} alt="" />
+      <img className="costumer-cover" src={selectedFileCover === null
+                  ? coverImageUrlLocal
+                  : URL.createObjectURL(selectedFileCover)} alt="" />
       <GenericModel open={open} handleClose={handleClose}>
         {content === "cover" ? (
           <div className="cover-section">
@@ -304,16 +294,13 @@ const CostumerEdit = () => {
               alt=""
             />
             <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-            <div className="upload-switch-background">
-              <UploadImage />
-            </div>
-            {/* <input
+            <input
               className="input-file"
               type="file"
               name="cover"
               id="cover"
               onChange={(event) => handleFileChange("cover", event)}
-            /> */}
+            />
             <div className="btn-switch-background-box">
               <ButtonPrimary
                 width={"18vw"}
@@ -344,23 +331,20 @@ const CostumerEdit = () => {
               alt=""
             />
             <p className="descriptio-warn">Selecione uma image de até 1MB</p>
-            <div className="upload-switch-profile">
-              <UploadImage />
-            </div>
-            {/* <input
+            <input
               className="input-file"
               type="file"
               name="cover"
               id="cover"
               onChange={(event) => handleFileChange("profile", event)}
-            /> */}
+            />
             <div className="btn-switch-profile-box">
               <ButtonPrimary
                 width={"18vw"}
                 height={"6vh"}
                 text="Atualizar Foto de Perfil"
                 className="send-cover-btn"
-                onClick={() => handlePostImage("profile")}
+                onclick={() => handlePostImage("profile")}
               />
               <ButtonSecondary
                 width={"15.7vw"}
@@ -377,7 +361,9 @@ const CostumerEdit = () => {
           <h1 className="title-edit-profile">Editar Perfil</h1>
           <div className="profile-edit">
             <div className="image-section">
-              <img className="perfil-img" src={profileImageUrlLocal} alt="" />
+              <img className="perfil-img" src={selectedFileProfile === null
+                  ? profileImageUrlLocal
+                  : URL.createObjectURL(selectedFileProfile)} alt="" />
               <ButtonPrimary
                 text="Selecione a foto de Perfil"
                 className="button-edit"

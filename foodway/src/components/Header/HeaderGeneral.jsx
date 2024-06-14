@@ -43,7 +43,7 @@ const Header = () => {
                         <>
                             <div className="header-geral-token">
                                 <span>Olá, {atob(sessionStorage.getItem("username"))}</span>
-                                <img src={atob(sessionStorage.getItem("profilePhoto")) ? atob(sessionStorage.getItem("profilePhoto")) : DefaultImage} alt="Foto de Perfil" />
+                                <img src={atob(sessionStorage.getItem("profilePhoto")) ? atob(sessionStorage.getItem("profilePhoto")) : DefaultImage} alt="Foto de Perfil"  />
                             </div>
                         </>
                         : <>

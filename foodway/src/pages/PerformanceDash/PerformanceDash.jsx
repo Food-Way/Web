@@ -18,6 +18,7 @@ function PerformanceDash() {
 
     const bodyToken = parseJWT();
     const [dashData, setDashData] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     const CardLoader = () => {
         const numRectangles = 4;
@@ -102,27 +103,26 @@ function PerformanceDash() {
         console.log("Response");
         console.log(response.data);
         setDashData(response.data);
+         setReviews(response.data.reviews);
+
+         var reviewss = response.data.reviews;
+         var reviewsOrdered = [];
+         
+         // Sort the reviews based on sentiment
+         reviewss.sort(function(a, b) {
+             var sentimentOrder = {
+                 "POSITIVE": 1,
+                 "NEUTRAL": 2,
+                 "NEGATIVE": 3,
+                 "TOTAL": 4
+             };
+             return sentimentOrder[a.sentiment] - sentimentOrder[b.sentiment];
+         });
+         reviewsOrdered =setReviews(reviewss);
     }
 
-    const reviews = [
-        {
-            count: 85,
-            sentiment: "positive"
-        },
-        {
-            count: 25,
-            sentiment: "neutral"
-        },
-        {
-            count: 10,
-            sentiment: "negative"
-        },
-        {
-            count: 120,
-            sentiment: "total"
-        }
-    ];
-
+    
+    
 
     useEffect(() => {
         getDashData();
