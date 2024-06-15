@@ -44,20 +44,24 @@ const SearchCard = (props) => {
                             <Comments
                                 comments={props.qtdComments}
                             />
-                            {/* <Upvotes
+                             <Upvotes
                                 upvotes={props.upvote}
-                            /> */}
+                                active={true}
+                            />
                         </div>
                         <div className="card-footer-box">
-                            <div className="favorite">
-                                {props.typeUser === "ESTABLISHMENT" ? (
-                                    <Heart isClick={isFavorite} onClick={() => {
-                                        favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment)
-                                        setIsFavorite(!isFavorite)
-                                    }} />
-                                ) : null}
-                            </div>
-                        </div>
+      <div className="favorite">
+        {props.typeUser === "ESTABLISHMENT" ? (
+          <Heart
+            isClick={isFavorite}
+            onClick={() => {
+              favoriteEstablishment(atob(sessionStorage.getItem("idUser")), props.idEstablishment);
+              setIsFavorite(!isFavorite);
+            }}
+          />
+        ) : null}
+      </div>
+    </div>
                     </div>
                 </div>
             </div>

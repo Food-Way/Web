@@ -315,7 +315,7 @@ const EstablishmentPage = () => {
                     )}
                   </div>
                 </div>
-                <div className="establishment-report-box">
+                {/* <div className="establishment-report-box">
                   <img src={Report} alt="Ícone de perigo" />
                   <span onClick={handleOpenReportModal}>Reportar</span>
                   <GenericModal classNameModal={"modal-page-establishment-report"} classNameBox={"box-page-establishment-report"} open={openReportModal} handleClose={handleCloseReportModal}>
@@ -353,7 +353,7 @@ const EstablishmentPage = () => {
                       </div>
                     </div>
                   </GenericModal>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

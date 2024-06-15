@@ -104,6 +104,11 @@ const CommentInsert = ({ establishmentId, setComments }) => {
       if (response.status === 200) {
         toast.success('Comentário adicionado com sucesso');
         clearCommentText();
+        setRatings({
+          AMBIENT: 0,
+          SERVICE: 0,
+          FOOD: 0
+        });
         updateComments(establishmentId, setComments)
       } else {
         toast.error('Erro ao adicionar comentário');
@@ -112,6 +117,10 @@ const CommentInsert = ({ establishmentId, setComments }) => {
   };
   const clearCommentText = () => {
     setCommentText('');
+    ratings.AMBIENT = 0;
+    ratings.SERVICE = 0;
+    ratings.FOOD = 0;
+  
   };
   return (
     <div className="comment_insert">
@@ -215,6 +224,11 @@ const CommentInsertReply = ({ establishmentId, commentParent, setComments }) => 
   };
   const clearCommentText = () => {
     setCommentText('');
+    setRatings({
+      AMBIENT: 0,
+      SERVICE: 0,
+      FOOD: 0
+    });
   };
   return (
     <div className="comment_insert">

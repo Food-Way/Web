@@ -90,6 +90,8 @@
 
 .comment-content-text {
     height: fit-content;
+    text-overflow: clip;
+    overflow: hidden;
 }
 
 .reply-container {
