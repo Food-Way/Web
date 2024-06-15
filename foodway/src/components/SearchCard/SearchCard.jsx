@@ -44,9 +44,9 @@ const SearchCard = (props) => {
                             <Comments
                                 comments={props.qtdComments}
                             />
-                            <Upvotes
+                            {/* <Upvotes
                                 upvotes={props.upvote}
-                            />
+                            /> */}
                         </div>
                         <div className="card-footer-box">
                             <div className="favorite">

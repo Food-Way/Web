@@ -6,10 +6,9 @@ import { ButtonPrimary } from "../../components/Button/Button";
 import { useState, useEffect } from "react";
 import "./EstablishmentEditPersonal.css";
 import api_call from "../../services/apiImpl";
-import api from "../../services/api";
-import { Box, Input, Modal } from "@mui/material";
+import api from "../../services/api.js";
 import { toast } from "react-toastify";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import parseJWT from "../../util/parseJWT";
 import GenericModal from "../../components/GenericModel/GenericModel";
@@ -22,9 +21,7 @@ const EstablismentEditPersonal = () => {
   const [selectedFileCover, setSelectedFileCover] = useState(null);
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);
   const [coverImageUrlLocal, setCoverImageUrlLocal] = useState();
-  const [coverImageName, setCoverImageName] = useState();
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
-  const [profileImageName, setProfileImageName] = useState();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState("");
   const handleOpen = () => setOpen(true);
@@ -34,17 +31,20 @@ const EstablismentEditPersonal = () => {
     setContent(content);
   };
 
-
   async function getEstablishment() {
     const response = await api_call('get', `establishments/${bodyToken.idUser}`, null, token, null);
     setFormData(response.data);
-    sessionStorage.setItem("establishmentName", (btoa(response.data.establishmentName)))
-  };
+    sessionStorage.setItem("establishmentName", btoa(response.data.establishmentName));
+    sessionStorage.setItem("coverPhoto", btoa(response.data.profileHeaderImg));
+    sessionStorage.setItem("profilePhoto", btoa(response.data.profilePhoto));
+    setProfileImageUrlLocal(response.data.profilePhoto);
+    setCoverImageUrlLocal(response.data.profileHeaderImg);
+  }
 
   async function deleteEstablishmentImages(type) {
-    const emailActual = bodyToken.email
+    const emailActual = bodyToken.email;
     const passwordActual = formData.passwordConfirmEditPhoto;
-    const defaultImageUrl = "https://foodway.s3.amazonaws.com/public-images/default-user-image.webp";
+    const defaultImageUrl = "https://foodway.s3.amazonaws.com/public-images/default-user-image.png";
     const defaultBannerUrl = "https://foodway.s3.amazonaws.com/public-images/default-banner.png";
 
     const images = {
@@ -58,13 +58,9 @@ const EstablismentEditPersonal = () => {
       ...images[type],
     };
 
-    console.log("Data", data);
-
     try {
-      console.log("patch" )
-      const response = await api_call("patch", `establishments/profile/${bodyToken.idUser}`, data, token, null)
+      const response = await api_call("patch", `establishments/profile/${bodyToken.idUser}`, data, token, null);
       if (response.status === 200) {
-        console.log(response.data)
         toast.success("Imagem deletada com sucesso");
         getEstablishment();
         handleClose();
@@ -130,22 +126,17 @@ const EstablismentEditPersonal = () => {
 
     if (!isValid) return;
 
-    console.log("Data", data);
-
     try {
       const response = await api_call("patch", `establishments/personal/${bodyToken.idUser}`, data, token, null);
       if (response.status === 200) {
-
         toast.success("Informações atualizadas com sucesso");
-        console.log(response.data)
-
         setTimeout(() => {
           window.location.reload();
           getEstablishment();
           handleClose();
         }, 2000);
       }
-    } catch {
+    } catch (error) {
       if (error.response) {
         switch (error.response.status) {
           case 400:
@@ -168,9 +159,7 @@ const EstablismentEditPersonal = () => {
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-
     setFormData({ ...formData, [id]: value });
-    console.log(formData);
   };
 
   const handleFileChange = async (type, event) => {
@@ -179,7 +168,6 @@ const EstablismentEditPersonal = () => {
       const isValid = await validateImage(type, file);
       if (isValid) {
         if (type === "cover") {
-          console.log(file)
           setSelectedFileCover(file);
         } else {
           setSelectedFileProfile(file);
@@ -204,21 +192,17 @@ const EstablismentEditPersonal = () => {
             if (img.width >= 400) {
               resolve(true);
             } else {
-              toast.error(
-                "A imagem precisa ter pelo menos 400 pixels de largura."
-              );
+              toast.error("A imagem precisa ter pelo menos 400 pixels de largura.");
               reject("A imagem precisa ter pelo menos 400 pixels de largura.");
             }
           } else {
             if (img.width >= 1280) {
               resolve(true);
             } else {
-              toast.error(
-                "A imagem precisa ter pelo menos 1280 pixels de largura."
-              );
+              toast.error("A imagem precisa ter pelo menos 1280 pixels de largura.");
               reject("A imagem precisa ter pelo menos 1280 pixels de largura.");
             }
-          };
+          }
         }
       }
       reader.readAsDataURL(file);
@@ -290,8 +274,6 @@ const EstablismentEditPersonal = () => {
     formData.append("file", file);
     formData.append("idUser", bodyToken.idUser);
     formData.append("typeUser", atob(sessionStorage.getItem("typeUser")));
-    formData.append("objectKey", `/user-images/${file.name}`);
-    formData.append("path", "user-images");
 
     try {
       const token = atob(sessionStorage.getItem("token"));
@@ -301,7 +283,7 @@ const EstablismentEditPersonal = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       console.error("Erro ao realizar upload de imagem:", error);
       throw error;
@@ -309,46 +291,45 @@ const EstablismentEditPersonal = () => {
   }
 
   const handlePostImage = async (type) => {
-    console.log("Entrou em handlePostImage");
     const fileToUpload = type === "cover" ? selectedFileCover : selectedFileProfile;
-
     if (!fileToUpload) {
       toast.error("Nenhum arquivo foi selecionado.");
       return;
     }
-
     try {
       const resizedFile = await handleResizeImage(fileToUpload);
       const uploadResponse = await uploadFileToS3(resizedFile, type);
-
       if (uploadResponse) {
         const successMessage = type === "cover" ? "Capa atualizada com sucesso!" : "Imagem de perfil atualizada com sucesso!";
         toast.success(successMessage);
-        const imageUrl = uploadResponse.url;
-
+        const imageUrl = uploadResponse.data;
+        
         if (type === "cover") {
-          setCoverImageName(uploadResponse.fileName);
           setCoverImageUrlLocal(imageUrl);
+          sessionStorage.setItem("coverPhoto", btoa(imageUrl));
         } else {
-          setProfileImageName(uploadResponse.fileName);
           setProfileImageUrlLocal(imageUrl);
           sessionStorage.setItem("profilePhoto", btoa(imageUrl));
         }
 
         const profileUpdateData = {
-          emailActual: bodyToken.email, 
-          passwordActual: formData.password,
-          ...(type === "cover" ? { profileHeaderImg: imageUrl } : { profilePhoto: imageUrl }),
+          profilePhoto: type === "cover" ? null : imageUrl,
+          profileHeaderImg: type === "cover" ? imageUrl : null,
         };
+
         const updateResponse = await api.patch(`/establishments/profile/${bodyToken.idUser}`, profileUpdateData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${atob(sessionStorage.getItem("token"))}`,
           },
         });
+
         if (updateResponse.status === 200) {
           toast.success("Perfil atualizado com sucesso!");
           handleClose();
+          
+          setTimeout(() => {getEstablishment();}, 2000); 
+
         } else {
           throw new Error("Atualização de perfil falhou");
         }
@@ -357,8 +338,6 @@ const EstablismentEditPersonal = () => {
       }
     } catch (error) {
       const errorMessage = error.message || "Erro ao processar a solicitação.";
-      console.error("errorMessage, error");
-      toast.error(errorMessage);
       console.error(errorMessage, error);
     }
   };
@@ -368,13 +347,12 @@ const EstablismentEditPersonal = () => {
   }, []);
 
   useEffect(() => {
-    console.log("FormData", formData);
   }, [formData]);
 
   return (
     <div className="establishment-edit">
-      <GenericModal open={open} classNameModal={content == "edit-info" ? "save-edit-establishment-modal" : "update-password-establishment-modal"} handleClose={handleClose}>
-        {content === "edit-info" ? (
+      <GenericModal open={open} classNameModal={content === "edit-info" ? "save-edit-establishment-modal" : "update-password-establishment-modal"} handleClose={handleClose}>
+        {content === "edit-info" && (
           <div className="edit-modal-confirm">
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
@@ -390,10 +368,8 @@ const EstablismentEditPersonal = () => {
               onclick={() => updateEstablishment("information")}
             />
           </div>
-        ) : (
-          <></>
         )}
-        {content === "edit-password" ? (
+        {content === "edit-password" && (
           <div className="edit-modal-password">
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
@@ -427,10 +403,8 @@ const EstablismentEditPersonal = () => {
               />
             </div>
           </div>
-        ) : (
-          <></>
         )}
-        {content === "edit-cover-image" ? (
+        {content === "edit-cover-image" && (
           <div className="edit-modal-default">
             <h3 className="title-edit-profile">Altere a foto de capa</h3>
             <img
@@ -447,27 +421,24 @@ const EstablismentEditPersonal = () => {
               alt={coverImageUrlLocal}
             />
             <div className="upload-edit-background-box">
-            <input
-              className="input-file"
-              type="file"
-              name="cover"
-              id="cover"
-              onChange={(event) => handleFileChange("cover", event)}
-            />
+              <input
+                className="input-file"
+                type="file"
+                name="cover"
+                id="cover"
+                onChange={(event) => handleFileChange("cover", event)}
+              />
             </div>
-            {/* <Input type="file" onChange={(event) => handleFileChange("cover", event)} /> */}
             <ButtonPrimary text="Confirmar" onclick={() => handlePostImage("cover")} />
           </div>
-        ) : (
-          <></>
         )}
-        {content === "edit-profile-image" ? (
+        {content === "edit-profile-image" && (
           <div className="edit-modal-default">
             <h3 className="title-edit-profile">Altere a foto de perfil</h3>
             <img
               style={{
-                width: "100px",
-                height: "100px",
+                width: "150px",
+                height: "150px",
                 borderRadius: "50%",
                 objectFit: "cover",
                 border: "1px solid black",
@@ -475,30 +446,27 @@ const EstablismentEditPersonal = () => {
               }}
               src={
                 selectedFileProfile === null
-                  ? coverImageUrlLocal
+                  ? profileImageUrlLocal
                   : URL.createObjectURL(selectedFileProfile)
               }
-              alt={coverImageUrlLocal}
+              alt={profileImageUrlLocal}
             />
             <div className="upload-edit-profile-box">
-            <input
-              className="input-file"
-              type="file"
-              name="profile"
-              id="profile"
-              onChange={(event) => handleFileChange("cover", event)}
-            />
+              <input
+                className="input-file"
+                type="file"
+                name="PROFILE"
+                id="profile"
+                onChange={(event) => handleFileChange("profile", event)}
+              />
             </div>
-            {/* <Input type="file" onChange={(event) => handleFileChange("profile", event)} /> */}
-            <ButtonPrimary
+            <ButtonPrimary 
               text="Confirmar"
               onclick={() => handlePostImage("profile")}
             />
           </div>
-        ) : (
-          <></>
         )}
-        {content === "delete-cover-image" ? (
+        {content === "delete-cover-image" && (
           <div>
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
@@ -514,10 +482,8 @@ const EstablismentEditPersonal = () => {
               onclick={() => deleteEstablishmentImages("cover")}
             />
           </div>
-        ) : (
-          <></>
         )}
-        {content === "delete-profile-image" ? (
+        {content === "delete-profile-image" && (
           <div>
             <h3 className="title-edit-profile">Confirme Informações</h3>
             <InputField
@@ -533,8 +499,6 @@ const EstablismentEditPersonal = () => {
               onclick={() => deleteEstablishmentImages("profile")}
             />
           </div>
-        ) : (
-          <></>
         )}
       </GenericModal>
       <div className="establishment-edit-container">
@@ -617,7 +581,7 @@ const EstablismentEditPersonal = () => {
                   text={"Atualizar"}
                 />
                 <ButtonPrimary
-                  width="200px"
+                 
                   className="establishment-edit-sec-delete"
                   text={"Atualizar senha"}
                   onclick={() => {
@@ -641,20 +605,20 @@ const EstablismentEditPersonal = () => {
                     <img
                       className="cover-img-edit-establishment"
                       src={
-                        coverImageUrlLocal === undefined
-                          ? formData.profileHeaderImg
-                          : coverImageUrlLocal
+                        selectedFileCover === null
+                          ? coverImageUrlLocal
+                          : URL.createObjectURL(selectedFileCover)
                       }
-                      alt=""
+                      alt="Capa do Estabelecimento"
                     />
                     <img
                       className="cover-img-edit-establishment-profile"
                       src={
-                        profileImageUrlLocal === undefined
-                          ? formData.profilePhoto
-                          : profileImageUrlLocal
+                        selectedFileProfile === null
+                          ? profileImageUrlLocal
+                          : URL.createObjectURL(selectedFileProfile)
                       }
-                      alt=""
+                      alt="Perfil do Estabelecimento"
                     />
                   </div>
                 </div>
@@ -668,14 +632,7 @@ const EstablismentEditPersonal = () => {
                         className="establishment-edit-sec-add"
                         text={"Adicionar foto de capa"}
                       />
-                      <ButtonPrimary
-                        onclick={() => {
-                          handleOpenModal("delete-cover-image");
-                        }}
-                        width="40px"
-                        className="establishment-edit-sec-delete"
-                        text={<FontAwesomeIcon icon={faTrashCan} />}
-                      />
+                       
                     </div>
                     <div className="section-btn-profile-picture">
                       <ButtonPrimary
@@ -685,14 +642,7 @@ const EstablismentEditPersonal = () => {
                         className="establishment-edit-sec-add"
                         text={"Adicionar foto de perfil"}
                       />
-                      <ButtonPrimary
-                        onclick={() => {
-                          handleOpenModal("delete-profile-image");
-                        }}
-                        width="40px"
-                        className="establishment-edit-sec-delete"
-                        text={<FontAwesomeIcon icon={faTrashCan} />}
-                      />
+                       
                     </div>
                   </div>
                 </div>

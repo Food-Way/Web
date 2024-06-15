@@ -15,11 +15,9 @@ const CostumerEdit = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const [content, setContent] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileCover, setSelectedFileCover] = useState(null);
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);
   const [coverImageUrlLocal, setCoverImageUrlLocal] = useState();
-  const [coverImageName, setCoverImageName] = useState();
   const [profileImageUrlLocal, setProfileImageUrlLocal] = useState();
   const [formData, setFormData] = useState({
     name: "",
@@ -31,11 +29,8 @@ const CostumerEdit = () => {
     try {
       const response = await api_call("get", `/customers/profile/${bodyToken.idUser}`, null, atob(sessionStorage.getItem("token"), null))
       if (response.status === 200) {
-        // setCoverImageUrlLocal(response.data.profileHeaderImg);
-        console.log("Imagem de capa teste: ", response.data.profileHeaderImg);
         setProfileImageUrlLocal(response.data.profilePhoto);
         setCoverImageUrlLocal(response.data.profileHeaderImg);
-        console.log(response.data);
         setFormData(response.data);
       }
     } catch (error) {
@@ -79,9 +74,7 @@ const CostumerEdit = () => {
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-
     setFormData({ ...formData, [id]: value });
-    console.log(formData);
   };
 
   const handleOpenModal = (type, event) => {
@@ -127,7 +120,6 @@ const CostumerEdit = () => {
   };
   
   const uploadFileToS3 = async (file, type) => {
-    console.log("uploadFileToS3");
     const formData = new FormData();
     formData.append("file", file);
     formData.append("idUser", bodyToken.idUser);
@@ -156,7 +148,6 @@ const CostumerEdit = () => {
   };
   
   const handlePostImage = async (type) => {
-    console.log("handlePostImage");
     const fileToUpload = type === "cover" ? selectedFileCover : selectedFileProfile;
   
     if (!fileToUpload) {
@@ -174,10 +165,10 @@ const CostumerEdit = () => {
         const imageUrl = uploadResponse.url;
   
         if (type === "cover") {
+          sessionStorage.setItem("coverPhoto", btoa(imageUrl));
           setCoverImageUrlLocal(imageUrl);
         } else {
           setProfileImageUrlLocal(imageUrl);
-          console.log("Imagem de perfil teste: ", imageUrl);
           ContactSupportOutlined.log("Imagem de perfil teste: ", btoa(imageUrl));
           sessionStorage.setItem("profilePhoto", btoa(imageUrl));
         }

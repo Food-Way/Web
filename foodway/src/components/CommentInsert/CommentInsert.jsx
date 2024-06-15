@@ -69,6 +69,7 @@ const CommentInsert = ({ establishmentId, setComments }) => {
 
     if (validaMessagem(comment)) {
       const commentObj = {
+        userName: bodyToken.username,
         idCustomer: bodyToken.idUser,
         idEstablishment: establishmentId,
         userPhoto: atob(sessionStorage.getItem("profilePhoto")),
