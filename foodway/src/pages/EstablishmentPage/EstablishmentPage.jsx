@@ -95,6 +95,8 @@ const EstablishmentPage = () => {
     console.log("Response")
     console.log(response.data)
     setProfile(response.data);
+    console.log("Profile")
+    console.log(profile)
     setComments(response.data.comments);
     setUrlMaps(`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GMAPS_API_KEY}&q=${response.data.lat},${response.data.lng}&zoom=18&maptype=roadmap`)
   }
@@ -134,7 +136,12 @@ const EstablishmentPage = () => {
           {profile.length === 0 ? <ProfileHeaderLoader /> : (
             <div
               className="establishment-banner-box"
-              style={{ backgroundImage: `url(${profile.profileHeaderImg})` }}>
+              style={{ 
+                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5)), url(${profile.profileHeaderImg})`,
+                height: '300px',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}>
               <div className="establishment-content-banner-box">
                 <div className="establishment-title-box">
                   <h1 className="title-establishment">{profile.establishmentName}</h1>
@@ -308,7 +315,7 @@ const EstablishmentPage = () => {
                     )}
                   </div>
                 </div>
-                <div className="establishment-report-box">
+                {/* <div className="establishment-report-box">
                   <img src={Report} alt="Ícone de perigo" />
                   <span onClick={handleOpenReportModal}>Reportar</span>
                   <GenericModal classNameModal={"modal-page-establishment-report"} classNameBox={"box-page-establishment-report"} open={openReportModal} handleClose={handleCloseReportModal}>
@@ -346,7 +353,7 @@ const EstablishmentPage = () => {
                       </div>
                     </div>
                   </GenericModal>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

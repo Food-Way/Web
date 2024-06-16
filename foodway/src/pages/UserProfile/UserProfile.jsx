@@ -207,6 +207,7 @@ const UserProfile = () => {
                     <span className="no-content">Nenhuma avaliação realizada</span>
                   ) : (
                     comments.map((item, index) => (
+                      console.log(item),
                       <Comment
                         key={index}
                         establishmentName={item.establishmentName}

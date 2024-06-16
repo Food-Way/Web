@@ -10,7 +10,6 @@ import "./SearchDetails.css";
 
 const SearchDetails = (props) => {
     const [updateText, setUpdateText] = useState(false);
-    // const [one, setoOne] = useState(0);
 
     function analysisText(text, category, upText) {
         var newText = "";
@@ -19,7 +18,6 @@ const SearchDetails = (props) => {
             newText = text.substring(0, 10) + "..."
             return newText;
         }
-
         if (tamanho > 150 && category == "text" && upText == false) {
             newText = text.substring(0, 150) + "..."
             return newText;
@@ -52,7 +50,7 @@ const SearchDetails = (props) => {
                             />
                         </div>
                         <div className="middle-header-side">
-                            <span className="user-detail-name"> {analysisText(props.name, "title")} </span>
+                            <span className="user-detail-name"> {analysisText(props.name, "title")}</span>
                             <div className="rate-detail-user">
                                 <span className="user-rate-number">5.0</span>
                                 <ReactStars

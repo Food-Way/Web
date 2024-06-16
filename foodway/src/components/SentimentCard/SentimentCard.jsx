@@ -15,16 +15,16 @@ function SentimentCard(props) {
             <div className="sentiment-data-establishment">
                 <div className="sentiment-item">
                     <div className="sentiment-img-box">
-                        <img src={props.sentiment == "positive" ? PositiveImage : props.sentiment == "neutral" ? NeutralImage : props.sentiment == "total" ? EqualsImage : NegativeImage} alt="Ícone de sentimento" />
+                        <img src={props.sentiment == "POSITIVE" ? PositiveImage : props.sentiment == "NEUTRAL" ? NeutralImage : props.sentiment == "TOTAL" ? EqualsImage : NegativeImage} alt="Ícone de sentimento" />
                     </div>
                     <div className="title-value-box">
-                        <span>Avaliações {props.sentiment == "positive" ? "Positivas" : props.sentiment == "neutral" ? "Neutras" : props.sentiment == "total" ? "Totais" : "Negativas"}</span>
+                        <span>Avaliações {props.sentiment == "POSITIVE" ? "Positivas" : props.sentiment == "NEUTRAL" ? "Neutras" : props.sentiment == "TOTAL" ? "Totais" : "Negativas"}</span>
                         <span>{props.count}</span>
                     </div>
-                    <div className="percent-value-box">
+                    {/* <div className="percent-value-box">
                         <span className="percent-value">+10%</span>
                         <img src={PercentPositiveImage} alt="Ícone de porcentagem" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

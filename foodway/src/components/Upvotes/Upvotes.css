@@ -18,3 +18,23 @@
     font-size: 1.7rem;
     font-weight: 700;
 }
+
+
+.upvotes-disabled {
+    width: 4.75rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upvotes-disabled img {
+    width: 2.125rem;
+    height: 2rem;
+    cursor:auto;
+}
+
+.upvotes-disabled span {
+    font-size: 1.7rem;
+    font-weight: 700;
+}

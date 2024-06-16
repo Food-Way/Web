@@ -54,7 +54,11 @@
     font-size: 1.8rem;
     font-weight: 700;
 }
-
+.comment-content span {
+    width: 2vw;
+    font-size: 1.8rem;
+    font-weight: 700;
+} 
 .more-text {
     width: 10rem;
     cursor: pointer;
@@ -86,6 +90,8 @@
 
 .comment-content-text {
     height: fit-content;
+    text-overflow: clip;
+    overflow: hidden;
 }
 
 .reply-container {
@@ -96,7 +102,6 @@
     margin: 0px 0px 0px 50px;
     border-left: 1px solid black;
     padding: 0px 0px 0px 25px;
-
 }
 
 .insert-comment-field {
@@ -107,4 +112,22 @@
 
 .user-content-values-reply {
     margin-top: 20px;
+}
+
+.positive{
+    background-color: rgb(0, 167, 0);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.negative{
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.neutral{
+    background-color: rgb(255, 252, 82);
+    padding: 10px;
+    border-radius: 10px;
 }

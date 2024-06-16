@@ -131,7 +131,7 @@
 
 .establishment-edit-sec-delete {
   margin-left: auto;
-  padding: 10px 0px;
+  padding: 10px 20px;
 
   color: var(--Branco-Branco, #fff);
   text-align: center;
@@ -151,10 +151,7 @@
 
 .establishment-edit-sec-add {
   margin-left: auto;
-  padding: 10px 0px;
-  width: 40%;
-  max-width: 300px;
-  min-width: 200px;
+  padding: 10px 20px;
   color: var(--Branco-Branco, #fff);
   text-align: center;
   font-family: Quicksand;
@@ -189,8 +186,6 @@
 
 .button-establishment-editPassword {
   max-width: fit-content;
-  width: 30%;
-  min-width: 20%;
   margin: 10px 10px 10px 10px;
   color: var(--Branco-Branco, #fff);
   text-align: center;
@@ -217,8 +212,7 @@
 
 .button-establishment-edit {
   max-width: fit-content;
-  width: 30%;
-  min-width: 20%;
+  
   margin: 10px 10px 10px 10px;
   color: var(--Branco-Branco, #fff);
   text-align: center;
@@ -308,7 +302,7 @@
 
 .files_input_btn label {
   margin-left: auto;
-  padding: 10px 0px;
+  padding: 10px 20px;
   width: 40%;
   max-width: 300px;
   min-width: 200px;

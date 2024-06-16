@@ -53,7 +53,7 @@ const Comment = (props) => {
     let sentimentAnalysis = 8.0;
 
     useEffect(() => {
-        setSize(props.width, props.height, props.text)
+        setSize(props.width, props.height, props.text, props.sentiment)
     }, []);
 
     return (
@@ -63,6 +63,10 @@ const Comment = (props) => {
                     <div className="comment-header">
                         <div className="header-initial">
                             <span> {props.establishmentName} </span>
+                            <div className="title-value-box">
+                            {props.sentiment == "POSITIVE" ? (<span className="positive">Muito Bom</span>) : props.sentiment == "NEUTRAL" ? (<span className="neutral">Interessante</span>) : props.sentiment == "NEGATIVE" ? (<span className="negative">Ruim</span>) : "" }
+                            <span>{props.count}</span>
+                    </div>
                         </div>
                         <ReactStars
                             count={5}
@@ -87,13 +91,11 @@ const Comment = (props) => {
         </>
     )
 }
-
 const CommentIndividual = (props) => {
     const navigate = useNavigate();
     const bodyToken = parseJWT();
     const [updateText, setUpdateText] = useState(false);
     const [showCommentInsert, setShowCommentInsert] = useState(true);
-
 
     function analysisText(text, category, upText) {
         var newText = "";

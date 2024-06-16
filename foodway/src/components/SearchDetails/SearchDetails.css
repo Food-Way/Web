@@ -35,7 +35,9 @@
 }
 
 .left-header-side img {
-    width: 5vw;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
     border-radius: 10rem;
 }
 

@@ -122,7 +122,7 @@ function SearchUser() {
                                         <MyLoader />
                                     )}
                                     {search && search.map((item, index) => (
-                                        <div onClick={(e) => {
+                                        <div key={index} onClick={(e) => {
                                             e.preventDefault();
                                             handleCardClick(index, item.typeUser)
                                             if (item.typeUser == "ESTABLISHMENT") {
@@ -160,7 +160,7 @@ function SearchUser() {
                                         tag={search[selectedCard].tag}
                                         rate={search[selectedCard].rate}
                                         comments={search[selectedCard].comments}
-                                        bio={selectedCardType == "CLIENT" ? search[selectedCard].bio : search[selectedCard].lastComment}
+                                        bio={selectedCardType == "CLIENT" ? search[selectedCard].bio : search[selectedCard].bio}
                                         typeUser={selectedCardType}
                                         upvote={search[selectedCard].upvote}
                                         qtdComments={search[selectedCard].qtdComments}
