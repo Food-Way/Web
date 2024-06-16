@@ -31,6 +31,7 @@ const CommentDash = () => {
     async function getComments() {
         const response = await api_call("get", `/establishments/${idUser}/comments`, null, atob(sessionStorage.getItem("token")));
         setComments(response.data);
+        console.log(response.data);
     }
 
     useEffect(() => {
@@ -62,6 +63,7 @@ const CommentDash = () => {
                                                 establishmentName={comment.establishmentName}
                                                 upvotes={comment.upvotes}
                                                 rate={comment.generalRate}
+                                                sentiment={comment.sentiment}
                                             />
                                         ))))}
                             </div>

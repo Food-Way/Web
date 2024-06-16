@@ -41,7 +41,8 @@ const Upvotes = (props) => {
     }
 
     return (
-        <>
+        (props.active) ? (
+            <>
             <div className="upvotes" onClick={() => {
                 if (!sessionStorage.getItem("token")) {
                     hasValidSession(navigate);
@@ -57,6 +58,14 @@ const Upvotes = (props) => {
                 <span>{props.upvotes ? props.upvotes : 0}</span>
             </div >
         </>
+        ) : (
+            <>
+            <div className="upvotes-disabled">
+                <img src={UpvoteIcon} alt="" />
+                <span>{props.upvotes ? props.upvotes : 0}</span>
+            </div >
+        </>
+        )
     )
 }
 

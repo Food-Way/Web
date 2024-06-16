@@ -30,7 +30,8 @@
 }
 
 .card-image {
-    width: 7vw;
+    width: 110px;
+    height: 110px;
     border-radius: .6rem;
     object-fit: cover;
     object-position: center;
