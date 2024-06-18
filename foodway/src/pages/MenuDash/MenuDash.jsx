@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import QRCode from "react-qr-code";
 import Product from "../../components/Product/Product";
 import SearchBar from "../../components/SearchBar/SearchBar";
-const Plus = "https://foodway.s3.amazonaws.com/public-images/plus.svg";
+const Plus = "https://foodway.s3.amazonaws.com/public-images/adicionar.svg";
 const ImageFilter = "https://foodway.s3.amazonaws.com/public-images/filter.svg";
 import Report from "../../components/Report/Report";
 import api_call from "../../services/apiImpl";
@@ -13,13 +13,13 @@ import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.j
 import { InputField } from "../../components/InputField/InputField";
 import { toast } from 'react-toastify';
 import "./MenuDash.css";
-import UploadImage from "../../components/UploadImage/UploadImage.jsx";
 import jsPDF from 'jspdf';
+import {api} from "../../services/api";
  
 
 const MenuDash = () => {
   const bodyToken = parseJWT();
-  const backgroundPdf = "https://foodway.s3.amazonaws.com/public-images/rank-background.webp";
+  const [selectedFile, setSelectedFile] = useState(null);
   const [menu, setMenu] = useState([]);
   let protocol = window.location.protocol;
   let host = window.location.hostname;
@@ -49,11 +49,47 @@ const MenuDash = () => {
     setPrice(e.target.value);
   };
 
+  const handleFileChange = async ( event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      toast.error("Nenhum arquivo foi selecionado.");
+      return;
+    }
+    console.log(file);
+    setSelectedFile(file); 
+  };
+
   async function getMenu({ filter }) {
     const response = await api_call("get", `products/establishments/${bodyToken.idUser}/${filter}`, null, atob(sessionStorage.getItem("token")));
     // console.log(response.data);
     setMenu(response.data);
   }
+
+
+  const uploadFileToS3 = async (file) => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("idUser", bodyToken.idUser);
+    formData.append("typeUser", atob(sessionStorage.getItem("typeUser")));
+    try {
+
+      const token = atob(sessionStorage.getItem("token"));
+      const response = await api.post(`files/upload-product-image`,formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("response");
+      
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao realizar upload de imagem:", error);
+      throw error;
+    }
+  };
 
   const handlePostProduct = async () => {
     if (name === "" || price === "") {
@@ -66,10 +102,13 @@ const MenuDash = () => {
       toast.error('Nome inválido');
     } else {
       try {
+        const uploadResponse = await uploadFileToS3(selectedFile);
+        console.log(uploadResponse);
         const response = await api_call("post", "products", {
           name: name,
           price: price,
-          idEstablishment: bodyToken.idUser
+          idEstablishment: bodyToken.idUser,
+          photo: uploadResponse
         }, atob(sessionStorage.getItem("token")), null);
         if (response.status === 201) {
           toast.success('Produto criado com sucesso!');
@@ -137,58 +176,56 @@ const MenuDash = () => {
 
   const handleDownloadPDF = async () => {
     const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}&data=${encodeURIComponent(qrData)}&bgcolor=${bgColor}&color=${color}`;
-
+  
     try {
       const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch QR Code image');
+      }
+  
       const blob = await response.blob();
-
       const pdf = new jsPDF();
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdfWidth;
-      const imgBackground = backgroundPdf;
-
-      const img = await new Promise((resolve) => {
+    
+  
+      const img = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = (e) => reject('Error reading image data');
         reader.readAsDataURL(blob);
       });
-
+  
       const title = `${atob(sessionStorage.getItem("establishmentName"))} - Cardápio`;
       const subTitle = "Leia o QR code abaixo e tenha mais informações dos produtos";
       const foodway = "Foodway 2024";
-
-      pdf.addImage(imgBackground, 'PNG', -10, 0, 300, 300);
-
+  
       pdf.setDrawColor(255, 255, 255);
       pdf.setLineWidth(2);
       pdf.setFillColor(34, 34, 34);
       pdf.roundedRect(20, 50, pdfWidth - 40, 170, 5, 5, 'FD');
-
+  
       pdf.setTextColor(255, 255, 255);
-
+  
       pdf.setFontSize(20);
-
       pdf.setFont("helvetica", "bold");
       pdf.text(title, pdfWidth / 2, 65, { align: 'center' });
-
+  
       pdf.setFont("helvetica", "normal");
-
       pdf.setFontSize(14);
-
       pdf.text(subTitle, pdfWidth / 2, 75, { align: 'center' });
-
+  
       pdf.addImage(img, 'PNG', pdfWidth / 2 - pdfHeight / 4, 85, pdfHeight / 2, pdfHeight / 2);
-
+  
       pdf.setFontSize(14);
-
       pdf.text(foodway, pdfWidth / 2, 205, { align: 'center' });
-
+  
       pdf.save('qrcode.pdf');
     } catch (error) {
       console.error('Error downloading QR Code:', error);
     }
   };
-
+  
   useEffect(() => {
     getMenu({ filter: "name" });
   }, []);
@@ -227,7 +264,13 @@ const MenuDash = () => {
                           onChange={handleChangePrice}
                         />
                       </div>
-                      <UploadImage />
+                      <input
+                        className="input-file"
+                        type="file"
+                        name="cover"
+                        id="cover"
+                        onChange={(event) => handleFileChange( event)}
+            />
                     </div>
                     <div className="button-modal-box">
                       <ButtonPrimary text="Enviar" width={"45%"} height={"6rem"} onclick={handlePostProduct} />
@@ -268,6 +311,7 @@ const MenuDash = () => {
                             idProduct={item.idProduct}
                             name={item.name}
                             price={item.price}
+                            photo={item.photo}
                           />
                         </>
                       ))

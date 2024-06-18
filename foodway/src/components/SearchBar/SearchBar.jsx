@@ -16,38 +16,62 @@ function SearchBar(props) {
     function listSearched() {
         var uriPath;
 
-        // switch (document.location.pathname) {
-        //     case '/':
-        //         var category = atob(sessionStorage.getItem('category'));
-        //         uriPath = `establishments/culinary?idCulinary=${category}`;
-        //         callGet(uriPath);
-        //         break;
-        //     case `/establishment/performance/menu/${bodyToken.idUser}`:
-        //         uriPath = `/products/establishments/${bodyToken.idUser}/name`;
-        //         setPassed(true);
-        //         setSearched([]);
-        //         callGet(uriPath);
-        //         break;
-        //     case `/establishment-menu/${sessionStorage.getItem('idEstablishment')}`:
-        //         uriPath = `/products/establishments/${bodyToken.idUser}/name`;
-        //         setPassed(true);
-        //         setSearched([]);
-        //         callGet(uriPath);
-        //         break;
-        //     case document.location.pathname.startsWith('/search-user'):
-        //         var uriPathEstb = `/establishments`;
-        //         var uriPathCust = `/customers`;
-        //         setPassed(true);
-        //         setSearched([]);
-        //         callGetTwo(uriPathEstb, uriPathCust);
-        //         break;
-        //     default:
-        //         console.log(document.location.pathname.startsWith(`/establishment/performance/menu/${bodyToken.idUser}`));
-        //         var category = atob(sessionStorage.getItem('category'));
-        //         uriPath = `establishments/culinary?idCulinary=${category}`;
-        //         callGet(uriPath);
-        //         break;
-        // }
+       if(bodyToken != null) {
+            switch (document.location.pathname) {
+            case '/':
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
+                break;
+            case `/establishment/performance/menu/${bodyToken.idUser}`:
+                uriPath = `/products/establishments/${bodyToken.idUser}/name`;
+                setPassed(true);
+                setSearched([]);
+                callGet(uriPath);
+                break;
+            case `/establishment-menu/${sessionStorage.getItem('idEstablishment')}`:
+                uriPath = `/products/establishments/${bodyToken.idUser}/name`;
+                setPassed(true);
+                setSearched([]);
+                callGet(uriPath);
+                break;
+            case document.location.pathname.startsWith('/search-user'):
+                var uriPathEstb = `/establishments`;
+                var uriPathCust = `/customers`;
+                setPassed(true);
+                setSearched([]);
+                callGetTwo(uriPathEstb, uriPathCust);
+                break;
+            default:
+                console.log(document.location.pathname.startsWith(`/establishment/performance/menu/${bodyToken.idUser}`));
+                var category = atob(sessionStorage.getItem('category'));
+                uriPath = `establishments/culinary?idCulinary=${category}`;
+                callGet(uriPath);
+                break;
+            }
+        }
+        else {
+            switch (document.location.pathname) {
+                case '/':
+                    var category = atob(sessionStorage.getItem('category'));
+                    uriPath = `establishments/culinary?idCulinary=${category}`;
+                    callGet(uriPath);
+                    break;
+                case document.location.pathname.startsWith('/search-user'):
+                    var uriPathEstb = `/establishments`;
+                    var uriPathCust = `/customers`;
+                    setPassed(true);
+                    setSearched([]);
+                    callGetTwo(uriPathEstb, uriPathCust);
+                    break;
+                default:
+                    var category = atob(sessionStorage.getItem('category'));
+                    uriPath = `establishments/culinary?idCulinary=${category}`;
+                    callGet(uriPath);
+                    break;
+            }
+        }
+
     }
 
     async function callGet(uriPath) {

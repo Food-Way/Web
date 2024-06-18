@@ -1,4 +1,4 @@
-import { api, nifi_url } from "./api";
+import { api } from "./api";
 const apiKey = "AIzaSyAKELgmqf4j5kRAdn9EKTC28cMao0sQvJE";
 
 async function api_call(methodParam, urlParam, dataParam, authorizationParam = "", idSessionParam = "") {
@@ -27,25 +27,7 @@ async function api_call(methodParam, urlParam, dataParam, authorizationParam = "
   }
 }
 
-async function nifi_call(methodParam, urlParam, dataParam) {
-  try {
-    const response = await nifi_url({
-      method: methodParam,
-      url: urlParam,
-      data: dataParam ? dataParam : undefined,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.status === 200) {
-      return response;
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
+ 
 
 export default api_call;
-export { api_call, nifi_call };
+export { api_call };

@@ -68,6 +68,7 @@
 }
 
 .establishment-avaliation-value span:first-child {
+    margin: 0px 20px;
     font-size: 2rem;
     color: var(--branco);
     font-weight: 600;
@@ -296,7 +297,7 @@
 
 .user-content-comment-parent p {
     width: 28.5vw;
-
+    height: fit-content;
     font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;
@@ -305,7 +306,6 @@
 
 .user-content-comment p {
     width: 28.5vw;
-
     font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;

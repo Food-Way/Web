@@ -68,6 +68,7 @@ const SearchDetails = (props) => {
                         <div className="right-header-side">
                             <Upvotes
                                 upvotes={props.upvote}
+                                active={false}
                             />
                             <Comments
                                 comments={props.qtdComments}

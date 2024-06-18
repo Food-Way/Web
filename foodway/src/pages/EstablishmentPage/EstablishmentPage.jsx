@@ -1,6 +1,6 @@
 import AvaliationDashCard from "../../components/AvaliationDashCard/AvaliationDashCard";
 import { useEffect, useState } from "react";
-import { api_call, nifi_call } from "../../services/apiImpl";
+import { api_call } from "../../services/apiImpl";
 import parseJWT from "../../util/parseJWT";
 import { Link, useParams } from "react-router-dom";
 import ContentLoader from 'react-content-loader';
@@ -150,7 +150,7 @@ const EstablishmentPage = () => {
                 </div>
                 <div className="establishment-avaliation-principal">
                   <div className="establishment-avaliation-value">
-                    <span>Avaliação</span>
+                    <span>Avaliação </span>
                     <span>{profile.generalRate.toFixed(1)}</span>
                   </div>
                   <div className="avaliation-general-points">
@@ -183,6 +183,7 @@ const EstablishmentPage = () => {
                       comments.map((commentParent, index) => (
                         <div className="establishment-comments-box-more" key={index}>
                           <CommentIndividual
+                            key={index}
                             size={30}
                             establishmentName={commentParent.establishmentName}
                             rate={commentParent.generalRate}
@@ -212,7 +213,7 @@ const EstablishmentPage = () => {
                         <span className="no-content">Nenhuma Tag selecionada</span>
                       ) : (
                         profile.tags.map((item, index) => (
-                          <div className="establishment-tag-box">
+                          <div className="establishment-tag-box" key={index}>
                             <span>{item.name}</span>
                           </div>
                         ))

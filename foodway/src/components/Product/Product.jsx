@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const ProductImage = "https://foodway.s3.amazonaws.com/public-images/product.png"
 import GenericModal from "../../components/GenericModel/GenericModel.jsx";
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button.jsx";
 import InputField from "../InputField/InputField.jsx";
@@ -76,13 +75,14 @@ const Product = (props) => {
     <>
       <div className="menu-item-container">
         <div className="menu-item-box">
+          <div className="menu-content">
+            <img src={props.photo} alt="Foto do Produto" />
+          </div>
+
+          <div className="menu-footer">
           <div className="menu-header">
             <span className="product-title">{props.name}</span>
           </div>
-          <div className="menu-content">
-            <img src={ProductImage} alt="Foto do Produto" />
-          </div>
-          <div className="menu-footer">
             <span>R$ {props.price}</span>
             {props.editIsAble === true ? (
               <div className="operations">

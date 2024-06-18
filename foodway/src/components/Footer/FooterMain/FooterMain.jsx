@@ -17,7 +17,7 @@ const FooterMain = () => {
             <ul>
               <li>Árabe</li>
               <li>Brasileiro</li>
-              <li>Italiano</li>
+              <li>Italiano</li> 
               <li>Japônes</li>
               <li>Mexicano</li>
               <li>Tailandês</li>

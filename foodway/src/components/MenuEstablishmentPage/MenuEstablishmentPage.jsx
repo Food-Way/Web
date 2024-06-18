@@ -133,6 +133,7 @@ const MenuEstablishmentPage = ({ menu, setMenu, id }) => {
                       idProduct={item.idProduct}
                       name={item.name}
                       price={item.price}
+                      photo={item.photo}
                     />
                   </>
                 ))

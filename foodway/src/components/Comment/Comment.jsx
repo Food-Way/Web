@@ -84,6 +84,8 @@ const Comment = (props) => {
                     <div className="comment-footer">
                         <Upvotes
                             upvotes={props.upvotes}
+                            active={true}
+                            
                         />
                     </div>
                 </div>

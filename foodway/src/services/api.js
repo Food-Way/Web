@@ -14,12 +14,7 @@ const api_mock = axios.create({
   },
 });
 
-const nifi_url = axios.create({
-  baseURL: import.meta.env.VITE_URL_NIFI,
-  headers: {
-    "Content-Type": "application/json", 
-  },
-});
+ 
 
 export default api;
-export { api_mock, api, nifi_url };
+export { api_mock, api };

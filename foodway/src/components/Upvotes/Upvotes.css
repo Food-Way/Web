@@ -2,10 +2,10 @@
 
 .upvotes {
     width: 4.75rem;
-
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
 }
 
 .upvotes img {
@@ -22,10 +22,10 @@
 
 .upvotes-disabled {
     width: 4.75rem;
-
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: crosshair;
 }
 
 .upvotes-disabled img {

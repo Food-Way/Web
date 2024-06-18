@@ -131,6 +131,7 @@
     width: 47.4vw;
     height: 54.5vh;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;

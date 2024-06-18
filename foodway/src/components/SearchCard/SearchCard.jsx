@@ -20,7 +20,7 @@ const SearchCard = (props) => {
     }, []);
 
     return (
-        <>
+        <div className="card-container-father">
             <div className="card-container">
                 <div className="card-box">
                     <div className="card-header">
@@ -65,7 +65,7 @@ const SearchCard = (props) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

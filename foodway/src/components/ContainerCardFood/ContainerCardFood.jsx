@@ -74,11 +74,13 @@ const ContainerCardFood = ({ categories }) => {
             slidesPerView={slidesPorVisualizacao}
             navigation
           >
-            {categories.map((item) => (
-              <SwiperSlide key={item.id}>
-                <CardTypeFood typeFood={item.name} image={item.photo} />
-              </SwiperSlide>
-            ))}
+            {
+              categories.length !== 0 ? categories.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <CardTypeFood typeFood={item.name} image={item.photo} />
+                </SwiperSlide>  
+              )) : (<>Nenhuma Categoria Adicionada</>)
+            }
           </Swiper>
        
       </div>

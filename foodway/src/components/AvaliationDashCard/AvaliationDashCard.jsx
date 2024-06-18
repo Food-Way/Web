@@ -28,7 +28,11 @@ function AvaliationDashCard(props) {
                     <div className="points-value-box">
                         {createPointsValue()}
                     </div>
-                    <span>{props.category}</span>
+                    <span>{ 
+                            props.category === "AMBIENT" ? "Ambiente" :
+                            props.category === "FOOD" ? "Comida" :
+                            props.category === "SERVICE" ? "Servicio" : null
+                            }</span>
                 </div>
             </div>
         </>
