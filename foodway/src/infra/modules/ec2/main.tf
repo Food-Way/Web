@@ -30,7 +30,7 @@ resource "aws_instance" "public_ec2_01" {
     sudo apt-get install -y nodejs npm
 
     # Clonar o repositório
-    git clone https://github.com/Food-Way/Web.git /home/ubuntu/
+    git clone https://github.com/Food-Way/Web.git
 
     # Navegar até o diretório do repositório clonado
     cd /home/ubuntu/Web/foodway
@@ -87,7 +87,7 @@ resource "aws_instance" "public_ec2_02" {
     sudo apt-get install -y nodejs npm
 
     # Clonar o repositório
-    git clone https://github.com/Food-Way/Web.git /home/ubuntu/
+    git clone https://github.com/Food-Way/Web.git
 
     # Navegar até o diretório do repositório clonado
     cd /home/ubuntu/Web/foodway
