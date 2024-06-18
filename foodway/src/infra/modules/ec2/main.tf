@@ -33,7 +33,6 @@ resource "aws_instance" "public_ec2_01" {
     sudo npm install --force
 
     # apagar dist anterior 
-
     sudo rm -r var/www/dist
 
     # Executar build
@@ -83,6 +82,9 @@ resource "aws_instance" "public_ec2_02" {
 
     # Instalar dependências
     sudo npm install --force
+
+    # apagar dist anterior 
+    sudo rm -r var/www/dist
 
     # Executar build
     sudo npm run build
