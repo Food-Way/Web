@@ -15,22 +15,22 @@ resource "aws_instance" "public_ec2_01" {
     Name = "public_ec2_01"
   }
   user_data = <<-EOF
-  #!/bin/bash
+    #!/bin/bash
 
     # Atualizar pacotes
     sudo apt-get update
+
+    # Adicionar o usuário 'ubuntu' ao grupo sudo
+    sudo usermod -aG sudo ubuntu  
+
+    # Ajustar permissões
+    sudo chown -R ubuntu:ubuntu /var/www
 
     # Instalar Node.js e npm
     sudo apt-get install -y nodejs npm
 
     # Clonar o repositório
     git clone https://github.com/Food-Way/Web.git /home/ubuntu/Web
-
-    # Adicionar o usuário 'ubuntu' ao grupo sudo
-    sudo usermod -aG sudo ubuntu
-
-    # Ajustar permissões
-    sudo chown -R ubuntu:ubuntu /var/www
 
     # Navegar até o diretório do repositório clonado
     cd /home/ubuntu/Web
@@ -39,7 +39,7 @@ resource "aws_instance" "public_ec2_01" {
     sudo npm install --force
 
     # apagar dist anterior 
-    sudo rm -r var/www/dist
+    sudo rm -r /var/www/dist
 
     # Executar build
     sudo npm run build
@@ -47,8 +47,11 @@ resource "aws_instance" "public_ec2_01" {
     # Copiar o diretório 'dist' para a pasta específica
     sudo cp -r dist /var/www
 
+    # Ajustar permissões
+    sudo chown -R ubuntu:ubuntu /var/www
+
     # Restartando nginx
-    sudo systemctl restart nginx  
+    sudo systemctl restart nginx1
   EOF
 }
 
@@ -74,26 +77,23 @@ resource "aws_instance" "public_ec2_02" {
     # Atualizar pacotes
     sudo apt-get update
 
+    # Adicionar o usuário 'ubuntu' ao grupo sudo
+    sudo usermod -aG sudo ubuntu
+    
+    # Ajustar permissões
+    sudo chown -R ubuntu:ubuntu /var/www
+
     # Instalar Node.js e npm
     sudo apt-get install -y nodejs npm
 
     # Clonar o repositório
     git clone https://github.com/Food-Way/Web.git /home/ubuntu/Web
 
-    # Adicionar o usuário 'ubuntu' ao grupo sudo
-    sudo usermod -aG sudo ubuntu
-
-    # Ajustar permissões
-    sudo chown -R ubuntu:ubuntu /var/www
-
     # Navegar até o diretório do repositório clonado
     cd /home/ubuntu/Web
 
     # Instalar dependências
     sudo npm install --force
-
-    # apagar dist anterior 
-    sudo rm -r var/www/dist
 
     # Executar build
     sudo npm run build
@@ -102,7 +102,7 @@ resource "aws_instance" "public_ec2_02" {
     sudo cp -r dist /var/www
 
     # Restartando nginx
-    sudo systemctl restart nginx  
+    sudo systemctl restart nginx
   EOF
 }
 
