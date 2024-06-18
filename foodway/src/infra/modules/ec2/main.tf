@@ -96,7 +96,7 @@ resource "aws_instance" "public_ec2_02" {
     sudo chown -R ubuntu:ubuntu /var/www
 
     # Restartando nginx
-    sudo systemctl start nginx
+    sudo systemctl restart nginx  
   EOF
 }
 
