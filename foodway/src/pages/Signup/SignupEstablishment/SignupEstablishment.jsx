@@ -392,7 +392,7 @@ const SignupEstablishment = () => {
                   />
                 </>
               )}
-              o
+              
               {step === 3 && (
                 <>
                   <InputField
@@ -425,13 +425,33 @@ const SignupEstablishment = () => {
                   />
                 </>
               )}
-              <span className="redirect-option">
+              
+              {step === 1 && (
+                <>
+                <span className="redirect-option">
                 Já possui uma conta? <Link to="/sign-in">Faça login</Link>
               </span>
-              {step === 1 && (
                 <ButtonPrimary text="Avançar" onclick={handleSteps} />
+                </>
               )}
-              {step === 2 && (
+              {step === 2 && (<>
+              
+                <div style={
+                  {
+                    width: "80%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "left",
+                  }
+                }>
+                    <input type="checkbox" className="redirect-option" id="accept_term" name="accept_term" value="accept_term"/>
+                    <label for="accept_term"><a href="https://foodway.s3.amazonaws.com/documents/Termo_de_Aceite_FoodWay.pdf" style={
+                      {
+                        
+                        fontSize: "15px"
+                      }
+                    } >Termo de aceite</a></label>
+                </div>
                 <div className="section-btn">
                   <div className="section-item">
                     <ButtonSecondary text="Voltar" onclick={handleBack} />
@@ -440,6 +460,7 @@ const SignupEstablishment = () => {
                     <ButtonPrimary text="Avançar" onclick={handleSteps} />
                   </div>
                 </div>
+              </>
               )}
               {step === 3 && (
                 <div className="section-btn">
