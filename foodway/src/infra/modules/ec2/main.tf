@@ -33,7 +33,7 @@ resource "aws_instance" "public_ec2_01" {
     git clone https://github.com/Food-Way/Web.git /home/ubuntu/Web
 
     # Navegar até o diretório do repositório clonado
-    cd /home/ubuntu/Web
+    cd /home/ubuntu/Web/foodway
 
     # Instalar dependências
     sudo npm install --force
@@ -90,7 +90,7 @@ resource "aws_instance" "public_ec2_02" {
     git clone https://github.com/Food-Way/Web.git /home/ubuntu/Web
 
     # Navegar até o diretório do repositório clonado
-    cd /home/ubuntu/Web
+    cd /home/ubuntu/Web/foodway
 
     # Instalar dependências
     sudo npm install --force
