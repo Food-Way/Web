@@ -24,7 +24,7 @@ resource "aws_instance" "public_ec2_01" {
     sudo usermod -aG sudo ubuntu  
 
     # Ajustar permissões
-    sudo chown -R ubuntu:ubuntu /var/www
+    sudo chown -R ubuntu:ubuntu /var/www/dist
 
     # Instalar Node.js e npm
     sudo apt-get install -y nodejs npm
@@ -36,7 +36,7 @@ resource "aws_instance" "public_ec2_01" {
     cd /home/ubuntu/Web/foodway
 
     # Instalar dependências
-    sudo npm install --force
+    sudo npm i --force
 
     # apagar dist anterior 
     sudo rm -r /var/www/dist
@@ -93,7 +93,7 @@ resource "aws_instance" "public_ec2_02" {
     cd /home/ubuntu/Web/foodway
 
     # Instalar dependências
-    sudo npm install --force
+    sudo npm i --force
 
     # Executar build
     sudo npm run build
